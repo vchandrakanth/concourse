@@ -1,0 +1,21 @@
+[0327/201033.379:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0520/154246.864:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0617/125457.760:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0617/143752.606:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0620/211614.946:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0620/211614.947:ERROR:exception_snapshot_win.cc(98)] thread ID 11088 not found in process
+[0620/211614.947:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[0702/213000.051:ERROR:file_io_win.cc(161)] CreateFile C:\Users\INTONE~1\AppData\Local\Temp\scoped_dir5072_16366\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
+[0702/213000.052:ERROR:file_io_win.cc(170)] CreateFile C:\Users\INTONE~1\AppData\Local\Temp\scoped_dir5072_16366\Crashpad\reports\d7b292b5-1e15-44de-9add-2620f5a133fa.dmp: The system cannot find the path specified. (0x3)
+[0702/213000.052:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[0711/133904.263:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0716/191511.153:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0725/181734.893:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0801/143132.291:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0814/140445.936:ERROR:file_io_win.cc(161)] CreateFile C:\Users\INTONE~1\AppData\Local\Temp\scoped_dir12216_8379\Crashpad\settings.dat: The system cannot find the path specified. (0x3)
+[0814/140445.946:ERROR:file_io_win.cc(170)] CreateFile C:\Users\INTONE~1\AppData\Local\Temp\scoped_dir12216_8379\Crashpad\reports\16d3aeed-4f9a-49a6-8548-359690401c2a.dmp: The system cannot find the path specified. (0x3)
+[0814/140445.946:ERROR:crash_report_exception_handler.cc(97)] PrepareNewCrashReport failed
+[0909/153002.934:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0917/202158.098:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0917/202410.425:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
+[0930/162014.018:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0

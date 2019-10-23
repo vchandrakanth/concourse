@@ -1,0 +1,527 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "AWS CloudFormation Template for building self-reference security group for a LZ in a VPC per Region in AWSAccount, Authors - Jun Hu Date -   March 22, 2019 Last Modified - March 22, 2019",
+    "Metadata": {
+      "AWS::CloudFormation::Interface": {
+        "ParameterGroups": [
+          {
+            "Label": {
+              "default": "Environment Type - a designated VPC will be used to host the application stack"
+            },
+            "Parameters": [
+              "EnvType",
+              "AppId",
+              "LandingZoneGuid",
+              "SecurityGroupLabel"
+            ]
+          },
+          {
+            "Label": {
+              "default": "Additional Ingress and Egress rules for App outside LandingZone"
+            },
+            "Parameters": [
+              "SGIngressForApp",
+              "SGEgressForApp"
+            ]
+          },
+          {
+            "Label": {
+              "default": "This allows to run this template in test Mode, it will add stack-name for all the resources to be created"
+            },
+            "Parameters": [
+              "FreddieCloudTestMode"
+            ]
+          },
+          {
+            "Label": {
+              "default": "The parameters in the SSM parameter store and should not be changed"
+            },
+            "Parameters": [
+              "BizUnit",
+              "AccountLabel",
+              "S3BucketL1Name",
+              "S3BucketR1Name",
+              "SSMPVersion"
+            ]
+          }
+        ],
+        "ParameterLabels": {
+          "EnvType": {
+            "default": "Environment Type"
+          }
+        }
+      }
+    },
+    "Parameters": {
+      "DataCatalogue": {
+        "AllowedValues": [
+          "P918",
+          "M190",
+          "B850",
+          "F599"
+        ],
+        "Description": "Catalog value for the data",
+        "Type": "String"
+      },
+      "EnvType": {
+        "AllowedValues": [
+          "external-sandbox",
+          "internal-poc",
+          "dev",
+          "integration",
+          "uat",
+          "non-prod",
+          "customer-testing",
+          "enclave",
+          "prod"
+        ],
+        "ConstraintDescription": "must be external-sandbox, internal-poc, dev, integration, uat, non-prod, customer-testing, enclave or prod.",
+        "Default": "dev",
+        "Description": "Environment type used for the workload",
+        "Type": "String"
+      },
+      "AppId": {
+        "Default": "DataScience",
+        "Type": "String"
+      },
+      "LandingZoneGuid": {
+        "Description": "LandingZoneGuid, should be the top stack name, if LOGICAL_NULL, it will be this stack name",
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "SecurityGroupLabel": {
+        "Description": "SecurityGroupLabel in a meaningful way, ...",
+        "Type": "String"
+      },
+      "SGIngressForApp": {
+        "Description": "Additional Ingress Rule for the application in the format of protocol:source:port",
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "SGEgressForApp": {
+        "Description": "Additional Ingress Rule for the application in the format of protocol:destination:port",
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "AccountLabel": {
+        "Default": "AccountLabel",
+        "AllowedValues": [
+          "AccountLabel"
+        ],
+        "Description": "The AWS Account Label",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "BizUnit": {
+        "Default": "AccountBizUnit",
+        "AllowedValues": [
+          "AccountBizUnit"
+        ],
+        "Description": "The business unit for whom this VPC is being created",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "S3BucketL1Name": {
+        "Default": "S3BucketL1Name",
+        "AllowedValues": [
+          "S3BucketL1Name"
+        ],
+        "Description": "The S3 Bucket in the region for Freddie Cloud metadata",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "S3BucketR1Name": {
+        "Default": "S3BucketR1Name",
+        "AllowedValues": [
+          "S3BucketR1Name"
+        ],
+        "Description": "The S3 Bucket in the remote region for Freddie Cloud metadata",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "LookupVpcArn": {
+        "AllowedValues": [
+          "AccountLambda-LookupVpc"
+        ],
+        "Default": "AccountLambda-LookupVpc",
+        "Description": "The logical name of lambda function arn",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "SSMPVersion": {
+        "Default": 1,
+        "Description": "The version of SSM parameters, not used yet",
+        "Type": "String"
+      },
+      "FreddieCloudTestMode": {
+        "Default": "LOGICAL_NULL",
+        "Description": "Force Freddie Cloud into using test version of metadata products",
+        "Type": "String"
+      }
+    },
+    "Conditions": {
+      "Is-FreddieCloudProd": {
+        "Fn::Equals": [
+          {
+            "Ref": "FreddieCloudTestMode"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-NoLandingZoneGuid": {
+        "Fn::Equals": [
+          {
+            "Ref": "LandingZoneGuid"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-NoSGIngressForApp": {
+        "Fn::Equals": [
+          {
+            "Ref": "SGIngressForApp"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-NoSGEgressForApp": {
+        "Fn::Equals": [
+          {
+            "Ref": "SGEgressForApp"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-CreateSGRule": {
+        "Fn::Or": [
+          {
+            "Fn::Not": [
+              {
+                "Fn::Equals": [
+                  {
+                    "Ref": "SGIngressForApp"
+                  },
+                  "LOGICAL_NULL"
+                ]
+              }
+            ]
+          },
+          {
+            "Fn::Not": [
+              {
+                "Fn::Equals": [
+                  {
+                    "Ref": "SGEgressForApp"
+                  },
+                  "LOGICAL_NULL"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Mappings": {
+      "DataClassification2DataCatalogue": {
+        "public": {
+          "DataCatalogue": "F599"
+        },
+        "nonpublic": {
+          "DataCatalogue": "B850"
+        },
+        "confidential": {
+          "DataCatalogue": "M190"
+        },
+        "restricted": {
+          "DataCatalogue": "P918"
+        }
+      }
+    },
+    "Resources": {
+      "LookupVpcMetadata": {
+        "Properties": {
+          "ServiceToken": {
+            "Ref": "LookupVpcArn"
+          },
+          "ENV_TYPE": {
+            "Ref": "EnvType"
+          },
+          "region": {
+            "Ref": "AWS::Region"
+          },
+          "BIZ_UNIT": {
+            "Ref": "BizUnit"
+          },
+          "DEPLOYMENT_ZONE": "private",
+          "WORKLOAD_TYPE": "app",
+          "APP_ID": {
+            "Ref": "AppId"
+          }
+        },
+        "Type": "Custom::VPCMetadataLookup"
+      },
+      "AppSelfReferencingSecurityGroup": {
+        "Properties": {
+          "GroupDescription": "Self Referencing SG in a LandingZone",
+          "VpcId": {
+            "Fn::GetAtt": [
+              "LookupVpcMetadata",
+              "vpcId"
+            ]
+          },
+          "GroupName": {
+            "Fn::Join": [
+              "/",
+              [
+                "/fmac-aws",
+                {
+                  "Ref": "AccountLabel"
+                },
+                {
+                  "Ref": "AWS::Region"
+                },
+                "vpc",
+                {
+                  "Ref": "EnvType"
+                },
+                "LZ",
+                {
+                  "Fn::If": [
+                    "Is-NoLandingZoneGuid",
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    {
+                      "Ref": "LandingZoneGuid"
+                    }
+                  ]
+                },
+                "SG",
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      {
+                        "Ref": "SecurityGroupLabel"
+                      },
+                      "SRSG"
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "Tags": [
+            {
+              "Key": "Name",
+              "Value": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "/fmac-aws",
+                    {
+                      "Ref": "AccountLabel"
+                    },
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "vpc",
+                    {
+                      "Ref": "EnvType"
+                    },
+                    "lz",
+                    {
+                      "Fn::If": [
+                        "Is-NoLandingZoneGuid",
+                        {
+                          "Ref": "AWS::StackName"
+                        },
+                        {
+                          "Ref": "LandingZoneGuid"
+                        }
+                      ]
+                    },
+                    "sg",
+                    {
+                      "Fn::Join": [
+                        "-",
+                        [
+                          {
+                            "Ref": "SecurityGroupLabel"
+                          },
+                          "srsg"
+                        ]
+                      ]
+                    }
+                  ]
+                ]
+              }
+            },
+            {
+              "Key": "fm_aws_name",
+              "Value": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "/fmac-aws",
+                    {
+                      "Ref": "AccountLabel"
+                    },
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    "vpc",
+                    {
+                      "Ref": "EnvType"
+                    },
+                    "lz",
+                    {
+                      "Fn::If": [
+                        "Is-NoLandingZoneGuid",
+                        {
+                          "Ref": "AWS::StackName"
+                        },
+                        {
+                          "Ref": "LandingZoneGuid"
+                        }
+                      ]
+                    },
+                    "sg",
+                    {
+                      "Fn::Join": [
+                        "-",
+                        [
+                          {
+                            "Ref": "SecurityGroupLabel"
+                          },
+                          "sg"
+                        ]
+                      ]
+                    }
+                  ]
+                ]
+              }
+            },
+            {
+              "Key": "fm_aws_environmentType",
+              "Value": {
+                "Ref": "EnvType"
+              }
+            },
+            {
+              "Key": "fm_aws_businessUnit",
+              "Value": {
+                "Ref": "BizUnit"
+              }
+            },
+            {
+              "Key": "fm_aws_applicationId",
+              "Value": {
+                "Ref": "AppId"
+              }
+            },
+            {
+              "Key": "fm_aws_landingZoneGuid",
+              "Value": {
+                "Fn::If": [
+                  "Is-NoLandingZoneGuid",
+                  {
+                    "Ref": "AWS::StackName"
+                  },
+                  {
+                    "Ref": "LandingZoneGuid"
+                  }
+                ]
+              }
+            },
+            {
+              "Key": "fm_aws_dCatalogue",
+              "Value": {
+                "Ref": "DataCatalogue"
+              }
+            }
+          ]
+        },
+        "Type": "AWS::EC2::SecurityGroup"
+      },
+      "AppSelfReferencingSecurityGroupIngress": {
+        "DependsOn": "AppSelfReferencingSecurityGroup",
+        "Properties": {
+          "FromPort": -1,
+          "GroupId": {
+            "Fn::GetAtt": [
+              "AppSelfReferencingSecurityGroup",
+              "GroupId"
+            ]
+          },
+          "SourceSecurityGroupId": {
+            "Ref": "AppSelfReferencingSecurityGroup"
+          },
+          "IpProtocol": -1,
+          "ToPort": -1
+        },
+        "Type": "AWS::EC2::SecurityGroupIngress"
+      },
+      "SecurityGroupSSM": {
+        "Type": "AWS::SSM::Parameter",
+        "Properties": {
+          "Name": {
+            "Fn::Join": [
+              "/",
+              [
+                "/fmac-aws",
+                {
+                  "Ref": "AccountLabel"
+                },
+                {
+                  "Ref": "AWS::Region"
+                },
+                "vpc",
+                {
+                  "Ref": "EnvType"
+                },
+                "lz",
+                {
+                  "Fn::If": [
+                    "Is-NoLandingZoneGuid",
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    {
+                      "Ref": "LandingZoneGuid"
+                    }
+                  ]
+                },
+                "sg",
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      {
+                        "Ref": "SecurityGroupLabel"
+                      },
+                      "srsg"
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "Type": "String",
+          "Value": {
+            "Fn::GetAtt": [
+              "AppSelfReferencingSecurityGroup",
+              "GroupId"
+            ]
+          },
+          "Description": "this self-referencing security group in the landingzone SSM parameter"
+        }
+      }
+    },
+    "Outputs": {
+      "SecurityGroupId": {
+        "Description": "The Security Group",
+        "Value": {
+          "Fn::GetAtt": [
+            "AppSelfReferencingSecurityGroup",
+            "GroupId"
+          ]
+        }
+      }
+    }
+  }

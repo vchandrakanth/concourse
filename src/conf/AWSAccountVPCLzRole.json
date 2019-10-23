@@ -1,0 +1,875 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "AWS CloudFormation Template for building instance role and profile for a LZ in a VPC per Region in AWSAccount, AD joined Host login Access and sudo Access per application stack in Freddie Mac's AWS private environment Authors - Jun Hu Date -   August 12, 2018 Last Modified - May 28, 2019",
+    "Metadata": {
+      "AWS::CloudFormation::Interface": {
+        "ParameterGroups": [
+          {
+            "Label": {
+              "default": "Environment Type - a designated VPC will be used to host the application stack"
+            },
+            "Parameters": [
+              "EnvType",
+              "LandingZoneGuid",
+              "RoleLabel"
+            ]
+          },
+          {
+            "Label": {
+              "default": "Application Information"
+            },
+            "Parameters": [
+              "S3BucketReadOnlyForApp",
+              "S3BucketReadWriteForApp"
+            ]
+          },
+          {
+            "Label": {
+              "default": "ec2 host login access and sudo root access"
+            },
+            "Parameters": [
+              "HostAccessADGroup",
+              "SudoAccessADGroup"
+            ]
+          },
+          {
+            "Label": {
+              "default": "This allows to run this template in test Mode, it will add stack-name for all the resources to be created"
+            },
+            "Parameters": [
+              "FreddieCloudTestMode"
+            ]
+          },
+          {
+            "Label": {
+              "default": "The parameters in the SSM parameter store and should not be changed"
+            },
+            "Parameters": [
+              "BizUnit",
+              "AccountLabel",
+              "S3BucketL1Name",
+              "S3BucketR1Name",
+              "SSMPVersion"
+            ]
+          }
+        ],
+        "ParameterLabels": {
+          "EnvType": {
+            "default": "Environment Type"
+          }
+        }
+      }
+    },
+    "Parameters": {
+      "EnvType": {
+        "AllowedValues": [
+          "external-sandbox",
+          "internal-poc",
+          "dev",
+          "integration",
+          "uat",
+          "non-prod",
+          "customer-testing",
+          "enclave",
+          "prod"
+        ],
+        "ConstraintDescription": "must be external-sandbox, internal-poc, dev, integration, uat, non-prod, customer-testing, enclave or prod.",
+        "Default": "dev",
+        "Description": "Environment type used for the workload",
+        "Type": "String"
+      },
+      "LandingZoneGuid": {
+        "Description": "LandingZoneGuid, should be the top stack name, if LOGICAL_NULL, it will be this stack name",
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "RoleLabel": {
+        "Description": "RoleLabel in the format such as readonly, crud, ...",
+        "Type": "String"
+      },
+      "RoleType": {
+        "Description": "RoleLabel in the format such as readonly, crud, ...",
+        "AllowedValues": [
+          "LOGICAL_NULL",
+          "EMREC2",
+          "EKS",
+          "DATAROBOT",
+          "datascience",
+          "hpcgrid",
+          "eks",
+          "datarobot",
+          "emr",
+          "bdap"
+        ],
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "S3BucketReadWriteForApp": {
+        "Description": "S3 Bucket for this application to have read-wrie access through instance profile",
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "S3BucketReadOnlyForApp": {
+        "Description": "S3 Bucket for this application to have read-only access through instance profile",
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "HostAccessADGroup": {
+        "Description": "list of AD groups to allow EC2 login access in the format of g1,g2 or NA if login access is not needed.",
+        "Default": "NA",
+        "Type": "String"
+      },
+      "SudoAccessADGroup": {
+        "Description": "list of AD groups to allow sudo root access in the format of g1,g2 or NA if sudo access is not needed.",
+        "Default": "NA",
+        "Type": "String"
+      },
+      "AccountLabel": {
+        "Default": "AccountLabel",
+        "AllowedValues": [
+          "AccountLabel"
+        ],
+        "Description": "The AWS Account Label",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "BizUnit": {
+        "Default": "AccountBizUnit",
+        "AllowedValues": [
+          "AccountBizUnit"
+        ],
+        "Description": "The business unit for whom this VPC is being created",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "S3BucketL1Name": {
+        "Default": "S3BucketL1Name",
+        "AllowedValues": [
+          "S3BucketL1Name"
+        ],
+        "Description": "The S3 Bucket in the region for Freddie Cloud metadata",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "S3BucketR1Name": {
+        "Default": "S3BucketR1Name",
+        "AllowedValues": [
+          "S3BucketR1Name"
+        ],
+        "Description": "The S3 Bucket in the remote region for Freddie Cloud metadata",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "SSMPVersion": {
+        "Default": 1,
+        "Description": "The version of SSM parameters, not used yet",
+        "Type": "String"
+      },
+      "FreddieCloudTestMode": {
+        "Default": "LOGICAL_NULL",
+        "Description": "Force Freddie Cloud into using test version of metadata products",
+        "Type": "String"
+      }
+    },
+    "Conditions": {
+      "Is-FreddieCloudProd": {
+        "Fn::Equals": [
+          {
+            "Ref": "FreddieCloudTestMode"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-NoLandingZoneGuid": {
+        "Fn::Equals": [
+          {
+            "Ref": "LandingZoneGuid"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-NoS3BucketReadOnlyForApp": {
+        "Fn::Equals": [
+          {
+            "Ref": "S3BucketReadOnlyForApp"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-NoS3BucketReadWriteForApp": {
+        "Fn::Equals": [
+          {
+            "Ref": "S3BucketReadWriteForApp"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-EMREC2RoleType": {
+        "Fn::Or": [
+          {
+            "Fn::Equals": [
+              {
+                "Ref": "RoleType"
+              },
+              "EMREC2"
+            ]
+          },
+          {
+            "Fn::Equals": [
+              {
+                "Ref": "RoleType"
+              },
+              "emr"
+            ]
+          }
+        ]
+      },
+      "Is-DataRobotRoleType": {
+        "Fn::Or": [
+          {
+            "Fn::Equals": [
+              {
+                "Ref": "RoleType"
+              },
+              "DATAROBOT"
+            ]
+          },
+          {
+            "Fn::Equals": [
+              {
+                "Ref": "RoleType"
+              },
+              "datarobot"
+            ]
+          }
+        ]
+      },
+      "Is-HpcGridType": {
+        "Fn::Equals": [
+          {
+            "Ref": "RoleType"
+          },
+          "hpcgrid"
+        ]
+      },
+      "Is-EksType": {
+        "Fn::Equals": [
+          {
+            "Ref": "RoleType"
+          },
+          "eks"
+        ]
+      },
+      "Is-BdapType": {
+        "Fn::Equals": [
+          {
+            "Ref": "RoleType"
+          },
+          "bdap"
+        ]
+      }
+    },
+    "Resources": {
+      "RolePolicy": {
+        "Type": "AWS::IAM::ManagedPolicy",
+        "Properties": {
+          "Description": {
+            "Fn::Join": [
+              " ",
+              [
+                "Policy for Instance Role and Profile associated with environment, landing-zone in the region",
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      {
+                        "Ref": "AccountLabel"
+                      },
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      "vpc",
+                      {
+                        "Ref": "EnvType"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "PolicyDocument": {
+            "Statement": [
+              {
+                "Action": [
+                  "s3:GetObject"
+                ],
+                "Effect": "Allow",
+                "Resource": [
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:s3:::",
+                        {
+                          "Ref": "S3BucketL1Name"
+                        },
+                        "/*"
+                      ]
+                    ]
+                  },
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:s3:::",
+                        {
+                          "Ref": "S3BucketR1Name"
+                        },
+                        "/*"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              {
+                "Action": [
+                  "resource-groups:*"
+                ],
+                "Effect": "Allow",
+                "Resource": "*"
+              },
+              {
+                "Action": [
+                  "cloudformation:DescribeStackResource"
+                ],
+                "Effect": "Allow",
+                "Resource": "*"
+              },
+              {
+                "Action": [
+                  "cloudformation:SignalResource"
+                ],
+                "Effect": "Allow",
+                "Resource": "*"
+              },
+              {
+                "Action": [
+                  "s3:GetObject",
+                  "s3:List*",
+                  "s3:PutObject",
+                  "s3:DeleteObject"
+                ],
+                "Effect": "Allow",
+                "Resource": [
+                  {
+                    "Fn::If": [
+                      "Is-NoS3BucketReadWriteForApp",
+                      "*",
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:s3:::",
+                            {
+                              "Ref": "S3BucketReadWriteForApp"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "Action": [
+                  "s3:GetObject",
+                  "s3:List*"
+                ],
+                "Effect": "Allow",
+                "Resource": [
+                  {
+                    "Fn::If": [
+                      "Is-NoS3BucketReadOnlyForApp",
+                      "*",
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:s3:::",
+                            {
+                              "Ref": "S3BucketReadOnlyForApp"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "Version": "2012-10-17"
+          },
+          "ManagedPolicyName": {
+            "Fn::Join": [
+              "",
+              [
+                "FreddieMac",
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      "ec2policy",
+                      {
+                        "Ref": "RoleLabel"
+                      },
+                      {
+                        "Fn::If": [
+                          "Is-NoLandingZoneGuid",
+                          {
+                            "Ref": "AWS::StackName"
+                          },
+                          {
+                            "Ref": "LandingZoneGuid"
+                          }
+                        ]
+                      },
+                      {
+                        "Ref": "EnvType"
+                      },
+                      "vpc",
+                      {
+                        "Ref": "AWS::Region"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "Roles": [
+            {
+              "Ref": "InstanceRole"
+            }
+          ]
+        }
+      },
+      "InstanceRole": {
+        "Type": "AWS::IAM::Role",
+        "Properties": {
+          "AssumeRolePolicyDocument": {
+            "Statement": [
+              {
+                "Action": [
+                  "sts:AssumeRole"
+                ],
+                "Effect": "Allow",
+                "Principal": {
+                  "Service": [
+                    "ec2.amazonaws.com"
+                  ]
+                }
+              }
+            ],
+            "Version": "2012-10-17"
+          },
+          "Path": {
+            "Fn::Join": [
+              "/",
+              [
+                "/fmac-aws",
+                {
+                  "Ref": "AccountLabel"
+                },
+                {
+                  "Ref": "AWS::Region"
+                },
+                "vpc",
+                {
+                  "Ref": "EnvType"
+                },
+                "lz",
+                {
+                  "Fn::If": [
+                    "Is-NoLandingZoneGuid",
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    {
+                      "Ref": "LandingZoneGuid"
+                    }
+                  ]
+                },
+                "iam",
+                ""
+              ]
+            ]
+          },
+          "ManagedPolicyArns": [
+            "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforSSM",
+            "arn:aws:iam::aws:policy/AWSHealthFullAccess",
+            "arn:aws:iam::aws:policy/AWSConfigUserAccess",
+            "arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess",
+            "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess",
+            "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy",
+            "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess",
+            {
+              "Fn::If": [
+                "Is-EMREC2RoleType",
+                "arn:aws:iam::aws:policy/service-role/AmazonElasticMapReduceforEC2Role",
+                {
+                  "Ref": "AWS::NoValue"
+                }
+              ]
+            },
+            {
+              "Fn::If": [
+                "Is-EMREC2RoleType",
+                "arn:aws:iam::aws:policy/AWSCertificateManagerPrivateCAUser",
+                {
+                  "Ref": "AWS::NoValue"
+                }
+              ]
+            },
+            {
+              "Fn::If": [
+                "Is-DataRobotRoleType",
+                "arn:aws:iam::aws:policy/AWSCertificateManagerPrivateCAUser",
+                {
+                  "Ref": "AWS::NoValue"
+                }
+              ]
+            }
+          ],
+          "RoleName": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Ref": "AccountLabel"
+                },
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      "ec2rolebyaws",
+                      {
+                        "Ref": "RoleLabel"
+                      },
+                      {
+                        "Fn::If": [
+                          "Is-NoLandingZoneGuid",
+                          {
+                            "Ref": "AWS::StackName"
+                          },
+                          {
+                            "Ref": "LandingZoneGuid"
+                          }
+                        ]
+                      },
+                      {
+                        "Ref": "AWS::Region"
+                      }
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "PermissionsBoundary": {
+            "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:policy/FreddieMacRoleAccessBoundary"
+          }
+        }
+      },
+      "InstanceRoleSSM": {
+        "Type": "AWS::SSM::Parameter",
+        "Properties": {
+          "Name": {
+            "Fn::Join": [
+              "/",
+              [
+                "/fmac-aws",
+                {
+                  "Ref": "AccountLabel"
+                },
+                {
+                  "Ref": "AWS::Region"
+                },
+                "vpc",
+                {
+                  "Ref": "EnvType"
+                },
+                "lz",
+                {
+                  "Fn::If": [
+                    "Is-NoLandingZoneGuid",
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    {
+                      "Ref": "LandingZoneGuid"
+                    }
+                  ]
+                },
+                "iam",
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      {
+                        "Ref": "RoleLabel"
+                      },
+                      "ec2RoleName"
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "Type": "String",
+          "Value": {
+            "Ref": "InstanceRole"
+          },
+          "Description": "this Application Instance role SSM Parameter"
+        }
+      },
+      "InstanceRoleIdSSM": {
+        "Type": "AWS::SSM::Parameter",
+        "Properties": {
+          "Name": {
+            "Fn::Join": [
+              "/",
+              [
+                "/fmac-aws",
+                {
+                  "Ref": "AccountLabel"
+                },
+                {
+                  "Ref": "AWS::Region"
+                },
+                "vpc",
+                {
+                  "Ref": "EnvType"
+                },
+                "lz",
+                {
+                  "Fn::If": [
+                    "Is-NoLandingZoneGuid",
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    {
+                      "Ref": "LandingZoneGuid"
+                    }
+                  ]
+                },
+                "iam",
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      {
+                        "Ref": "RoleLabel"
+                      },
+                      "ec2RoldId"
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "Type": "String",
+          "Value": {
+            "Fn::GetAtt": [
+              "InstanceRole",
+              "RoleId"
+            ]
+          },
+          "Description": "this Application Instance role id SSM Parameter"
+        }
+      },
+      "InstanceRoleArnSSM": {
+        "Type": "AWS::SSM::Parameter",
+        "Properties": {
+          "Name": {
+            "Fn::Join": [
+              "/",
+              [
+                "/fmac-aws",
+                {
+                  "Ref": "AccountLabel"
+                },
+                {
+                  "Ref": "AWS::Region"
+                },
+                "vpc",
+                {
+                  "Ref": "EnvType"
+                },
+                "lz",
+                {
+                  "Fn::If": [
+                    "Is-NoLandingZoneGuid",
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    {
+                      "Ref": "LandingZoneGuid"
+                    }
+                  ]
+                },
+                "iam",
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      {
+                        "Ref": "RoleLabel"
+                      },
+                      "ec2RoldArn"
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "Type": "String",
+          "Value": {
+            "Fn::GetAtt": [
+              "InstanceRole",
+              "Arn"
+            ]
+          },
+          "Description": "this Application Instance role arn SSM Parameter"
+        }
+      },
+      "HostAccessADGroupSSM": {
+        "Type": "AWS::SSM::Parameter",
+        "Properties": {
+          "Name": {
+            "Fn::Join": [
+              "/",
+              [
+                "/fmac-aws",
+                {
+                  "Ref": "AccountLabel"
+                },
+                {
+                  "Ref": "AWS::Region"
+                },
+                "vpc",
+                {
+                  "Ref": "EnvType"
+                },
+                "lz",
+                {
+                  "Fn::If": [
+                    "Is-NoLandingZoneGuid",
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    {
+                      "Ref": "LandingZoneGuid"
+                    }
+                  ]
+                },
+                "iam",
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      {
+                        "Ref": "RoleLabel"
+                      },
+                      "HostAccessADGroup"
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "Type": "String",
+          "Value": {
+            "Ref": "HostAccessADGroup"
+          },
+          "Description": "this Application AD Group to login server SSM parameter"
+        }
+      },
+      "SudoAccessADGroupSSM": {
+        "Type": "AWS::SSM::Parameter",
+        "Properties": {
+          "Name": {
+            "Fn::Join": [
+              "/",
+              [
+                "/fmac-aws",
+                {
+                  "Ref": "AccountLabel"
+                },
+                {
+                  "Ref": "AWS::Region"
+                },
+                "vpc",
+                {
+                  "Ref": "EnvType"
+                },
+                "lz",
+                {
+                  "Fn::If": [
+                    "Is-NoLandingZoneGuid",
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    {
+                      "Ref": "LandingZoneGuid"
+                    }
+                  ]
+                },
+                "iam",
+                {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      {
+                        "Ref": "RoleLabel"
+                      },
+                      "SudoAccessADGroup"
+                    ]
+                  ]
+                }
+              ]
+            ]
+          },
+          "Type": "String",
+          "Value": {
+            "Ref": "SudoAccessADGroup"
+          },
+          "Description": "this AD Group to sudo root SSM parameter"
+        }
+      }
+    },
+    "Outputs": {
+      "RoleName": {
+        "Description": "RoleName",
+        "Value": {
+          "Ref": "InstanceRole"
+        }
+      },
+      "RoleId": {
+        "Description": "Role Id",
+        "Value": {
+          "Fn::GetAtt": [
+            "InstanceRole",
+            "RoleId"
+          ]
+        }
+      },
+      "RoleArn": {
+        "Description": "Role Id",
+        "Value": {
+          "Fn::GetAtt": [
+            "InstanceRole",
+            "Arn"
+          ]
+        }
+      }
+    }
+  }

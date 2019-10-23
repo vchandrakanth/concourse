@@ -1,0 +1,41 @@
+{
+  "name": "e2e_concourse",
+  "version": "1.0.0",
+  "description": "To test the e2e functionality using protractor",
+  "main": "conf.js",
+  "dependencies": {
+    "@types/jasmine": "^3.3.9",
+    "@types/node": "^11.13.19",
+    "bash": "0.0.1",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
+    "g": "^2.0.1",
+    "jasmine-slack-reporter": "^1.4.0",
+    "log4js-protractor-appender": "^1.1.2",
+    "protractor-screenshoter-plugin": "^0.10.3",
+    "selenium-webdriver": "^4.0.0-alpha.4",
+    "yarn": "^1.16.0"
+  },
+  "devDependencies": {
+    "html-dnd": "^1.2.0",
+    "jasmine": "^3.4.0",
+    "jasmine-spec-reporter": "^4.2.1",
+    "protractor": "^5.4.2",
+    "protractor-helper": "^3.7.2",
+    "protractor-helpers": "^1.1.499",
+    "protractor-slack-plugin": "0.0.1",
+    "protractor-video-reporter": "^0.3.0",
+    "typescript": "^3.2.4"
+  },
+  "scripts": {
+    "pretest": "npm run tsc",
+    "test": "protractor ./build/conf/conf.js",
+    "tsc": "tsc",
+    "test-odin": "npm run test0 --test:env=local --test:app_sty=web --test:prot_def=local-chrome --test:capabilities=local-chrome --test:suites=odin --test:timeouts=debug",
+    "test-local": "env=local npm run test-local",
+    "test-adhoc": "env=adhoc npm run test-adhoc"
+  },
+  "author": "Rama",
+  "license": "ISC"
+}

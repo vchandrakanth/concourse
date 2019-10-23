@@ -1,0 +1,864 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "AWS CloudFormation Template for building a Landing Zone compatible S3 bucket",
+    "Parameters": {
+      "DataCatalogue": {
+        "AllowedValues": [
+          "P918",
+          "M190",
+          "B850",
+          "F599"
+        ],
+        "Description": "Catalog value for the data",
+        "Type": "String"
+      },
+      "AppId": {
+        "Description": "Application ID for the bucket",
+        "Type": "String"
+      },
+      "LandingZoneGuid": {
+        "Description": "LandingZoneGuid, should be the top stack name, if LOGICAL_NULL, it will be this stack name",
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "ReplicationRegion": {
+        "Default": "LOGICAL_NULL",
+        "AllowedValues": [
+          "LOGICAL_NULL",
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2"
+        ],
+        "Description": "Out of region replica bucket location",
+        "Type": "String"
+      },
+      "S3BucketLabel": {
+        "Description": "Name of the S3 Bucket to create",
+        "Type": "String"
+      },
+      "BucketReaderRoleId": {
+        "Description": "ID of the bucket reader role for the LZ",
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "BucketCrudRoleId": {
+        "Description": "ID of the bucket CRUD role for the LZ",
+        "Default": "LOGICAL_NULL",
+        "Type": "String"
+      },
+      "LzMasterKeyArn": {
+        "Description": "ARN of the master key for the LZ",
+        "Type": "String"
+      },
+      "S3BucketL1Name": {
+        "Default": "S3BucketL1Name",
+        "Description": "The Label for this AWS Account",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "S3BucketR1Name": {
+        "Default": "S3BucketR1Name",
+        "Description": "The Label for this AWS Account",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "BizUnit": {
+        "Default": "AccountBizUnit",
+        "Description": "The Label for this AWS Account",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "AccountLabel": {
+        "Default": "AccountLabel",
+        "Description": "The Label for this AWS Account",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "AdminRoleId": {
+        "Default": "AdminRoleId",
+        "Description": "The Admin role roleid for this AWS Account",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "CloudAdminRoleId": {
+        "Default": "CloudAdminRoleId",
+        "Description": "The Cloud Admin role roleid for this AWS Account",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "LandingZoneAdminRoleId": {
+        "Default": "LandingZoneAdminRoleId",
+        "Description": "The LandingZone Admin role roleid for this AWS Account",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "S3ReplicatorRoleId": {
+        "Default": "S3ReplicatorRoleId",
+        "Description": "The S3Replicator role roleid for this AWS Account",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "AccountS3LoggingBucket": {
+        "Default": "AccountS3LoggingBucket",
+        "Description": "The S3 Logging Bucket for this AWS Account in this region",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "AccountS3LoggingOORBucket": {
+        "Default": "AccountS3LoggingOORBucket",
+        "Description": "The S3 Logging Bucket for this AWS Account in OOR region",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "AccountS3LoggingOORBucketArn": {
+        "Default": "AccountS3LoggingOORBucketArn",
+        "Description": "The S3 Logging Bucket for this AWS Account in OOR region",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "CreateRemoteBucketArn": {
+        "Default": "AccountLambda-CreateRemoteBucket",
+        "Description": "The logical name of lambda function arn",
+        "Type": "AWS::SSM::Parameter::Value<String>"
+      },
+      "FreddieCloudTestMode": {
+        "Default": "LOGICAL_NULL",
+        "Description": "Force Freddie Cloud into using test version of metadata products",
+        "Type": "String"
+      }
+    },
+    "Conditions": {
+      "Is-FreddieCloudProd": {
+        "Fn::Equals": [
+          {
+            "Ref": "FreddieCloudTestMode"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-NoLandingZoneGuid": {
+        "Fn::Equals": [
+          {
+            "Ref": "LandingZoneGuid"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-UsEast1Region": {
+        "Fn::Equals": [
+          {
+            "Ref": "AWS::Region"
+          },
+          "us-east-1"
+        ]
+      },
+      "Is-UsWest2Region": {
+        "Fn::Equals": [
+          {
+            "Ref": "AWS::Region"
+          },
+          "us-west-2"
+        ]
+      },
+      "Is-UsEast2Region": {
+        "Fn::Equals": [
+          {
+            "Ref": "AWS::Region"
+          },
+          "us-east-2"
+        ]
+      },
+      "Is-NoS3Replication": {
+        "Fn::Equals": [
+          {
+            "Ref": "ReplicationRegion"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-Without-BucketReader": {
+        "Fn::Equals": [
+          {
+            "Ref": "BucketReaderRoleId"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-With-BucketReader": {
+        "Fn::Not": [
+          {
+            "Condition": "Is-Without-BucketReader"
+          }
+        ]
+      },
+      "Is-Without-BucketCrud": {
+        "Fn::Equals": [
+          {
+            "Ref": "BucketCrudRoleId"
+          },
+          "LOGICAL_NULL"
+        ]
+      },
+      "Is-With-BucketCrud": {
+        "Fn::Not": [
+          {
+            "Condition": "Is-Without-BucketCrud"
+          }
+        ]
+      },
+      "Is-With-Both-Roles": {
+        "Fn::And": [
+          {
+            "Condition": "Is-With-BucketReader"
+          },
+          {
+            "Condition": "Is-With-BucketCrud"
+          }
+        ]
+      }
+    },
+    "Resources": {
+      "TheS3Bucket": {
+        "Description": "Creates S3 bucket with bucket policies, life cycle rules and versioning",
+        "Properties": {
+          "BucketName": {
+            "Fn::Join": [
+              "-",
+              [
+                "aws",
+                {
+                  "Ref": "AccountLabel"
+                },
+                "s3",
+                {
+                  "Ref": "AWS::Region"
+                },
+                {
+                  "Ref": "S3BucketLabel"
+                },
+                {
+                  "Fn::If": [
+                    "Is-NoLandingZoneGuid",
+                    {
+                      "Ref": "AWS::StackName"
+                    },
+                    {
+                      "Ref": "LandingZoneGuid"
+                    }
+                  ]
+                }
+              ]
+            ]
+          },
+          "BucketEncryption": {
+            "ServerSideEncryptionConfiguration": [
+              {
+                "ServerSideEncryptionByDefault": {
+                  "SSEAlgorithm": "aws:kms",
+                  "KMSMasterKeyID": {
+                    "Ref": "LzMasterKeyArn"
+                  }
+                }
+              }
+            ]
+          },
+          "ReplicationConfiguration": {
+            "Role": {
+              "Fn::Join": [
+                "",
+                [
+                  "arn:aws:iam::",
+                  {
+                    "Ref": "AWS::AccountId"
+                  },
+                  ":role/",
+                  {
+                    "Ref": "AccountLabel"
+                  },
+                  "s3replicationrolebyaws"
+                ]
+              ]
+            },
+            "Rules": [
+              {
+                "Destination": {
+                  "Bucket": {
+                    "Fn::If": [
+                      "Is-NoS3Replication",
+                      {
+                        "Ref": "AccountS3LoggingOORBucketArn"
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:aws:s3:::",
+                            {
+                              "Fn::Join": [
+                                "-",
+                                [
+                                  "aws",
+                                  {
+                                    "Ref": "AccountLabel"
+                                  },
+                                  "s3",
+                                  {
+                                    "Ref": "ReplicationRegion"
+                                  },
+                                  {
+                                    "Ref": "S3BucketLabel"
+                                  },
+                                  {
+                                    "Ref": "LandingZoneGuid"
+                                  }
+                                ]
+                              ]
+                            }
+                          ]
+                        ]
+                      }
+                    ]
+                  },
+                  "StorageClass": "STANDARD_IA",
+                  "EncryptionConfiguration": {
+                    "ReplicaKmsKeyID": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "arn:aws:kms:",
+                          {
+                            "Fn::If": [
+                              "Is-UsEast1Region",
+                              "us-west-2",
+                              "us-east-1"
+                            ]
+                          },
+                          ":",
+                          {
+                            "Ref": "AWS::AccountId"
+                          },
+                          ":key/",
+                          {
+                            "Fn::Join": [
+                              "-",
+                              [
+                                {
+                                  "Ref": "AccountLabel"
+                                },
+                                "s3key",
+                                {
+                                  "Fn::If": [
+                                    "Is-UsEast1Region",
+                                    "us-west-2",
+                                    "us-east-1"
+                                  ]
+                                }
+                              ]
+                            ]
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                },
+                "Id": {
+                  "Fn::Join": [
+                    "-",
+                    [
+                      "aws",
+                      {
+                        "Ref": "AccountLabel"
+                      },
+                      "s3",
+                      {
+                        "Ref": "ReplicationRegion"
+                      },
+                      {
+                        "Ref": "S3BucketLabel"
+                      },
+                      {
+                        "Ref": "LandingZoneGuid"
+                      }
+                    ]
+                  ]
+                },
+                "Prefix": "",
+                "Status": {
+                  "Fn::If": [
+                    "Is-NoS3Replication",
+                    "Disabled",
+                    "Enabled"
+                  ]
+                },
+                "SourceSelectionCriteria": {
+                  "SseKmsEncryptedObjects": {
+                    "Status": {
+                      "Fn::If": [
+                        "Is-NoS3Replication",
+                        "Disabled",
+                        "Enabled"
+                      ]
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          "VersioningConfiguration": {
+            "Status": "Enabled"
+          },
+          "LoggingConfiguration": {
+            "DestinationBucketName": {
+              "Ref": "AccountS3LoggingBucket"
+            },
+            "LogFilePrefix": {
+              "Fn::Join": [
+                "/",
+                [
+                  {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "aws",
+                        {
+                          "Ref": "AccountLabel"
+                        },
+                        "s3",
+                        {
+                          "Ref": "AWS::Region"
+                        },
+                        {
+                          "Ref": "S3BucketLabel"
+                        },
+                        {
+                          "Ref": "LandingZoneGuid"
+                        }
+                      ]
+                    ]
+                  },
+                  ""
+                ]
+              ]
+            }
+          },
+          "PublicAccessBlockConfiguration": {
+            "BlockPublicAcls": true,
+            "BlockPublicPolicy": true,
+            "IgnorePublicAcls": true,
+            "RestrictPublicBuckets": true
+          },
+          "Tags": [
+            {
+              "Key": "fm_aws_name",
+              "Value": {
+                "Ref": "S3BucketLabel"
+              }
+            },
+            {
+              "Key": "fm_aws_businessUnit",
+              "Value": {
+                "Ref": "BizUnit"
+              }
+            },
+            {
+              "Key": "fm_aws_applicationId",
+              "Value": {
+                "Ref": "AppId"
+              }
+            },
+            {
+              "Key": "fm_aws_landingZoneGuid",
+              "Value": {
+                "Ref": "LandingZoneGuid"
+              }
+            },
+            {
+              "Key": "fm_aws_dCatalogue",
+              "Value": {
+                "Ref": "DataCatalogue"
+              }
+            }
+          ]
+        },
+        "Type": "AWS::S3::Bucket"
+      },
+      "TheS3BucketPolicyAll": {
+        "Description": "This resource attaches the following bucket policy to the created S3 bucket",
+        "Properties": {
+          "Bucket": {
+            "Ref": "TheS3Bucket"
+          },
+          "PolicyDocument": {
+            "Statement": [
+              {
+                "NotAction": [
+                  "s3:PutObject",
+                  "s3:DeleteObject",
+                  "s3:GetObject",
+                  "s3:List*"
+                ],
+                "Effect": "Deny",
+                "Principal": "*",
+                "Resource": [
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:s3:::",
+                        {
+                          "Ref": "TheS3Bucket"
+                        }
+                      ]
+                    ]
+                  },
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:s3:::",
+                        {
+                          "Ref": "TheS3Bucket"
+                        },
+                        "/*"
+                      ]
+                    ]
+                  }
+                ],
+                "Condition": {
+                  "StringNotLike": {
+                    "aws:userId": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "AdminRoleId"
+                            },
+                            ":*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "CloudAdminRoleId"
+                            },
+                            ":*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "LandingZoneAdminRoleId"
+                            },
+                            ":*"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "Action": [
+                  "s3:PutObject*",
+                  "s3:DeleteObject*"
+                ],
+                "Effect": "Deny",
+                "Principal": "*",
+                "Resource": [
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:s3:::",
+                        {
+                          "Ref": "TheS3Bucket"
+                        },
+                        "/*"
+                      ]
+                    ]
+                  }
+                ],
+                "Condition": {
+                  "StringNotLike": {
+                    "aws:userId": [
+                      {
+                        "Fn::If": [
+                          "Is-With-BucketCrud",
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                {
+                                  "Ref": "BucketCrudRoleId"
+                                },
+                                ":*"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "AWS::NoValue"
+                          }
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "S3ReplicatorRoleId"
+                            },
+                            ":*"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "Action": [
+                  "s3:GetObject*"
+                ],
+                "Effect": "Deny",
+                "Principal": "*",
+                "Resource": [
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:s3:::",
+                        {
+                          "Ref": "TheS3Bucket"
+                        },
+                        "/*"
+                      ]
+                    ]
+                  }
+                ],
+                "Condition": {
+                  "StringNotLike": {
+                    "aws:userId": [
+                      {
+                        "Fn::If": [
+                          "Is-With-BucketCrud",
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                {
+                                  "Ref": "BucketCrudRoleId"
+                                },
+                                ":*"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "AWS::NoValue"
+                          }
+                        ]
+                      },
+                      {
+                        "Fn::If": [
+                          "Is-With-BucketReader",
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                {
+                                  "Ref": "BucketReaderRoleId"
+                                },
+                                ":*"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "AWS::NoValue"
+                          }
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "S3ReplicatorRoleId"
+                            },
+                            ":*"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "Action": [
+                  "s3:List*"
+                ],
+                "Effect": "Deny",
+                "Principal": "*",
+                "Resource": [
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:s3:::",
+                        {
+                          "Ref": "TheS3Bucket"
+                        },
+                        "/*"
+                      ]
+                    ]
+                  }
+                ],
+                "Condition": {
+                  "StringNotLike": {
+                    "aws:userId": [
+                      {
+                        "Fn::If": [
+                          "Is-With-BucketCrud",
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                {
+                                  "Ref": "BucketCrudRoleId"
+                                },
+                                ":*"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "AWS::NoValue"
+                          }
+                        ]
+                      },
+                      {
+                        "Fn::If": [
+                          "Is-With-BucketReader",
+                          {
+                            "Fn::Join": [
+                              "",
+                              [
+                                {
+                                  "Ref": "BucketReaderRoleId"
+                                },
+                                ":*"
+                              ]
+                            ]
+                          },
+                          {
+                            "Ref": "AWS::NoValue"
+                          }
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "AdminRoleId"
+                            },
+                            ":*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "CloudAdminRoleId"
+                            },
+                            ":*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "LandingZoneAdminRoleId"
+                            },
+                            ":*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            {
+                              "Ref": "S3ReplicatorRoleId"
+                            },
+                            ":*"
+                          ]
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "Action": "s3:PutObject",
+                "Condition": {
+                  "StringNotLikeIfExists": {
+                    "s3:x-amz-server-side-encryption-aws-kms-key-id": {
+                      "Ref": "LzMasterKeyArn"
+                    }
+                  }
+                },
+                "Effect": "Deny",
+                "Principal": "*",
+                "Resource": [
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:s3:::",
+                        {
+                          "Ref": "TheS3Bucket"
+                        },
+                        "/*"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              {
+                "Action": "s3:PutObject",
+                "Condition": {
+                  "StringEquals": {
+                    "s3:x-amz-server-side-encryption": "AES256"
+                  }
+                },
+                "Effect": "Deny",
+                "Principal": "*",
+                "Resource": [
+                  {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:aws:s3:::",
+                        {
+                          "Ref": "TheS3Bucket"
+                        },
+                        "/*"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "Type": "AWS::S3::BucketPolicy"
+      }
+    },
+    "Outputs": {
+      "S3BucketName": {
+        "Description": "The S3 Bucket",
+        "Value": {
+          "Ref": "TheS3Bucket"
+        }
+      }
+    }
+  }

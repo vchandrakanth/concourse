@@ -7,7 +7,7 @@ import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
 import { browser, ExpectedConditions } from 'protractor';
 
 
-describe('Login Concourse ', async function () {
+describe('Verifying Policy Violation', async function () {
 
     let originalTimeout;
     let risk = new Risk();

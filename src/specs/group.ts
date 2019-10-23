@@ -4,7 +4,7 @@ import { Group } from '../pageObjects/groups.Po';
 import { Surface } from '../pageObjects/surfaces.Po';
 // import { VerifyUserPermissions } from '../pageObjects/userPermissions.Po';
 
-describe('Login Concourse ', async function () {
+describe('Creaing Groups Concourse ', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let group = new Group();

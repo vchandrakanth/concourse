@@ -3,7 +3,7 @@ import { ExpectHelper } from '../utils/expectHelper';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 
 
-describe('Login Concourse ', async function () {
+describe('Creaing Attribute Tags', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let attributeTag = new AttributeTag();

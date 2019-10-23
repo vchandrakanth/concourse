@@ -4,7 +4,7 @@ import { AssetManager } from '../pageObjects/assetManager.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 
 
-describe('Login Concourse ', async function () {
+describe('Creating Enclave Models ', async function () {
   let originalTimeout;
   let EC = ExpectedConditions;
   let assetsManager = new AssetManager();

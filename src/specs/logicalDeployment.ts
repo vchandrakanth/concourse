@@ -5,7 +5,7 @@ import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { LogicalDeployment } from '../pageObjects/logicalDeployment.Po';
 // let gsh = require('../utils/globalSpecHelper');
 
-describe('Login Concourse ', async function () {
+describe('Creaing Logical Deployment', async function () {
 
   let originalTimeout;
   let EC = ExpectedConditions;
@@ -54,17 +54,17 @@ describe('Login Concourse ', async function () {
     await console.log('Logical Deployment id is', deploymentId);
   });
 
-  // it('Step 4: Delete Logical Deployment', async function (): Promise<any> {
-  //   // Delete Logical Deployement
-  //   await logicalDeployment.deleteLogicalDeployement(deploymentName);
-  //   await ExpectHelper.expectDoesNotExists(logicalDeployment.logicalDeployementElement(deploymentName));
-  // });
+  it('Step 4: Delete Logical Deployment', async function (): Promise<any> {
+    // Delete Logical Deployement
+    await logicalDeployment.deleteLogicalDeployement(deploymentName);
+    await ExpectHelper.expectDoesNotExists(logicalDeployment.logicalDeployementElement(deploymentName));
+  });
 
-  // it('Step 5: Clean Up', async function (): Promise<any> {
-  //   // Clean Up
-  //   await assetManager.deleteEnclaveModel(assetName, 'false');
-  //   await attributeTag.deleteAttributeTag(attributeTagName, 'false');
-  // });
+  it('Step 5: Clean Up', async function (): Promise<any> {
+    // Clean Up
+    await assetManager.deleteEnclaveModel(assetName, 'false');
+    await attributeTag.deleteAttributeTag(attributeTagName, 'false');
+  });
 
   afterEach(function () {
     // console.log(gsh);

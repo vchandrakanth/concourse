@@ -5,7 +5,7 @@ import { PolicyGroup } from '../pageObjects/policyGroup.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { Approvals } from '../pageObjects/approvals.Po';
 
-describe('Policy Group Concourse ', async function () {
+describe('Verifying Approvals', async function () {
   let originalTimeout;
   let EC = ExpectedConditions;
   let attributeTag = new AttributeTag();

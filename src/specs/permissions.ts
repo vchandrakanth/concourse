@@ -7,7 +7,7 @@ import { AssetManager } from '../pageObjects/assetManager.Po';
 import { LoginPage } from '../pageObjects/login.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 
-describe('Login Concourse ', async function () {
+describe('Verifying Permissions Concourse ', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let group = new Group();

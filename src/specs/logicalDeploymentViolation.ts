@@ -7,7 +7,7 @@ import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { LogicalDeployment } from '../pageObjects/logicalDeployment.Po';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
 
-describe('Login Concourse ', async function () {
+describe('Creaing Logical Deployment Violations', async function () {
 
   let originalTimeout;
   let risk = new Risk();

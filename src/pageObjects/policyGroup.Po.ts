@@ -45,11 +45,10 @@ export class PolicyGroup {
   selectRegion(region: any) { return element(by.xpath(`//div[.='${region}']`)); }
   get nextButton() { return element(by.xpath('//button[.="Next"]')); }
   selectAttributeTag(attributeTagName: string) { return element(by.xpath(`//span[.='${attributeTagName}']`)); }
-  selectOrganization(Organization: any) { return element(by.xpath(`//label[.='${Organization}']`)); }
+  selectSurfaceLayer(surfacelayer: any) { return element(by.xpath(`//label[.='${surfacelayer}']`)); }
   get policySubmit() { return element(by.xpath('//button[.=\'Submit\']')); }
   get editPoliciesButton() { return element(by.css('button[data-e2e="editPolicies"]')); }
   get editSurfaceLayerButton() { return element(by.css('.btn-outline-primary[data-e2e="editSurfaceLayers"]')); }
-  selectSurfaceLayer(surfacelayer: any) { return element(by.xpath(`//label[.='${surfacelayer}']`)); } // Default Surface - Root Surface Layer
   get updateSurfaceLayers() { return element(by.css('button[data-e2e="updateSurfaceLayers"]')); }
   get toast() { return $('#toast-container'); }
   get list() { return $('.list'); }
@@ -202,7 +201,7 @@ export class PolicyGroup {
     // click on next to Assign organizations
     await WaitHelper.waitForElementToBeClickable(this.nextButton, 2000, 'next ');
     await elementClick(this.nextButton);
-    await browser.logger.info('Moved to Assign organizations Page');
+    await browser.logger.info('Moved to Set Relationships Page');
 
     await WaitHelper.waitForElementToBeClickable(this.attributeTagDropDown, 2000, 'Attribute Tag Drop Down  ');
     await elementClick(this.attributeTagDropDown);
@@ -214,7 +213,7 @@ export class PolicyGroup {
     await browser.logger.info('Attribute Selected');
 
     if (surfaceLayer === 'Default Surface - Root Surface Layer') {
-      await elementClick(this.selectOrganization(surfaceLayer));
+      await elementClick(this.selectSurfaceLayer(surfaceLayer));
       await browser.logger.info('Organization Selected');
     }
 
@@ -745,8 +744,8 @@ export class PolicyGroup {
     });
   }
 
-  /****************************************Update Organization For PolicyGroup********************************************/
-  async removeOrganizationForPG(policyGroupName: string = null, SurfaceLayer: string = null) {
+  /****************************************Remove Surface Layer For PolicyGroup********************************************/
+  async removeSurfaceLayerForPG(policyGroupName: string = null, SurfaceLayer: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/policy-groups');
 

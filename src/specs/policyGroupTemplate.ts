@@ -2,7 +2,7 @@ import { ExpectedConditions } from 'protractor';
 import { ExpectHelper } from '../utils/expectHelper';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
 
-describe('Policy Group Concourse ', async function () {
+describe('Creaing Policy Group Template Concourse ', async function () {
   let originalTimeout;
   let EC = ExpectedConditions;
   let properties = require('../conf/properties');

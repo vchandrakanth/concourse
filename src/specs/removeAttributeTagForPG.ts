@@ -7,7 +7,7 @@ import { Risk } from '../pageObjects/risks.Po';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
 import { ExpectHelper } from '../utils/expectHelper';
 
-describe('Login Concourse ', async function () {
+describe('Remove Attribute Tag From Policy Group To Verify Violation', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let assetsManager = new AssetManager();

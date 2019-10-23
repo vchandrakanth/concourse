@@ -97,6 +97,7 @@ module.exports = {
     groupDescription: 'Description Of E2E Test Group',
     user: 'e2e Test <ramakrishna+e2etest@concourselabs.com>'
     // user: 'e2e Test <ramakrishna+e2e@concourselabs.com>'
+    // user: 'e2e Test <ramakrishna+e2etestuser@concourselabs.com>'
 
   },
   // Control Topology Data
@@ -145,7 +146,7 @@ module.exports = {
     module7: 'user-management/groups',
     module8: 'user-management/users',
     // e2eTestUser: 'ramakrishna+e2etestuser@concourselabs.com',
-    e2eTestUser: 'ramakrishna+e2eUser1@concourselabs.com'
+    e2eTestUser: 'ramakrishna+e2etestuser@concourselabs.com'
   },
   ApprovalsData:
   {

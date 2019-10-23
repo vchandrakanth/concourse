@@ -2,7 +2,6 @@ import { ExpectedConditions } from 'protractor';
 import { ExpectHelper } from '../utils/expectHelper';
 import { Group } from '../pageObjects/groups.Po';
 import { Surface } from '../pageObjects/surfaces.Po';
-// import { VerifyUserPermissions } from '../pageObjects/userPermissions.Po';
 
 describe('Creaing Groups Concourse ', async function () {
     let originalTimeout;

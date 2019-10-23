@@ -47,11 +47,11 @@ describe('Verifying Permissions Concourse ', async function () {
     let responsibilities4 = ['Manage Institutions', 'Create Surfaces', 'Manage Cloud Roles'];
     let role5 = ['Identity Admin'];
     let responsibilities5 = ['Manage Groups', 'Manage Users'];
-    let AttributeTagName = 'Permissions';
-    let AssetName = 'Permissions';
-    let PolicyGroupTemplateName = 'Permissions';
-    let PolicyGroupName = 'Permissions';
-    let GroupName = 'Permissions';
+    let AttributeTagName = 'User Permissions';
+    let AssetName = 'User Permissions';
+    let PolicyGroupTemplateName = 'User Permissions';
+    let PolicyGroupName = 'User Permissions';
+    let GroupName = 'User Permissions';
 
     beforeEach(function () {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -114,13 +114,13 @@ describe('Verifying Permissions Concourse ', async function () {
         await ExpectHelper.expectExists(verifyUserPermissions.buttonDelete);
         await console.log('User2 Has Delete Policy Group Template Permission');
 
-        //     // await verifyUserPermissions.VerifyPermissionGranted(module4, PolicyGroupName);
-        //     // await ExpectHelper.isListElementExists(element(by.css('#page-actions-container')), 'NEW POLICY GROUP');
-        //     // await console.log('User2 Has Create New Policy Group Permission');
-        //     // await ExpectHelper.expectExists(verifyUserPermissions.buttonEdit);
-        //     // await console.log('User2 Has Edit Policy Group Permission');
-        //     // await ExpectHelper.expectExists(verifyUserPermissions.buttonDelete);
-        //     // await console.log('User2 Has Delete Policy Group Permission');
+        await verifyUserPermissions.VerifyPermissionGranted(module4, PolicyGroupName);
+        await ExpectHelper.isListElementExists(element(by.css('#page-actions-container')), 'NEW POLICY GROUP');
+        await console.log('User2 Has Create New Policy Group Permission');
+        await ExpectHelper.expectExists(verifyUserPermissions.buttonEdit);
+        await console.log('User2 Has Edit Policy Group Permission');
+        await ExpectHelper.expectExists(verifyUserPermissions.buttonDelete);
+        await console.log('User2 Has Delete Policy Group Permission');
 
         await verifyUserPermissions.VerifyPermissionNotGranted(module2);
         await ExpectHelper.expectDoesNotExists(verifyUserPermissions.createButton('NEW ATTRIBUTE TAG'));
@@ -147,7 +147,7 @@ describe('Verifying Permissions Concourse ', async function () {
     });
 
     it('Step 3: Verify Business Operator Permissions For User3', async function (): Promise<any> {
-        await group.addRoleToGroup(GroupName, role3, responsibilities4);
+        await group.addRoleToGroup(GroupName, role3, responsibilities3);
         await group.reLogin(username, e2eTestUser, password);
         await browser.sleep(2000);
         await verifyUserPermissions.VerifyPermissionGranted(module1, AssetName);

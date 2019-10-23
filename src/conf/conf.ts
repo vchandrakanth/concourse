@@ -45,7 +45,7 @@ export let config: Config = {
             args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
             // '--headless',
         },
-        specs:  ['../specs/addAttributeTagForPG.js']
+        specs:  ['../specs/permissions.js']
         // , '../specs/removeAttributeTagForPG.js', '../specs/removeOrganizationForPG.js']
         // '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
         // '../specs/approvals.js', '../specs/group.js',

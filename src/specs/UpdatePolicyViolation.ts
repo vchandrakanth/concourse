@@ -5,6 +5,7 @@ import { PolicyGroup } from '../pageObjects/policyGroup.Po';
 import { AssetManager } from '../pageObjects/assetManager.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
+import { getIdFromUrl } from '../utils/utils';
 
 describe('Update Policy Violation ', async function () {
 
@@ -79,7 +80,7 @@ describe('Update Policy Violation ', async function () {
     it('Step 5: Creating Policy Group with EC2 and S3 ', async function (): Promise<any> {
         // Creating Policy Group
         await policyPage.createPolicyGroup(policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services);
-        policyId = await policyPage.getId();
+        policyId = await getIdFromUrl();
         await console.log('Policy Group name is', policyId);
         await console.log('Policy Group name is', policyGroupName);
         await policyPage.searchPolicyGroup(policyGroupName);
@@ -89,7 +90,7 @@ describe('Update Policy Violation ', async function () {
     it('Step 6: Update Policy Group with all Products Except EC2', async function (): Promise<any> {
         // Updating Policy Group With EC2
         await policyPage.updatePolicyGroupWithEC2(policyGroupName, ec2Service);
-        s3PolicyId = await policyPage.getId3();
+        s3PolicyId = await getIdFromUrl();
         await console.log(' Published Policy Group id is', s3PolicyId);
         await console.log('Policy Group name is', policyGroupName);
         await policyPage.searchPolicyGroup(policyGroupName);
@@ -105,7 +106,7 @@ describe('Update Policy Violation ', async function () {
     it('Step 8: Update Policy Group with all Products Except S3 Service', async function (): Promise<any> {
         // Update Policy Group With S3
         await policyPage.updatePolicyGroupWithS3(policyGroupName, s3Service);
-        ec2PolicyId = await policyPage.getId4();
+        ec2PolicyId = await getIdFromUrl();
         await console.log(' Published Policy Group id is', ec2PolicyId);
         await console.log('Policy Group name is', policyGroupName);
         await policyPage.searchPolicyGroup(policyGroupName);

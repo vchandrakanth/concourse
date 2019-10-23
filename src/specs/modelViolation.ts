@@ -5,6 +5,7 @@ import { PolicyGroup } from '../pageObjects/policyGroup.Po';
 import { AssetManager } from '../pageObjects/assetManager.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
+import { getIdFromUrl } from '../utils/utils';
 
 describe('Creaing Model Violations ', async function () {
   let EC = ExpectedConditions;
@@ -31,8 +32,7 @@ describe('Creaing Model Violations ', async function () {
   let entityType = properties.ApprovalsData.policyGroupType;
   let service = ['AWS::S3'];
   let service1 = ['AWS::EC2'];
-  let ID;
-  let riskId;
+  let modelId;
 
   beforeEach(function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -66,8 +66,8 @@ describe('Creaing Model Violations ', async function () {
   it('Step 4: Creating Policy Group with S3 ', async function (): Promise<any> {
     // // Creating Policy Group
     await policyPage.createPolicyGroup(policyGroupName, policyGroupDescription, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, service);
-    let policyId = await policyPage.getId();
-    await console.log('Policy Group name is', policyId);
+    let s3PolicyGroupId = await getIdFromUrl();
+    await console.log('Policy Group name is', s3PolicyGroupId);
     await console.log('Policy Group name is', policyGroupName);
     await policyPage.searchPolicyGroup(policyGroupName);
     await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);
@@ -76,9 +76,9 @@ describe('Creaing Model Violations ', async function () {
   it('Step 5: Creating Policy Group with EC2 ', async function (): Promise<any> {
     // // Creating Policy Group
     await policyPage.createPolicyGroup(policyGroupName1, policyGroupDescription1, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, service1);
-    let policyId1 = await policyPage.getId();
-    await console.log('Policy Group name is', policyId1);
-    await console.log('Policy Group id is', policyId1);
+    let ec2PolicyGroupId = await getIdFromUrl();
+    await console.log('Policy Group name is', policyGroupName1);
+    await console.log('Policy Group id is', ec2PolicyGroupId);
     await policyPage.searchPolicyGroup(policyGroupName1);
     await ExpectHelper.isListElementExists(policyPage.list, policyGroupName1);
   });
@@ -86,18 +86,18 @@ describe('Creaing Model Violations ', async function () {
   it('Step 6: Create New Enclave Model With Above Created Attribute Tags', async function (): Promise<any> {
     // Creating Enclave Model
     await assetsManager.createEnclaveModel('PUBLISHED', assetName, description, attributeTags, 'concourseInfra.json', 'E2E Admin');
-    ID = await assetsManager.getId();
+    modelId = await assetsManager.getId();
     await console.log('Enclave Model name is', assetName);
-    await console.log('Enclave Model id is', ID);
+    await console.log('Enclave Model id is', modelId);
     await assetsManager.searchAssetManager(assetName);
     await ExpectHelper.isListElementExists(assetsManager.assetList, assetName);
   });
 
   it('Step 7: Verifying Risk ', async function (): Promise<any> {
     // Verifying Risk
-    await risk.openRisk(ID);
-    await ExpectHelper.isListElementExists(risk.risklist, ID);
-    await console.log('Risk Happened For', ID);
+    await risk.openRisk(modelId);
+    await ExpectHelper.isListElementExists(risk.risklist, modelId);
+    await console.log('Risk Happened For', modelId);
   });
 
   it('Step 8: Delete Enclave Model', async function (): Promise<any> {
@@ -108,9 +108,9 @@ describe('Creaing Model Violations ', async function () {
 
   it('Step 9: Verifying Risk After Deletion Of Enclave Model', async function (): Promise<any> {
     // verifying Risk After Deletion Of Enclave Model
-    await risk.openRisk(ID);
-    await ExpectHelper.expectDoesNotExists(risk.riskElement(ID));
-    await console.log('Risk Removed For', ID);
+    await risk.openRisk(modelId);
+    await ExpectHelper.expectDoesNotExists(risk.riskElement(modelId));
+    await console.log('Risk Removed For', modelId);
   });
 
   it('Step 10: CleanUp', async function (): Promise<any> {

@@ -6,6 +6,7 @@ import { AssetManager } from '../pageObjects/assetManager.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { LogicalDeployment } from '../pageObjects/logicalDeployment.Po';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
+import { getIdFromUrl } from '../utils/utils';
 
 describe('Creaing Logical Deployment Violations', async function () {
 
@@ -69,7 +70,7 @@ describe('Creaing Logical Deployment Violations', async function () {
   it('Step 4: Creating Policy Group with  Published', async function (): Promise<any> {
     // Creating Policy Group with  Published
     await policyPage.createPolicyGroup(policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services);
-    policyId = await policyPage.getId();
+    policyId = await getIdFromUrl();
     await console.log('Policy Group name is', policyId);
     await console.log('Policy Group name is', policyGroupName);
     await policyPage.searchPolicyGroup(policyGroupName);

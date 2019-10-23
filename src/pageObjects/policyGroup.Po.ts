@@ -238,15 +238,6 @@ export class PolicyGroup {
   getRandomNum = function (min, max) {
     return parseInt(Math.random() * (max - min) + min);
   };
-  async getId() {
-    return browser.getCurrentUrl().then(function (url) {
-      console.log(url);
-      let str = 'currentUrl';
-      let entityId = [];
-      entityId = url.split('/');
-      return entityId[4];
-    });
-  }
 
   async entityType(entityType: any = null, group: any = null) {
 
@@ -476,17 +467,6 @@ export class PolicyGroup {
     await browser.sleep(2000);
   }
 
-  async getId1() {
-    return browser.getCurrentUrl().then(function (url) {
-      console.log(url);
-      let str = 'currentUrl';
-      let entityId = [str];
-      entityId = url.split('/');
-      return entityId[4];
-    });
-
-  }
-
   /**************************************** Verify Policy Violation********************************************/
   async verifyPolicyViolation(fileName: string = null, Services: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
@@ -517,16 +497,6 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
     await elementClick(this.submitButton);
     await browser.logger.info('Enclave Model Submitted');
-  }
-
-  async getId2() {
-    return browser.getCurrentUrl().then(function (url) {
-      console.log(url);
-      let str = 'currentUrl';
-      let entityId = [str];
-      entityId = url.split('/');
-      return entityId[4];
-    });
   }
 
   async fileUpload(fileName: string = null) {
@@ -631,16 +601,6 @@ export class PolicyGroup {
     await browser.sleep(2000);
   }
 
-  async getId3() {
-    return browser.getCurrentUrl().then(function (url) {
-      console.log(url);
-      let str = 'currentUrl';
-      let entityId = [str];
-      entityId = url.split('/');
-      return entityId[4];
-    });
-  }
-
   async updatePolicyGroupWithS3(policyGroupName: string = null, service: String[] = null, policyId2: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/policy-groups');
@@ -732,16 +692,6 @@ export class PolicyGroup {
     await elementClick(this.saveButton);
     await browser.logger.info('Policy Published');
     await browser.sleep(2000);
-  }
-
-  async getId4() {
-    return browser.getCurrentUrl().then(function (url) {
-      console.log(url);
-      let str = 'currentUrl';
-      let entityId = [str];
-      entityId = url.split('/');
-      return entityId[4];
-    });
   }
 
   /****************************************Remove Surface Layer For PolicyGroup********************************************/
@@ -904,16 +854,6 @@ export class PolicyGroup {
     await browser.sleep(3000);
   }
 
-  async getId5() {
-    return browser.getCurrentUrl().then(function (url) {
-      console.log(url);
-      let str = 'currentUrl';
-      let entityId = [];
-      entityId = url.split('/');
-      return entityId[4];
-    });
-  }
-
   async getId6(str: any) {
     let ID = [];
     ID = String(str).split('| ');
@@ -999,16 +939,6 @@ export class PolicyGroup {
 
   }
 
-  async getId7() {
-    return browser.getCurrentUrl().then(function (url) {
-      console.log(url);
-      let str = 'currentUrl';
-      let entityId = [str];
-      entityId = url.split('/');
-      return entityId[4];
-    });
-  }
-
   async editSurfaceLayerAndPublish(policyGroupName: string = null, surfacelayer: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
@@ -1087,15 +1017,6 @@ export class PolicyGroup {
     await browser.sleep(2000);
   }
 
-  async getId8() {
-    return browser.getCurrentUrl().then(function (url) {
-      console.log(url);
-      let str = 'currentUrl';
-      let entityId = [str];
-      entityId = url.split('/');
-      return entityId[4];
-    });
-  }
   async verifyPolicyGroup(policyGroupName: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await elementClear(this.search, policyGroupName);

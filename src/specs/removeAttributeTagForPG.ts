@@ -6,8 +6,9 @@ import { PolicyGroup } from '../pageObjects/policyGroup.Po';
 import { Risk } from '../pageObjects/risks.Po';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
 import { ExpectHelper } from '../utils/expectHelper';
+import { getIdFromUrl } from '../utils/utils';
 
-describe('Remove Attribute Tag From Policy Group To Verify Violation', async function () {
+describe('Login Concourse ', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let assetsManager = new AssetManager();
@@ -77,7 +78,7 @@ describe('Remove Attribute Tag From Policy Group To Verify Violation', async fun
 
     it('Step 5: Create Policy Group With Second Attribute Tag', async function (): Promise<any> {
         await policyPage.createPolicyGroup(policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, services);
-        policyId = await policyPage.getId();
+        policyId = await getIdFromUrl();
         await console.log('Policy Group  id is', policyId);
         await policyPage.searchPolicyGroup(policyGroupName);
         await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);
@@ -85,9 +86,7 @@ describe('Remove Attribute Tag From Policy Group To Verify Violation', async fun
 
     it('Step 6: Add First Attribute Tag To Policy Group', async function (): Promise<any> {
         await policyPage.addAttributeTagForPG(policyGroupName, attributeTagName);
-        updatedPolicyID = await policyPage.getId5();
-        await console.log('Policy Group Violation Id', updatedPolicyID);
-        await policyPage.searchPolicyGroup(policyGroupName);
+        updatedPolicyID = await getIdFromUrl();
         await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);
     });
 
@@ -99,7 +98,7 @@ describe('Remove Attribute Tag From Policy Group To Verify Violation', async fun
 
     it('Step 8: Remove Existing Attribute Tag(Second One) ', async function (): Promise<any> {
         await policyPage.removeAttributeTagForPG(policyGroupName, attributeTagId);
-        latestPolicyId = await policyPage.getId();
+        latestPolicyId = await getIdFromUrl();
         await console.log('Policy Group  id Is', latestPolicyId);
     });
 

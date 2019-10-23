@@ -18,6 +18,16 @@ export async function elementClick(targetElement: ElementFinder) {
 
 }
 
+export async function getIdFromUrl() {
+    return browser.getCurrentUrl().then(function (url) {
+        console.log(url);
+        let str = 'currentUrl';
+        let entityId = [str];
+        entityId = url.split('/');
+        return entityId[4];
+    });
+}
+
 export async function elementClear(targetElement: ElementFinder, text: any) {
 
     await targetElement.clear();

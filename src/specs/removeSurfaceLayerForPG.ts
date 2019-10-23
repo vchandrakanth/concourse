@@ -7,6 +7,7 @@ import { AssetManager } from '../pageObjects/assetManager.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { LogicalDeployment } from '../pageObjects/logicalDeployment.Po';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
+import { getIdFromUrl } from '../utils/utils';
 
 describe('Remove Surface Layer For Policy Group and Verify Violation created ', async function () {
     let originalTimeout;
@@ -93,7 +94,7 @@ describe('Remove Surface Layer For Policy Group and Verify Violation created ', 
     it('Step 6: Creating Policy Group with EC2 and S3 ', async function (): Promise<any> {
         // Creating Policy Group
         await policyPage.createPolicyGroup(policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, services, 'Default Surface - Root Surface Layer');
-        policyId = await policyPage.getId();
+        policyId = await getIdFromUrl();
         await console.log('Policy Group  id is', policyId);
         await policyPage.searchPolicyGroup(policyGroupName);
         await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);
@@ -109,7 +110,7 @@ describe('Remove Surface Layer For Policy Group and Verify Violation created ', 
     it('Step 8: Remove Surface Layer From Policy Group', async function (): Promise<any> {
         // Adding New Attribute Tag For Policy Group
         await policyPage.removeSurfaceLayerForPG(policyGroupName, SurfaceLayer);
-        updatedPolicyGroupId = await policyPage.getId5();
+        updatedPolicyGroupId = await getIdFromUrl();
         await console.log('Updated Policy Group Id Is', updatedPolicyGroupId);
         await policyPage.searchPolicyGroup(policyGroupName);
         await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);

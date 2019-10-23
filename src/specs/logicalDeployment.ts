@@ -67,9 +67,7 @@ describe('Creaing Logical Deployment', async function () {
   });
 
   afterEach(function () {
-    // console.log(gsh);
-    // gsh.console.log(Text);
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
+      jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
 });

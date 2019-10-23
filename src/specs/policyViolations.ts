@@ -5,6 +5,7 @@ import { AssetManager } from '../pageObjects/assetManager.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
 import { browser, ExpectedConditions } from 'protractor';
+import { getIdFromUrl } from '../utils/utils';
 
 
 describe('Verifying Policy Violation', async function () {
@@ -64,7 +65,7 @@ describe('Verifying Policy Violation', async function () {
     it('Step 4: Creating Policy Group with S3 ', async function (): Promise<any> {
         // Creating Policy Group
         await policyPage.createPolicyGroup(policyGroupName, policyGroupDescription, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, service);
-        let policyId = await policyPage.getId();
+        let policyId = await getIdFromUrl();
         await console.log('Policy Group name is', policyId);
         await console.log('Policy Group name is', policyGroupName);
         await policyPage.searchPolicyGroup(policyGroupName);

@@ -89,8 +89,6 @@ describe('Creaing Policy Group Concourse ', async function () {
   it('Step 9: Delete Published Policy Group', async function (): Promise<any> {
     // Edit Policies And Publish Policy Group
     await policyPage.deletePolicyGroup(policyGroupNamePublish, 'false');
-    // await policyPage.searchPolicyGroup(policyGroupNamePublish);
-    // await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupNamePublish));
   });
 
   it('Step 10: CleanUp', async function (): Promise<any> {

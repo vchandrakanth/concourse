@@ -1,0 +1,1123 @@
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <title>Concourse</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <style type="text/css">svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.225em;
+}
+.svg-inline--fa.fa-w-1 {
+  width: 0.0625em;
+}
+.svg-inline--fa.fa-w-2 {
+  width: 0.125em;
+}
+.svg-inline--fa.fa-w-3 {
+  width: 0.1875em;
+}
+.svg-inline--fa.fa-w-4 {
+  width: 0.25em;
+}
+.svg-inline--fa.fa-w-5 {
+  width: 0.3125em;
+}
+.svg-inline--fa.fa-w-6 {
+  width: 0.375em;
+}
+.svg-inline--fa.fa-w-7 {
+  width: 0.4375em;
+}
+.svg-inline--fa.fa-w-8 {
+  width: 0.5em;
+}
+.svg-inline--fa.fa-w-9 {
+  width: 0.5625em;
+}
+.svg-inline--fa.fa-w-10 {
+  width: 0.625em;
+}
+.svg-inline--fa.fa-w-11 {
+  width: 0.6875em;
+}
+.svg-inline--fa.fa-w-12 {
+  width: 0.75em;
+}
+.svg-inline--fa.fa-w-13 {
+  width: 0.8125em;
+}
+.svg-inline--fa.fa-w-14 {
+  width: 0.875em;
+}
+.svg-inline--fa.fa-w-15 {
+  width: 0.9375em;
+}
+.svg-inline--fa.fa-w-16 {
+  width: 1em;
+}
+.svg-inline--fa.fa-w-17 {
+  width: 1.0625em;
+}
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
+.svg-inline--fa.fa-w-19 {
+  width: 1.1875em;
+}
+.svg-inline--fa.fa-w-20 {
+  width: 1.25em;
+}
+.svg-inline--fa.fa-pull-left {
+  margin-right: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-pull-right {
+  margin-left: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-border {
+  height: 1.5em;
+}
+.svg-inline--fa.fa-li {
+  width: 2em;
+}
+.svg-inline--fa.fa-fw {
+  width: 1.25em;
+}
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -0.125em;
+  width: 1em;
+}
+.fa-layers svg.svg-inline--fa {
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter, .fa-layers-text {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+}
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+          transform-origin: center center;
+}
+
+.fa-layers-counter {
+  background-color: #ff253a;
+  border-radius: 1em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: #fff;
+  height: 1.5em;
+  line-height: 1;
+  max-width: 5em;
+  min-width: 1.5em;
+  overflow: hidden;
+  padding: 0.25em;
+  right: 0;
+  text-overflow: ellipsis;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-bottom-right {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom right;
+          transform-origin: bottom right;
+}
+
+.fa-layers-bottom-left {
+  bottom: 0;
+  left: 0;
+  right: auto;
+  top: auto;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: bottom left;
+          transform-origin: bottom left;
+}
+
+.fa-layers-top-right {
+  right: 0;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.fa-layers-top-left {
+  left: 0;
+  right: auto;
+  top: 0;
+  -webkit-transform: scale(0.25);
+          transform: scale(0.25);
+  -webkit-transform-origin: top left;
+          transform-origin: top left;
+}
+
+.fa-lg {
+  font-size: 1.3333333333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.fa-xs {
+  font-size: 0.75em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0;
+}
+.fa-ul > li {
+  position: relative;
+}
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit;
+}
+
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+.fa-pull-left {
+  float: left;
+}
+
+.fa-pull-right {
+  float: right;
+}
+
+.fa.fa-pull-left,
+.fas.fa-pull-left,
+.far.fa-pull-left,
+.fal.fa-pull-left,
+.fab.fa-pull-left {
+  margin-right: 0.3em;
+}
+.fa.fa-pull-right,
+.fas.fa-pull-right,
+.far.fa-pull-right,
+.fal.fa-pull-right,
+.fab.fa-pull-right {
+  margin-left: 0.3em;
+}
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear;
+}
+
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+          animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+          transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+          transform: scale(-1, 1);
+}
+
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+          transform: scale(1, -1);
+}
+
+.fa-flip-both, .fa-flip-horizontal.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(-1, -1);
+          transform: scale(-1, -1);
+}
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical,
+:root .fa-flip-both {
+  -webkit-filter: none;
+          filter: none;
+}
+
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  position: relative;
+  width: 2.5em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1.25em;
+}
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2.5em;
+}
+
+.fa-inverse {
+  color: #fff;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.sr-only-focusable:active, .sr-only-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+.svg-inline--fa .fa-primary {
+  fill: var(--fa-primary-color, currentColor);
+  opacity: 1;
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa .fa-secondary {
+  fill: var(--fa-secondary-color, currentColor);
+  opacity: 0.4;
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-primary {
+  opacity: 0.4;
+  opacity: var(--fa-secondary-opacity, 0.4);
+}
+
+.svg-inline--fa.fa-swap-opacity .fa-secondary {
+  opacity: 1;
+  opacity: var(--fa-primary-opacity, 1);
+}
+
+.svg-inline--fa mask .fa-primary,
+.svg-inline--fa mask .fa-secondary {
+  fill: black;
+}
+
+.fad.fa-inverse {
+  color: #fff;
+}</style><link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logos/favicon-16x16.png">
+  <link rel="manifest" href="assets/logos/site.webmanifest">
+  <link rel="mask-icon" href="assets/logos/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="assets/logos/favicon.ico">
+  <meta name="msapplication-TileColor" content="#2b5797">
+  <meta name="msapplication-config" content="assets/logos/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="styles.7deee6d1b928bfa31ccc.css"><style>[_nghost-jaw-c0] {
+  display: grid;
+  
+  grid-template-areas: "left header header" "left main right" "left footer footer";
+  grid-template-columns: 300px auto minmax(0px, 500px);
+  grid-template-rows: var(--header-height) calc(100vh - 77px) var(--footer-height);
+  height: 100vh; }
+
+app-header[_ngcontent-jaw-c0] {
+  grid-area: header; }
+
+app-sidebar[_ngcontent-jaw-c0] {
+  grid-area: left; }
+
+.app-container[_ngcontent-jaw-c0] {
+  grid-column: main-start / right-end;
+  grid-row: main;
+  overflow-x: hidden;
+  overflow-y: auto; }
+
+app-notification-bar[_ngcontent-jaw-c0] {
+  display: none; }
+
+app-notification-bar.expanded[_ngcontent-jaw-c0] {
+  display: block;
+  grid-column: right-start / right-end;
+  grid-row: header-end / footer-start; }
+
+footer[_ngcontent-jaw-c0] {
+  grid-area: footer;
+  display: flex;
+  align-items: center; }
+
+router-outlet[_ngcontent-jaw-c0] {
+  display: none; }
+
+.footer[_ngcontent-jaw-c0] {
+  justify-self: flex-end;
+  width: 100%; }</style><style>[_nghost-jaw-c1] {
+  box-shadow: 1px 0 4px rgba(37, 112, 175, 0.4);
+  box-shadow: 1px 0 4px rgba(177, 177, 177, 0.4);
+  z-index: 3;
+  background: var(--light);
+  background: #fff; }
+
+.top-nav[_ngcontent-jaw-c1] {
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: calc(100vh - 70px); }
+
+.nav[_ngcontent-jaw-c1]   .nav-link[_ngcontent-jaw-c1] {
+  margin: .25rem .5rem;
+  margin: .15rem .5rem;
+  border-radius: .25rem;
+  color: #231F20;
+  font-size: 16px;
+  letter-spacing: .2px;
+  display: flex;
+  align-items: center; }
+
+.nav[_ngcontent-jaw-c1]   fa-icon[_ngcontent-jaw-c1] {
+  color: #231F20;
+  opacity: .55;
+  margin-right: 1rem;
+  width: 1em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center; }
+
+.nav[_ngcontent-jaw-c1]   fa-icon.fa-inverse[_ngcontent-jaw-c1] {
+    color: #fff;
+    opacity: 1; }
+
+.nav[_ngcontent-jaw-c1]   .nav-link.active[_ngcontent-jaw-c1] {
+  background: var(--primary-light); }
+
+.nav[_ngcontent-jaw-c1]   .nav-link.active[_ngcontent-jaw-c1]   .fa-inverse[_ngcontent-jaw-c1] {
+    color: var(--primary-light); }
+
+.nav[_ngcontent-jaw-c1]   .key-value-label[_ngcontent-jaw-c1] {
+  opacity: .6;
+  color: #73797c; }
+
+.navbar-brand[_ngcontent-jaw-c1] {
+  display: flex;
+  width: 100%; }
+
+.navbar-brand[_ngcontent-jaw-c1]   img[_ngcontent-jaw-c1] {
+    width: 200px;
+    height: auto; }
+
+.nav-item[_ngcontent-jaw-c1] {
+  width: 100%; }
+
+.divider[_ngcontent-jaw-c1] {
+  height: 1px;
+  display: inline-table;
+  background: #E5E5E5;
+  margin: .5rem; }
+
+.icon-stack[_ngcontent-jaw-c1] {
+  display: grid;
+  grid-template-areas: 'stack';
+  margin-right: 1em; }
+
+.icon-stack[_ngcontent-jaw-c1]   fa-icon[_ngcontent-jaw-c1] {
+    grid-area: stack;
+    margin: 0; }
+
+.icon-stack[_ngcontent-jaw-c1]   fa-icon[_ngcontent-jaw-c1]:first-of-type {
+      z-index: 1;
+      font-size: .8em;
+      width: 100%; }</style><style>[_nghost-jaw-c2] {
+  display: block;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 3; }
+  @media screen and (max-width: 1240px) {
+    [_nghost-jaw-c2]     .search {
+      max-width: 120px; }
+    [_nghost-jaw-c2]     .dropdown-toggle-split {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.85rem;
+      line-height: 1.35; }
+    [_nghost-jaw-c2]     .btn[routerLink="dashboard"] {
+      display: none; } }
+  .navbar[_ngcontent-jaw-c2] {
+  max-height: 100px;
+  height: var(--header-height);
+  padding: 0 1rem 0 0;
+  flex-wrap: nowrap; }
+  .navbar[_ngcontent-jaw-c2]:empty {
+    display: none; }
+  .navbar[_ngcontent-jaw-c2]   .page-actions[_ngcontent-jaw-c2]:empty    + .split[_ngcontent-jaw-c2], .navbar[_ngcontent-jaw-c2]   .user-actions[_ngcontent-jaw-c2]:empty    + .split[_ngcontent-jaw-c2] {
+    display: none; }
+  .split[_ngcontent-jaw-c2] {
+  background-color: #e5ecef;
+  display: block;
+  margin: 0 4px;
+  width: 1px; }
+  #page-search-actions-container[_ngcontent-jaw-c2]:empty {
+  margin: 0 !important; }</style><style>[_nghost-jaw-c3] {
+  background-color: #fff;
+  height: 100%;
+  width: inherit;
+  z-index: 3; }
+
+.card[_ngcontent-jaw-c3] {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 0; }
+
+.list-group-item[_ngcontent-jaw-c3] {
+  
+  display: grid;
+  grid-template-areas: "title meta" "body meta" "footer footer";
+  grid-gap: 6px;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: 1fr minmax(1fr, auto) 0.5fr;
+  grid-template-rows: auto auto 1fr;
+  width: 100%;
+  padding: 1em 1.4em 2em 1.4em;
+  min-height: 150px; }
+
+.notification-title[_ngcontent-jaw-c3] {
+  grid-area: title; }
+
+.notification-description[_ngcontent-jaw-c3] {
+  grid-area: body; }
+
+.notification-meta[_ngcontent-jaw-c3] {
+  text-align: right;
+  grid-area: meta; }
+
+.notification-footer[_ngcontent-jaw-c3] {
+  text-transform: uppercase;
+  grid-area: footer;
+  align-self: end; }
+
+.button-border[_ngcontent-jaw-c3] {
+  border: 0.6px solid; }
+
+.hide-button[_ngcontent-jaw-c3] {
+  opacity: 0; }
+
+.list-group-item[_ngcontent-jaw-c3]:hover   .hide-button[_ngcontent-jaw-c3] {
+  opacity: 1; }
+
+.badge[_ngcontent-jaw-c3] {
+  margin-right: .5em; }
+
+.badge-secondary[_ngcontent-jaw-c3] {
+  background: #eee; }
+
+.new[_ngcontent-jaw-c3] {
+  border-left: 4px solid var(--primary); }</style><style>[_nghost-jaw-c4] {
+  position: relative; }
+  [_nghost-jaw-c4]:after {
+    content: '';
+    background-image: url('data:image/svg+xml;utf8,<svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-down" class="svg-inline--fa fa-caret-down fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg>');
+    width: 8px;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center; }
+  select[_ngcontent-jaw-c4] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  padding: 0.375rem 2em 0.375rem 0.75em;
+  cursor: pointer;
+  background-color: #fff;
+  border: var(--border-width) solid var(--border-color); }</style><style>[_nghost-jaw-c5]     .fa-layers-counter {
+  background-color: var(--red);
+  border-radius: 1em;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 2.5em;
+  height: 2em;
+  line-height: 1.5;
+  max-width: 5em;
+  min-width: 2em;
+  overflow: hidden;
+  right: -0.5em;
+  text-overflow: ellipsis;
+  top: -0.25em;
+  transform: scale(0.25); }</style><script charset="utf-8" src="0.690795e8336e45a481d8.js"></script><script charset="utf-8" src="1.6a00da904c8eb1631825.js"></script><script charset="utf-8" src="4.4eb8efc24e08f6383569.js"></script><script charset="utf-8" src="common.ff5685b05f68e62ba794.js"></script><script charset="utf-8" src="7.6abc3bfdf2e31343bc8f.js"></script><style>.grid-table[_ngcontent-jaw-c8] {
+  display: grid;
+  margin: 0 auto;
+  width: 100%;
+  align-items: top; }
+  .grid-table-row[_ngcontent-jaw-c8] {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 1rem 1rem; }
+  .grid-table-row[_ngcontent-jaw-c8]:not(:last-child) {
+      border-bottom: 1px solid #ddd; }
+  .grid-table-row[_ngcontent-jaw-c8]:first-child {
+      font-weight: bold;
+      text-shadow: 0 2px 1px #fff;
+      color: silver; }
+  .grid-table-row[_ngcontent-jaw-c8]:not(:first-child):hover {
+      background-color: #e8edef; }
+  .grid-table-cell[_ngcontent-jaw-c8]:nth-child(2) {
+    font-weight: 600; }
+  .ngx-datatable.scroll-vertical[_ngcontent-jaw-c8] {
+  height: calc(100vh - var(--header-height) - var(--footer-height) - 44px); }</style><style>.search[_ngcontent-jaw-c11] {
+  border: 1px solid var(--border-color);
+  border-width: var(--border-width); }
+  .search[_ngcontent-jaw-c11]   input[_ngcontent-jaw-c11] {
+    font-weight: 700;
+    border: none; }
+  .filter-container[_ngcontent-jaw-c11] {
+  position: relative;
+  display: flex;
+  flex-direction: row; }
+  .filter-container[_ngcontent-jaw-c11]   .dropdown-toggle[_ngcontent-jaw-c11] {
+    border: none;
+    background-color: transparent;
+    color: #6E95F0;
+    justify-content: space-between; }
+  .filter-container[_ngcontent-jaw-c11]   .dropdown-toggle[_ngcontent-jaw-c11]:active:focus:focus-within:hover {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+      background-color: transparent; }</style><style>.spinner-container[_ngcontent-jaw-c10] {
+  width: calc(100% - var(--sidebar-width));
+  height: calc(100vh - var(--header-height) - var(--footer-height) - 44px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed; }</style><style>.ngx-datatable {
+  display: block;
+  overflow: hidden;
+  justify-content: center;
+  position: relative;
+  -webkit-transform: translate3d(0, 0, 0);
+  
+  
+  
+  
+  
+  
+  
+   }
+  .ngx-datatable [hidden] {
+    display: none !important; }
+  .ngx-datatable *, .ngx-datatable *:before, .ngx-datatable *:after {
+    box-sizing: border-box; }
+  .ngx-datatable.scroll-vertical .datatable-body {
+    overflow-y: auto; }
+  .ngx-datatable.scroll-vertical.virtualized .datatable-body .datatable-row-wrapper {
+    position: absolute; }
+  .ngx-datatable.scroll-horz .datatable-body {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; }
+  .ngx-datatable.fixed-header .datatable-header .datatable-header-inner {
+    white-space: nowrap; }
+  .ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+  .ngx-datatable.fixed-row .datatable-scroll {
+    white-space: nowrap; }
+  .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row {
+      white-space: nowrap; }
+  .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-cell {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+  .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-group-cell {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+  .ngx-datatable .datatable-body-row,
+  .ngx-datatable .datatable-row-center,
+  .ngx-datatable .datatable-header-inner {
+    display: flex;
+    flex-direction: row;
+    -o-flex-flow: row;
+    flex-flow: row; }
+  .ngx-datatable .datatable-body-cell,
+  .ngx-datatable .datatable-header-cell {
+    overflow-x: hidden;
+    vertical-align: top;
+    display: inline-block;
+    line-height: 1.625; }
+  .ngx-datatable .datatable-body-cell:focus,
+    .ngx-datatable .datatable-header-cell:focus {
+      outline: none; }
+  .ngx-datatable .datatable-row-left,
+  .ngx-datatable .datatable-row-right {
+    z-index: 9; }
+  .ngx-datatable .datatable-row-left,
+  .ngx-datatable .datatable-row-center,
+  .ngx-datatable .datatable-row-group,
+  .ngx-datatable .datatable-row-right {
+    position: relative; }
+  .ngx-datatable .datatable-header {
+    display: block;
+    overflow: hidden; }
+  .ngx-datatable .datatable-header .datatable-header-inner {
+      align-items: stretch;
+      -webkit-align-items: stretch; }
+  .ngx-datatable .datatable-header .datatable-header-cell {
+      position: relative;
+      display: inline-block; }
+  .ngx-datatable .datatable-header .datatable-header-cell.sortable .datatable-header-cell-wrapper {
+        cursor: pointer; }
+  .ngx-datatable .datatable-header .datatable-header-cell.longpress .datatable-header-cell-wrapper {
+        cursor: move; }
+  .ngx-datatable .datatable-header .datatable-header-cell .sort-btn {
+        line-height: 100%;
+        vertical-align: middle;
+        display: inline-block;
+        cursor: pointer; }
+  .ngx-datatable .datatable-header .datatable-header-cell .resize-handle, .ngx-datatable .datatable-header .datatable-header-cell .resize-handle--not-resizable {
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 5px;
+        padding: 0 4px;
+        visibility: hidden; }
+  .ngx-datatable .datatable-header .datatable-header-cell .resize-handle {
+        cursor: ew-resize; }
+  .ngx-datatable .datatable-header .datatable-header-cell.resizeable:hover .resize-handle {
+        visibility: visible; }
+  .ngx-datatable .datatable-header .datatable-header-cell:hover .resize-handle--not-resizable {
+        visibility: visible; }
+  .ngx-datatable .datatable-header .datatable-header-cell .targetMarker {
+        position: absolute;
+        top: 0;
+        bottom: 0; }
+  .ngx-datatable .datatable-header .datatable-header-cell .targetMarker.dragFromLeft {
+          right: 0; }
+  .ngx-datatable .datatable-header .datatable-header-cell .targetMarker.dragFromRight {
+          left: 0; }
+  .ngx-datatable .datatable-header .datatable-header-cell .datatable-header-cell-template-wrap {
+        height: inherit; }
+  .ngx-datatable .datatable-body {
+    position: relative;
+    z-index: 10;
+    display: block; }
+  .ngx-datatable .datatable-body .datatable-scroll {
+      display: inline-block; }
+  .ngx-datatable .datatable-body .datatable-row-detail {
+      overflow-y: hidden; }
+  .ngx-datatable .datatable-body .datatable-row-wrapper {
+      display: flex;
+      flex-direction: column; }
+  .ngx-datatable .datatable-body .datatable-body-row {
+      outline: none; }
+  .ngx-datatable .datatable-body .datatable-body-row > div {
+        display: flex; }
+  .ngx-datatable .datatable-footer {
+    display: block;
+    width: 100%; }
+  .ngx-datatable .datatable-footer .datatable-footer-inner {
+      display: flex;
+      align-items: center;
+      width: 100%; }
+  .ngx-datatable .datatable-footer .selected-count .page-count {
+      flex: 1 1 40%; }
+  .ngx-datatable .datatable-footer .selected-count .datatable-pager {
+      flex: 1 1 60%; }
+  .ngx-datatable .datatable-footer .page-count {
+      flex: 1 1 20%; }
+  .ngx-datatable .datatable-footer .datatable-pager {
+      flex: 1 1 80%;
+      text-align: right; }
+  .ngx-datatable .datatable-footer .datatable-pager .pager,
+      .ngx-datatable .datatable-footer .datatable-pager .pager li {
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+        list-style: none; }
+  .ngx-datatable .datatable-footer .datatable-pager .pager li, .ngx-datatable .datatable-footer .datatable-pager .pager li a {
+        outline: none; }
+  .ngx-datatable .datatable-footer .datatable-pager .pager li a {
+        cursor: pointer;
+        display: inline-block; }
+  .ngx-datatable .datatable-footer .datatable-pager .pager li.disabled a {
+        cursor: not-allowed; }
+</style><style>[_nghost-jaw-c6] {
+  margin: 0 .25em .25em 0;
+  display: inline-block; }</style></head>
+
+<body>
+  <app-root _nghost-jaw-c0="" ng-version="7.2.15"><app-sidebar _ngcontent-jaw-c0="" _nghost-jaw-c1=""><nav _ngcontent-jaw-c1="" class="navbar"><a _ngcontent-jaw-c1="" class="navbar-brand mx-0" routerlink="/" ng-reflect-router-link="/" href="/"><img _ngcontent-jaw-c1="" alt="Concourse" src="/assets/logos/concourse-logo-wide-color.svg"></a></nav><!--bindings={
+  "ng-reflect-ng-if": "true",
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><ul _ngcontent-jaw-c1="" class="top-nav nav nav-pills flex-column flex-nowrap ng-star-inserted"><li _ngcontent-jaw-c1="" class="nav-item mb-3"><ul _ngcontent-jaw-c1="" class="nav nav-pills flex-column"><span _ngcontent-jaw-c1="" class="nav-link key-value-label">Institution</span><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="linkDashboard" routerlink="dashboard" routerlinkactive="active" ng-reflect-router-link="dashboard" ng-reflect-router-link-active-options="[object Object]" ng-reflect-router-link-active="active" href="/dashboard"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-line" class="svg-inline--fa fa-chart-line fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M496 384H64V80c0-8.84-7.16-16-16-16H16C7.16 64 0 71.16 0 80v336c0 17.67 14.33 32 32 32h464c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16zM464 96H345.94c-21.38 0-32.09 25.85-16.97 40.97l32.4 32.4L288 242.75l-73.37-73.37c-12.5-12.5-32.76-12.5-45.25 0l-68.69 68.69c-6.25 6.25-6.25 16.38 0 22.63l22.62 22.62c6.25 6.25 16.38 6.25 22.63 0L192 237.25l73.37 73.37c12.5 12.5 32.76 12.5 45.25 0l96-96 32.4 32.4c15.12 15.12 40.97 4.41 40.97-16.97V112c.01-8.84-7.15-16-15.99-16z"></path></svg></fa-icon> Dashboard </a></li><!--bindings={
+  "ng-reflect-has-responsibility": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-has-responsibility": "[object Object]"
+}--><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="linkInsights" routerlink="insights" routerlinkactive="active" ng-reflect-router-link="insights" ng-reflect-router-link-active="active" href="/insights"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="columns" class="svg-inline--fa fa-columns fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64V160h160v256zm224 0H288V160h160v256z"></path></svg></fa-icon> Insights </a></li><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="linkSurfaces" routerlink="surfaces" routerlinkactive="active" ng-reflect-router-link="surfaces" ng-reflect-router-link-active="active" href="/surfaces"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sitemap" class="svg-inline--fa fa-sitemap fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M128 352H32c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h96c17.67 0 32-14.33 32-32v-96c0-17.67-14.33-32-32-32zm-24-80h192v48h48v-48h192v48h48v-57.59c0-21.17-17.23-38.41-38.41-38.41H344v-64h40c17.67 0 32-14.33 32-32V32c0-17.67-14.33-32-32-32H256c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h40v64H94.41C73.23 224 56 241.23 56 262.41V320h48v-48zm264 80h-96c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h96c17.67 0 32-14.33 32-32v-96c0-17.67-14.33-32-32-32zm240 0h-96c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h96c17.67 0 32-14.33 32-32v-96c0-17.67-14.33-32-32-32z"></path></svg></fa-icon> Surfaces </a></li></ul></li><li _ngcontent-jaw-c1="" class="nav-item mb-3"><ul _ngcontent-jaw-c1="" class="nav nav-pills flex-column"><span _ngcontent-jaw-c1="" class="nav-link key-value-label">Company Resources</span><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="linkAssets" routerlink="assets" routerlinkactive="active" ng-reflect-router-link="assets" ng-reflect-router-link-active="active" href="/assets"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="code-branch" class="svg-inline--fa fa-code-branch fa-w-12" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path fill="currentColor" d="M384 144c0-44.2-35.8-80-80-80s-80 35.8-80 80c0 36.4 24.3 67.1 57.5 76.8-.6 16.1-4.2 28.5-11 36.9-15.4 19.2-49.3 22.4-85.2 25.7-28.2 2.6-57.4 5.4-81.3 16.9v-144c32.5-10.2 56-40.5 56-76.3 0-44.2-35.8-80-80-80S0 35.8 0 80c0 35.8 23.5 66.1 56 76.3v199.3C23.5 365.9 0 396.2 0 432c0 44.2 35.8 80 80 80s80-35.8 80-80c0-34-21.2-63.1-51.2-74.6 3.1-5.2 7.8-9.8 14.9-13.4 16.2-8.2 40.4-10.4 66.1-12.8 42.2-3.9 90-8.4 118.2-43.4 14-17.4 21.1-39.8 21.6-67.9 31.6-10.8 54.4-40.7 54.4-75.9zM80 64c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16 7.2-16 16-16zm0 384c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zm224-320c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16 7.2-16 16-16z"></path></svg></fa-icon> Cloud Assets </a></li><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="linkLogicalDeployments" routerlink="workflows/logical-deployments" routerlinkactive="active" ng-reflect-router-link="workflows/logical-deployments" ng-reflect-router-link-active="active" href="/workflows/logical-deployments"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="server" class="svg-inline--fa fa-server fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M480 160H32c-17.673 0-32-14.327-32-32V64c0-17.673 14.327-32 32-32h448c17.673 0 32 14.327 32 32v64c0 17.673-14.327 32-32 32zm-48-88c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm-64 0c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm112 248H32c-17.673 0-32-14.327-32-32v-64c0-17.673 14.327-32 32-32h448c17.673 0 32 14.327 32 32v64c0 17.673-14.327 32-32 32zm-48-88c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm-64 0c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm112 248H32c-17.673 0-32-14.327-32-32v-64c0-17.673 14.327-32 32-32h448c17.673 0 32 14.327 32 32v64c0 17.673-14.327 32-32 32zm-48-88c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm-64 0c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24z"></path></svg></fa-icon> Logical Deployments </a></li><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="linkDiscoveredDeployments" routerlink="workflows/discovered-deployments" routerlinkactive="active" ng-reflect-router-link="workflows/discovered-deploymen" ng-reflect-router-link-active="active" href="/workflows/discovered-deployments"><span _ngcontent-jaw-c1="" class="icon-stack"><fa-icon _ngcontent-jaw-c1="" class="fa-inverse ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></fa-icon><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="server" class="svg-inline--fa fa-server fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M480 160H32c-17.673 0-32-14.327-32-32V64c0-17.673 14.327-32 32-32h448c17.673 0 32 14.327 32 32v64c0 17.673-14.327 32-32 32zm-48-88c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm-64 0c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm112 248H32c-17.673 0-32-14.327-32-32v-64c0-17.673 14.327-32 32-32h448c17.673 0 32 14.327 32 32v64c0 17.673-14.327 32-32 32zm-48-88c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm-64 0c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm112 248H32c-17.673 0-32-14.327-32-32v-64c0-17.673 14.327-32 32-32h448c17.673 0 32 14.327 32 32v64c0 17.673-14.327 32-32 32zm-48-88c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24zm-64 0c-13.255 0-24 10.745-24 24s10.745 24 24 24 24-10.745 24-24-10.745-24-24-24z"></path></svg></fa-icon></span> Discovered Deployments </a></li></ul></li><li _ngcontent-jaw-c1="" class="nav-item mb-3"><ul _ngcontent-jaw-c1="" class="nav nav-pills flex-column"><span _ngcontent-jaw-c1="" class="nav-link key-value-label">Runtime Action Management</span><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="linkApprovals" routerlink="workflows/approvals" routerlinkactive="active" ng-reflect-router-link="workflows/approvals" ng-reflect-router-link-active="active" href="/workflows/approvals"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="thumbs-up" class="svg-inline--fa fa-thumbs-up fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M104 224H24c-13.255 0-24 10.745-24 24v240c0 13.255 10.745 24 24 24h80c13.255 0 24-10.745 24-24V248c0-13.255-10.745-24-24-24zM64 472c-13.255 0-24-10.745-24-24s10.745-24 24-24 24 10.745 24 24-10.745 24-24 24zM384 81.452c0 42.416-25.97 66.208-33.277 94.548h101.723c33.397 0 59.397 27.746 59.553 58.098.084 17.938-7.546 37.249-19.439 49.197l-.11.11c9.836 23.337 8.237 56.037-9.308 79.469 8.681 25.895-.069 57.704-16.382 74.757 4.298 17.598 2.244 32.575-6.148 44.632C440.202 511.587 389.616 512 346.839 512l-2.845-.001c-48.287-.017-87.806-17.598-119.56-31.725-15.957-7.099-36.821-15.887-52.651-16.178-6.54-.12-11.783-5.457-11.783-11.998v-213.77c0-3.2 1.282-6.271 3.558-8.521 39.614-39.144 56.648-80.587 89.117-113.111 14.804-14.832 20.188-37.236 25.393-58.902C282.515 39.293 291.817 0 312 0c24 0 72 8 72 81.452z"></path></svg></fa-icon> Approvals </a></li><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link active" data-e2e="linkPolicyViolations" routerlink="workflows/risks" routerlinkactive="active" ng-reflect-router-link="workflows/risks" ng-reflect-router-link-active="active" href="/workflows/risks"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="exclamation-triangle" class="svg-inline--fa fa-exclamation-triangle fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M569.517 440.013C587.975 472.007 564.806 512 527.94 512H48.054c-36.937 0-59.999-40.055-41.577-71.987L246.423 23.985c18.467-32.009 64.72-31.951 83.154 0l239.94 416.028zM288 354c-25.405 0-46 20.595-46 46s20.595 46 46 46 46-20.595 46-46-20.595-46-46-46zm-43.673-165.346l7.418 136c.347 6.364 5.609 11.346 11.982 11.346h48.546c6.373 0 11.635-4.982 11.982-11.346l7.418-136c.375-6.874-5.098-12.654-11.982-12.654h-63.383c-6.884 0-12.356 5.78-11.981 12.654z"></path></svg></fa-icon> Policy Violations </a></li></ul></li><li _ngcontent-jaw-c1="" class="nav-item mb-3"><ul _ngcontent-jaw-c1="" class="nav nav-pills flex-column"><span _ngcontent-jaw-c1="" class="nav-link key-value-label">Policy</span><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="policyGroupMenu" routerlink="policy-groups" routerlinkactive="active" ng-reflect-router-link="policy-groups" ng-reflect-router-link-active="active" href="/policy-groups"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="balance-scale" class="svg-inline--fa fa-balance-scale fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M256 336h-.02c0-16.18 1.34-8.73-85.05-181.51-17.65-35.29-68.19-35.36-85.87 0C-2.06 328.75.02 320.33.02 336H0c0 44.18 57.31 80 128 80s128-35.82 128-80zM128 176l72 144H56l72-144zm511.98 160c0-16.18 1.34-8.73-85.05-181.51-17.65-35.29-68.19-35.36-85.87 0-87.12 174.26-85.04 165.84-85.04 181.51H384c0 44.18 57.31 80 128 80s128-35.82 128-80h-.02zM440 320l72-144 72 144H440zm88 128H352V153.25c23.51-10.29 41.16-31.48 46.39-57.25H528c8.84 0 16-7.16 16-16V48c0-8.84-7.16-16-16-16H383.64C369.04 12.68 346.09 0 320 0s-49.04 12.68-63.64 32H112c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h129.61c5.23 25.76 22.87 46.96 46.39 57.25V448H112c-8.84 0-16 7.16-16 16v32c0 8.84 7.16 16 16 16h416c8.84 0 16-7.16 16-16v-32c0-8.84-7.16-16-16-16z"></path></svg></fa-icon> Policy Groups </a></li><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="linkPolicyGroupTemplates" routerlink="policy-group-templates" routerlinkactive="active" ng-reflect-router-link="policy-group-templates" ng-reflect-router-link-active="active" href="/policy-group-templates"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="university" class="svg-inline--fa fa-university fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M496 128v16a8 8 0 0 1-8 8h-24v12c0 6.627-5.373 12-12 12H60c-6.627 0-12-5.373-12-12v-12H24a8 8 0 0 1-8-8v-16a8 8 0 0 1 4.941-7.392l232-88a7.996 7.996 0 0 1 6.118 0l232 88A8 8 0 0 1 496 128zm-24 304H40c-13.255 0-24 10.745-24 24v16a8 8 0 0 0 8 8h464a8 8 0 0 0 8-8v-16c0-13.255-10.745-24-24-24zM96 192v192H60c-6.627 0-12 5.373-12 12v20h416v-20c0-6.627-5.373-12-12-12h-36V192h-64v192h-64V192h-64v192h-64V192H96z"></path></svg></fa-icon> Policy Group Templates </a></li><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" routerlink="cloud-roles" routerlinkactive="active" ng-reflect-router-link="cloud-roles" ng-reflect-router-link-active="active" href="/cloud-roles"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user-lock" class="svg-inline--fa fa-user-lock fa-w-20" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M224 256A128 128 0 1 0 96 128a128 128 0 0 0 128 128zm96 64a63.08 63.08 0 0 1 8.1-30.5c-4.8-.5-9.5-1.5-14.5-1.5h-16.7a174.08 174.08 0 0 1-145.8 0h-16.7A134.43 134.43 0 0 0 0 422.4V464a48 48 0 0 0 48 48h280.9a63.54 63.54 0 0 1-8.9-32zm288-32h-32v-80a80 80 0 0 0-160 0v80h-32a32 32 0 0 0-32 32v160a32 32 0 0 0 32 32h224a32 32 0 0 0 32-32V320a32 32 0 0 0-32-32zM496 432a32 32 0 1 1 32-32 32 32 0 0 1-32 32zm32-144h-64v-80a32 32 0 0 1 64 0z"></path></svg></fa-icon> Cloud Roles </a></li><li _ngcontent-jaw-c1="" class="nav-item"><a _ngcontent-jaw-c1="" class="nav-link" data-e2e="linkAttributeTags" routerlink="attribute-tags" routerlinkactive="active" ng-reflect-router-link="attribute-tags" ng-reflect-router-link-active="active" href="/attribute-tags"><fa-icon _ngcontent-jaw-c1="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="link" class="svg-inline--fa fa-link fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"></path></svg></fa-icon> Attribute Tags </a></li></ul></li><!--bindings={
+  "ng-reflect-has-responsibility": "[object Object]"
+}--></ul><!----></app-sidebar><app-header _ngcontent-jaw-c0="" _nghost-jaw-c2=""><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><nav _ngcontent-jaw-c2="" class="navbar container-fluid bg-white border-bottom ng-star-inserted"><div _ngcontent-jaw-c2="" class="d-flex align-items-center"><div _ngcontent-jaw-c2="" class="mr-2" id="page-search-actions-container"><form _ngcontent-jaw-c11="" class="search ng-untouched ng-pristine ng-valid ng-star-inserted" novalidate="" ng-reflect-form="[object Object]"><div _ngcontent-jaw-c11="" class="form-row"><div _ngcontent-jaw-c11="" class="col-auto"><div _ngcontent-jaw-c11="" class="input-group"><div _ngcontent-jaw-c11="" class="input-group-prepend"><span _ngcontent-jaw-c11="" class="input-group-text bg-transparent"><fa-icon _ngcontent-jaw-c11="" class="fa-search ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg></fa-icon></span></div><input _ngcontent-jaw-c11="" class="form-control ng-untouched ng-pristine ng-valid" formcontrolname="textSearch" placeholder="Search" type="search" ng-reflect-name="textSearch"></div></div></div></form><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!----></div><div _ngcontent-jaw-c2="" class="page-actions d-flex align-items-center" id="page-actions-container"></div></div><div _ngcontent-jaw-c2="" class="d-flex"><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><div _ngcontent-jaw-c2="" class="d-flex align-items-center user-actions ng-star-inserted"><span _ngcontent-jaw-c2="" class="split"></span><app-surface-switcher _ngcontent-jaw-c2="" _nghost-jaw-c4=""><!--bindings={}--></app-surface-switcher><span _ngcontent-jaw-c2="" class="split"></span><app-notification-icon _ngcontent-jaw-c2="" _nghost-jaw-c5=""><!--bindings={
+  "ng-reflect-ng-let": "28"
+}--><!----><button _ngcontent-jaw-c5="" class="btn btn-outline-secondary ng-star-inserted btn-outline-danger"><fa-layers _ngcontent-jaw-c5="" class="fa-layers fa-fw" ng-reflect-fixed-width="true"><fa-icon _ngcontent-jaw-c5="" class="ng-fa-icon" transform="grow-8" ng-reflect-icon-prop="[object Object]" ng-reflect-transform="grow-8"><svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="bell" class="svg-inline--fa fa-bell fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="transform-origin: 0.4375em 0.5em;"><g transform="translate(224 256)"><g transform="translate(0, 0)  scale(1.5, 1.5)  rotate(0 0 0)"><path fill="currentColor" d="M439.39 362.29c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71zM67.53 368c21.22-27.97 44.42-74.33 44.53-159.42 0-.2-.06-.38-.06-.58 0-61.86 50.14-112 112-112s112 50.14 112 112c0 .2-.06.38-.06.58.11 85.1 23.31 131.46 44.53 159.42H67.53zM224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64z" transform="translate(-224 -256)"></path></g></g></svg></fa-icon><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><fa-layers-counter _ngcontent-jaw-c5="" class="ng-fa-layers-counter ng-star-inserted" ng-reflect-content="28"><span class="fa-layers-counter">28</span></fa-layers-counter></fa-layers></button></app-notification-icon><span _ngcontent-jaw-c2="" class="split"></span><div _ngcontent-jaw-c2="" class="btn-group ml-auto" dropdown="" placement="bottom right" ng-reflect-placement="bottom right"><button _ngcontent-jaw-c2="" class="btn btn-secondary" routerlink="dashboard" type="button" tabindex="0" ng-reflect-router-link="dashboard"> e2e Test </button><button _ngcontent-jaw-c2="" aria-controls="dropdown-split" class="btn btn-secondary btn-sm dropdown-toggle-split" dropdowntoggle="" id="button-split" type="button" aria-haspopup="true"><fa-icon _ngcontent-jaw-c2="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="caret-down" class="svg-inline--fa fa-caret-down fa-w-10" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"></path></svg></fa-icon></button><!----></div></div></div></nav></app-header><app-notification-bar _ngcontent-jaw-c0="" _nghost-jaw-c3="" class="ng-tns-c3-0"><!--bindings={
+  "ng-reflect-ng-let": "[object Object]"
+}--><div _ngcontent-jaw-c3="" class="container border-left card ng-tns-c3-0 ng-star-inserted"><div _ngcontent-jaw-c3="" class="card-header bg-primary d-flex justify-content-between"><h5 _ngcontent-jaw-c3="" class="text-white mb-0">Notifications</h5><div _ngcontent-jaw-c3="" class="notifications-actions"><button _ngcontent-jaw-c3="" class="btn btn-link btn-sm text-white"><fa-icon _ngcontent-jaw-c3="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]" ng-reflect-spin="false"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sync" class="svg-inline--fa fa-sync fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M440.65 12.57l4 82.77A247.16 247.16 0 0 0 255.83 8C134.73 8 33.91 94.92 12.29 209.82A12 12 0 0 0 24.09 224h49.05a12 12 0 0 0 11.67-9.26 175.91 175.91 0 0 1 317-56.94l-101.46-4.86a12 12 0 0 0-12.57 12v47.41a12 12 0 0 0 12 12H500a12 12 0 0 0 12-12V12a12 12 0 0 0-12-12h-47.37a12 12 0 0 0-11.98 12.57zM255.83 432a175.61 175.61 0 0 1-146-77.8l101.8 4.87a12 12 0 0 0 12.57-12v-47.4a12 12 0 0 0-12-12H12a12 12 0 0 0-12 12V500a12 12 0 0 0 12 12h47.35a12 12 0 0 0 12-12.6l-4.15-82.57A247.17 247.17 0 0 0 255.83 504c121.11 0 221.93-86.92 243.55-201.82a12 12 0 0 0-11.8-14.18h-49.05a12 12 0 0 0-11.67 9.26A175.86 175.86 0 0 1 255.83 432z"></path></svg></fa-icon></button><button _ngcontent-jaw-c3="" class="btn btn-link btn-sm text-white" title="Dismiss All"><fa-icon _ngcontent-jaw-c3="" class="ng-fa-icon" ng-reflect-icon-prop="[object Object]"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="stream" class="svg-inline--fa fa-stream fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M16 128h416c8.84 0 16-7.16 16-16V48c0-8.84-7.16-16-16-16H16C7.16 32 0 39.16 0 48v64c0 8.84 7.16 16 16 16zm480 80H80c-8.84 0-16 7.16-16 16v64c0 8.84 7.16 16 16 16h416c8.84 0 16-7.16 16-16v-64c0-8.84-7.16-16-16-16zm-64 176H16c-8.84 0-16 7.16-16 16v64c0 8.84 7.16 16 16 16h416c8.84 0 16-7.16 16-16v-64c0-8.84-7.16-16-16-16z"></path></svg></fa-icon></button></div></div><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div></app-notification-bar><div _ngcontent-jaw-c0="" class="app-container"><router-outlet _ngcontent-jaw-c0=""></router-outlet><app-risk-tabular-view _nghost-jaw-c8="" class="ng-star-inserted"><!--bindings={
+  "ng-reflect-ng-let": "[object Object]"
+}--><div _ngcontent-jaw-c8="" class="ng-star-inserted"><ul _ngcontent-jaw-c8="" class="nav nav-tabs mt-2"><li _ngcontent-jaw-c8="" class="nav-item ml-2"><a _ngcontent-jaw-c8="" class="nav-link active">My Policy Violations</a></li><li _ngcontent-jaw-c8="" class="nav-item"><a _ngcontent-jaw-c8="" class="nav-link">Assigned Policy Violations</a></li></ul><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><ngx-datatable _ngcontent-jaw-c8="" class="bootstrap ngx-datatable fixed-header fixed-row scroll-vertical virtualized ng-star-inserted" columnmode="force" data-e2e="tableRisks" ng-reflect-rows="[object Object],[object Object" ng-reflect-columns="[object Object],[object Object" ng-reflect-scrollbar-v="true" ng-reflect-row-height="44" ng-reflect-column-mode="force" ng-reflect-header-height="56" ng-reflect-footer-height="false"><div visibilityobserver="" class="visible"><!--bindings={
+  "ng-reflect-ng-if": "56"
+}--><datatable-header class="datatable-header ng-star-inserted" ng-reflect-sort-ascending-icon="datatable-icon-up" ng-reflect-sort-descending-icon="datatable-icon-down" ng-reflect-scrollbar-h="false" ng-reflect-inner-width="1066" ng-reflect-sorts="" ng-reflect-sort-type="single" ng-reflect-all-rows-selected="false" ng-reflect-reorderable="true" ng-reflect-header-height="56" ng-reflect-columns="[object Object],[object Object" ng-reflect-offset-x="0" style="height: 56px; width: 100%;"><div class="datatable-header-inner" orderable="" style="width: 1059px;"><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "function (index, colGroup) {\n "
+}--><div ng-reflect-ng-style="[object Object]" class="datatable-row-left ng-star-inserted" style="width: 0px;"><!--bindings={
+  "ng-reflect-ng-for-of": "",
+  "ng-reflect-ng-for-track-by": "function (index, column) {\n   "
+}--></div><div ng-reflect-ng-style="[object Object]" class="datatable-row-center ng-star-inserted" style="width: 1059px; backface-visibility: hidden; transform: translate3d(0px, 0px, 0px);"><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "function (index, column) {\n   "
+}--><datatable-header-cell class="datatable-header-cell sortable resizeable ng-star-inserted" draggable="" long-press="" resizeable="" ng-reflect-drag-model="[object Object]" ng-reflect-drag-y="false" ng-reflect-resize-enabled="true" ng-reflect-press-enabled="true" ng-reflect-press-model="[object Object]" ng-reflect-sort-type="single" ng-reflect-sort-ascending-icon="datatable-icon-up" ng-reflect-sort-descending-icon="datatable-icon-down" ng-reflect-all-rows-selected="false" ng-reflect-column="[object Object]" ng-reflect-header-height="56px" ng-reflect-sorts="" title="ID" style="width: 151.286px;"><div class="datatable-header-cell-template-wrap"><!--bindings={}--><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span class="datatable-header-cell-wrapper ng-star-inserted"><span class="datatable-header-cell-label draggable">ID</span></span><!--bindings={}--><span class="sort-btn"></span></div><span class="resize-handle"></span></datatable-header-cell><datatable-header-cell class="datatable-header-cell sortable resizeable ng-star-inserted" draggable="" long-press="" resizeable="" ng-reflect-drag-model="[object Object]" ng-reflect-drag-y="false" ng-reflect-resize-enabled="true" ng-reflect-press-enabled="true" ng-reflect-press-model="[object Object]" ng-reflect-sort-type="single" ng-reflect-sort-ascending-icon="datatable-icon-up" ng-reflect-sort-descending-icon="datatable-icon-down" ng-reflect-all-rows-selected="false" ng-reflect-column="[object Object]" ng-reflect-header-height="56px" ng-reflect-sorts="" title="Status" style="width: 151.286px;"><div class="datatable-header-cell-template-wrap"><!--bindings={}--><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span class="datatable-header-cell-wrapper ng-star-inserted"><span class="datatable-header-cell-label draggable">Status</span></span><!--bindings={}--><span class="sort-btn"></span></div><span class="resize-handle"></span></datatable-header-cell><datatable-header-cell class="datatable-header-cell sortable resizeable ng-star-inserted" draggable="" long-press="" resizeable="" ng-reflect-drag-model="[object Object]" ng-reflect-drag-y="false" ng-reflect-resize-enabled="true" ng-reflect-press-enabled="true" ng-reflect-press-model="[object Object]" ng-reflect-sort-type="single" ng-reflect-sort-ascending-icon="datatable-icon-up" ng-reflect-sort-descending-icon="datatable-icon-down" ng-reflect-all-rows-selected="false" ng-reflect-column="[object Object]" ng-reflect-header-height="56px" ng-reflect-sorts="" title="Priority" style="width: 151.286px;"><div class="datatable-header-cell-template-wrap"><!--bindings={}--><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span class="datatable-header-cell-wrapper ng-star-inserted"><span class="datatable-header-cell-label draggable">Priority</span></span><!--bindings={}--><span class="sort-btn"></span></div><span class="resize-handle"></span></datatable-header-cell><datatable-header-cell class="datatable-header-cell sortable resizeable ng-star-inserted" draggable="" long-press="" resizeable="" ng-reflect-drag-model="[object Object]" ng-reflect-drag-y="false" ng-reflect-resize-enabled="true" ng-reflect-press-enabled="true" ng-reflect-press-model="[object Object]" ng-reflect-sort-type="single" ng-reflect-sort-ascending-icon="datatable-icon-up" ng-reflect-sort-descending-icon="datatable-icon-down" ng-reflect-all-rows-selected="false" ng-reflect-column="[object Object]" ng-reflect-header-height="56px" ng-reflect-sorts="" title="Entity Type" style="width: 151.286px;"><div class="datatable-header-cell-template-wrap"><!--bindings={}--><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span class="datatable-header-cell-wrapper ng-star-inserted"><span class="datatable-header-cell-label draggable">Entity Type</span></span><!--bindings={}--><span class="sort-btn"></span></div><span class="resize-handle"></span></datatable-header-cell><datatable-header-cell class="datatable-header-cell sortable resizeable ng-star-inserted" draggable="" long-press="" resizeable="" ng-reflect-drag-model="[object Object]" ng-reflect-drag-y="false" ng-reflect-resize-enabled="true" ng-reflect-press-enabled="true" ng-reflect-press-model="[object Object]" ng-reflect-sort-type="single" ng-reflect-sort-ascending-icon="datatable-icon-up" ng-reflect-sort-descending-icon="datatable-icon-down" ng-reflect-all-rows-selected="false" ng-reflect-column="[object Object]" ng-reflect-header-height="56px" ng-reflect-sorts="" title="Entity ID" style="width: 151.286px;"><div class="datatable-header-cell-template-wrap"><!--bindings={}--><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span class="datatable-header-cell-wrapper ng-star-inserted"><span class="datatable-header-cell-label draggable">Entity ID</span></span><!--bindings={}--><span class="sort-btn"></span></div><span class="resize-handle"></span></datatable-header-cell><datatable-header-cell class="datatable-header-cell sortable resizeable ng-star-inserted" draggable="" long-press="" resizeable="" ng-reflect-drag-model="[object Object]" ng-reflect-drag-y="false" ng-reflect-resize-enabled="true" ng-reflect-press-enabled="true" ng-reflect-press-model="[object Object]" ng-reflect-sort-type="single" ng-reflect-sort-ascending-icon="datatable-icon-up" ng-reflect-sort-descending-icon="datatable-icon-down" ng-reflect-all-rows-selected="false" ng-reflect-column="[object Object]" ng-reflect-header-height="56px" ng-reflect-sorts="" title="Created" style="width: 151.286px;"><div class="datatable-header-cell-template-wrap"><!--bindings={}--><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span class="datatable-header-cell-wrapper ng-star-inserted"><span class="datatable-header-cell-label draggable">Created</span></span><!--bindings={}--><span class="sort-btn"></span></div><span class="resize-handle"></span></datatable-header-cell><datatable-header-cell class="datatable-header-cell sortable resizeable ng-star-inserted" draggable="" long-press="" resizeable="" ng-reflect-drag-model="[object Object]" ng-reflect-drag-y="false" ng-reflect-resize-enabled="true" ng-reflect-press-enabled="true" ng-reflect-press-model="[object Object]" ng-reflect-sort-type="single" ng-reflect-sort-ascending-icon="datatable-icon-up" ng-reflect-sort-descending-icon="datatable-icon-down" ng-reflect-all-rows-selected="false" ng-reflect-column="[object Object]" ng-reflect-header-height="56px" ng-reflect-sorts="" title="Updated" style="width: 151.286px;"><div class="datatable-header-cell-template-wrap"><!--bindings={}--><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span class="datatable-header-cell-wrapper ng-star-inserted"><span class="datatable-header-cell-label draggable">Updated</span></span><!--bindings={}--><span class="sort-btn"></span></div><span class="resize-handle"></span></datatable-header-cell></div><div ng-reflect-ng-style="[object Object]" class="datatable-row-right ng-star-inserted" style="width: 0px; transform: translate3d(7px, 0px, 0px); backface-visibility: hidden;"><!--bindings={
+  "ng-reflect-ng-for-of": "",
+  "ng-reflect-ng-for-track-by": "function (index, column) {\n   "
+}--></div></div></datatable-header><datatable-body class="datatable-body" ng-reflect-scrollbar-v="true" ng-reflect-scrollbar-h="false" ng-reflect-loading-indicator="false" ng-reflect-external-paging="false" ng-reflect-row-height="44" ng-reflect-offset-x="0" ng-reflect-empty-message="No data to display" ng-reflect-selected="" ng-reflect-row-identity="function (x) { return x; }" ng-reflect-group-expansion-default="false" ng-reflect-inner-width="1066" ng-reflect-virtualization="true" ng-reflect-summary-row="false" ng-reflect-summary-position="top" ng-reflect-summary-height="30" ng-reflect-page-size="10" ng-reflect-rows="[object Object],[object Object" ng-reflect-columns="[object Object],[object Object" ng-reflect-offset="0" ng-reflect-row-count="2" ng-reflect-body-height="436" style="width: 100%; height: 436px;"><datatable-selection ng-reflect-rows="[object Object],[object Object" ng-reflect-selected="" ng-reflect-select-enabled="false" ng-reflect-row-identity="function (x) { return x; }"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "2"
+}--><datatable-scroller class="datatable-scroll ng-star-inserted" ng-reflect-scrollbar-v="true" ng-reflect-scrollbar-h="false" ng-reflect-scroll-height="88" ng-reflect-scroll-width="1059" style="height: 88px; width: 1059px;"><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "function () { [native code] }"
+}--><datatable-row-wrapper class="datatable-row-wrapper ng-star-inserted" ng-reflect-ng-style="[object Object]" ng-reflect-inner-width="1066" ng-reflect-offset-x="0" ng-reflect-detail-row-height="0" ng-reflect-row="[object Object]" ng-reflect-row-index="0" ng-reflect-expanded="false" style="transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true",
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><datatable-body-row tabindex="-1" ng-reflect-columns="[object Object],[object Object" ng-reflect-inner-width="1066" ng-reflect-expanded="false" ng-reflect-row="[object Object]" ng-reflect-is-selected="false" ng-reflect-row-index="0" ng-reflect-offset-x="0" ng-reflect-row-height="44" class="datatable-body-row datatable-row-even ng-star-inserted" style="height: 44px; width: 1059px;"><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "function (index, colGroup) {\n "
+}--><div ng-reflect-ng-style="[object Object]" class="datatable-row-left datatable-row-group ng-star-inserted" style="width: 0px; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;"><!--bindings={
+  "ng-reflect-ng-for-of": "",
+  "ng-reflect-ng-for-track-by": "function (index, column) {\n   "
+}--></div><div ng-reflect-ng-style="[object Object]" class="datatable-row-center datatable-row-group ng-star-inserted" style="width: 1059px;"><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "function (index, column) {\n   "
+}--><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="0" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span title="54232" class="ng-star-inserted">54232</span><!--bindings={}--></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="0" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}--><app-color-badge _ngcontent-jaw-c8="" _nghost-jaw-c6="" ng-reflect-text="CREATED" class="ng-star-inserted"><span _ngcontent-jaw-c6="" class="badge badge-success">CREATED</span></app-color-badge><!----></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="0" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}--><app-color-badge _ngcontent-jaw-c8="" _nghost-jaw-c6="" ng-reflect-text="MEDIUM" class="ng-star-inserted"><span _ngcontent-jaw-c6="" class="badge badge-warning">MEDIUM</span></app-color-badge><!----></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="0" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}-->MODEL<!----></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="0" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span title="7679" class="ng-star-inserted">7679</span><!--bindings={}--></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="0" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}-->Oct 23, 2019, 2:45:01 PM<!----></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="0" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}-->Oct 23, 2019, 2:45:01 PM<!----></div></datatable-body-cell></div><div ng-reflect-ng-style="[object Object]" class="datatable-row-right datatable-row-group ng-star-inserted" style="width: 0px; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;"><!--bindings={
+  "ng-reflect-ng-for-of": "",
+  "ng-reflect-ng-for-track-by": "function (index, column) {\n   "
+}--></div></datatable-body-row><!----><!----><!--bindings={}--></datatable-row-wrapper><datatable-row-wrapper class="datatable-row-wrapper ng-star-inserted" ng-reflect-ng-style="[object Object]" ng-reflect-inner-width="1066" ng-reflect-offset-x="0" ng-reflect-detail-row-height="0" ng-reflect-row="[object Object]" ng-reflect-row-index="0" ng-reflect-expanded="false" style="transform: translate3d(0px, 44px, 0px); backface-visibility: hidden;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true",
+  "ng-reflect-ng-if-else": "[object Object]"
+}--><datatable-body-row tabindex="-1" ng-reflect-columns="[object Object],[object Object" ng-reflect-inner-width="1066" ng-reflect-expanded="false" ng-reflect-row="[object Object]" ng-reflect-is-selected="false" ng-reflect-row-index="1" ng-reflect-offset-x="0" ng-reflect-row-height="44" class="datatable-body-row datatable-row-odd ng-star-inserted" style="height: 44px; width: 1059px;"><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "function (index, colGroup) {\n "
+}--><div ng-reflect-ng-style="[object Object]" class="datatable-row-left datatable-row-group ng-star-inserted" style="width: 0px; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;"><!--bindings={
+  "ng-reflect-ng-for-of": "",
+  "ng-reflect-ng-for-track-by": "function (index, column) {\n   "
+}--></div><div ng-reflect-ng-style="[object Object]" class="datatable-row-center datatable-row-group ng-star-inserted" style="width: 1059px;"><!--bindings={
+  "ng-reflect-ng-for-of": "[object Object],[object Object",
+  "ng-reflect-ng-for-track-by": "function (index, column) {\n   "
+}--><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="1" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span title="54233" class="ng-star-inserted">54233</span><!--bindings={}--></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="1" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}--><app-color-badge _ngcontent-jaw-c8="" _nghost-jaw-c6="" ng-reflect-text="CREATED" class="ng-star-inserted"><span _ngcontent-jaw-c6="" class="badge badge-success">CREATED</span></app-color-badge><!----></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="1" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}--><app-color-badge _ngcontent-jaw-c8="" _nghost-jaw-c6="" ng-reflect-text="MEDIUM" class="ng-star-inserted"><span _ngcontent-jaw-c6="" class="badge badge-warning">MEDIUM</span></app-color-badge><!----></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="1" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}-->MODEL<!----></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="1" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "true"
+}--><span title="7679" class="ng-star-inserted">7679</span><!--bindings={}--></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="1" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}-->Oct 23, 2019, 2:45:01 PM<!----></div></datatable-body-cell><datatable-body-cell tabindex="-1" ng-reflect-row-height="44" ng-reflect-is-selected="false" ng-reflect-expanded="false" ng-reflect-row-index="1" ng-reflect-column="[object Object]" ng-reflect-row="[object Object]" class="datatable-body-cell sort-active ng-star-inserted" style="width: 151.286px; height: 44px;"><div class="datatable-body-cell-label" style="margin-left: 0px;"><!--bindings={}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!--bindings={
+  "ng-reflect-ng-if": "[object Object]"
+}--><!--bindings={
+  "ng-reflect-ng-template-outlet-context": "[object Object]",
+  "ng-reflect-ng-template-outlet": "[object Object]"
+}-->Oct 23, 2019, 2:45:01 PM<!----></div></datatable-body-cell></div><div ng-reflect-ng-style="[object Object]" class="datatable-row-right datatable-row-group ng-star-inserted" style="width: 0px; transform: translate3d(0px, 0px, 0px); backface-visibility: hidden;"><!--bindings={
+  "ng-reflect-ng-for-of": "",
+  "ng-reflect-ng-for-track-by": "function (index, column) {\n   "
+}--></div></datatable-body-row><!----><!----><!--bindings={}--></datatable-row-wrapper><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></datatable-scroller><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></datatable-selection></datatable-body><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div></ngx-datatable><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--><!----><!----><!----><!--bindings={
+  "ng-reflect-ng-if": "false"
+}--></div><app-search-actions _ngcontent-jaw-c8="" _nghost-jaw-c11=""><!----></app-search-actions></app-risk-tabular-view></div><footer _ngcontent-jaw-c0="" class="footer"><div _ngcontent-jaw-c0="" class="container-fluid"><span _ngcontent-jaw-c0="" class="text-muted">© ConcourseLabs</span></div></footer></app-root>
+<script type="text/javascript" src="runtime.feb94f4746ca1cd11778.js"></script><script type="text/javascript" src="polyfills.7fb9316996e9e0800e42.js"></script><script type="text/javascript" src="main.b849978ed27d6da8efbf.js"></script>
+
+
+<div class="overlay-container"><div id="toast-container" class="toast-bottom-right toast-container"></div></div></body></html>

@@ -2,9 +2,7 @@
 import { browser, element, by, ExpectedConditions, $, ElementFinder, protractor } from 'protractor';
 import { elementClick, elementSendkeys, elementClear } from '../utils/utils';
 import { WaitHelper } from '../utils/waitHelper';
-import { AssetManager } from './assetManager.Po';
 let configProperties = require('../conf/properties');
-let assetsManager = new AssetManager();
 
 export class Approvals {
 

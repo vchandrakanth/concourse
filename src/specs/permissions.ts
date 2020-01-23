@@ -17,6 +17,7 @@ describe('Verifying Permissions Concourse ', async function () {
     let assetsManager = new AssetManager();
     let verifyUserPermissions = new VerifyUserPermissions();
     let properties = require('../conf/properties');
+    let surfaceName = properties.SurfaceData.surfaceName;
     let groupName = properties.groupData.groupName + group.getRandomNum(1, 1000);
     let groupDescription = properties.groupData.groupDescription;
     let user1 = properties.UserPermissionData.user1;
@@ -60,7 +61,8 @@ describe('Verifying Permissions Concourse ', async function () {
 
     it('Step 1: Verify Business Author Permissions For User1', async function (): Promise<any> {
 
-        await group.addRoleToGroup(GroupName, role1, responsibilities1, organization);
+        // await group.addRoleToGroup(surfaceName, GroupName, role1, responsibilities1, organization);
+        await group.addRoleToGroup(surfaceName, groupName, role1, responsibilities1, organization);
         await browser.sleep(2000);
         await group.reLogin(username, e2eTestUser, password);
         await verifyUserPermissions.VerifyPermissionGranted(module1, AssetName);
@@ -98,12 +100,12 @@ describe('Verifying Permissions Concourse ', async function () {
         await console.log('User1 Does Not Have Permission For GROUPS');
 
         await group.reLogin(e2eTestUser, username, password);
-        await group.removeRolesFromGroup(GroupName, role1);
+        await group.removeRolesFromGroup(surfaceName, GroupName, role1);
     });
 
     it('Step 2: Verify Control Author Permissions For User2', async function (): Promise<any> {
 
-        await group.addRoleToGroup(GroupName, role2, responsibilities2, organization);
+        await group.addRoleToGroup(surfaceName, GroupName, role2, responsibilities2, organization);
         await group.reLogin(username, e2eTestUser, password);
         await browser.sleep(2000);
         await verifyUserPermissions.VerifyPermissionGranted(module3, PolicyGroupTemplateName);
@@ -143,11 +145,11 @@ describe('Verifying Permissions Concourse ', async function () {
         await console.log('User2 Does Not Have Permission For GROUPS');
 
         await group.reLogin(e2eTestUser, username, password);
-        await group.removeRolesFromGroup(GroupName, role2);
+        await group.removeRolesFromGroup(surfaceName, GroupName, role2);
     });
 
     it('Step 3: Verify Business Operator Permissions For User3', async function (): Promise<any> {
-        await group.addRoleToGroup(GroupName, role3, responsibilities3);
+        await group.addRoleToGroup(surfaceName, GroupName, role3, responsibilities3);
         await group.reLogin(username, e2eTestUser, password);
         await browser.sleep(2000);
         await verifyUserPermissions.VerifyPermissionGranted(module1, AssetName);
@@ -182,12 +184,12 @@ describe('Verifying Permissions Concourse ', async function () {
         await console.log('User3 Does Not Have Permission For POLICY GROUPS');
 
         await group.reLogin(e2eTestUser, username, password);
-        await group.removeRolesFromGroup(GroupName, role3);
+        await group.removeRolesFromGroup(surfaceName, GroupName, role3);
     });
 
     it('Step 4: Verify Institution Admin Permissions For User4', async function (): Promise<any> {
 
-        await group.addRoleToGroup(GroupName, role4, responsibilities4);
+        await group.addRoleToGroup(surfaceName, GroupName, role4, responsibilities4);
         await group.reLogin(username, e2eTestUser, password);
         await browser.sleep(2000);
         await verifyUserPermissions.VerifyPermissionGranted(module5, 'surfaceName');
@@ -219,12 +221,12 @@ describe('Verifying Permissions Concourse ', async function () {
         await console.log('User4 Does Not Have Permission For ATTRIBUTE TAGS');
 
         await group.reLogin(e2eTestUser, username, password);
-        await group.removeRolesFromGroup(GroupName, role4);
+        await group.removeRolesFromGroup(surfaceName, GroupName, role4);
     });
 
     it('Step 5: Verify Identity Admin Permissions For User5', async function (): Promise<any> {
 
-        await group.addRoleToGroup(GroupName, role5, responsibilities5, organization);
+        await group.addRoleToGroup(surfaceName, GroupName, role5, responsibilities5, organization);
         await group.reLogin(username, e2eTestUser, password);
         await browser.sleep(2000);
         await verifyUserPermissions.VerifyPermissionGranted(module7, GroupName);
@@ -264,7 +266,7 @@ describe('Verifying Permissions Concourse ', async function () {
         await console.log('User5 Does Not Have Permission For INSTITUTION DATA');
 
         await group.reLogin(e2eTestUser, username, password);
-        await group.removeRolesFromGroup(GroupName, role5);
+        await group.removeRolesFromGroup(surfaceName, GroupName, role5);
     });
 
     afterEach(function () {

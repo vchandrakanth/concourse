@@ -1,5 +1,5 @@
 
-import { browser, element, by, ExpectedConditions, $, ElementFinder, protractor } from 'protractor';
+import { browser, element, by, ExpectedConditions, $, ElementFinder, protractor, $$ } from 'protractor';
 import { elementClick, elementSendkeys, elementClear } from '../utils/utils';
 import { WaitHelper } from '../utils/waitHelper';
 let configProperties = require('../conf/properties');
@@ -32,48 +32,60 @@ export class Approvals {
   get approvalStatus() { return element(by.xpath('//span[.="APPROVED"]')); }
   myelement(modelId: string) { return element(by.xpath(`//td[.='${modelId} - Model']`)); }
   get surfaceDropDown() { return element(by.css('select')); }
-  selectSurface(topology: string) { return element(by.xpath(`//option[contains(.,'${topology}')]`)); }
+  selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
   get policyGroupDetailPage() { return element(by.css('div[data-e2e="policyGroupDetails"]')); }
   get deleteButton() { return element(by.css('.btn-danger')); }
   get confirmDeleteButton() { return element(by.css('.delete')); }
   get approvalList() { return element(by.css('.datatable-body')); }
 
-  async ApprovalAction(entityId: any = null) {
+  async ApprovalAction(surfaceName: string = null, entityId: any = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // Click on Assets Manager Menu Button
-    // await browser.get(configProperties.qaUrl + '/workflows/approvals');
+    // Click on Approvals Menu Button
     await elementClick(this.approvalsMenu);
     await browser.logger.info('Clicked on Approvals Menu');
+
+    await this.selectSurfaceFromDropDown(surfaceName);
+
+    await elementClear(this.search, entityId);
+
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'Policy Group List Displayed');
     await this.search.sendKeys(entityId);
-    await elementClick(this.approvalEntity(entityId));
+    let approvalRequest = element(by.css('.list-group')).all(by.className('mb-3 ng-star-inserted'));
+    approvalRequest.first().click();
     await browser.logger.info(entityId, 'Selected');
+    await browser.sleep(2000);
 
     await WaitHelper.waitForElementToBeClickable(this.approveButton, 2000, 'Approve Button ');
-    await browser.actions().mouseDown(this.approveButton).perform();
+    await browser.actions().mouseMove(this.approveButton).perform();
     await elementClick(this.approveButton);
-    await browser.logger.info('Approved');
+    await browser.logger.info('Action Approved');
   }
 
-  async VerifyPublishedApprovalRequest(Id: any = null) {
+  async VerifyPublishedApprovalRequest(surfaceName: string = null, Id: any = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // Click on Assets Manager Menu Button
+    // Click on Approvals Menu Button
     await elementClick(this.approvalsMenu);
     await browser.logger.info('Clicked on Approvals Menu');
 
-    // Select Created Policy Group
+    await this.selectSurfaceFromDropDown(surfaceName);
+
+    await elementClear(this.search, Id);
+
     await WaitHelper.waitForElementToBeDisplayed(this.approvalList, 5000, 'Approval List Displayed');
     await this.search.sendKeys(Id);
     await browser.logger.info(Id, 'Displayed');
   }
 
-  async DeleteApprovalRequest(policyGroupName: any = null) {
+  async DeleteApprovalRequest(surfaceName: string = null, policyGroupName: any = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // Click on Assets Manager Menu Button
+    // Click on Policy Group Menu Button
     await elementClick(this.policyGroupMenu);
     await browser.logger.info('Clicked on Policy Group Menu');
 
-    // Select Created Policy Group
+    await this.selectSurfaceFromDropDown(surfaceName);
+
+    await elementClear(this.search, policyGroupName);
+
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'Policy Group List Displayed');
     await this.search.sendKeys(policyGroupName);
     await elementClick(this.searchPolicyGroupName(policyGroupName));
@@ -88,18 +100,34 @@ export class Approvals {
     await browser.actions().mouseMove(this.confirmDeleteButton).perform();
     await elementClick(this.confirmDeleteButton);
     await browser.logger.info('Confirm Delete');
+    await browser.sleep(2000);
   }
 
-  async VerifyDeleteApprovalRequest(Id: any = null) {
+  async VerifyDeleteApprovalRequest(surfaceName: string = null, Id: any = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // Click on Assets Manager Menu Button
+    // Click on Approvals Menu Button
     await elementClick(this.approvalsMenu);
     await browser.logger.info('Clicked on Approvals Menu');
 
-    // Select Created Policy Group
+    await this.selectSurfaceFromDropDown(surfaceName);
+
+    await elementClear(this.search, Id);
+
+    // Select Approval Request
     await WaitHelper.waitForElementToBeDisplayed(this.approvalList, 5000, 'Approval List Displayed');
     await this.search.sendKeys(Id);
     await browser.logger.info(Id, 'Displayed');
+  }
+
+  async selectSurfaceFromDropDown(surfaceName: string = null) {
+    await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
+    await elementClick(this.surfaceDropDown);
+    await browser.logger.info(surfaceName, 'Surface Drop Down Clicked');
+
+    await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
+    await elementClick(this.selectSurface(surfaceName));
+    await browser.logger.info('Surface Selcted');
+    await browser.sleep(2000);
   }
 
   async getId() {

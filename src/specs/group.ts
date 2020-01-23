@@ -3,7 +3,7 @@ import { ExpectHelper } from '../utils/expectHelper';
 import { Group } from '../pageObjects/groups.Po';
 import { Surface } from '../pageObjects/surfaces.Po';
 
-describe('Creaing Groups Concourse ', async function () {
+describe('Creating Groups Concourse ', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let group = new Group();
@@ -21,14 +21,14 @@ describe('Creaing Groups Concourse ', async function () {
     let surfaceName = properties.SurfaceData.surfaceName;
     let groupId;
 
-   beforeEach(function () {
+    beforeEach(function () {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
     });
 
     it('Step 1: Create New Group', async function (): Promise<any> {
         // Creating New Group
-        await group.createGroup(groupName, groupDescription, 0);
+        await group.createGroup(surfaceName, groupName, groupDescription, 0);
         // Verify if the Group is created
         await ExpectHelper.isListElementExists(group.groupList, groupName);
         groupId = await group.getId();
@@ -37,50 +37,60 @@ describe('Creaing Groups Concourse ', async function () {
 
     it('Step 2: Asign User For New Group', async function (): Promise<any> {
         // Assigning User For Newly Created Group
-        await group.assignUserForGroup(groupName, user, 0);
+        await group.assignUserForGroup(surfaceName, groupName, user, 0);
         await ExpectHelper.isListElementExists(group.groupList, groupName);
     });
 
     it('Step 3: Add Role Assignment For Group', async function (): Promise<any> {
         // Assigning Roles For Group
-        await group.addRoleToGroup(groupName, role, responsibilities, organization);
+        await group.addRoleToGroup(surfaceName, groupName, role, responsibilities, organization);
         await ExpectHelper.isListElementExists(group.groupList, groupName);
     });
 
     it('Step 4: Add Another Role Assignment For Group', async function (): Promise<any> {
         // Assigning Another Role For Group
-        await group.addRoleToGroup(groupName, role1, responsibilities1, organization);
+        await group.addRoleToGroup(surfaceName, groupName, role1, responsibilities1, organization);
         await ExpectHelper.isListElementExists(group.groupList, groupName);
     });
 
     it('Step 5: Remove Role Assignment From Group', async function (): Promise<any> {
         // Removing Role From Group
-        await group.removeRolesFromGroup(groupName, role);
+        await group.removeRolesFromGroup(surfaceName, groupName, role);
         await ExpectHelper.expectDoesNotExists(group.selectRoleToDelete(role));
     });
 
     it('Step 6: Verify Role Assignment Removed Or Not', async function (): Promise<any> {
         // Verifying the Role is Removed Or Not
-        await group.verifyRolesInUI(groupName, role);
+        await group.verifyRolesInUI(surfaceName, groupName, role);
         await ExpectHelper.expectDoesNotExists(group.selectRoleToDelete(role));
     });
 
-    it('Step 7: Remove User From Group', async function (): Promise<any> {
+    it('Step 7: Remove Role Assignment From Group', async function (): Promise<any> {
+        // Removing Role From Group
+        await group.removeRolesFromGroup(surfaceName, groupName, role1);
+        await ExpectHelper.expectDoesNotExists(group.selectRoleToDelete(role1));
+    });
+
+    it('Step 8: Verify Role Assignment Removed Or Not', async function (): Promise<any> {
+        // Verifying the Role is Removed Or Not
+        await group.verifyRolesInUI(surfaceName, groupName, role1);
+        await ExpectHelper.expectDoesNotExists(group.selectRoleToDelete(role1));
+    });
+
+    it('Step 9: Remove User From Group', async function (): Promise<any> {
         // Removing User From Group
-        await group.removeUserForGroup(groupName, user);
+        await group.removeUserForGroup(surfaceName, groupName, user);
         await ExpectHelper.expectDoesNotExists(group.selectUserToDelete(groupName));
     });
 
-    it('Step 8: Deassociate Group', async function (): Promise<any> {
+    it('Step 10: Deassociate Group', async function (): Promise<any> {
         //  Deleting Group
-        await group.deAssociateGroup(surfaceName, groupId);
-        // await ExpectHelper.expectDoesNotExists(groupName);
+        await group.dissociateGroup(surfaceName, groupName, groupId);
     });
 
-    it('Step 9: Delete Group', async function (): Promise<any> {
+    it('Step 11: Delete Group', async function (): Promise<any> {
         //  Deleting Group
-        await group.deleteGroup(groupName);
-        // await ExpectHelper.expectDoesNotExists(groupName);
+        await group.deleteGroup(surfaceName, groupName);
     });
 
     afterEach(function () {

@@ -1,14 +1,21 @@
 module.exports = {
 
-  qaUrl: 'https://adhoc.concourse.company/',
-  // qaUrl: 'https://beta.concourse.company/',
+  // qaUrl: 'https://adhoc.concourse.company/',
+  qaUrl: 'https://beta.concourse.company/',
+  // qaUrl: 'https://prod.concourselabs.io/',
   seleniumServerUrl: 'http://localhost:4444/wd/hub',
 
   // Login Data
   loginData: {
-    username: 'ramakrishna+e2etest@concourselabs.com',
+
+    // username: 'admin@concoursehub.com',
+    // username: 'ramakrishna+e2etest@concourselabs.com',
+    username: 'ramakrishna+e2e@concourselabs.com',
     // username: 'ramakrishna+e2e@concourselabs.com',
     password: 'Concourse1!',
+    // password: 'password',
+    // username: 'jian+e2e@concourselabs.com',
+    // password: 'E2etest1!',
   },
   // policyGroupTemplate Data
   policyGroupTemplateData:
@@ -26,7 +33,6 @@ module.exports = {
     requireApprovalPolicyGroupTemplateDesc: 'Require Approval PGT',
     policyGroupTemplateNameWithAWSProducts: 'AWS Products Policy Group Template',
     policyGroupTemplateDescWithAWSProducts: 'AWS Products Policy Group Template'
-
   },
   // policyGroup Data
   policyGroupData:
@@ -51,12 +57,12 @@ module.exports = {
   // attribute Tag Data
   attributeTagData:
   {
-    attributeName1: 'Test Attribute',
-    attributeDescription1: 'Test Attribute For Testing Purpose',
-    tagName: 'Test Attribute',
-    tagDescription: 'Test Attribute For Testing Purpose',
-    attributeName: 'EC2 - Attribute',
-    attributeDescription: 'EC2 - Attribute For Violation',
+    attributeName1: 'Test Attribute Tag',
+    attributeDescription1: 'Test Attribute Tag For Testing Purpose',
+    tagName: 'Test Attribute Tag',
+    tagDescription: 'Test Attribute Tag For Testing Purpose',
+    attributeName: 'EC2 - Attribute Tag',
+    attributeDescription: 'EC2 - Attribute Tag For Violation',
     attributeName2: 'E2E Test - Restrict Ingress Tag',
     attributeDescription2: 'E2E Test - Restrict Ingress Tag',
     attributeName3: 'E2E Test - Restrict Egress Tag',
@@ -67,8 +73,8 @@ module.exports = {
     attributeDescription5: 'E2E Test - Approval Tag',
     violationAttributeTagName: 'Attribute Tag For Violation',
     violationAttributeTagDescription: 'Attribute Tag For Violation',
-    violationAttributeName1: 'Attribute Model Violation3',
-    violationAttributeDescription1: 'Attribute Model Violation3'
+    violationAttributeName1: 'Attribute Tag Model Violation',
+    violationAttributeDescription1: 'Attribute Tag Model Violation'
   },
   // Enclave Model Data
   enclaveModelData:
@@ -95,10 +101,10 @@ module.exports = {
   {
     groupName: 'E2E Test Group',
     groupDescription: 'Description Of E2E Test Group',
-    user: 'e2e Test <ramakrishna+e2etest@concourselabs.com>'
-    // user: 'e2e Test <ramakrishna+e2e@concourselabs.com>'
+    // user: 'e2e Test <ramakrishna+e2etest@concourselabs.com>'
+    user: 'e2e Test <ramakrishna+e2e@concourselabs.com>',
+    // user: 'Prod E2E Test <ramakrishna+e2e@concourselabs.com>'
     // user: 'e2e Test <ramakrishna+e2etestuser@concourselabs.com>'
-
   },
   // Control Topology Data
   ControlTopologyData:
@@ -106,21 +112,37 @@ module.exports = {
     // Control Topology Data
     controlTopology: 'E2E Surface'
   },
+
   logicalDeploymentData:
   {
     deploymentName: 'E2E Test Deployment',
-    stackName: 'E2E Test Stack-123'
+    stackName: 'E2E Test Stack-123',
+    version: ' (v0.2)'
   },
+
   SurfaceData:
   {
     // Surface Data
     surfaceName: 'E2E Surface',
-    // surfaceName: 'Default Surface',
     surfaceLayer: 'Default Surface - Root Surface Layer',
     sampleSurfaceName: 'E2E Sample Surface',
     surfacedesc: 'Description For Surface',
     group: 'Root Admin',
-    group1: 'TestGroup'
+    group1: 'TestGroup',
+    defaultGroup: ' - Root Group',
+    dataForAWSAccount: 'Aws Accounts',
+    dataForAzureSubscription: 'Azure Subscriptions',
+    dataForAzureAccount: 'Azure Account',
+    dataForNetworkWhitelists: 'Network Whitelists',
+    dataForInsightsUrls: 'Insights Urls',
+    accountKey: 'Account-123456789',
+    accountValue: '123456789',
+    whiteListValue: '10.10.10.1',
+    insightUrl: '//adhoc.concourse.company',
+    updatedInsightUrl: 'http://adhoc.concourse.com',
+    azureSubscriptionKey: 'Account-123454321',
+    azureSubscriptionValue: '123456978',
+    UpdatedWhiteListValue: '10.10.10.2',
   },
 
   ServicesData:
@@ -128,6 +150,7 @@ module.exports = {
     service1: 'AWS::S3',
     service: 'AWS::EC2'
   },
+
   UserPermissionData:
   {
     e2euser1: 'ramakrishna+e2e4@concourselabs.com',
@@ -145,14 +168,30 @@ module.exports = {
     module6: 'institutions/data',
     module7: 'user-management/groups',
     module8: 'user-management/users',
-    // e2eTestUser: 'ramakrishna+e2etestuser@concourselabs.com',
+    // e2eTestUser: 'ramakrishna+e2e5@concourselabs.com',
     e2eTestUser: 'ramakrishna+e2etestuser@concourselabs.com'
   },
+
   ApprovalsData:
   {
     policyGroupType: 'POLICY_GROUP',
     deploymentType: 'DEPLOYMENT',
     modelType: 'MODEL',
     cloudRoleType: 'CLOUD_ROLE'
+  },
+
+  CloudRolesData:
+  {
+    cloudRoleName: 'E2E-Cloud Role',
+    cloudRoleDesc: 'Description For Cloud Role',
+    amazonProvider: 'aws',
+    azureProvider: 'azure',
+    deleteUser: 'a4b:DeleteUser',
+    disassociateDeviceFromRoom: 'a4b:DisassociateDeviceFromRoom',
+    putConferencePreference: 'a4b:PutConferencePreference',
+    createSkillGroup: 'a4b:CreateSkillGroup',
+    associateDeviceWithRoom: 'a4b:AssociateDeviceWithRoom',
+    putRoomSkillParameter: 'a4b:PutRoomSkillParameter',
   }
+
 };

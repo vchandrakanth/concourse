@@ -22,45 +22,46 @@ describe('Creaing Policy Group Concourse ', async function () {
   let policyGroupNamePublish = properties.policyGroupData.policyGroupNamePublish + policyPage.getRandomNum(1, 1000);
   let policyGroupDescPublish = properties.policyGroupData.policyGroupDescPublish;
   let service = properties.ServicesData.service;
+  let baseSurface = properties.SurfaceData.surfaceName;
   let services = [service];
 
   beforeEach(function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
   });
 
   it('Step 1: Creating Attribute Tag', async function (): Promise<any> {
     // Creating Attribute Tag
-    await attributeTag.createAttributeTag(attributeTagName, description);
-    await attributeTag.searchAttribute(attributeTagName, 'Description');
+    await attributeTag.createAttributeTag(baseSurface, attributeTagName, description);
+    await attributeTag.searchAttribute(baseSurface, attributeTagName, 'Description');
     await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName);
   });
 
   // Creating policy group Tempalte
   it('Step 2: Creating Policy Group Template with  Published', async function (): Promise<any> {
     // Verify if the plolciy Template is created as Published
-    await policyGroupTemplatePage.createPolicyGroupTemplate('PUBLISHED', policyGroupTemplateName, policyGroupTemplatedesc, 'Allowed AWS Products on Accounts');
-    await policyGroupTemplatePage.searchPolicyGroupTemplate(policyGroupTemplateName);
+    await policyGroupTemplatePage.createPolicyGroupTemplate(baseSurface, 'PUBLISHED', policyGroupTemplateName, policyGroupTemplatedesc, 'Allowed AWS Products in Stacks');
+    await policyGroupTemplatePage.searchPolicyGroupTemplate(baseSurface, policyGroupTemplateName);
     await ExpectHelper.isListElementExists(policyGroupTemplatePage.list, policyGroupTemplateName);
   });
 
   it('Step 3: Creating Policy Group with  Draft', async function (): Promise<any> {
     // Creating Policy Group With Draft Status
-    await policyPage.createPolicyGroup(policyGroupNameDraft, policyGroupDescDraft, 'E2E Admin', 'DRAFT', policyGroupTemplateName, attributeTagName, services);
-    await policyPage.searchPolicyGroup(policyGroupNameDraft);
+    await policyPage.createPolicyGroup(baseSurface, policyGroupNameDraft, policyGroupDescDraft, 'E2E Admin', 'DRAFT', policyGroupTemplateName, attributeTagName, services);
+    await policyPage.searchPolicyGroup(baseSurface, policyGroupNameDraft);
     await ExpectHelper.isListElementExists(policyPage.list, policyGroupNameDraft);
   });
 
   it('Step 4: Editing Policy Group with  Draft', async function (): Promise<any> {
     // Edit The Draft Policy Group
-    await policyPage.editPolicyGroup(policyGroupNameDraft);
-    await policyPage.searchPolicyGroup(policyGroupNameDraft + ' Updated');
+    await policyPage.editPolicyGroup(baseSurface, policyGroupNameDraft);
+    await policyPage.searchPolicyGroup(baseSurface, policyGroupNameDraft + ' Updated');
     await ExpectHelper.isListElementExists(policyPage.list, policyGroupNameDraft + ' Updated');
   });
 
   it('Step 5: Deleting Policy Group with  Draft', async function (): Promise<any> {
     // Deleting Policy Group with Draft Status
-    await policyPage.deletePolicyGroup(policyGroupNameDraft);
+    await policyPage.deletePolicyGroup(baseSurface, policyGroupNameDraft);
     // Policy Group Deleted
     await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupNameDraft));
   });
@@ -68,33 +69,33 @@ describe('Creaing Policy Group Concourse ', async function () {
   it('Step 6: Verify Policy Group With Draft Status Deleted or Not', async function (): Promise<any> {
 
     await policyPage.verifyPolicyGroup(policyGroupNameDraft);
-    await policyPage.searchPolicyGroup(policyGroupNameDraft + ' Updated');
+    await policyPage.searchPolicyGroup(baseSurface, policyGroupNameDraft + ' Updated');
     await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupNameDraft + ' Updated'));
   });
 
   it('Step 7: Creating Policy Group with  Published', async function (): Promise<any> {
     // Creating Policy Group with  Published
-    await policyPage.createPolicyGroup(policyGroupNamePublish, policyGroupDescPublish, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services);
-    await policyPage.searchPolicyGroup(policyGroupNamePublish);
+    await policyPage.createPolicyGroup(baseSurface, policyGroupNamePublish, policyGroupDescPublish, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services);
+    await policyPage.searchPolicyGroup(baseSurface, policyGroupNamePublish);
     await ExpectHelper.isListElementExists(policyPage.list, policyGroupNamePublish);
   });
 
   it('Step 8: Edit Policies And Publish Policy Group', async function (): Promise<any> {
     // Edit Policies And Publish Policy Group
-    await policyPage.editPoliciesandPublish(policyGroupNamePublish, 'AWS::S3');
-    await policyPage.searchPolicyGroup(policyGroupNamePublish);
+    await policyPage.editPoliciesandPublish(baseSurface, policyGroupNamePublish, 'AWS::S3');
+    await policyPage.searchPolicyGroup(baseSurface, policyGroupNamePublish);
     await ExpectHelper.isListElementExists(policyPage.list, policyGroupNamePublish);
   });
 
   it('Step 9: Delete Published Policy Group', async function (): Promise<any> {
     // Edit Policies And Publish Policy Group
-    await policyPage.deletePolicyGroup(policyGroupNamePublish, 'false');
+    await policyPage.deletePolicyGroup(baseSurface, policyGroupNamePublish, 'false');
   });
 
   it('Step 10: CleanUp', async function (): Promise<any> {
     // CleanUp
-    await policyGroupTemplatePage.deletePolicyGroupTemplate(policyGroupTemplateName, 'false');
-    await attributeTag.deleteAttributeTag(attributeTagName, 'false');
+    await policyGroupTemplatePage.deletePolicyGroupTemplate(baseSurface, policyGroupTemplateName, 'false');
+    await attributeTag.deleteAttributeTag(baseSurface, attributeTagName, 'false');
   });
 
   afterEach(function () {

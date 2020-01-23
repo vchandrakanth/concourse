@@ -27,6 +27,7 @@ describe('Verifying Policy Violation', async function () {
     let policyGroupDescription = properties.policyGroupData.violationPolicyGroupDescription;
     let assetName = properties.enclaveModelData.violationModel + assetsManager.getRandomNum(1, 1000);
     let description = properties.enclaveModelData.ViolationDescription;
+    let baseSurface = properties.SurfaceData.surfaceName;
     let attributeTags = [attributeTagName];
     let service = ['AWS::S3'];
     let modelId;
@@ -38,37 +39,37 @@ describe('Verifying Policy Violation', async function () {
 
     it('Step 1: Create Attribute Tag', async function (): Promise<any> {
         // Creating Attribute Tag
-        await attributeTag.createAttributeTag(attributeTagName, attributeTagDesc);
-        await attributeTag.searchAttribute(attributeTagName, 'attributeTagDesc');
+        await attributeTag.createAttributeTag(baseSurface, attributeTagName, attributeTagDesc);
+        await attributeTag.searchAttribute(baseSurface, attributeTagName, 'attributeTagDesc');
         await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName);
         await console.log('Attribute Tag name is', attributeTagName);
     });
 
     it('Step 2: Create New Enclave Model With Above Created Attribute Tag', async function (): Promise<any> {
         // Creating Enclave Model
-        await assetsManager.createEnclaveModel('PUBLISHED', assetName, description, attributeTags, 'ec2template.json', 'E2E Admin');
+        await assetsManager.createEnclaveModel(baseSurface, 'PUBLISHED', assetName, description, attributeTags, 'ec2template.json', 'E2E Admin');
         modelId = await assetsManager.getId();
         await console.log('Enclave Model name is', assetName);
         await console.log('Enclave Model id is', modelId);
-        await assetsManager.searchAssetManager(assetName);
+        await assetsManager.searchAssetManager(baseSurface, assetName);
         await ExpectHelper.isListElementExists(assetsManager.assetList, assetName);
     });
 
     it('Step 3: Creating Policy Group Template with  Published', async function (): Promise<any> {
         // Creating Policy Group Template
-        await policyGroupTemplatePage.createPolicyGroupTemplate('PUBLISHED', policyGroupTemplateName, policyGroupTemplatedesc, 'Allowed AWS Products in Assets');
-        await policyGroupTemplatePage.searchPolicyGroupTemplate(policyGroupTemplateName);
+        await policyGroupTemplatePage.createPolicyGroupTemplate(baseSurface, 'PUBLISHED', policyGroupTemplateName, policyGroupTemplatedesc, 'Allowed AWS Products in Stacks');
+        await policyGroupTemplatePage.searchPolicyGroupTemplate(baseSurface, policyGroupTemplateName);
         await ExpectHelper.isListElementExists(policyGroupTemplatePage.list, policyGroupTemplateName);
         await console.log('Policy Group Template name is', policyGroupTemplateName);
     });
 
     it('Step 4: Creating Policy Group with S3 ', async function (): Promise<any> {
         // Creating Policy Group
-        await policyPage.createPolicyGroup(policyGroupName, policyGroupDescription, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, service);
+        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDescription, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, service);
         let policyId = await getIdFromUrl();
-        await console.log('Policy Group name is', policyId);
+        await console.log('Policy Group Id is', policyId);
         await console.log('Policy Group name is', policyGroupName);
-        await policyPage.searchPolicyGroup(policyGroupName);
+        await policyPage.searchPolicyGroup(baseSurface, policyGroupName);
         await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);
     });
 
@@ -81,10 +82,10 @@ describe('Verifying Policy Violation', async function () {
 
     it('Step 6: CleanUp ', async function (): Promise<any> {
         // CleanUp
-        await policyPage.deletePolicyGroup(policyGroupName, 'false');
-        await policyGroupTemplatePage.deletePolicyGroupTemplate(policyGroupTemplateName, 'false');
-        await assetsManager.deleteEnclaveModel(assetName, 'false');
-        await attributeTag.deleteAttributeTag(attributeTagName, 'false');
+        await policyPage.deletePolicyGroup(baseSurface, policyGroupName, 'false');
+        await policyGroupTemplatePage.deletePolicyGroupTemplate(baseSurface, policyGroupTemplateName, 'false');
+        await assetsManager.deleteEnclaveModel(baseSurface, assetName, 'false');
+        await attributeTag.deleteAttributeTag(baseSurface, attributeTagName, 'false');
     });
 
     afterEach(function () {

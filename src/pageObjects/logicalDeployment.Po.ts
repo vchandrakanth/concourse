@@ -27,20 +27,24 @@ export class LogicalDeployment {
     get toast() { return $('#toast-container'); }
     get list() { return element(by.css('.datatable-body')); }
     get scrollBar() { return element(by.css('.bootstrap')); }
+    searchDeployment(deploymentId: any) { return element(by.xpath(`//datatable-body-cell[.='${deploymentId}']`)); }
     deployment(deploymentId: any) { return element(by.css(`span[title='${deploymentId}']`)); }
     get deleteButton() { return element(by.css('.btn-danger')); }
     get confirmDeleteButton() { return element(by.css('.delete')); }
     get logicalDeployementMenu() { return element(by.xpath('//a[contains(.,"Logical Deployments")]')); }
     get surfaceDropDown() { return element(by.css('select')); }
-    selectSurface(topology: string) { return element(by.xpath(`//option[contains(.,'${topology}')]`)); }
+    selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
     logicalDeployementElement(deploymentName: any) { return element(by.css(`span[title='${deploymentName}']`)); }
     get risklist() { return element(by.xpath('//datatable-body[@class="datatable-body"]')); }
     get lastPage() { return element(by.xpath('//i[@class="datatable-icon-skip"]')); }
     deploysTab(count: any) { return element(by.xpath(`//a[contains(.,'Deploys ${count}')]`)); }
-    get updateDeployment() { return element(by.css('[data-e2e="changeDeploymentVersion"]')); }
+    get updateDeploymentButton() { return element(by.css('[data-e2e="changeDeploymentVersion"]')); }
+    get versionDropDown() { return element(by.css('[placeholder="Select a different version"]')); }
+    selectVersion(assetName: any, version: any) { return element(by.xpath(`//span[contains(.,'${(assetName) + (version)}')]`)); }
+    get nextButton() { return element(by.xpath('//button[.="Next"]')); }
     get deploymentList() { return element(by.css('.app-container')); }
 
-    async newlogicalDeployment(assetName: string = null,
+    async newlogicalDeployment(surfaceName: string = null, assetName: string = null,
         deploymentName: string = null, stackName: string = null, region: string = null,
         SurfaceLayer: string = null, account: string = null) {
 
@@ -50,16 +54,7 @@ export class LogicalDeployment {
         // await elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
-        // Click on Control Topology Drop Down Button
-        await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-        await browser.actions().mouseDown(this.surfaceDropDown).perform();
-        await elementClick(this.surfaceDropDown);
-        await browser.logger.info('Surface Drop Down Selected');
-
-        // Select Control Topology
-        await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-        await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-        await browser.logger.info('Selected E2E Topology');
+        await this.selectSurfaceFromDropDown(surfaceName);
 
         await elementClear(this.search, assetName);
 
@@ -147,19 +142,13 @@ export class LogicalDeployment {
         });
     }
 
-    async searchLogicalDeployment(deploymentName: string = null) {
+    async searchLogicalDeployment(surfaceName: string = null, deploymentName: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on LogicalDeployment Menu Button
         await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
         await browser.logger.info('Clicked on Logical Deployment Menu');
-        await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-        await browser.actions().mouseDown(this.surfaceDropDown).perform();
-        await elementClick(this.surfaceDropDown);
-        await browser.logger.info('Surface Drop Down Selected');
 
-        await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-        await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-        await browser.logger.info('Selected E2E Topology');
+        await this.selectSurfaceFromDropDown(surfaceName);
 
         await elementClear(this.search, deploymentName);
 
@@ -170,23 +159,62 @@ export class LogicalDeployment {
         await browser.logger.info(deploymentName, 'Selected');
     }
 
-    async deleteLogicalDeployement(deploymentName: any = null) {
+    async updateLogicalDeployment(surfaceName: string = null, deploymentName: string = null, assetName: string = null, version: string = null) {
+        await WaitHelper.waitForElementToBeHidden(this.toast);
+        // Click on LogicalDeployment Menu Button
+        await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
+        await browser.logger.info('Clicked on Logical Deployment Menu');
+
+        await this.selectSurfaceFromDropDown(surfaceName);
+
+        await elementClear(this.search, deploymentName);
+
+        // Select Created Deployment
+        await WaitHelper.waitForElementToBeDisplayed(this.deploymentList, 5000, 'Logical Deployments List Displayed');
+        await this.search.sendKeys(deploymentName);
+        await elementClick(this.logicalDeployementElement(deploymentName));
+        await browser.logger.info(deploymentName, 'Selected');
+
+        await WaitHelper.waitForElementToBeDisplayed(this.updateDeploymentButton, 2000, 'Update Deployment Button');
+        await browser.actions().mouseDown(this.updateDeploymentButton).perform();
+        await elementClick(this.updateDeploymentButton);
+        await browser.logger.info('Update Deployment Button Selected');
+
+        await WaitHelper.waitForElementToBeDisplayed(this.versionDropDown, 2000, 'Version Drop Down');
+        await browser.actions().mouseDown(this.versionDropDown).perform();
+        await elementClick(this.versionDropDown);
+        await browser.logger.info('Version Drop Down Selected');
+
+        await WaitHelper.waitForElementToBeDisplayed(this.selectVersion(assetName, version), 2000, 'Version');
+        await browser.actions().mouseDown(this.selectVersion(assetName, version)).perform();
+        await elementClick(this.selectVersion(assetName, version));
+        await browser.logger.info('Version Selected');
+
+        // Click On Next Button To Go Enclave Model Evaluation Page
+        await WaitHelper.waitForElement(this.nextToEnclaveModelEvaluation, 5000, 'Next ');
+        await elementClick(this.nextToEnclaveModelEvaluation);
+        await browser.logger.info('Next');
+
+        // Click On Next Button To Go Review Deployment Page
+        await WaitHelper.waitForElement(this.nextToReviewDeployment, 5000, 'Next ');
+        await elementClick(this.nextToReviewDeployment);
+        await browser.logger.info('Next');
+
+        // Click On Submit Button
+        await WaitHelper.waitForElement(this.submitButton, 5000, 'Submit ');
+        await elementClick(this.submitButton);
+        await browser.logger.info('Submitted Deployment');
+        await browser.sleep(2000);
+    }
+
+    async deleteLogicalDeployement(surfaceName: string = null, deploymentName: any = null) {
         // wait till the toast element flash is hidden.
         await WaitHelper.waitForElementToBeHidden(this.toast);
 
         await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
         await browser.logger.info('Clicked on Logical Deployments Menu');
 
-        // Click on Surface Drop Down Button
-        await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-        await browser.actions().mouseDown(this.surfaceDropDown).perform();
-        await elementClick(this.surfaceDropDown);
-        await browser.logger.info('Surface Drop Down Selected');
-
-        // Select Surface
-        await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-        await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-        await browser.logger.info('Selected E2E Topology');
+        await this.selectSurfaceFromDropDown(surfaceName);
 
         await this.search.sendKeys(deploymentName);
         await browser.sleep(2000);
@@ -204,6 +232,17 @@ export class LogicalDeployment {
         await elementClick(this.confirmDeleteButton);
         await browser.logger.info('Logical Deployment is deleted');
     }
+
+    async selectSurfaceFromDropDown(surfaceName: string = null) {
+        await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
+        await elementClick(this.surfaceDropDown);
+        await browser.logger.info(surfaceName, 'Surface Drop Down Clicked');
+
+        await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
+        await elementClick(this.selectSurface(surfaceName));
+        await browser.logger.info('Surface Selcted');
+        await browser.sleep(2000);
+      }
 
     async getPageTitle() {
         return browser.getTitle();

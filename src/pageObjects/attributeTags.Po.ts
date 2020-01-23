@@ -26,9 +26,9 @@ export class AttributeTag {
   get search() { return element(by.css('[placeholder="Search"]')); }
   // get surfaceDropDown() { return element(by.css('select')); }
   get surfaceDropDown() { return element(by.css('[data-e2e="surfaceSwitcherDropdown"]')); }
-  selectSurface(topology: string) { return element(by.xpath(`//option[contains(.,'${topology}')]`)); }
+  selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
 
-  async createAttributeTag(name: string = null, description: any) {
+  async createAttributeTag(surfaceName: string = null, name: string = null, description: any) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // await browser.get(configProperties.qaUrl + '/attribute-tags');
     // await browser.actions().mouseDown(this.attributeTagsLink).perform();
@@ -37,14 +37,8 @@ export class AttributeTag {
     await browser.logger.info('AttributeTags Menu Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Control Topology Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Control Topology Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
+    await browser.logger.info('Selected E2E Surface');
 
     // Click on '+' Button to Create new Tag
     await elementClick(this.createNewAttributeTag);
@@ -72,26 +66,15 @@ export class AttributeTag {
     return parseInt(Math.random() * (max - min) + min);
   };
 
-  async searchAttribute(name: string = null, description: any = null) {
+  async searchAttribute(surfaceName: string = null, name: string = null, description: any = null) {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
     await browser.get(configProperties.qaUrl + '/attribute-tags');
-    // await browser.actions().mouseDown(this.attributeTagsLink).perform();
     // await elementClick(this.attributeTagsLink);
-
     await browser.logger.info('AttributeTags Menu Clicked');
-    await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Surface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
-    await browser.sleep(2000);
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     // Select Created Attribute Tag
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'AttributeTag List Displayed');
@@ -100,10 +83,10 @@ export class AttributeTag {
     await browser.logger.info(name, 'Selected');
   }
 
-  async editAttributeTag(name: string = null, description: any) {
+  async editAttributeTag(surfaceName: string = null, name: string = null, description: any) {
 
     // Search arrtribute.
-    await this.searchAttribute(name, description);
+    await this.searchAttribute(surfaceName, name, description);
 
     // Click Edit Icon
     await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button ');
@@ -126,33 +109,26 @@ export class AttributeTag {
     await browser.logger.info('Attribute Tag Updated');
     await console.log('Attribute Tag Is', name + ' Updated');
   }
+
   async getId() {
     return browser.getCurrentUrl().then(function (url) {
-        console.log(url);
-        let str = 'currentUrl';
-        let entityId = [];
-        entityId = url.split('/');
-        return entityId[4];
+      console.log(url);
+      let str = 'currentUrl';
+      let entityId = [];
+      entityId = url.split('/');
+      return entityId[4];
     });
   }
-  async deleteAttributeTag(name: string = null, deleteOnly: string = null) {
+
+  async deleteAttributeTag(surfaceName: string = null, name: string = null, deleteOnly: string = null) {
     // wait till the toast element flash is hidden.
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/attribute-tags');
-    // await browser.actions().mouseDown(this.attributeTagsLink).perform();
     // await elementClick(this.attributeTagsLink);
-
     await browser.logger.info('AttributeTags Menu Clicked');
+
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
-
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Surface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, name);
 
@@ -181,6 +157,17 @@ export class AttributeTag {
     await this.search.sendKeys(name + ' Updated');
     await browser.logger.info('Searched For ', name + ' Updated');
     await browser.logger.info(name + ' Updated', ' Is Not Present');
+  }
+
+  async selectSurfaceFromDropDown(surfaceName: string = null) {
+    await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
+    await elementClick(this.surfaceDropDown);
+    await browser.logger.info(surfaceName, 'Surface Drop Down Clicked');
+
+    await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
+    await elementClick(this.selectSurface(surfaceName));
+    await browser.logger.info('Surface Selcted');
+    await browser.sleep(2000);
   }
 
   async getPageTitle() {

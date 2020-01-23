@@ -10,7 +10,7 @@ describe('Login Concourse ', async function () {
   beforeEach(function () {
 
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
   });
 
   it('Step 1: open the brower and login', async function (): Promise<any> {

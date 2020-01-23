@@ -21,69 +21,65 @@ describe('Policy Group Concourse ', async function () {
     let policyGroupName = properties.policyGroupData.policyGroupName + policyPage.getRandomNum(1, 1000);
     let policyGroupDesc = properties.policyGroupData.policyGroupDesc;
     let service = properties.ServicesData.service;
+    let baseSurface = properties.SurfaceData.surfaceName;
     let services = [service];
     let policyGroupId;
 
     beforeEach(function () {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
     });
 
     it('Step 1: Creating Attribute Tag', async function (): Promise<any> {
-        await attributeTag.createAttributeTag(attributeTagName, description);
-        await attributeTag.searchAttribute(attributeTagName, 'Description');
+        await attributeTag.createAttributeTag(baseSurface, attributeTagName, description);
+        await attributeTag.searchAttribute(baseSurface, attributeTagName, 'Description');
         await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName);
     });
 
     it('Step 2: Creating Policy Group Template with  Published', async function (): Promise<any> {
-        await policyGroupTemplatePage.createPolicyGroupTemplate('PUBLISHED', policyGroupTemplateName, policyGroupTemplatedesc, 'Require Approval');
-        await policyGroupTemplatePage.searchPolicyGroupTemplate(policyGroupTemplateName);
+        await policyGroupTemplatePage.createPolicyGroupTemplate(baseSurface, 'PUBLISHED', policyGroupTemplateName, policyGroupTemplatedesc, 'Require Approval of Institutional Entities');
+        await policyGroupTemplatePage.searchPolicyGroupTemplate(baseSurface, policyGroupTemplateName);
         await ExpectHelper.isListElementExists(policyGroupTemplatePage.list, policyGroupTemplateName);
     });
 
-    it('Step 3: Creating Policy Group with  Draft', async function (): Promise<any> {
-        await policyPage.createPolicyGroup(policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services, '', 'POLICY_GROUP', 'E2E Admin');
-        await policyPage.searchPolicyGroup(policyGroupName);
+    it('Step 3: Creating Policy Group', async function (): Promise<any> {
+        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services, 'Default Surface - Root Surface Layer', 'POLICY_GROUP', 'E2E Admin');
+        policyGroupId = await getIdFromUrl();
+        await console.log('Policy Group id Is', policyGroupId);
+        await policyPage.searchPolicyGroup(baseSurface, policyGroupName);
         await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);
     });
 
-    it('Step 4: Edit Policies And Publish Policy Group For Approval', async function (): Promise<any> {
-        await policyPage.editSurfaceLayerAndPublish(policyGroupName, 'Default Surface - Root Surface Layer');
-        policyGroupId = await getIdFromUrl();
-        await console.log('Policy Group id Is', policyGroupId);
+    it('Step 4: Verify Approval Request For Publish', async function (): Promise<any> {
+        await approvals.VerifyPublishedApprovalRequest(baseSurface, policyGroupId);
+        // await ExpectHelper.isListElementExists(approvals.approvalList, policyGroupId);
     });
 
-    it('Step 5: Verify Approval Request For Publish', async function (): Promise<any> {
-        await approvals.VerifyPublishedApprovalRequest(policyGroupId);
-        await ExpectHelper.isListElementExists(approvals.approvalList, policyGroupId);
+    it('Step 5: Approve Publish Request', async function (): Promise<any> {
+        await approvals.ApprovalAction(baseSurface, policyGroupId);
     });
 
-    it('Step 6: Approve Publish Request', async function (): Promise<any> {
-        await approvals.ApprovalAction(policyGroupId);
-
+    it('Step 6: Approval Request For Delete', async function (): Promise<any> {
+        await approvals.DeleteApprovalRequest(baseSurface, policyGroupName);
     });
 
-    it('Step 7: Approval Request For Delete', async function (): Promise<any> {
-        await approvals.DeleteApprovalRequest(policyGroupName);
+    it('Step 7: Verify Approval Request For Delete', async function (): Promise<any> {
+        await approvals.VerifyDeleteApprovalRequest(baseSurface, policyGroupId);
+        // await ExpectHelper.isListElementExists(approvals.approvalList, policyGroupId);
     });
 
-    it('Step 8: Verify Approval Request For Delete', async function (): Promise<any> {
-        await approvals.VerifyDeleteApprovalRequest(policyGroupId);
-        await ExpectHelper.isListElementExists(approvals.approvalList, policyGroupId);
+    it('Step 8: Approve Delete Action', async function (): Promise<any> {
+        await approvals.ApprovalAction(baseSurface, policyGroupId);
     });
 
-    it('Step 9: Approve Publish Delete', async function (): Promise<any> {
-        await approvals.ApprovalAction(policyGroupId);
-    });
-
-    it('Step 10: Verify Policy Group Deleted Or Not', async function (): Promise<any> {
-        await policyPage.searchPolicyGroup(policyGroupName);
+    it('Step 9: Verify Policy Group Deleted Or Not', async function (): Promise<any> {
+        await policyPage.searchPolicyGroup(baseSurface, policyGroupName);
         await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupName));
     });
 
-    it('Step 11: CleanUp', async function (): Promise<any> {
-        await policyGroupTemplatePage.deletePolicyGroupTemplate(policyGroupTemplateName, 'false');
-        await attributeTag.deleteAttributeTag(attributeTagName, 'false');
+    it('Step 10: CleanUp', async function (): Promise<any> {
+        await policyGroupTemplatePage.deletePolicyGroupTemplate(baseSurface, policyGroupTemplateName, 'false');
+        await attributeTag.deleteAttributeTag(baseSurface, attributeTagName, 'false');
     });
 
     afterEach(function () {

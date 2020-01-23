@@ -44,9 +44,10 @@ export class NestedEnClaveModel {
     get editButton() { return element(by.css('button[title="Edit Asset"]')); }
     get surfaceDropDown() { return element(by.css('[data-e2e="surfaceSwitcherDropdown"]')); }
     // get surfaceDropDown() { return element(by.css('select')); }
-    selectSurface(topology: string) { return element(by.xpath(`//option[contains(.,'${topology}')]`)); }
+    selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
     get addNestedTemplate() { return element(by.xpath('//button[contains(.,"Add Nested Template")]')); }
-    chooseTemplate(num: string) { return element(by.css(`div.form-group > div:nth-of-type(${num}). form-control-file`)); }
+    // chooseTemplate(num: string) { return element(by.css(`div.form-group > div:nth-of-type(${num}). form-control-file`)); }
+    chooseTemplate(num: string) { return element(by.xpath(`//div[@class='form-group']/div[${num}]`)); }
 
     async createNestedEnclaveModel(status: any, assetName: string = null, desc: any = 'Default description', attributeTagName: string[] = null,
         fileName: string = null, nestedTemplateName: any[], owningGroup: string = null, platform: string = null) {
@@ -105,17 +106,27 @@ export class NestedEnClaveModel {
         await console.log('Cloud Formation Template Uploaded', fileName);
         await browser.sleep(2000);
 
-        for (let i = 1; i <= 4; i++) {
+        // for (let i = 1; i <= 4; i++) {
+        //     await WaitHelper.waitForElementToBePresent(this.addNestedTemplate, 5000, 'Add Nested Template ');
+        //     await browser.actions().mouseMove(this.addNestedTemplate).perform();
+        //     await elementClick(this.addNestedTemplate);
+        //     // await browser.sleep(2000);
+        //     await console.log('value', i);
+        //     await console.log('Nested Template Name', nestedTemplateName[i]);
+        //     await this.uploadNestedTemplate(nestedTemplateName[i], i);
+        //     await browser.logger.info('Clicked on AddNested Template');
+        // }
+
+        for (let i = 0; i <= 4; i++) {
             await WaitHelper.waitForElementToBePresent(this.addNestedTemplate, 5000, 'Add Nested Template ');
             await browser.actions().mouseMove(this.addNestedTemplate).perform();
             await elementClick(this.addNestedTemplate);
-            // await browser.sleep(2000);
+            await browser.sleep(2000);
             await console.log('value', i);
             await console.log('Nested Template Name', nestedTemplateName[i]);
             await this.uploadNestedTemplate(nestedTemplateName[i], i);
             await browser.logger.info('Clicked on AddNested Template');
-        }
-        // Select Status Drop Down
+         } // Select Status Drop Down
         await WaitHelper.waitForElementToBeClickable(this.statusDropdown, 2000, 'Status Drop Down ');
         await browser.actions().mouseDown(this.statusDropdown).perform();
         await elementClick(this.statusDropdown);
@@ -171,12 +182,20 @@ export class NestedEnClaveModel {
         await this.chooseFile.sendKeys(absolutePath);
     }
 
-    async uploadNestedTemplate(nestedTemplateName: any[], num: any) {
-        let fileToUpload = `C:/Users/intone-wv/Desktop/e2e/src/conf/${nestedTemplateName}`;
-        let absolutePath = path.resolve(__dirname, fileToUpload);
+    async uploadNestedTemplate(nestedTemplate: string = null, num: any = null) {
+
+        let fileToUpload = `C:/Users/intone-wv/Desktop/e2e/src/conf/${nestedTemplate}`;
+        let absolutePath = path.join(__dirname, fileToUpload);
         await PageHelper.uploadFile(this.chooseTemplate(num), absolutePath);
         await browser.logger.info('Nested Template Uploaded');
     }
+
+    // async uploadNestedTemplate(nestedTemplateName: any[], num: any) {
+    //     let fileToUpload = `C:/Users/intone-wv/Desktop/e2e/src/conf/${nestedTemplateName}`;
+    //     let absolutePath = path.resolve(__dirname, fileToUpload);
+    //     await PageHelper.uploadFile(this.chooseTemplate(num), absolutePath);
+    //     await browser.logger.info('Nested Template Uploaded');
+    // }
 
     getRandomNum = function (min, max) {
         return parseInt(Math.random() * (max - min) + min);

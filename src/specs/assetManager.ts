@@ -15,41 +15,42 @@ describe('Creating Enclave Models ', async function () {
   let attributeTagName = properties.attributeTagData.attributeName1 + attributeTag.getRandomNum(1, 1000);
   let attributeTagdescription = properties.attributeTagData.attributeDescription1;
   let attitibuteTag = [attributeTagName];
+  let baseSurface = properties.SurfaceData.surfaceName;
   let modelId;
 
   beforeEach(function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
   });
 
 
   it('Step 1: Create Attribute Tag', async function (): Promise<any> {
     // Creating Attribute Tag
-    await attributeTag.createAttributeTag(attributeTagName, attributeTagdescription);
-    await attributeTag.searchAttribute(attributeTagName, 'Description');
+    await attributeTag.createAttributeTag(baseSurface, attributeTagName, attributeTagdescription);
+    await attributeTag.searchAttribute(baseSurface, attributeTagName, 'Description');
     await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName);
   });
 
   it('Step 2: Create New Enclave Model', async function (): Promise<any> {
     // Creating Enclave Model
-    await assetsManager.createEnclaveModel('PUBLISHED', assetName, desc, attitibuteTag, 'concourseInfra.json', 'E2E Admin');
+    await assetsManager.createEnclaveModel(baseSurface, 'PUBLISHED', assetName, desc, attitibuteTag, 'concourseInfra.json', 'E2E Admin');
     modelId = await assetsManager.getId();
     await console.log('Enclave Model name is', assetName);
     await console.log('Enclave Model id is', modelId);
-    await assetsManager.searchAssetManager(assetName);
+    await assetsManager.searchAssetManager(baseSurface, assetName);
     await ExpectHelper.isListElementExists(assetsManager.assetList, assetName);
   });
 
   it('Step 3: Edit Enclave Model', async function (): Promise<any> {
     // Editing Created Enclave Model
-    await assetsManager.editEnclaveModel(assetName, desc);
-    await assetsManager.searchAssetManager(assetName + '  Updated');
+    await assetsManager.editEnclaveModel(baseSurface, assetName, desc);
+    await assetsManager.searchAssetManager(baseSurface, assetName + '  Updated');
     await ExpectHelper.isListElementExists(assetsManager.assetList, assetName);
   });
 
   it('Step 4: Delete Enclave Model', async function (): Promise<any> {
     // Deleting Enclave Model
-    await assetsManager.deleteEnclaveModel(assetName);
+    await assetsManager.deleteEnclaveModel(baseSurface, assetName);
     await ExpectHelper.expectDoesNotExists(assetsManager.enclaveModelElement(assetName));
   });
 
@@ -61,7 +62,7 @@ describe('Creating Enclave Models ', async function () {
 
   it('Step 6: Clean Up', async function (): Promise<any> {
     // Clean Up
-    await attributeTag.deleteAttributeTag(attributeTagName, 'false');
+    await attributeTag.deleteAttributeTag(baseSurface, attributeTagName, 'false');
   });
 
   afterEach(function () {

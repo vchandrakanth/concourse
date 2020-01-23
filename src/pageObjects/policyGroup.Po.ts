@@ -10,19 +10,23 @@ export class PolicyGroup {
 
   get policyGroupMenu() { return element(by.css('a[data-e2e="policyGroupMenu"]')); }
   get createNewpolicyGroup() { return element(by.css('button[data-e2e="createPolicyGroup"]')); }
-  // get enterPolicyGroupName() { return element(by.css('[data-e2e="policyGroupNameInput"]')); }
-  get enterPolicyGroupName() { return element(by.css('[data-e2e="policyGroupName"]')); }
-  // get enterPolicyGroupDescription() { return element(by.css('textarea[data-e2e="policyGroupDescriptionInput"]')); }
-  get enterPolicyGroupDescription() { return element(by.css('[data-e2e="policyGroupDescription"]')); }
+  get enterPolicyGroupName() { return element(by.css('[data-e2e="name"]')); }
+  // get enterPolicyGroupName() { return element(by.css('[data-e2e="policyGroupName"]')); }
+  get enterPolicyGroupDescription() { return element(by.css('[data-e2e="description"]')); }
+  // get enterPolicyGroupDescription() { return element(by.css('[data-e2e="policyGroupDescription"]')); }
   get enterEditPolicyGroupName() { return element(by.xpath('//input[@id="name"]')); }
   get ownigGroupDropDown() { return element(by.css('ng-select[formcontrolname="owningGroupId"]')); }
   selectOowningGroup(owningGroup: any) { return element(by.xpath(`//span[@class='ng-option-label ng-star-inserted'][contains(text(),'${owningGroup}')]`)); } // //span[.='Root Group']
   get policyGroupStatusDropdown() { return element(by.css('select[formcontrolname="status"]')); }
-  get policyGroupDraft() { return element(by.css('option[value="DRAFT"]')); }
-  get policyGroupPublished() { return element(by.css('option[value="PUBLISHED"]')); }
+  // get policyGroupDraft() { return element(by.css('option[value="DRAFT"]')); }
+  get policyGroupDraft() { return element(by.css('[for="draft"]')); }
+  // get policyGroupPublished() { return element(by.css('option[value="PUBLISHED"]')); }
+  get policyGroupPublished() { return element(by.css('[for="published"]')); }
   get policyGroupIncrementByDropdown() { return element(by.css('select[ng-reflect-name="versionBump"]')); }
-  get policyGroupMajor() { return element(by.xpath('//option[.="Major"]')); }
-  get policyGroupMinor() { return element(by.xpath('//option[.="Minor"]')); }
+  // get policyGroupMajor() { return element(by.xpath('//option[.="Major"]')); }
+  get policyGroupMajor() { return element(by.css('#major')); }
+  // get policyGroupMinor() { return element(by.xpath('//option[.="Minor"]')); }
+  get policyGroupMinor() { return element(by.css('#Minor')); }
   policyGroupTemplate(policyGroupTemplateName: any) { return element(by.xpath(`//h5[contains(.,'PGT ${policyGroupTemplateName}')]`)); }
   // get allowDisAllowDropDown() { return element(by.css('select[ng-reflect-form="[object Object]"]')); }
   get allowDisAllowDropDown() { return element(by.css('template-allow .form-control')); }
@@ -60,7 +64,7 @@ export class PolicyGroup {
   get editMinor() { return element(by.xpath('//option[contains(.,"MINOR")]')); }
   get editMajor() { return element(by.xpath('//option[contains(.,"MAJOR")]')); }
   get surfaceDropDown() { return element(by.css('select')); }
-  selectSurface(topology: string) { return element(by.xpath(`//option[contains(.,'${topology}')]`)); }
+  selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
 
   templateType;
   policyStatusName;
@@ -74,14 +78,15 @@ export class PolicyGroup {
   get chooseFile() { return element(by.css('input[type="file"]')); }
   get nextToEnclaveModelEvaluations() { return element(by.xpath('//button[.="Next"]')); }
   get nextToReviewEnclaveModel() { return element(by.xpath('//button[.="Next"]')); }
-  get submitButton() { return element(by.xpath('//button[.="Submit"]')); }
+  // get submitButton() { return element(by.xpath('//button[.="Submit"]')); }
+  get submitButton() { return element(by.css('button[type="submit"]')); }
 
   /**************************************** Update Policy Violation********************************************/
 
-  // get policyGroup() { return element(by.xpath(`//h5[.='${configProperties.policyGroupData.statusPublishedName}']`)); }
   get editButton() { return element(by.css('button[data-e2e="editPolicyGroup"]')); }
   get policiesEditButton() { return element(by.css('button[data-e2e="editPolicies"]')); }
-  deselectService(service: any) { return element(by.xpath(`//div[.="${service}"]`)); }
+  // deselectService(service: any) { return element(by.xpath(`//div[.='×${service}']`)); }
+  deselectService(service: any) { return element(by.xpath(`//div[@class='ng-value-container']/div['${service}']/span[@class='ng-value-icon left ng-star-inserted']`)); }
   get closeDropDown() { return element(by.xpath('//span[@class="ng-arrow-wrapper"]')); }
   get confirmChanges() { return element(by.css('button[data-e2e="submitPolicyGroupChanges"]')); }
   get publishButton() { return element(by.xpath('//button[.="Publish"]')); }
@@ -97,21 +102,23 @@ export class PolicyGroup {
   get selectNewAttributeTag() { return element(by.xpath(`//div[.='properties.attributeTagData.violationAttributeName']`)); }
 
   /**************************************** Update Organization For PG in Policy Violation********************************************/
-  get editOrganizationButton() { return element(by.css('button[data-e2e="editSurfaceLayers"]')); }
+  // get editOrganizationButton() { return element(by.css('button[data-e2e="editSurfaceLayers"]')); }
+  get editOrganizationButton() { return element(by.css('.btn-outline-primary[data-e2e="editSurfaceLayers"]')); }
   get updateOrganizationButton() { return element(by.xpath('//button[data-e2e="updateSurfaceLayers"]')); }
   uncheckOrganization(Org: any) { return element(by.xpath(`//label[.='${Org}']`)); }
   get deleteButton() { return element(by.css('.btn-danger')); }
   get confirmDeleteButton() { return element(by.css('[data-e2e="confirmDeleteModalBtn"]')); }
   get attributeTagDropDown() { return element(by.css('ng-select[formcontrolname="attributeTagIds"] > div > span')); }
   get search() { return element(by.css('[placeholder="Search"]')); }
+  // get policyGroupTemplateSearch() { return element(by.css('step:nth-of-type(2)>form>div:nth-of-type(1)>div:nth-of-type(1)>input')); }
   get policyGroupTemplateSearch() { return element(by.css('step:nth-of-type(2)>form>div:nth-of-type(1)>div:nth-of-type(1)>input')); }
   searchPolicyGroupName(policyGroupName: string) { return element(by.css(`h5[data-e2e='${policyGroupName}']`)); }
   get policyGroupToPublish() { return element(by.xpath('//li[@class="list-group-item ng-star-inserted active"]')); } // ul[@class="list-group ng-star-inserted"]
   get editAttributeTagDropDown() { return element(by.xpath('//div[@class="ng-value-container"]')); }
   get blankClick() { return element(by.xpath('//span[@class="ng-arrow-wrapper"]')); }
 
-  // Create the policy Group.//li[@class='list-group-item ng-star-inserted active']
-  async createPolicyGroup(policyGroupName: string = null, policyGroupDescription: any = null,
+  // Create the policy Group
+  async createPolicyGroup(surfaceName: string = null, policyGroupName: string = null, policyGroupDescription: any = null,
     owningGroup: any = null, status: any = null, policyGroupTemplateName: string = null,
     attributeTagName: string = null, service: String[], surfaceLayer: any = null, entityType: any = null, group: any = null) {
 
@@ -127,15 +134,7 @@ export class PolicyGroup {
     await browser.get(configProperties.qaUrl + '/policy-groups');
     await browser.logger.info('Clicked On Policy Group Menu');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.sleep(3000);
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     // Click on '+' Button to Create new policy
     await WaitHelper.waitForElementToBeDisplayed(this.list);
@@ -152,18 +151,9 @@ export class PolicyGroup {
     await elementSendkeys(this.enterPolicyGroupDescription, policyGroupDescription);
     await browser.logger.info('Description Entered');
 
-    // Owning Group DropDown
-    await WaitHelper.waitForElementToBePresent(this.ownigGroupDropDown, 5000, 'Ownig Group DropDown ');
-    await elementClick(this.ownigGroupDropDown);
-    await browser.logger.info('Ownig Group DropDown Selected');
-
-    await WaitHelper.waitForElementToBePresent(this.selectOowningGroup(owningGroup), 5000, 'Ownig Group ');
-    await elementClick(this.selectOowningGroup(owningGroup));
-    await browser.logger.info('Ownig Group Selected');
-
     // select status
-    await WaitHelper.waitForElementToBeClickable(this.policyGroupStatusDropdown, 2000, 'Status DropDown ');
-    await elementClick(this.policyGroupStatusDropdown);
+    // await WaitHelper.waitForElementToBeClickable(this.policyGroupStatusDropdown, 2000, 'Status DropDown ');
+    // await elementClick(this.policyGroupStatusDropdown);
 
     if (status === 'PUBLISHED') {
       await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
@@ -176,6 +166,15 @@ export class PolicyGroup {
       await browser.sleep(1000);
     }
 
+    // Owning Group DropDown
+    await WaitHelper.waitForElementToBePresent(this.ownigGroupDropDown, 5000, 'Ownig Group DropDown ');
+    await elementClick(this.ownigGroupDropDown);
+    await browser.logger.info('Ownig Group DropDown Selected');
+
+    await WaitHelper.waitForElementToBePresent(this.selectOowningGroup(owningGroup), 5000, 'Ownig Group ');
+    await elementClick(this.selectOowningGroup(owningGroup));
+    await browser.logger.info('Ownig Group Selected');
+
     // Click on next to select services
     await WaitHelper.waitForElementToBeClickable(this.nextButton, 2000, 'next ');
     await elementClick(this.nextButton);
@@ -185,6 +184,8 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeClickable(this.policyGroupTemplateSearch, 5000, 'Policy group Template List Displayed');
     await elementClick(this.policyGroupTemplateSearch);
     await elementSendkeys(this.policyGroupTemplateSearch, policyGroupTemplateName);
+    // await PageHelper.actionSendKeys(policyGroupTemplateName);
+    // await browser.actions().mouseMove(this.policyGroupTemplate(`${policyGroupTemplateName}`)).perform();
     await elementClick(this.policyGroupTemplate(`${policyGroupTemplateName}`));
     await browser.logger.info('Policy Template Selected');
 
@@ -221,7 +222,6 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeClickable(this.nextButton, 5000, 'Next ');
     await elementClick(this.nextButton);
     await browser.logger.info('Moved to Impact Assessment Page');
-    await WaitHelper.waitForElementToBeHidden(this.toast);
 
     // Click on next to Review Policy Group
     await WaitHelper.waitForElementToBeClickable(this.nextButton, 5000, 'Next ');
@@ -232,7 +232,7 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeClickable(this.policySubmit, 2000, 'Submit Button ');
     await elementClick(this.policySubmit);
     await browser.logger.info('Policy Submitted', policyGroupName);
-    await browser.sleep(5000);
+    await browser.sleep(2000);
   }
 
   getRandomNum = function (min, max) {
@@ -245,17 +245,18 @@ export class PolicyGroup {
     await elementClick(this.entityTypeDropDown);
     await browser.logger.info('Entity Type Selected');
 
-    await WaitHelper.waitForElementToBeClickable(this.selectEntityType(entityType), 2000, 'Policy Group');
+    await WaitHelper.waitForElementToBeClickable(this.selectEntityType(entityType), 2000, 'Entity Type');
     await elementClick(this.selectEntityType(entityType));
     await browser.logger.info('Model Selected');
 
-    await WaitHelper.waitForElementToBeClickable(this.eventDropDown, 2000, 'Events Drop DOwn ');
+    await WaitHelper.waitForElementToBeClickable(this.eventDropDown, 2000, 'Events Drop Down ');
     await elementClick(this.eventDropDown);
     await browser.logger.info('Events Drop Down');
 
     await WaitHelper.waitForElementToBeClickable(this.selectAllEvents, 2000, 'Select All Events ');
     await elementClick(this.selectAllEvents);
     await browser.logger.info('Events Selected');
+    // await browser.sleep(2000);
 
     await elementClick(this.eventsBlankClick);
 
@@ -291,20 +292,14 @@ export class PolicyGroup {
     }
   }
 
-  async searchPolicyGroup(policyGroupName: string = null) {
+  async searchPolicyGroup(surfaceName: string = null, policyGroupName: string = null) {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
     await browser.get(configProperties.qaUrl + '/policy-groups');
     await browser.logger.info('Clicked on Policy Group Menu');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, ' Suface Drop Down');
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -314,8 +309,14 @@ export class PolicyGroup {
     await browser.logger.info(policyGroupName, 'Selected');
   }
 
-  async editPolicyGroup(policyGroupName: string = null) {
-    await this.searchPolicyGroup(policyGroupName);
+  async editPolicyGroup(surfaceName: string = null, policyGroupName: string = null) {
+
+    await WaitHelper.waitForElementToBeHidden(this.toast);
+    // Click on Assets Manager Menu Button
+    await browser.get(configProperties.qaUrl + '/policy-groups');
+    await browser.logger.info('Clicked on Policy Group Menu');
+
+    await this.searchPolicyGroup(surfaceName, policyGroupName);
     await elementClick(this.searchPolicyGroupName(policyGroupName));
     await browser.logger.info(policyGroupName, 'Selected');
 
@@ -327,42 +328,31 @@ export class PolicyGroup {
     await browser.sleep(2000);
 
     // Edit Policy Group
-    await WaitHelper.waitForElementToBePresent(this.enterEditPolicyGroupName, 5000, 'Policy Group Name ');
-    await elementSendkeys(this.enterEditPolicyGroupName, ' Updated');
+    await WaitHelper.waitForElementToBePresent(this.enterPolicyGroupName, 5000, 'Policy Group Name ');
+    await elementSendkeys(this.enterPolicyGroupName, ' Updated');
     await browser.logger.info('Policy Group Name Entered: ', policyGroupName + ' Updated');
 
-    await WaitHelper.waitForElementToBePresent(this.editStatusDropDown, 5000, 'Status Drop Down ');
-    await elementClick(this.editStatusDropDown);
-    await browser.logger.info('Policy Group Template Status Drop DOwn ');
-
-    await WaitHelper.waitForElementToBeClickable(this.editStatusPublish, 2000, 'Published ');
-    await elementClick(this.editStatusPublish);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
-    await WaitHelper.waitForElementToBeClickable(this.editMinor, 2000, 'Minor ');
-    await elementClick(this.editMinor);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
     // Click on Submit button to submit the Policy Group
-    await WaitHelper.waitForElementToBeClickable(this.saveButton, 5000, 'Save ');
-    await elementClick(this.saveButton);
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Save ');
+    await elementClick(this.submitButton);
     await browser.logger.info('Policy Group Saved', policyGroupName);
   }
 
-  async deletePolicyGroup(policyGroupName: string = null, deleteOnly: string = null) {
+  async deletePolicyGroup(surfaceName: string = null, policyGroupName: string = null, deleteOnly: string = null) {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -376,7 +366,7 @@ export class PolicyGroup {
     await browser.sleep(2000);
 
     await WaitHelper.waitForElementToBeDisplayed(this.deleteButton, 5000, 'Delete Button');
-    // await browser.actions().mouseMove(this.deleteButton).perform();
+    await browser.actions().mouseMove(this.deleteButton).perform();
     await elementClick(this.deleteButton);
     await browser.logger.info('Delete Policy Group');
 
@@ -385,19 +375,12 @@ export class PolicyGroup {
     await browser.logger.info(policyGroupName, 'Deleted');
   }
 
-  async editPoliciesandPublish(policyGroupName: string = null, service: string = null) {
+  async editPoliciesandPublish(surfaceName: string = null, policyGroupName: string = null, service: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -430,39 +413,28 @@ export class PolicyGroup {
 
     await elementClear(this.search, policyGroupName);
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await this.search.sendKeys(policyGroupName);
     await elementClick(this.searchPolicyGroupName(policyGroupName));
-    await browser.sleep(2000);
     // await elementClick(this.policyGroupToPublish.last());
+    await browser.sleep(2000);
 
     await WaitHelper.waitForElementToBeClickable(this.publishButton, 5000, 'Publish Button ');
     await browser.actions().mouseMove(this.publishButton).perform();
     await elementClick(this.publishButton);
     await browser.logger.info('Publish Button ');
 
-    await WaitHelper.waitForElementToBePresent(this.editStatusDropDown, 5000, 'Status Drop Down ');
-    await elementClick(this.editStatusDropDown);
-    await browser.logger.info('Policy Group Template Status Drop Down ');
-
-    await WaitHelper.waitForElementToBeClickable(this.editStatusPublish, 2000, 'Published ');
-    await elementClick(this.editStatusPublish);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
-    await WaitHelper.waitForElementToBeClickable(this.editMinor, 2000, 'Minor ');
-    await elementClick(this.editMinor);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
-    await WaitHelper.waitForElementToBeClickable(this.saveButton, 2000, 'Save ');
-    await elementClick(this.saveButton);
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 2000, 'Submit ');
+    await elementClick(this.submitButton);
     await browser.logger.info('Policy Published');
     await browser.sleep(2000);
   }
@@ -507,18 +479,11 @@ export class PolicyGroup {
   }
 
   /****************************************Update Policy Violation********************************************/
-  async updatePolicyGroupWithEC2(policyGroupName: string = null, service: String[] = null) {
+  async updatePolicyGroupWithEC2(surfaceName: string = null, policyGroupName: string = null, service: String[]) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -549,9 +514,14 @@ export class PolicyGroup {
     await elementClick(this.selectAllServices);
     await browser.logger.info('Select All Services');
 
-    await WaitHelper.waitForElementToBeClickable(this.deselectService(service), 5000, 'Deselect EC2 ');
-    await elementClick(this.deselectService(service));
-    await browser.logger.info('Deselect EC2 ');
+    await WaitHelper.waitForElementToBePresent(this.deselectService(service[0]), 5000, 'DeSelect Services ');
+    await elementClick(this.deselectService(service[0]));
+    await browser.logger.info('DeSelect Services');
+
+    // await WaitHelper.waitForElementToBeClickable(this.deselectService(service), 5000, 'Deselect Service ');
+    // await browser.actions().mouseMove(this.deselectService(service)).perform();
+    // await elementClick(this.deselectService(service));
+    // await browser.logger.info('Deselect Service ');
 
     await elementClick(this.blankClick);
 
@@ -564,14 +534,7 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -580,39 +543,32 @@ export class PolicyGroup {
     await elementClick(this.searchPolicyGroupName(policyGroupName));
 
     await WaitHelper.waitForElementToBeClickable(this.publishButton, 5000, 'Publish Button ');
+    await browser.actions().mouseMove(this.publishButton).perform();
     await elementClick(this.publishButton);
     await browser.logger.info('Publish Button');
 
-    await WaitHelper.waitForElementToBePresent(this.editStatusDropDown, 5000, 'Status Drop Down ');
-    await elementClick(this.editStatusDropDown);
-    await browser.logger.info('Policy Group Template Status Drop Down ');
-
-    await WaitHelper.waitForElementToBeClickable(this.editStatusPublish, 2000, 'Published ');
-    await elementClick(this.editStatusPublish);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await browser.actions().mouseMove(this.policyGroupPublished).perform();
+    await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
-    await WaitHelper.waitForElementToBeClickable(this.editMinor, 2000, 'Minor ');
-    await elementClick(this.editMinor);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await browser.actions().mouseMove(this.policyGroupMinor).perform();
+    await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
-    await WaitHelper.waitForElementToBeClickable(this.saveButton, 2000, 'Save ');
-    await elementClick(this.saveButton);
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 2000, 'Submit ');
+    await browser.actions().mouseMove(this.submitButton).perform();
+    await elementClick(this.submitButton);
     await browser.logger.info('Policy Published');
     await browser.sleep(2000);
   }
 
-  async updatePolicyGroupWithS3(policyGroupName: string = null, service: String[] = null, policyId2: string = null) {
+  async updatePolicyGroupWithS3(surfaceName: string = null, policyGroupName: string = null, service: String[] = null, policyId2: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -634,17 +590,23 @@ export class PolicyGroup {
     await elementClick(this.selectAllow);
     await browser.logger.info('selectAllow');
 
-    await WaitHelper.waitForElementToBePresent(this.servicesDropDown, 5000, 'Select All Services ');
+    await WaitHelper.waitForElementToBePresent(this.servicesDropDown, 5000, 'Services Drop Down ');
     await elementClick(this.servicesDropDown);
     await browser.logger.info('Services Drop Down');
 
-    await WaitHelper.waitForElementToBePresent(this.selectAllServices, 5000, 'Services Drop Down ');
+    await WaitHelper.waitForElementToBePresent(this.selectAllServices, 5000, 'Select All Services');
     await elementClick(this.selectAllServices);
-    await browser.logger.info('Services Drop Down');
+    await browser.logger.info('Select All Services');
+    await browser.sleep(2000);
 
-    await WaitHelper.waitForElementToBeClickable(this.deselectService(service), 5000, 'Deselect EC2 ');
-    await elementClick(this.deselectService(service));
-    await browser.logger.info('Deselect S3 ');
+    await WaitHelper.waitForElementToBePresent(this.deselectService(service[0]), 5000, 'DeSelect Services ');
+    await elementClick(this.deselectService(service[0]));
+    await browser.logger.info('DeSelect Services');
+
+    // await WaitHelper.waitForElementToBeClickable(this.deselectService(service), 5000, 'Deselect Service ');
+    // await browser.actions().mouseMove(this.deselectService(service)).perform();
+    // await elementClick(this.deselectService(service));
+    // await browser.logger.info('Deselect Service ');
 
     await elementClick(this.blankClick);
 
@@ -657,14 +619,7 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -676,37 +631,27 @@ export class PolicyGroup {
     await elementClick(this.publishButton);
     await browser.logger.info('Publish Button');
 
-    await WaitHelper.waitForElementToBePresent(this.editStatusDropDown, 5000, 'Status Drop Down ');
-    await elementClick(this.editStatusDropDown);
-    await browser.logger.info('Policy Group Template Status Drop Down ');
-
-    await WaitHelper.waitForElementToBeClickable(this.editStatusPublish, 2000, 'Published ');
-    await elementClick(this.editStatusPublish);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await browser.actions().mouseMove(this.policyGroupPublished).perform();
+    await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
-    await WaitHelper.waitForElementToBeClickable(this.editMinor, 2000, 'Minor ');
-    await elementClick(this.editMinor);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
-    await WaitHelper.waitForElementToBeClickable(this.saveButton, 2000, 'Save ');
-    await elementClick(this.saveButton);
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 2000, 'Submit ');
+    await elementClick(this.submitButton);
     await browser.logger.info('Policy Published');
     await browser.sleep(2000);
   }
 
   /****************************************Remove Surface Layer For PolicyGroup********************************************/
-  async removeSurfaceLayerForPG(policyGroupName: string = null, SurfaceLayer: string = null) {
+  async removeSurfaceLayerForPG(surfaceName: string = null, policyGroupName: string = null, SurfaceLayer: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -716,7 +661,7 @@ export class PolicyGroup {
     await browser.logger.info(policyGroupName, 'Selected');
 
     await WaitHelper.waitForElementToBeDisplayed(this.editOrganizationButton, 5000, 'Edit Surfaces Button');
-    await browser.actions().mouseDown(this.editOrganizationButton).perform();
+    await browser.actions().mouseMove(this.editOrganizationButton).perform();
     await elementClick(this.editOrganizationButton);
     await browser.logger.info('Select Edit Surfaces Button');
 
@@ -724,7 +669,7 @@ export class PolicyGroup {
     await elementClick(this.selectSurfaceLayer(SurfaceLayer));
     await browser.logger.info('Surface Layer Selected');
 
-    await WaitHelper.waitForElementToBeClickable(this.updateSurfaceLayers, 5000, 'Confirm Button ');
+    await WaitHelper.waitForElementToBeClickable(this.updateSurfaceLayers, 5000, 'Confirm Changes ');
     await elementClick(this.updateSurfaceLayers);
     await browser.logger.info('Confirm Changes ');
     await browser.sleep(2000);
@@ -733,14 +678,7 @@ export class PolicyGroup {
 
     await elementClear(this.search, policyGroupName);
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await this.search.sendKeys(policyGroupName);
     await elementClick(this.searchPolicyGroupName(policyGroupName));
@@ -751,37 +689,27 @@ export class PolicyGroup {
     await elementClick(this.publishButton);
     await browser.logger.info('Publish Button ');
 
-    await WaitHelper.waitForElementToBePresent(this.editStatusDropDown, 5000, 'Status Drop Down ');
-    await elementClick(this.editStatusDropDown);
-    await browser.logger.info('Policy Group Template Status Drop Down ');
-
-    await WaitHelper.waitForElementToBeClickable(this.editStatusPublish, 2000, 'Published ');
-    await elementClick(this.editStatusPublish);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await browser.actions().mouseMove(this.policyGroupPublished).perform();
+    await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
-    await WaitHelper.waitForElementToBeClickable(this.editMinor, 2000, 'Minor ');
-    await elementClick(this.editMinor);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
-    await WaitHelper.waitForElementToBeClickable(this.saveButton, 2000, 'Save ');
-    await elementClick(this.saveButton);
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 2000, 'Save ');
+    await elementClick(this.submitButton);
     await browser.logger.info('Policy Published');
     await browser.sleep(3000);
   }
 
   /*************************************** Add Attribute Tag For Policy Group ******************/
-  async addAttributeTagForPG(policyGroupName: string = null, attributeTagName: string = null) {
+  async addAttributeTagForPG(surfaceName: string = null, policyGroupName: string = null, attributeTagName: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -816,16 +744,9 @@ export class PolicyGroup {
 
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
+    await this.selectSurfaceFromDropDown(surfaceName);
+
     await elementClear(this.search, policyGroupName);
-
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
 
     await this.search.sendKeys(policyGroupName);
     await elementClick(this.searchPolicyGroupName(policyGroupName));
@@ -836,20 +757,17 @@ export class PolicyGroup {
     await elementClick(this.publishButton);
     await browser.logger.info('Publish Button ');
 
-    await WaitHelper.waitForElementToBePresent(this.editStatusDropDown, 5000, 'Status Drop Down ');
-    await elementClick(this.editStatusDropDown);
-    await browser.logger.info('Policy Group Template Status Drop Down ');
-
-    await WaitHelper.waitForElementToBeClickable(this.editStatusPublish, 2000, 'Published ');
-    await elementClick(this.editStatusPublish);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await browser.actions().mouseMove(this.policyGroupPublished).perform();
+    await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
-    await WaitHelper.waitForElementToBeClickable(this.editMinor, 2000, 'Minor ');
-    await elementClick(this.editMinor);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
-    await WaitHelper.waitForElementToBeClickable(this.saveButton, 2000, 'Save ');
-    await elementClick(this.saveButton);
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 2000, 'Submit ');
+    await elementClick(this.submitButton);
     await browser.logger.info('Policy Published');
     await browser.sleep(3000);
   }
@@ -862,18 +780,11 @@ export class PolicyGroup {
   }
 
   /****************************************Update Attribute Tag For PG********************************************/
-  async removeAttributeTagForPG(policyGroupName: string = null, attributeTagId: string = null) {
+  async removeAttributeTagForPG(surfaceName: string = null, policyGroupName: string = null, attributeTagId: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -900,16 +811,8 @@ export class PolicyGroup {
 
     await browser.get(configProperties.qaUrl + '/policy-groups');
 
+    await this.selectSurfaceFromDropDown(surfaceName);
     await elementClear(this.search, policyGroupName);
-
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
 
     await this.search.sendKeys(policyGroupName);
     await elementClick(this.searchPolicyGroupName(policyGroupName));
@@ -920,38 +823,27 @@ export class PolicyGroup {
     await elementClick(this.publishButton);
     await browser.logger.info('Publish Button ');
 
-    await WaitHelper.waitForElementToBePresent(this.editStatusDropDown, 5000, 'Status Drop Down ');
-    await elementClick(this.editStatusDropDown);
-    await browser.logger.info('Policy Group Template Status Drop Down ');
-
-    await WaitHelper.waitForElementToBeClickable(this.editStatusPublish, 2000, 'Published ');
-    await elementClick(this.editStatusPublish);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
-    await WaitHelper.waitForElementToBeClickable(this.editMinor, 2000, 'Minor ');
-    await elementClick(this.editMinor);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
-    await WaitHelper.waitForElementToBeClickable(this.saveButton, 2000, 'Save ');
-    await elementClick(this.saveButton);
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 2000, 'Submit ');
+    await elementClick(this.submitButton);
     await browser.logger.info('Policy Published');
     await browser.sleep(3000);
 
   }
 
-  async editSurfaceLayerAndPublish(policyGroupName: string = null, surfacelayer: string = null) {
+  async editSurfaceLayerAndPublish(surfaceName: string = null, policyGroupName: string = null, surfacelayer: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
     await elementClick(this.policyGroupMenu);
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
 
@@ -981,14 +873,7 @@ export class PolicyGroup {
 
     await elementClear(this.search, policyGroupName);
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Suface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await this.search.sendKeys(policyGroupName);
     await elementClick(this.searchPolicyGroupName(policyGroupName));
@@ -999,16 +884,12 @@ export class PolicyGroup {
     await elementClick(this.publishButton);
     await browser.logger.info('Publish Button ');
 
-    await WaitHelper.waitForElementToBePresent(this.editStatusDropDown, 5000, 'Status Drop Down ');
-    await elementClick(this.editStatusDropDown);
-    await browser.logger.info('Policy Group Template Status Drop Down ');
-
-    await WaitHelper.waitForElementToBeClickable(this.editStatusPublish, 2000, 'Published ');
-    await elementClick(this.editStatusPublish);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
-    await WaitHelper.waitForElementToBeClickable(this.editMinor, 2000, 'Minor ');
-    await elementClick(this.editMinor);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
     await WaitHelper.waitForElementToBeClickable(this.saveButton, 2000, 'Save ');
@@ -1023,6 +904,56 @@ export class PolicyGroup {
     await this.search.sendKeys(policyGroupName + ' Updated');
     await browser.logger.info('Searched For ', policyGroupName + ' Updated');
     await browser.logger.info(policyGroupName + ' Updated', ' Is Not Present');
+  }
+
+  async selectSurfaceFromDropDown(surfaceName: string = null) {
+    await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
+    await elementClick(this.surfaceDropDown);
+    await browser.logger.info('Surface Drop Down Clicked');
+
+    await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
+    await elementClick(this.selectSurface(surfaceName));
+    await browser.logger.info('Surface Selcted');
+    await browser.sleep(2000);
+  }
+
+  async publishPolicyGroup(surfaceName: string = null, policyGroupName: string = null) {
+
+    await WaitHelper.waitForElementToBeHidden(this.toast);
+    // Click on Assets Manager Menu Button
+    await browser.get(configProperties.qaUrl + '/policy-groups');
+    await browser.logger.info('Clicked on Policy Group Menu');
+
+    await this.searchPolicyGroup(surfaceName, policyGroupName);
+    await elementClick(this.searchPolicyGroupName(policyGroupName));
+    await browser.logger.info(policyGroupName, 'Selected');
+
+    // Click Edit Icon
+    await browser.actions().mouseDown(this.editButton).perform();
+    await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button');
+    await elementClick(this.editButton);
+    await browser.logger.info('Edit Button Clicked');
+    await browser.sleep(2000);
+    await WaitHelper.waitForElementToBeClickable(this.publishButton, 5000, 'Publish Button ');
+    await browser.actions().mouseMove(this.publishButton).perform();
+    await elementClick(this.publishButton);
+    await browser.logger.info('Publish Button');
+
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await browser.actions().mouseMove(this.policyGroupPublished).perform();
+    await elementClick(this.policyGroupPublished);
+    await browser.logger.info(' Selected Published');
+
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await browser.actions().mouseMove(this.policyGroupMinor).perform();
+    await elementClick(this.policyGroupMinor);
+    await browser.logger.info(' Selected Minor');
+
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 2000, 'Submit ');
+    await browser.actions().mouseMove(this.submitButton).perform();
+    await elementClick(this.submitButton);
+    await browser.logger.info('Policy Published');
+    await browser.sleep(2000);
   }
 
   async getPageTitle() {

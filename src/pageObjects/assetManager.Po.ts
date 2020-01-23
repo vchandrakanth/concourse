@@ -13,7 +13,7 @@ export class AssetManager {
   get assetTypeDropDown() { return element(by.xpath('//*[@id="assetType"]/select')); }
   get enterAssetName() { return element(by.css('[data-e2e="inputAssetName"]')); }
   get description() { return element(by.css('[data-e2e="inputAssetDescription"]')); }
-  get ownigGroupDropDown() { return element(by.css('ng-select[data-e2e="selectAssetOwningGroup"] ')); }
+  get ownigGroupDropDown() { return element(by.css('ng-select[data-e2e="selectAssetOwningGroup"]')); }
   owningGroup(owningGroup: any) { return element(by.xpath(`//span[.='${owningGroup}']`)); }
   get attributeTagDropdown() { return element(by.css('ng-select[formcontrolname="attributeTagIds"]')); }
   attributeTag(inValue: string) { return element(by.xpath(`//span[.='${inValue}']`)); }
@@ -39,25 +39,19 @@ export class AssetManager {
   enclaveModelElement(name: any) { return element(by.xpath(`//datatable-body-cell[.='${name}']`)); }
   get editButton() { return element(by.css('[data-e2e="editAssetButton"]')); }
   get surfaceDropDown() { return element(by.css('[data-e2e="surfaceSwitcherDropdown"]')); }
-  // get surfaceDropDown() { return element(by.css('select')); }
-  selectSurface(topology: string) { return element(by.xpath(`//option[contains(.,'${topology}')]`)); }
+  selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
 
-  async createEnclaveModel(status: any, assetName: string = null, desc: any = 'Default description', attributeTagName: string[] = null,
+  async createEnclaveModel(surfaceName: string = null, status: any, assetName: string = null, desc: any = 'Default description', attributeTagName: string[] = null,
     fileName: string = null, owningGroup: string = null, platform: string = null) {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    await browser.get(configProperties.qaUrl + '/assets');
+    // await browser.get(configProperties.qaUrl + '/assets');
+    await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Assets Manager Menu Clicked');
+    await browser.sleep(2000);
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Surface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     // Click on '+' Button to Create new policy
     await WaitHelper.waitForElementToBeDisplayed(this.assetList, 5000, 'screen displayed');
@@ -153,7 +147,6 @@ export class AssetManager {
       entityId = url.split('/');
       return entityId[5];
     });
-
   }
 
   async fileUpload(fileName: string = null) {
@@ -162,7 +155,7 @@ export class AssetManager {
     await this.chooseFile.sendKeys(absolutePath);
   }
 
-  async searchAssetManager(assetName: string = null, searchOnly: string = null) {
+  async searchAssetManager(surfaceName: string = null, assetName: string = null, searchOnly: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
 
@@ -170,14 +163,7 @@ export class AssetManager {
     // await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Surface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, assetName);
 
@@ -186,9 +172,9 @@ export class AssetManager {
     await this.search.sendKeys(assetName);
   }
 
-  async editEnclaveModel(assetName: string = null, desc) {
+  async editEnclaveModel(surfaceName: string = null, assetName: string = null, desc) {
     // Search the enclaveModel
-    await this.searchAssetManager(assetName, desc);
+    await this.searchAssetManager(surfaceName, assetName, desc);
     await elementClick(this.searchEnclaveModel(assetName));
     await browser.logger.info(assetName, 'Selected');
     await browser.sleep(3000);
@@ -226,20 +212,14 @@ export class AssetManager {
     await browser.logger.info('Enclave Model Updated', assetName + '  Updated');
   }
 
-  async deleteEnclaveModel(assetName: string = null, deleteOnly: string = null) {
+  async deleteEnclaveModel(surfaceName: string = null, assetName: string = null, deleteOnly: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    await browser.get(configProperties.qaUrl + '/assets');
+    // await browser.get(configProperties.qaUrl + '/assets');
+    await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
 
-    await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-    await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
-    await browser.logger.info('Surface Drop Down Selected');
-
-    await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-    await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-    await browser.logger.info('Selected E2E Topology');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, assetName);
 
@@ -264,11 +244,71 @@ export class AssetManager {
     await browser.logger.info(assetName, 'Deleted');
   }
 
+  async updateEnclaveModel(surfaceName: string = null, assetName: string = null, attributeTagName: string = null) {
+
+    await WaitHelper.waitForElementToBeHidden(this.toast);
+    // Click on Assets Manager Menu Button
+    // await browser.get(configProperties.qaUrl + '/assets');
+    await elementClick(this.assetsManagerMenu);
+    await browser.logger.info('Clicked on Asset Manager Menu');
+    // Search the enclaveModel
+    await this.searchAssetManager(surfaceName, assetName);
+    await elementClick(this.searchEnclaveModel(assetName));
+    await browser.logger.info(assetName, 'Selected');
+    await browser.sleep(3000);
+
+    // Click Edit Icon
+    await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button ');
+    await browser.actions().mouseMove(this.editButton).perform();
+    await elementClick(this.editButton);
+    await browser.logger.info('Edit Button Clicked');
+    await WaitHelper.waitForElementToBeClickable(this.attributeTagDropdown, 2000, 'Attribute Tag Drop Down  ');
+    await elementClick(this.attributeTagDropdown);
+
+    // Select Role
+    await WaitHelper.waitForElementToBeClickable(this.attributeTag(attributeTagName), 2000, 'Attribute Tag');
+    await browser.actions().mouseDown(this.attributeTag(attributeTagName)).perform();
+    await elementClick(this.attributeTag(attributeTagName));
+    await browser.logger.info('Attribute Tag Selected');
+
+    // click on next to Template Mapping Page
+    await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Template Mapping ');
+    await browser.actions().mouseDown(this.nextButton).perform();
+    await elementClick(this.nextButton);
+    await browser.logger.info('Moved to Template Mapping Page');
+
+    // click on next to Enclave Model Evaluations Page
+    await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Enclave Model Evaluations ');
+    await elementClick(this.nextButton);
+    await browser.logger.info('Moved to Review Enclave Model Page');
+
+    // Select Review Enclave Model Page
+    await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Review Enclave Model ');
+    await elementClick(this.nextButton);
+    await browser.logger.info('Moved to Submit Page');
+
+    // Click on Submit button to submit the EnClave Model
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
+    await elementClick(this.submitButton);
+    await browser.logger.info('Enclave Model Updated', assetName);
+  }
+
   async verifyEnclaveModel(assetName: any) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await WaitHelper.waitForElementToBeDisplayed(this.assetList, 5000, 'Enclave Model List Displayed');
     await this.search.sendKeys(assetName + '  Updated');
     await browser.logger.info(assetName + '  Updated', ' Is Not Present');
+  }
+
+  async selectSurfaceFromDropDown(surfaceName: string = null) {
+    await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
+    await elementClick(this.surfaceDropDown);
+    await browser.logger.info(surfaceName, 'Surface Drop Down Clicked');
+
+    await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
+    await elementClick(this.selectSurface(surfaceName));
+    await browser.logger.info('Surface Selcted');
+    await browser.sleep(2000);
   }
 
   async getPageTitle() {

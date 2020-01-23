@@ -19,7 +19,7 @@ describe('Login Concourse ', function () {
         let EC = protractor_1.ExpectedConditions;
         beforeEach(function () {
             originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-            jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000;
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
         });
         it('Step 1: open the brower and login', function () {
             return __awaiter(this, void 0, void 0, function* () {

@@ -29,6 +29,7 @@ describe('Login Concourse ', async function () {
     let policyGroupDesc = properties.policyGroupData.violationPolicyGroupDescription;
     let assetName = properties.enclaveModelData.ec2ModelName + assetsManager.getRandomNum(1, 1000);
     let description = properties.enclaveModelData.ec2ModelDescription;
+    let baseSurface = properties.SurfaceData.surfaceName;
     let service = ['AWS::S3'];
     let service1 = ['AWS::EC2'];
     let services = ['AWS::S3', 'AWS::EC2'];
@@ -38,97 +39,102 @@ describe('Login Concourse ', async function () {
     let policyId;
     let latestPolicyId;
     let attributeTagId;
+    let riskId;
 
     beforeEach(function () {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
     });
 
     it('Step 1: Create Attribute Tag', async function (): Promise<any> {
-        await attributeTag.createAttributeTag(attributeTagName, attributeTagDesc);
-        await attributeTag.searchAttribute(attributeTagName, 'description');
+        await attributeTag.createAttributeTag(baseSurface, attributeTagName, attributeTagDesc);
+        await attributeTag.searchAttribute(baseSurface, attributeTagName, 'description');
         await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName);
         await console.log('Attribute Tag name is', attributeTagName);
     });
 
     it('Step 2: Create Another Attribute Tag', async function (): Promise<any> {
-        await attributeTag.createAttributeTag(attributeTagName1, attributeTagDesc1);
+        await attributeTag.createAttributeTag(baseSurface, attributeTagName1, attributeTagDesc1);
         attributeTagId = await attributeTag.getId();
         await console.log('AttributeTag Name is', attributeTagName1);
         await console.log('AttributeTag id is', attributeTagId);
-        await attributeTag.searchAttribute(attributeTagName1, 'description');
+        await attributeTag.searchAttribute(baseSurface, attributeTagName1, 'description');
         await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName1);
         await console.log('Attribute Tag name is', attributeTagName1);
     });
 
     it('Step 3: Create Enclave Model With First Attribute Tag', async function (): Promise<any> {
-        await assetsManager.createEnclaveModel('PUBLISHED', assetName, description, attributeTags, 'concourseInfra.json', 'E2E Admin');
+        await assetsManager.createEnclaveModel(baseSurface, 'PUBLISHED', assetName, description, attributeTags, 'concourseInfra.json', 'E2E Admin');
         modelId = await assetsManager.getId();
         await console.log('Enclave Model id is', modelId);
         await console.log('Enclave Model name is', assetName);
-        await assetsManager.searchAssetManager(assetName);
+        await assetsManager.searchAssetManager(baseSurface, assetName);
         await ExpectHelper.isListElementExists(assetsManager.assetList, assetName);
     });
 
     it('Step 4: Create Policy Group Template with  Published', async function (): Promise<any> {
-        await policyGroupTemplatePage.createPolicyGroupTemplate('PUBLISHED', policyGroupTemplateName, policyGroupTemplateDesc, 'Allowed AWS Products in Assets');
-        await policyGroupTemplatePage.searchPolicyGroupTemplate(policyGroupTemplateName);
+        await policyGroupTemplatePage.createPolicyGroupTemplate(baseSurface, 'PUBLISHED', policyGroupTemplateName, policyGroupTemplateDesc, 'Allowed AWS Products in Stacks');
+        await policyGroupTemplatePage.searchPolicyGroupTemplate(baseSurface, policyGroupTemplateName);
         await ExpectHelper.isListElementExists(policyGroupTemplatePage.list, policyGroupTemplateName);
     });
 
     it('Step 5: Create Policy Group With Second Attribute Tag', async function (): Promise<any> {
-        await policyPage.createPolicyGroup(policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, services);
+        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, services);
         policyId = await getIdFromUrl();
         await console.log('Policy Group  id is', policyId);
-        await policyPage.searchPolicyGroup(policyGroupName);
+        await policyPage.searchPolicyGroup(baseSurface, policyGroupName);
         await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);
     });
 
     it('Step 6: Add First Attribute Tag To Policy Group', async function (): Promise<any> {
-        await policyPage.addAttributeTagForPG(policyGroupName, attributeTagName);
+        await policyPage.addAttributeTagForPG(baseSurface, policyGroupName, attributeTagName);
         updatedPolicyID = await getIdFromUrl();
         await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);
     });
 
     it('Step 7: Verifying Risk ', async function (): Promise<any> {
         await risk.openRisk(modelId);
-        await ExpectHelper.isListElementExists(risk.risklist, modelId);
         await console.log('Risk Happened For', modelId);
+        riskId = await risk.getId();
+        await console.log('Violation id is', riskId);
+        await ExpectHelper.isListElementExists(risk.risklist, riskId);
     });
 
     it('Step 8: Remove Existing Attribute Tag(Second One) ', async function (): Promise<any> {
-        await policyPage.removeAttributeTagForPG(policyGroupName, attributeTagId);
+        await policyPage.removeAttributeTagForPG(baseSurface, policyGroupName, attributeTagId);
         latestPolicyId = await getIdFromUrl();
         await console.log('Policy Group  id Is', latestPolicyId);
     });
 
     it('Step 9: Verifying Risk ', async function (): Promise<any> {
         await risk.openRisk(modelId);
-        await ExpectHelper.isListElementExists(risk.risklist, modelId);
         await console.log('Still Risk Showing For', modelId);
+        riskId = await risk.getId();
+        await console.log('Violation id is', riskId);
+        await ExpectHelper.isListElementExists(risk.risklist, riskId);
     });
 
     it('Step 10: Delete Policy Group', async function (): Promise<any> {
-        await policyPage.deletePolicyGroup(policyGroupName, 'false');
-        await policyPage.searchPolicyGroup(policyGroupName);
+        await policyPage.deletePolicyGroup(baseSurface, policyGroupName, 'false');
+        await policyPage.searchPolicyGroup(baseSurface, policyGroupName);
         await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupName));
         await console.log(policyGroupName, 'Deleted');
     });
 
     it('Step 11: Verifying Risk After Deletion Of Policy Group', async function (): Promise<any> {
-        await risk.openRisk(modelId);
-        await ExpectHelper.expectDoesNotExists(risk.riskElement(modelId));
+        await risk.verifyRisk(riskId);
+        await ExpectHelper.expectDoesNotExists(risk.riskElement(riskId));
         await console.log('Risk Removed For', modelId);
     });
 
     it('Step 12: CleanUp ', async function (): Promise<any> {
-        await policyGroupTemplatePage.deletePolicyGroupTemplate(policyGroupTemplateName, 'false');
+        await policyGroupTemplatePage.deletePolicyGroupTemplate(baseSurface, policyGroupTemplateName, 'false');
         await console.log(policyGroupTemplateName, 'Deleted');
-        await assetsManager.deleteEnclaveModel(assetName, 'false');
+        await assetsManager.deleteEnclaveModel(baseSurface, assetName, 'false');
         await console.log(assetName, 'Deleted');
-        await attributeTag.deleteAttributeTag(attributeTagName, 'false');
+        await attributeTag.deleteAttributeTag(baseSurface, attributeTagName, 'false');
         await console.log(attributeTagName, 'Deleted');
-        await attributeTag.deleteAttributeTag(attributeTagName1, 'false');
+        await attributeTag.deleteAttributeTag(baseSurface, attributeTagName1, 'false');
         await console.log(attributeTagName1, 'Deleted');
     });
 

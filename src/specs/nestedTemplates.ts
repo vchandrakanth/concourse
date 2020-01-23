@@ -16,9 +16,10 @@ describe('Creaing Encalve Model With Nested Templates ', async function () {
   let desc = properties.enclaveModelData.modelDescription;
   let attributeTagName = properties.attributeTagData.attributeName1 + attributeTag.getRandomNum(1, 1000);
   let attributeTagdescription = properties.attributeTagData.attributeDescription1;
+  let baseSurface = properties.SurfaceData.surfaceName;
   let attitibuteTag = [attributeTagName];
   let modelId;
-  let nestedTemplateName = [, 'AWSAccountVPCLzKmsKey.json', 'AWSAccountVPCLzRole.json', 'AWSAccountVPCLzSecurityGroup.json', 'LandingZoneS3BucketCore.json'];
+  let nestedTemplateName = ['AWSAccountVPCLzKmsKey.json', 'AWSAccountVPCLzRole.json', 'AWSAccountVPCLzSecurityGroup.json', 'LandingZoneS3BucketCore.json'];
 
   beforeEach(function () {
     originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -27,8 +28,8 @@ describe('Creaing Encalve Model With Nested Templates ', async function () {
 
   it('Step 1: Create Attribute Tag', async function (): Promise<any> {
     // Creating Attribute Tag
-    await attributeTag.createAttributeTag(attributeTagName, attributeTagdescription);
-    await attributeTag.searchAttribute(attributeTagName, 'Description');
+    await attributeTag.createAttributeTag(baseSurface, attributeTagName, attributeTagdescription);
+    await attributeTag.searchAttribute(baseSurface, attributeTagName, 'Description');
     await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName);
   });
 
@@ -44,7 +45,7 @@ describe('Creaing Encalve Model With Nested Templates ', async function () {
   it('Step 3: Edit Enclave Model', async function (): Promise<any> {
     // Editing Created Enclave Model
     await nestedEnClaveModel.editNestedEnclaveModel(assetName, desc);
-    await assetsManager.searchAssetManager(assetName + '  Updated');
+    await assetsManager.searchAssetManager(baseSurface, assetName + '  Updated');
     await ExpectHelper.isListElementExists(assetsManager.assetList, modelId);
   });
 
@@ -63,7 +64,7 @@ describe('Creaing Encalve Model With Nested Templates ', async function () {
 
   it('Step 6: Clean Up', async function (): Promise<any> {
     // Clean Up
-    await attributeTag.deleteAttributeTag(attributeTagName, 'false');
+    await attributeTag.deleteAttributeTag(baseSurface, attributeTagName, 'false');
   });
 
   afterEach(function () {

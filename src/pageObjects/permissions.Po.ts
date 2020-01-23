@@ -10,7 +10,7 @@ let properties = require('../conf/properties');
 export class VerifyUserPermissions {
     createButton(verifyText: any) { return element(by.xpath(`//button[contains(text(),'${verifyText}')]`)); }
     get surfaceDropDown() { return element(by.css('select')); }
-    selectSurface(topology: string) { return element(by.xpath(`//option[contains(.,'${topology}')]`)); }
+    selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
     get toast() { return $('#toast-container'); }
     get search() { return element(by.css('[placeholder="Search"]')); }
     listItem(Item: any) { return element(by.xpath(`//h5[.='${Item}']`)); }

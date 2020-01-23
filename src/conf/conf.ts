@@ -45,17 +45,19 @@ export let config: Config = {
             args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
             // '--headless',
         },
-        specs: [
-        '../specs/attributeTags.js', '../specs/assetManager.js',
-        '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
-        '../specs/approvals.js', '../specs/group.js',
-        '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
-        '../specs/modelViolation.js', '../specs/policyViolations.js',
-        '../specs/addAttributeTagForPG.js', '../specs/UpdatePolicyViolation.js', '../specs/removeAttributeTagForPG.js']
-        // '../specs/removeAttributeTagForPG.js', '../specs/removeOrganizationForPG.js',
-        // '../specs/attributeTags.js', '../specs/assetManager.js',
+        specs: ['../specs/UpdatePolicyViolation.js']
+        // ['../specs/attributeTags.js', '../specs/assetManager.js',
         // '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
         // '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
+        // '../specs/approvals.js', '../specs/group.js', '../specs/surfaces.js',
+        // '../specs/modelViolation.js', '../specs/policyViolations.js',
+        // '../specs/addAttributeTagForPG.js', '../specs/UpdatePolicyViolation.js',
+        // '../specs/removeAttributeTagForPG.js', '../specs/cloudRoles.js',
+        // '../specs/removingBusinessAuthorRoleAssignment.js', '../specs/removingControlAuthorRoleAssignment.js']
+        // '../specs/attributeTags.js', '../specs/assetManager.js', '../specs/cloudRoles.js',
+        // '../specs/removingBusinessAuthorRoleAssignment.js', '../specs/removingControlAuthorRoleAssignment.js'
+        // '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js', '../specs/manageInstitutionData.js'
+        // '../specs/policyGroupTemplate.js', '../specs/policyGroup.js', '../specs/surfaces.js'
         // '../specs/modelViolation.js', '../specs/policyViolations.js', '../specs/removeAttributeTagForPG.js'
         // '../specs/attributeTags.js', '../specs/assetManager.js', '../specs/permissions.js'
         //  '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
@@ -121,7 +123,7 @@ export let config: Config = {
             return browser.driver.getCurrentUrl().then(function (url) {
                 return /dashboard/.test(url);
             });
-        }, 10000);
+        }, 15000);
         return global.browser.getProcessedConfig().then(function (config) {
             // it is ok to be empty
         });

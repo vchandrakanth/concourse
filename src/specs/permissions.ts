@@ -18,15 +18,9 @@ describe('Verifying Permissions Concourse ', async function () {
     let verifyUserPermissions = new VerifyUserPermissions();
     let properties = require('../conf/properties');
     let surfaceName = properties.SurfaceData.surfaceName;
-    let groupName = properties.groupData.groupName + group.getRandomNum(1, 1000);
-    let groupDescription = properties.groupData.groupDescription;
-    let user1 = properties.UserPermissionData.user1;
-    let user2 = properties.UserPermissionData.user2;
-    let user3 = properties.UserPermissionData.user3;
-    let user4 = properties.UserPermissionData.user4;
-    let user5 = properties.UserPermissionData.user5;
+    // let groupName = properties.groupData.groupName + group.getRandomNum(1, 1000);
+    let groupName = 'User Permissions';
     let e2eTestUser = properties.UserPermissionData.e2eTestUser;
-    let e2euser1 = properties.UserPermissionData.e2euser1;
     let password = properties.UserPermissionData.password;
     let username = properties.loginData.username;
     let module1 = properties.UserPermissionData.module1;
@@ -38,16 +32,16 @@ describe('Verifying Permissions Concourse ', async function () {
     let module7 = properties.UserPermissionData.module7;
     let module8 = properties.UserPermissionData.module8;
     let role1 = ['Business Author'];
-    let responsibilities1 = ['Manage Attribute Tags', 'Manage Models'];
+    let responsibilities1 = ['Manage Attribute Tags', 'Manage Models', 'Manage Baselines', 'View Reports'];
     let organization = ['Default Surface - Root Surface Layer'];
     let role2 = ['Control Author'];
-    let responsibilities2 = ['Manage Policy Group Templates', 'Manage Policy Groups'];
+    let responsibilities2 = ['Manage Policy Group Templates', 'Manage Policy Groups', 'View Reports'];
     let role3 = ['Business Operator'];
     let responsibilities3 = ['Manage Deployments', 'View Reports'];
     let role4 = ['Institution Admin'];
-    let responsibilities4 = ['Manage Institutions', 'Create Surfaces', 'Manage Cloud Roles'];
+    let responsibilities4 = ['Manage Institutions', 'Manage Surfaces', 'Manage Cloud Roles'];
     let role5 = ['Identity Admin'];
-    let responsibilities5 = ['Manage Groups', 'Manage Users'];
+    let responsibilities5 = ['Manage Groups', 'Manage Users', 'View Reports'];
     let AttributeTagName = 'User Permissions';
     let AssetName = 'User Permissions';
     let PolicyGroupTemplateName = 'User Permissions';
@@ -56,7 +50,7 @@ describe('Verifying Permissions Concourse ', async function () {
 
     beforeEach(function () {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 400000;
     });
 
     it('Step 1: Verify Business Author Permissions For User1', async function (): Promise<any> {

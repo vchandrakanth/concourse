@@ -17,6 +17,7 @@ export class Group {
     get enterGroupDescription() { return element(by.css('[data-e2e="inputGroupDescription"]')); }
     get createButton() { return element(by.css('[data-e2e="createGroupSaveBtn"]')); }
     get search() { return element(by.css('[placeholder="Search"]')); }
+    get inputUserName() { return element(by.css('[data-e2e="inputUsername"]')); }
     searchGroup(name: string) { return element(by.xpath(`//h5[.='${name}']`)); }
     get usersTab() { return element(by.css('div[data-e2e="tabUsers"]')); }
     get userDropDown() { return element(by.xpath('//div[.="Select User"]')); }
@@ -69,6 +70,7 @@ export class Group {
     get surfaceLayerDropDown() { return element(by.css('tab.cloud-role-assignments [formcontrolname="surfaceLayersAppliedTo"] > div > span')); }
     get selectSurfaceLayer() { return element(by.xpath('//span[@class="ng-option-label ng-star-inserted"]')); }
     get submitCloudRoleButton() { return element(by.css('tab.cloud-role-assignments .btn')); }
+    // selectCloudRoleToDelete(cloudRole: any) { return element(by.xpath(`//li[contains(.,'${cloudRole}')]//button[@data-e2e='deleteCloudRoleAssignment']`)); }
     selectCloudRoleToDelete(cloudRole: any) { return element(by.xpath(`//li[contains(.,'${cloudRole}')]//button[@data-e2e='deleteCloudRoleAssignment']`)); }
     get alertWindow() { return element(by.css('div.modal-body .alert-container')); }
     get alertMessage() { return element(by.css('//div[@class="modal-body"]//div[@class="alert alert-danger alert-dismissible ng-star-inserted"]')); }
@@ -214,10 +216,11 @@ export class Group {
 
         // Click User Drop Down
         await WaitHelper.waitForElementToBeClickable(this.userDropDown, 2000, 'Users Drop Down ');
+        await browser.actions().mouseMove(this.userDropDown).perform();
         await elementClick(this.userDropDown);
         await browser.logger.info('User Drop Down Selected');
 
-        // // Select User
+        // Select User
         await WaitHelper.waitForElementToBeClickable(this.selectUser(user), 2000, 'ramakrishna+e2e@concourselabs.com');
         await browser.actions().mouseMove(this.selectUser(user)).perform();
         await elementClick(this.selectUser(user));
@@ -252,7 +255,7 @@ export class Group {
 
     async deleteUserFromGroup(user: string = null) {
         await WaitHelper.waitForElementToBeClickable(this.selectUserToDelete(user), 5000, 'Delete User');
-        await browser.actions().mouseDown(this.selectUserToDelete(user)).perform();
+        await browser.actions().mouseMove(this.selectUserToDelete(user)).perform();
         await elementClick(this.selectUserToDelete(user));
 
         await WaitHelper.waitForElementToBeClickable(this.deleteUser, 5000, 'Delete User');
@@ -273,6 +276,7 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click On Groups Menu
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
+        await browser.actions().mouseMove(this.groupsMenu).perform();
         await elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
@@ -286,10 +290,11 @@ export class Group {
         for (let roleName of role) {
             console.log('value', roleName);
 
-            await WaitHelper.waitForElementToBeClickable(this.rolesDropDown, 2000, 'Roles Drop Down ');
+            await WaitHelper.waitForElementToBeClickable(this.rolesDropDown, 5000, 'Roles Drop Down ');
             await elementClick(this.rolesDropDown);
+            await browser.sleep(3000);
             // Select Role
-            await WaitHelper.waitForElementToBeClickable(this.selectRole(roleName), 3000, 'Roles');
+            await WaitHelper.waitForElementToBeClickable(this.selectRole(roleName), 5000, 'Roles');
             await browser.actions().mouseMove(this.selectRole(roleName)).perform();
             await elementClick(this.selectRole(roleName));
             await browser.logger.info('Role Selected');
@@ -303,17 +308,17 @@ export class Group {
 
             // Select Role
             await WaitHelper.waitForElementToBeClickable(this.selectResponsibility(responsibilityName), 3000, 'Responsibilities ');
-            await browser.sleep(2000);
+            await browser.sleep(1000);
             await browser.actions().mouseDown(this.selectResponsibility(responsibilityName)).perform();
             await elementClick(this.selectResponsibility(responsibilityName));
             await browser.logger.info('Responsibilities Selected');
-            await browser.sleep(2000);
+            await browser.sleep(1000);
         }
 
         if (organization) {
             await this.addOrganization(organization);
             await browser.logger.info(organization, 'Selected');
-            await browser.sleep(2000);
+            await browser.sleep(1000);
         }
 
         // Click On Submit Button
@@ -321,7 +326,7 @@ export class Group {
         await elementClick(this.submitButton);
         await browser.logger.info('Group Updated');
         await browser.logger.info(role, 'Role Added To The Group');
-        await browser.sleep(2000);
+        await browser.sleep(1000);
     }
 
     async removeRolesFromGroup(surfaceName: string = null, groupName: string = null, roles: string[]) {
@@ -354,7 +359,7 @@ export class Group {
         await browser.actions().mouseDown(this.confirmDeleteButton).perform();
         await elementClick(this.confirmDeleteButton);
         await browser.logger.info(roles, 'Role Assignment Deleted');
-        await browser.sleep(3000);
+        await browser.sleep(2000);
     }
 
     async assignCloudRoleForGroup(surfaceName: string = null, groupName: string = null, count: any = null, cloudRoles: string[]) {
@@ -377,7 +382,8 @@ export class Group {
 
             await WaitHelper.waitForElementToBeClickable(this.cloudRoleDropDown, 2000, 'Cloud Roles Drop Down ');
             await elementClick(this.cloudRoleDropDown);
-            // Select Role
+            await browser.sleep(2000);
+            // Select Cloud Role
             await WaitHelper.waitForElementToBeClickable(this.selectCloudRole(cloudRoleName), 3000, 'Cloud Roles');
             await browser.actions().mouseMove(this.selectCloudRole(cloudRoleName)).perform();
             await elementClick(this.selectCloudRole(cloudRoleName));
@@ -416,15 +422,18 @@ export class Group {
         // Select Role To Delete
         for (let cloudRoleName of cloudRoles) {
             console.log('value', cloudRoleName);
-            await WaitHelper.waitForElementToBeClickable(this.selectCloudRoleToDelete(cloudRoleName), 2000, 'Cloud Role Selected ');
+            await WaitHelper.waitForElementToBeClickable(this.selectCloudRoleToDelete(cloudRoleName), 5000, 'Cloud Role Selected ');
             await browser.actions().mouseMove(this.selectCloudRoleToDelete(cloudRoleName)).perform();
+            await browser.sleep(2000);
             await elementClick(this.selectCloudRoleToDelete(cloudRoleName));
             await browser.logger.info('Selected Cloud Roles Assignment');
+            await browser.sleep(2000);
         }
 
         // Click On Roles Assignment Tab
         await WaitHelper.waitForElementToBeClickable(this.confirmDeleteButton, 2000, 'Confirm Delete Cloud Roles Assignment ');
         await browser.actions().mouseDown(this.confirmDeleteButton).perform();
+        await browser.sleep(2000);
         await elementClick(this.confirmDeleteButton);
         await browser.logger.info(cloudRoles, 'Cloud Role Assignment Deleted');
         await browser.sleep(3000);
@@ -480,6 +489,8 @@ export class Group {
     async reLogin(user: any, user1: any, pass: any) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         await this.logOut(user);
+        await elementClear(this.inputUserName, user);
+        await browser.sleep(2000);
         await loginpage.login(user1, pass);
         await WaitHelper.waitForElementToBeHidden(this.toast);
     }
@@ -493,7 +504,7 @@ export class Group {
         await elementClick(this.selectSurface(surfaceName));
         await browser.logger.info('Surface Selcted');
         await browser.sleep(2000);
-      }
+    }
 
     getRandomNum = function (min, max) {
         return parseInt(Math.random() * (max - min) + min);

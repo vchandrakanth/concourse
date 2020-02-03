@@ -35,7 +35,7 @@ describe('Creaing Logical Deployment Violations', async function () {
   let services = ['AWS::EC2'];
   let modelid;
   let riskId;
-  let deploymentId;
+  let logicalDeploymentId;
   let policyId;
 
 
@@ -82,19 +82,17 @@ describe('Creaing Logical Deployment Violations', async function () {
     // Creating Logical Deployement
     await logicalDeployment.newlogicalDeployment(baseSurface, assetName, deploymentName, stackName, 'us-east-1', 'Default Surface - Root Surface Layer', 'Account-123456987456');
     await logicalDeployment.searchLogicalDeployment(baseSurface, deploymentName);
-    await ExpectHelper.isListElementExists(logicalDeployment.deploymentList, deploymentName);
-    deploymentId = await logicalDeployment.getId();
+    await ExpectHelper.isListElementExists(logicalDeployment.logicalDeploymentList, deploymentName);
+    logicalDeploymentId = await logicalDeployment.getId();
     await console.log('Logical Deployment Name is', deploymentName);
-    await console.log('Logical Deployment id is', deploymentId);
+    await console.log('Logical Deployment id is', logicalDeploymentId);
   });
 
   it('Step 6: Verify Risk', async function (): Promise<any> {
     // Verifying Risk For Deployement
-    await risk.openRisk(deploymentId);
-    ExpectHelper.isListElementExists(risk.deploymentRiskDetail, deploymentId);
-    await console.log('Risk Happened For', deploymentId);
-    // riskId = await risk.getId();
-    // await console.log('Violation id is', riskId);
+    await risk.openRisk(logicalDeploymentId);
+    ExpectHelper.isListElementExists(risk.deploymentRiskDetail, logicalDeploymentId);
+    await console.log('Risk Happened For', logicalDeploymentId);
   });
 
   it('Step 7: Delete Logical Deployment', async function (): Promise<any> {
@@ -105,9 +103,9 @@ describe('Creaing Logical Deployment Violations', async function () {
 
   it('Step 8: Re verifying Risk', async function (): Promise<any> {
     // Reverifying Risk For Deployement
-    await risk.verifyRisk(deploymentId);
-    await ExpectHelper.expectDoesNotExists(risk.riskElement(deploymentId));
-    await console.log('Risk Removed For', deploymentId);
+    await risk.verifyRisk(logicalDeploymentId);
+    await ExpectHelper.expectDoesNotExists(risk.riskElement(logicalDeploymentId));
+    await console.log('Risk Removed For', logicalDeploymentId);
   });
 
   it('Step 9: Clean Up', async function (): Promise<any> {

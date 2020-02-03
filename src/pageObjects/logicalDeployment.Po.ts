@@ -28,7 +28,7 @@ export class LogicalDeployment {
     get list() { return element(by.css('.datatable-body')); }
     get scrollBar() { return element(by.css('.bootstrap')); }
     searchDeployment(deploymentId: any) { return element(by.xpath(`//datatable-body-cell[.='${deploymentId}']`)); }
-    deployment(deploymentId: any) { return element(by.css(`span[title='${deploymentId}']`)); }
+    logicalDeployment(deploymentId: any) { return element(by.css(`span[title='${deploymentId}']`)); }
     get deleteButton() { return element(by.css('.btn-danger')); }
     get confirmDeleteButton() { return element(by.css('.delete')); }
     get logicalDeployementMenu() { return element(by.xpath('//a[contains(.,"Logical Deployments")]')); }
@@ -42,7 +42,7 @@ export class LogicalDeployment {
     get versionDropDown() { return element(by.css('[placeholder="Select a different version"]')); }
     selectVersion(assetName: any, version: any) { return element(by.xpath(`//span[contains(.,'${(assetName) + (version)}')]`)); }
     get nextButton() { return element(by.xpath('//button[.="Next"]')); }
-    get deploymentList() { return element(by.css('.app-container')); }
+    get logicalDeploymentList() { return element(by.css('.app-container')); }
 
     async newlogicalDeployment(surfaceName: string = null, assetName: string = null,
         deploymentName: string = null, stackName: string = null, region: string = null,
@@ -153,7 +153,7 @@ export class LogicalDeployment {
         await elementClear(this.search, deploymentName);
 
         // Select Created Deployment
-        await WaitHelper.waitForElementToBeDisplayed(this.deploymentList, 5000, 'Logical Deployments List Displayed');
+        await WaitHelper.waitForElementToBeDisplayed(this.logicalDeploymentList, 5000, 'Logical Deployments List Displayed');
         await this.search.sendKeys(deploymentName);
         await elementClick(this.logicalDeployementElement(deploymentName));
         await browser.logger.info(deploymentName, 'Selected');
@@ -170,7 +170,7 @@ export class LogicalDeployment {
         await elementClear(this.search, deploymentName);
 
         // Select Created Deployment
-        await WaitHelper.waitForElementToBeDisplayed(this.deploymentList, 5000, 'Logical Deployments List Displayed');
+        await WaitHelper.waitForElementToBeDisplayed(this.logicalDeploymentList, 5000, 'Logical Deployments List Displayed');
         await this.search.sendKeys(deploymentName);
         await elementClick(this.logicalDeployementElement(deploymentName));
         await browser.logger.info(deploymentName, 'Selected');
@@ -231,6 +231,17 @@ export class LogicalDeployment {
         await WaitHelper.waitForElementToBeClickable(this.confirmDeleteButton, 2000, 'Confirm Delete');
         await elementClick(this.confirmDeleteButton);
         await browser.logger.info('Logical Deployment is deleted');
+    }
+
+    async verifyLogicalDeployment(surfaceName: string = null, deploymentName: string = null) {
+        await WaitHelper.waitForElementToBeHidden(this.toast);
+        // Click on LogicalDeployment Menu Button
+        await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
+        await browser.logger.info('Clicked on Logical Deployment Menu');
+
+        await this.selectSurfaceFromDropDown(surfaceName);
+
+        await elementClear(this.search, deploymentName);
     }
 
     async selectSurfaceFromDropDown(surfaceName: string = null) {

@@ -35,7 +35,8 @@ export class AttributeTag {
     await elementClick(this.attributeTagsLink);
 
     await browser.logger.info('AttributeTags Menu Clicked');
-    await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
+    // await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
+    // await WaitHelper.waitAny(5000, this.list);
 
     await this.selectSurfaceFromDropDown(surfaceName);
     await browser.logger.info('Selected E2E Surface');
@@ -70,8 +71,8 @@ export class AttributeTag {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
-    await browser.get(configProperties.qaUrl + '/attribute-tags');
-    // await elementClick(this.attributeTagsLink);
+    // await browser.get(configProperties.qaUrl + '/attribute-tags');
+    await elementClick(this.attributeTagsLink);
     await browser.logger.info('AttributeTags Menu Clicked');
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -123,8 +124,8 @@ export class AttributeTag {
   async deleteAttributeTag(surfaceName: string = null, name: string = null, deleteOnly: string = null) {
     // wait till the toast element flash is hidden.
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await browser.get(configProperties.qaUrl + '/attribute-tags');
-    // await elementClick(this.attributeTagsLink);
+    // await browser.get(configProperties.qaUrl + '/attribute-tags');
+    await elementClick(this.attributeTagsLink);
     await browser.logger.info('AttributeTags Menu Clicked');
 
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');

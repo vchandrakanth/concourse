@@ -1,21 +1,18 @@
 module.exports = {
 
-  // qaUrl: 'https://adhoc.concourse.company/',
-  qaUrl: 'https://beta.concourse.company/',
+  qaUrl: 'https://adhoc.concourse.company/',
+  // qaUrl: 'https://beta.concourse.company/',
   // qaUrl: 'https://prod.concourselabs.io/',
   seleniumServerUrl: 'http://localhost:4444/wd/hub',
 
   // Login Data
   loginData: {
-
-    // username: 'admin@concoursehub.com',
-    // username: 'ramakrishna+e2etest@concourselabs.com',
-    username: 'ramakrishna+e2e@concourselabs.com',
-    // username: 'ramakrishna+e2e@concourselabs.com',
-    password: 'Concourse1!',
-    // password: 'password',
-    // username: 'jian+e2e@concourselabs.com',
-    // password: 'E2etest1!',
+    adhocUserName: 'ramakrishna+e2etest@concourselabs.com',
+    adhocPassWord: 'Concourse1!',
+    betaUserName: 'ramakrishna+e2e@concourselabs.com',
+    betaPassWord: 'Concourse1!',
+    prodUserName: 'jian+e2e@concourselabs.com',
+    prodPassWord: 'E2etest1!',
   },
   // policyGroupTemplate Data
   policyGroupTemplateData:
@@ -101,10 +98,11 @@ module.exports = {
   {
     groupName: 'E2E Test Group',
     groupDescription: 'Description Of E2E Test Group',
-    // user: 'e2e Test <ramakrishna+e2etest@concourselabs.com>'
-    user: 'e2e Test <ramakrishna+e2e@concourselabs.com>',
+    user: 'e2e Test <ramakrishna+e2etest@concourselabs.com>'
+    // user: 'e2e Test <ramakrishna+e2e@concourselabs.com>',
     // user: 'Prod E2E Test <ramakrishna+e2e@concourselabs.com>'
     // user: 'e2e Test <ramakrishna+e2etestuser@concourselabs.com>'
+    // user: 'E2E test <jian+e2e@concourselabs.com>'
   },
   // Control Topology Data
   ControlTopologyData:
@@ -168,8 +166,9 @@ module.exports = {
     module6: 'institutions/data',
     module7: 'user-management/groups',
     module8: 'user-management/users',
-    // e2eTestUser: 'ramakrishna+e2e5@concourselabs.com',
-    e2eTestUser: 'ramakrishna+e2etestuser@concourselabs.com'
+    e2eTestUser: 'ramakrishna+e2euser@concourselabs.com',
+    // e2eTestUser: 'ramakrishna+e2etestuser@concourselabs.com'
+    // e2eTestUser: 'ramakrishna+e2eUser@concourselabs.com'
   },
 
   ApprovalsData:

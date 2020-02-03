@@ -10,6 +10,7 @@ export class PolicyGroup {
 
   get policyGroupMenu() { return element(by.css('a[data-e2e="policyGroupMenu"]')); }
   get createNewpolicyGroup() { return element(by.css('button[data-e2e="createPolicyGroup"]')); }
+  // get createNewpolicyGroup() { return element(by.xpath('//button[contains(.,"New Policy Group v2")]')); }
   get enterPolicyGroupName() { return element(by.css('[data-e2e="name"]')); }
   // get enterPolicyGroupName() { return element(by.css('[data-e2e="policyGroupName"]')); }
   get enterPolicyGroupDescription() { return element(by.css('[data-e2e="description"]')); }
@@ -23,13 +24,13 @@ export class PolicyGroup {
   // get policyGroupPublished() { return element(by.css('option[value="PUBLISHED"]')); }
   get policyGroupPublished() { return element(by.css('[for="published"]')); }
   get policyGroupIncrementByDropdown() { return element(by.css('select[ng-reflect-name="versionBump"]')); }
-  // get policyGroupMajor() { return element(by.xpath('//option[.="Major"]')); }
-  get policyGroupMajor() { return element(by.css('#major')); }
-  // get policyGroupMinor() { return element(by.xpath('//option[.="Minor"]')); }
-  get policyGroupMinor() { return element(by.css('#Minor')); }
+  // get policyGroupMajor() { return element(by.css('[for="major"]')); }
+  // get policyGroupMajor() { return element(by.css('#major')); }
+  get policyGroupMinor() { return element(by.css('[for="minor"]')); }
+  // get policyGroupMinor() { return element(by.css('#Minor')); }
   policyGroupTemplate(policyGroupTemplateName: any) { return element(by.xpath(`//h5[contains(.,'PGT ${policyGroupTemplateName}')]`)); }
   // get allowDisAllowDropDown() { return element(by.css('select[ng-reflect-form="[object Object]"]')); }
-  get allowDisAllowDropDown() { return element(by.css('template-allow .form-control')); }
+  get allowDisAllowDropDown() { return element(by.css('template-allow > .form-group')); }
   get selectAllow() { return element(by.xpath('//option[.="Allow"]')); }
   get selectDisAllow() { return element(by.xpath('//option[.="Disallow"]')); }
   get servicesDropDown() { return element(by.css('[data-e2e="serviceDropdown"]')); }
@@ -85,8 +86,8 @@ export class PolicyGroup {
 
   get editButton() { return element(by.css('button[data-e2e="editPolicyGroup"]')); }
   get policiesEditButton() { return element(by.css('button[data-e2e="editPolicies"]')); }
-  // deselectService(service: any) { return element(by.xpath(`//div[.='×${service}']`)); }
-  deselectService(service: any) { return element(by.xpath(`//div[@class='ng-value-container']/div['${service}']/span[@class='ng-value-icon left ng-star-inserted']`)); }
+  deselectService(service: any) { return element(by.xpath(`//div[.='${service}']`)); }
+  // deselectService(service: any) { return element(by.xpath(`//div['${service}']/span[@class='ng-value-icon left ng-star-inserted']`)); }
   get closeDropDown() { return element(by.xpath('//span[@class="ng-arrow-wrapper"]')); }
   get confirmChanges() { return element(by.css('button[data-e2e="submitPolicyGroupChanges"]')); }
   get publishButton() { return element(by.xpath('//button[.="Publish"]')); }
@@ -130,6 +131,11 @@ export class PolicyGroup {
     }
     // wait till the toast element flash is hidden.
     await WaitHelper.waitForElementToBeHidden(this.toast);
+
+    // if (policyGroupName.includes('V2')) {
+    //   await browser.logger.info('Account Name' + policyGroupName);
+    //   await elementClick(this.createNewPolicyGroupV2);
+    // }
 
     await browser.get(configProperties.qaUrl + '/policy-groups');
     await browser.logger.info('Clicked On Policy Group Menu');
@@ -271,6 +277,7 @@ export class PolicyGroup {
 
   async awsProducts(service: String[]) {
     await WaitHelper.waitForElementToBeClickable(this.allowDisAllowDropDown, 2000, 'allowDisAllowDropDown ');
+    await browser.actions().mouseMove(this.allowDisAllowDropDown).perform();
     await elementClick(this.allowDisAllowDropDown);
     await browser.logger.info('allowDisAllowDropDown Page');
 
@@ -333,10 +340,12 @@ export class PolicyGroup {
     await browser.logger.info('Policy Group Name Entered: ', policyGroupName + ' Updated');
 
     await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await browser.actions().mouseMove(this.policyGroupPublished).perform();
     await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
     await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await browser.actions().mouseMove(this.policyGroupMinor).perform();
     await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
@@ -599,14 +608,21 @@ export class PolicyGroup {
     await browser.logger.info('Select All Services');
     await browser.sleep(2000);
 
-    await WaitHelper.waitForElementToBePresent(this.deselectService(service[0]), 5000, 'DeSelect Services ');
-    await elementClick(this.deselectService(service[0]));
-    await browser.logger.info('DeSelect Services');
+    // await WaitHelper.waitForElementToBePresent(this.deselectService(service[0]), 5000, 'DeSelect Services ');
+    // await elementClick(this.deselectService(service[0]));
+    // await browser.logger.info('DeSelect Services');
+    // await browser.sleep(2000);
 
-    // await WaitHelper.waitForElementToBeClickable(this.deselectService(service), 5000, 'Deselect Service ');
-    // await browser.actions().mouseMove(this.deselectService(service)).perform();
-    // await elementClick(this.deselectService(service));
-    // await browser.logger.info('Deselect Service ');
+    await elementClick(this.blankClick);
+
+    await WaitHelper.waitForElementToBePresent(this.servicesDropDown, 5000, 'Services Drop Down ');
+    await elementClick(this.servicesDropDown);
+    await browser.logger.info('Services Drop Down');
+
+    await WaitHelper.waitForElementToBeClickable(this.deselectService(service), 5000, 'Deselect Service ');
+    await browser.actions().mouseMove(this.deselectService(service)).perform();
+    await elementClick(this.deselectService(service));
+    await browser.logger.info('Deselect Service ');
 
     await elementClick(this.blankClick);
 
@@ -730,7 +746,8 @@ export class PolicyGroup {
 
     // Select Attribute Tag
     await WaitHelper.waitForElementToBeClickable(this.selectAttributeTag(attributeTagName), 5000, 'Attribute');
-    await browser.actions().mouseMove(this.selectAttributeTag(attributeTagName)).perform();
+    await browser.actions().mouseDown(this.selectAttributeTag(attributeTagName)).perform();
+    await browser.sleep(1000);
     await elementClick(this.selectAttributeTag(attributeTagName));
     await browser.logger.info('Attribute Selected');
 
@@ -824,10 +841,12 @@ export class PolicyGroup {
     await browser.logger.info('Publish Button ');
 
     await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await browser.actions().mouseMove(this.policyGroupPublished).perform();
     await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
     await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await browser.actions().mouseMove(this.policyGroupMinor).perform();
     await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 

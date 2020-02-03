@@ -122,8 +122,8 @@ describe('Login Concourse ', async function () {
     });
 
     it('Step 11: Verifying Risk After Deletion Of Policy Group', async function (): Promise<any> {
-        await risk.verifyRisk(riskId);
-        await ExpectHelper.expectDoesNotExists(risk.riskElement(riskId));
+        await risk.verifyRisk(modelId);
+        await ExpectHelper.expectDoesNotExists(risk.riskElement(modelId));
         await console.log('Risk Removed For', modelId);
     });
 

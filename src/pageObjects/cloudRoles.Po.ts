@@ -11,8 +11,10 @@ export class CloudRoles {
   selectCloudProvider(cloudProvider: any) { return element(by.css(`[for='cp-${cloudProvider}']`)); }
   get draftStatus() { return element(by.css('[for="draft"]')); }
   get publishedStatus() { return element(by.css('[for="published"]')); }
-  get minor() { return element(by.css('#Minor')); }
-  get major() { return element(by.css('#major')); }
+  // get minor() { return element(by.css('#Minor')); }
+  // get major() { return element(by.css('#major')); }
+  get minor() { return element(by.css('[for="minor"]')); }
+  get major() { return element(by.css('[for="major"]')); }
   get nextButton() { return element(by.xpath('//button[.="Next"]')); }
   get searchAWSActions() { return element(by.css('[formgroupname="awsCloudActions"] [placeholder="Search Actions"]')); }
   get searchAWSNonActions() { return element(by.css('[formgroupname="awsCloudNonActions"] [placeholder="Search Actions"]')); }
@@ -41,6 +43,7 @@ export class CloudRoles {
   get saveButton() { return element(by.xpath('//button[.="Save"]')); }
   get searchInEditWindow() { return element(by.css('[placeholder="Search Actions"]')); }
   get addButton() { return element(by.xpath('//button[@class="btn btn-primary btn-sm"]')); }
+  searchCloudRoleFromList(cloudRole: string) { return element(by.css(`//h5[.='${cloudRole}']`)); }
 
 
   async createCloudRole(surfaceName: string = null, name: string = null, description: any = null, cloudProvider: string = null,
@@ -179,6 +182,32 @@ export class CloudRoles {
     await browser.logger.info('Selected Published');
 
     await WaitHelper.waitForElementToBeClickable(this.minor, 2000, 'Minor ');
+    await elementClick(this.minor);
+    await browser.logger.info('Selected Minor');
+
+    // Submit Cloud Role
+    await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
+    await elementClick(this.submitButton);
+    await browser.logger.info('Cloud Role Updated');
+    await console.log('Cloud Role Is', name + ' Updated');
+  }
+
+  async publishCloudRole(surfaceName: string = null, name: string = null, description: any) {
+    // Search CLoud Role.
+    await this.searchCloudRole(surfaceName, name);
+
+    // Click Edit Icon
+    await WaitHelper.waitForElementToBePresent(this.editCloudRoleButton, 5000, 'Edit Button ');
+    await elementClick(this.editCloudRoleButton);
+    await browser.logger.info('Edit Button Clicked');
+
+    await WaitHelper.waitForElementToBeClickable(this.publishedStatus, 2000, 'Published ');
+    await browser.actions().mouseMove(this.publishedStatus).perform();
+    await elementClick(this.publishedStatus);
+    await browser.logger.info('Selected Published');
+
+    await WaitHelper.waitForElementToBeClickable(this.minor, 2000, 'Minor ');
+    await browser.actions().mouseMove(this.minor).perform();
     await elementClick(this.minor);
     await browser.logger.info('Selected Minor');
 
@@ -328,6 +357,7 @@ export class CloudRoles {
     if (!deleteOnly)
       name = name + ' Updated';
     await this.search.sendKeys(name);
+    await browser.sleep(2000);
     await elementClick(this.searchCloudRoleName(name));
     await browser.logger.info(name, 'Selected');
 
@@ -340,6 +370,22 @@ export class CloudRoles {
     await browser.actions().mouseMove(this.confirmDeleteButton).perform();
     await elementClick(this.confirmDeleteButton);
     await browser.logger.info(name, 'Is deleted');
+  }
+
+  async verifyCloudRole(surfaceName: string = null, name: string = null) {
+    await WaitHelper.waitForElementToBeHidden(this.toast);
+    // await elementClick(this.cloudRolesLink);
+    await browser.get(configProperties.qaUrl + '/cloud-roles');
+    await browser.logger.info('Cloud Roles Menu Clicked');
+    await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
+
+    await this.selectSurfaceFromDropDown(surfaceName);
+    await browser.logger.info('Selected E2E Surface');
+
+    await elementClear(this.search, name);
+
+    await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'list');
+    await this.search.sendKeys(name);
   }
 
   async selectSurfaceFromDropDown(surfaceName: string = null) {

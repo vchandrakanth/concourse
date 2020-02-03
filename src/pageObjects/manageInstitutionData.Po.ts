@@ -246,10 +246,13 @@ export class InstitutionData {
 
     async enterData(value: any = null, dataKey: string = null, keyValue: string = null) {
         await WaitHelper.waitForElementToBePresent(this.enterKey(value), 5000, 'Data Key');
+        await elementClick(this.enterKey(value));
         await elementSendkeys(this.enterKey(value), dataKey);
         await browser.logger.info('Entered key ', dataKey);
+        await browser.sleep(2000);
 
         await WaitHelper.waitForElementToBePresent(this.enterValue(value), 5000, 'Data Key Value');
+        await elementClick(this.enterValue(value));
         await elementSendkeys(this.enterValue(value), keyValue);
         await browser.logger.info('Entered Key Value ', keyValue);
     }

@@ -215,8 +215,8 @@ export class AssetManager {
   async deleteEnclaveModel(surfaceName: string = null, assetName: string = null, deleteOnly: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    // await browser.get(configProperties.qaUrl + '/assets');
-    await elementClick(this.assetsManagerMenu);
+    await browser.get(configProperties.qaUrl + '/assets');
+    // await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
 
     await this.selectSurfaceFromDropDown(surfaceName);

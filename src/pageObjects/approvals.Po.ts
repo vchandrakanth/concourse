@@ -41,6 +41,7 @@ export class Approvals {
   async ApprovalAction(surfaceName: string = null, entityId: any = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Approvals Menu Button
+    await WaitHelper.waitForElementToBeDisplayed(this.approvalsMenu, 5000, 'Approvals Menu');
     await elementClick(this.approvalsMenu);
     await browser.logger.info('Clicked on Approvals Menu');
 
@@ -63,6 +64,7 @@ export class Approvals {
 
   async VerifyPublishedApprovalRequest(surfaceName: string = null, Id: any = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
+    await WaitHelper.waitForElementToBeDisplayed(this.approvalsMenu, 5000, 'Approvals Menu');
     // Click on Approvals Menu Button
     await elementClick(this.approvalsMenu);
     await browser.logger.info('Clicked on Approvals Menu');
@@ -78,6 +80,7 @@ export class Approvals {
 
   async DeleteApprovalRequest(surfaceName: string = null, policyGroupName: any = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
+    await WaitHelper.waitForElementToBeDisplayed(this.policyGroupMenu, 5000, 'Policy Group Menu Displayed');
     // Click on Policy Group Menu Button
     await elementClick(this.policyGroupMenu);
     await browser.logger.info('Clicked on Policy Group Menu');

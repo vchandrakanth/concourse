@@ -18,8 +18,8 @@ export class WaitHelper {
      * @param {string} message
      */
     static async waitForElement(targetElement: ElementFinder,
-                                timeout = PageHelper.DEFAULT_TIMEOUT,
-                                message = 'Element should exist') {
+        timeout = PageHelper.DEFAULT_TIMEOUT,
+        message = 'Element should exist') {
         VerboseLogger.logSelector(timeout, targetElement, 'exist');
         return browser.wait(this.EC.presenceOf(targetElement),
             timeout,
@@ -33,8 +33,8 @@ export class WaitHelper {
      * @param {string} message
      */
     static async waitForElementToBeDisplayed(targetElement: ElementFinder,
-                                             timeout = PageHelper.DEFAULT_TIMEOUT,
-                                             message = 'Element should be visible') {
+        timeout = PageHelper.DEFAULT_TIMEOUT,
+        message = 'Element should be visible') {
         VerboseLogger.logSelector(timeout, targetElement, 'be visible');
         return browser.wait(this.EC.visibilityOf(targetElement),
             timeout,
@@ -49,8 +49,8 @@ export class WaitHelper {
      * @param {string} message
      */
     static async waitForElementToBePresent(targetElement: ElementFinder,
-                                           timeout = PageHelper.DEFAULT_TIMEOUT,
-                                           message = 'Element should be visible') {
+        timeout = PageHelper.DEFAULT_TIMEOUT,
+        message = 'Element should be visible') {
         VerboseLogger.logSelector(timeout, targetElement, 'be present');
         return browser.wait(this.EC.presenceOf(targetElement),
             timeout,
@@ -66,8 +66,8 @@ export class WaitHelper {
      * @returns {any}
      */
     static async waitForElementToBeHidden(targetElement: ElementFinder,
-                                          timeout = PageHelper.DEFAULT_TIMEOUT,
-                                          message = 'Element should not be visible') {
+        timeout = PageHelper.DEFAULT_TIMEOUT,
+        message = 'Element should not be visible') {
         VerboseLogger.logSelector(timeout, targetElement, 'be invisible');
         return browser.wait(this.EC.invisibilityOf(targetElement),
             timeout,
@@ -81,8 +81,8 @@ export class WaitHelper {
      * @param {string} message
      */
     static async waitForElementToBeClickable(targetElement: ElementFinder,
-                                             timeout = PageHelper.DEFAULT_TIMEOUT,
-                                             message = 'Element not clickable') {
+        timeout = PageHelper.DEFAULT_TIMEOUT,
+        message = 'Element not clickable') {
         VerboseLogger.logSelector(timeout, targetElement, 'be clickable');
         try {
             await browser.wait(this.EC.elementToBeClickable(targetElement),
@@ -116,8 +116,8 @@ export class WaitHelper {
      * @returns {any}
      */
     static async waitForElementToBeEnabled(targetElement: ElementFinder,
-                                           timeout = PageHelper.DEFAULT_TIMEOUT,
-                                           message = 'Element not enabled') {
+        timeout = PageHelper.DEFAULT_TIMEOUT,
+        message = 'Element not enabled') {
         return await browser.wait(targetElement.isEnabled(), timeout,
             targetElement.locator().toString() + message);
     }
@@ -130,15 +130,43 @@ export class WaitHelper {
      * @returns {any}
      */
     static async waitForElementToBeSelected(targetElement: ElementFinder,
-                                            timeout = PageHelper.DEFAULT_TIMEOUT,
-                                            message = 'Element not selected') {
+        timeout = PageHelper.DEFAULT_TIMEOUT,
+        message = 'Element not selected') {
         return await browser.wait(targetElement.isSelected(), timeout,
             targetElement.locator().toString() + message);
     }
 
     static async scrollIntoView2(element: ElementFinder) {
 
-        await browser.controlFlow().execute(async function() {
-        return await browser.executeScript('arguments[0].scrollIntoView(true)',  element.getWebElement());
-    });
-}}
+        await browser.controlFlow().execute(async function () {
+            return await browser.executeScript('arguments[0].scrollIntoView(true)', element.getWebElement());
+        });
+    }
+    static async waitAny(msTimeOut: number, ...elements: ElementFinder[]): Promise<any> {
+        let proms: Promise<any>[] = [];
+        // let me = I;
+        let ix = 0, l = elements.length;
+        let ele = elements[ix];
+        // let wrecu = me.waitSimple(ele, 1000)
+        //     .then((ok)
+        {
+            //         ix = (ix + 1) % l;
+            //     });
+            let interval = 500;
+            elements.forEach((element, ix) => {
+                proms.push(browser.waitSimple(element, interval).catch(() => null));
+                // });
+                return Promise.all(proms).then((res) => { // ) me.any.call(me.any,
+                    browser.console(`waitAny result: [${res.join(',')}] - timeout:${msTimeOut}`);
+                    if (msTimeOut <= 0 || res.filter(r => r === true).length > 0) {
+                        return res; // at least one is visible/clickable
+                    } else {
+                        return this.waitAny(msTimeOut - interval, ...elements);
+                    }
+                }).catch((res) => {
+                    debugger;
+                });
+            });
+        }
+    }
+}

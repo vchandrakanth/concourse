@@ -58,7 +58,7 @@ describe('Creaing Logical Deployment', async function () {
     // Creating Logical Deployement
     await logicalDeployment.newlogicalDeployment(baseSurface, assetName, deploymentName, stackName, 'us-east-1', 'Default Surface - Root Surface Layer', 'Account-123456987456');
     await logicalDeployment.searchLogicalDeployment(baseSurface, deploymentName);
-    await ExpectHelper.isListElementExists(logicalDeployment.deploymentList, deploymentName);
+    await ExpectHelper.isListElementExists(logicalDeployment.logicalDeploymentList, deploymentName);
     deploymentId = await logicalDeployment.getId();
     await console.log('Logical Deployment Name is', deploymentName);
     await console.log('Logical Deployment id is', deploymentId);
@@ -77,7 +77,7 @@ describe('Creaing Logical Deployment', async function () {
     // Updating Logical Deployement Version
     await logicalDeployment.updateLogicalDeployment(baseSurface, deploymentName, assetName, version);
     await logicalDeployment.searchLogicalDeployment(baseSurface, deploymentName);
-    await ExpectHelper.isListElementExists(logicalDeployment.deploymentList, deploymentName);
+    await ExpectHelper.isListElementExists(logicalDeployment.logicalDeploymentList, deploymentName);
     deploymentId = await logicalDeployment.getId();
     await console.log('Logical Deployment Name is', deploymentName);
     await console.log('Logical Deployment id is', deploymentId);

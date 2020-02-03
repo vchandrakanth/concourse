@@ -80,7 +80,7 @@ describe('Remove Surface Layer For Policy Group and Verify Violation created ', 
         // Creating Logical Deployment
         await logicalDeployment.newlogicalDeployment(baseSurface, assetName, deploymentName, stackName, 'us-east-1', 'Default Surface - Root Surface Layer', 'Account-123456987456');
         await logicalDeployment.searchLogicalDeployment(baseSurface, deploymentName);
-        await ExpectHelper.isListElementExists(logicalDeployment.deploymentList, deploymentName);
+        await ExpectHelper.isListElementExists(logicalDeployment.logicalDeploymentList, deploymentName);
         deploymentId = await logicalDeployment.getId();
         await console.log('Logical Deployment Name is', deploymentName);
         await console.log('Logical Deployment id is', deploymentId);

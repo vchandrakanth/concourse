@@ -23,8 +23,8 @@ export class PolicyGroupTemplatePage {
   get policyGroupTemplateIncrementBy() { return element(by.css('select[formcontrolname="versionBump"]')); }
   // get policyGroupTemplateMajor() { return element(by.css('option[value="MAJOR"]')); }
   get policyGroupTemplateMajor() { return element(by.css('#major')); }
-  // get policyGroupTemplateMinor() { return element(by.css('option[value="MINOR"]')); }
-  get policyGroupTemplateMinor() { return element(by.css('#Minor')); }
+  get policyGroupTemplateMinor() { return element(by.css('[for="minor"]')); }
+  // get policyGroupTemplateMinor() { return element(by.css('#Minor')); }
   get nextButton() { return element(by.xpath('//button[.="Next"]')); }
   get policyGroupTemplateList() { return element($('.list')); }
   get policyGroupTemplateSubmit() { return element(by.css('button[type="submit"]')); }

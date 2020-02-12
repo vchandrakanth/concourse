@@ -11,7 +11,7 @@ export let config: Config = {
     //    directConnect: true,
     plugins: [{
         package: 'protractor-screenshoter-plugin',
-        screenshotPath: './src/REPORTS/e2e',
+        screenshotPath: '../src/REPORTS/e2e',
         screenshotOnExpect: 'failure+success',
         screenshotOnSpec: 'failure+success',
         withLogs: true,
@@ -45,26 +45,18 @@ export let config: Config = {
             args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
             // '--headless',
         },
-        specs: ['../specs/attributeTags.js']
+        specs: ['../specs/assetManager.js']
         // ['../specs/attributeTags.js', '../specs/assetManager.js',
-        // '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
-        // '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
-        // '../specs/approvals.js', '../specs/group.js', '../specs/surfaces.js',
-        // '../specs/modelViolation.js', '../specs/policyViolations.js',
-        // '../specs/addAttributeTagForPG.js', '../specs/removeControlAuthorRoleAssignment.js',
-        // '../specs/removeAttributeTagForPG.js', '../specs/cloudRoles.js', '../specs/manageInstitutionData.js',
-        // '../specs/requestForLogicalDeployment.js', '../specs/requestForModel.js',
-        // '../specs/removeBusinessAuthorRoleAssignment.js']
-        // '../specs/attributeTags.js', '../specs/assetManager.js', '../specs/cloudRoles.js',
-        // '../specs/removeBusinessAuthorRoleAssignment.js', '../specs/removeControlAuthorRoleAssignment.js'
-        // '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js', '../specs/manageInstitutionData.js'
-        // '../specs/policyGroupTemplate.js', '../specs/policyGroup.js', '../specs/surfaces.js'
-        // '../specs/modelViolation.js', '../specs/policyViolations.js', '../specs/removeAttributeTagForPG.js'
-        // '../specs/attributeTags.js', '../specs/assetManager.js', '../specs/permissions.js'
-        //  '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
-        //   '../specs/group.js', '../specs/logicalDeployment.js', '../specs/policyViolations.js', '../specs/attributeTags.js', '../specs/assetManager.js', '../specs/policyGroupTemplate.js', '../specs/policyGroup.js', '../specs/group.js',
-        // '../specs/logicalDeployment.js', '../specs/modelViolation.js', '../specs/policyViolations.js', '../specs/logicalDeploymentViolation.js'
-        // '../specs/surfaces.js', '../specs/addAttributeTagForPG.js', '../specs/nestedTemplates.js'
+        //     '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
+        //     '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
+        //     '../specs/approvals.js', '../specs/group.js', '../specs/surfaces.js',
+        //     '../specs/cloudRoles.js', '../specs/modelViolation.js', '../specs/policyViolations.js',
+        //      '../specs/UpdatePolicyViolation.js',
+        //     '../specs/addAttributeTagForPG.js', '../specs/removeAttributeTagForPG.js',
+        //      '../specs/manageInstitutionData.js', '../specs/requestForModel.js',
+        //     '../specs/requestForLogicalDeployment.js', '../specs/requestForCloudRoles.js',
+        //     '../specs/removeBusinessAuthorRoleAssignment.js', '../specs/removeControlAuthorRoleAssignment.js']
+        // '../specs/permissions.js', '../specs/nestedTemplates.js',
     },
 
     seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -102,60 +94,65 @@ export let config: Config = {
         // Login before
         let loginPage = new LoginPage();
         goToMainPage();
+        let username;
+        let password;
         browser.logger.info('Logging into concourse website');
         // loginPage.login(configProperties.loginData.username, configProperties.loginData.password);
         let currentUrl = await getUrl();
-        if (currentUrl.includes('adhoc')) {
-            let username = configProperties.loginData.adhocUserName;
-        let password = configProperties.loginData.adhocPassWord;
-        loginPage.login(username, password);
-        }
-        if (currentUrl.includes('beta')) {
-            let username = configProperties.loginData.betaUserName;
-            let password = configProperties.loginData.betaPassWord;
-        loginPage.login(username, password);
-        }
-        if (currentUrl.includes('prod')) {
-            let username = configProperties.loginData.prodUserName;
-            let password = configProperties.loginData.prodPassWord;
-        loginPage.login(username, password);
-        }
-        // loginPage.login(userName, password);
-    // Slack integration.
-    let webRep = require('jasmine-slack-reporter');
-    browser.getProcessedConfig().then(function (config) {
-        let browserName = config.capabilities.browserName;
-        jasmine.getEnv().addReporter(new webRep.WebReporter({
-            projectName: 'Concourse Labs',
-            environment: 'adhoc',
-            testname: jasmine.getEnv().currentSpec,
-            slackUrl: 'https://hooks.slack.com/services/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',
-            channel: 'qa-e2e-test',
-            get itName() { let cs = jasmine.getEnv().currentSpec; return cs ? cs.description : ''; }
-        }));
-    });
 
-    // Wait till get the confirmation. tsc
-    return browser.driver.wait(function () {
-        return browser.driver.getCurrentUrl().then(function (url) {
-            return /dashboard/.test(url);
+        if (currentUrl.includes('adhoc')) {
+            username = configProperties.loginData.adhocUserName;
+            password = configProperties.loginData.adhocPassWord;
+        }
+
+        if (currentUrl.includes('beta')) {
+            username = configProperties.loginData.betaUserName;
+            password = configProperties.loginData.betaPassWord;
+        }
+
+        if (currentUrl.includes('prod')) {
+            username = configProperties.loginData.prodUserName;
+            password = configProperties.loginData.prodPassWord;
+        }
+
+        loginPage.login(username, password);
+        // Slack integration.
+        let webRep = require('jasmine-slack-reporter');
+        browser.getProcessedConfig().then(function (config) {
+            let browserName = config.capabilities.browserName;
+            jasmine.getEnv().addReporter(new webRep.WebReporter({
+                projectName: 'Concourse Labs',
+                environment: 'adhoc',
+                testname: jasmine.getEnv().currentSpec,
+                slackUrl: 'https://hooks.slack.com/services/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',
+                channel: 'qa-e2e-test',
+                get itName() { let cs = jasmine.getEnv().currentSpec; return cs ? cs.description : ''; }
+            }));
         });
-    }, 15000);
-    return global.browser.getProcessedConfig().then(function (config) {
-        // it is ok to be empty
-    });
-    // onPrepare: function () {
-    //     let global =require('protractor');
-    //     let browser = global.browser;
-    //     browser.ignoreSynchronization = true;
-    //     browser.manage().window().maximize();
-    //     browser.manage().timeouts().implicitlyWait(20000);
-    //    // browser.manage().timeouts().setScriptTimeout(60000);
-    //     browser.logger = log4js.getLogger('protractorLog4js');
-    //     return global.browser.getProcessedConfig().then(function (config) {
-    //         //it is ok to be empty
-    //     });
-},
+
+        // Wait till get the confirmation. tsc
+        return browser.driver.wait(function () {
+            return browser.driver.getCurrentUrl().then(function (url) {
+                return /dashboard/.test(url);
+            });
+
+        }, 15000);
+        return global.browser.getProcessedConfig().then(function (config) {
+            // it is ok to be empty
+        });
+
+        // onPrepare: function () {
+        //     let global =require('protractor');
+        //     let browser = global.browser;
+        //     browser.ignoreSynchronization = true;
+        //     browser.manage().window().maximize();
+        //     browser.manage().timeouts().implicitlyWait(20000);
+        //    // browser.manage().timeouts().setScriptTimeout(60000);
+        //     browser.logger = log4js.getLogger('protractorLog4js');
+        //     return global.browser.getProcessedConfig().then(function (config) {
+        //         //it is ok to be empty
+        //     });
+    },
 };
 
 

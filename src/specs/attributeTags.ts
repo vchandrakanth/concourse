@@ -27,8 +27,8 @@ describe('Creaing Attribute Tags', async function () {
     it('Step 2: Edit Attribute Tag', async function (): Promise<any> {
         // Editing Attribute Tag
         await attributeTag.editAttributeTag(baseSurface, attributeTagName, description);
-        // await attributeTag.searchAttribute(baseSurface, attributeTagName, 'description');
-        await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName);
+        // await attributeTag.searchAttribute(baseSurface, attributeTagName + ' Updated');
+        await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName + ' Updated');
     });
 
     it('Step 3: Delete Attribute Tag', async function (): Promise<any> {

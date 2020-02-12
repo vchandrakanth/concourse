@@ -74,6 +74,7 @@ export class AssetManager {
     await browser.logger.info('Ownig Group DropDown Selected');
 
     await WaitHelper.waitForElementToBePresent(this.owningGroup(owningGroup), 5000, 'Owning Group');
+    await browser.actions().mouseMove(this.owningGroup(owningGroup)).perform();
     await elementClick(this.owningGroup(owningGroup));
     await browser.logger.info('Ownig Group Selected');
 
@@ -85,6 +86,7 @@ export class AssetManager {
 
       // Select Role
       await WaitHelper.waitForElementToBeClickable(this.attributeTag(attributeTag), 2000, 'Attribute Tag');
+      await browser.actions().mouseMove(this.attributeTag(attributeTag)).perform();
       await elementClick(this.attributeTag(attributeTag));
       await browser.logger.info('Attribute Tag Selected');
     }
@@ -97,7 +99,7 @@ export class AssetManager {
 
     // Select Status Drop Down
     await WaitHelper.waitForElementToBeClickable(this.statusDropdown, 2000, 'Status Drop Down ');
-    await browser.actions().mouseDown(this.statusDropdown).perform();
+    await browser.actions().mouseMove(this.statusDropdown).perform();
     await elementClick(this.statusDropdown);
     await browser.logger.info('Status Drop DOwn Selected');
 

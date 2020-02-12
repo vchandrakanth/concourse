@@ -16,7 +16,7 @@ describe('Login Concourse ', async function () {
   it('Step 1: open the brower and login', async function (): Promise<any> {
 
     // Open the Url and login
-   await  goToMainPage();
+    await goToMainPage();
 
     await browser.logger.info('Logging into concourse website');
 
@@ -24,14 +24,10 @@ describe('Login Concourse ', async function () {
     let loginPage = new LoginPage();
     await loginPage.login('admin@concoursehub.com', 'password');
     // await loginPage.clickTopologyCreateNode();
-
-   // await loginPage.clickInviteUser();
-   });
-
-
+    // await loginPage.clickInviteUser();
+  });
 
   afterEach(function () {
-
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 

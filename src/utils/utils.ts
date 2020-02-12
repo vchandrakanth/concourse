@@ -3,18 +3,14 @@ import { stringify } from 'querystring';
 import { async } from 'q';
 let prop1 = require('../conf/properties');
 
-
 export async function goToMainPage() {
     // browser.ignoreSynchronization=true;
     await browser.get(prop1.qaUrl);
-
     console.log(prop1.qaUrl);
 }
 
 export async function elementClick(targetElement: ElementFinder) {
-
     await targetElement.click();
-
 }
 
 export async function getIdFromUrl() {
@@ -26,6 +22,7 @@ export async function getIdFromUrl() {
         return entityId[4];
     });
 }
+
 export async function getUrl() {
     return browser.getCurrentUrl().then(function (url) {
         console.log(url);
@@ -34,14 +31,11 @@ export async function getUrl() {
 }
 
 export async function elementClear(targetElement: ElementFinder, text: any) {
-
     await targetElement.clear();
-
 }
 // elementName: string
 export async function elementSendkeys(targetElement: ElementFinder, elementName: string) {
     await targetElement.sendKeys(elementName);
-
 }
 
 export async function getMonthNames(fullAbbrevation, month) {
@@ -53,7 +47,6 @@ export async function getMonthNames(fullAbbrevation, month) {
     else {
         return monthNames[month];
     }
-
 }
 
 export async function getRandomInteger(min = 1, max = 999) {

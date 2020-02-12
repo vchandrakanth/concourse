@@ -159,8 +159,8 @@ export class Surface {
     async verifySurface(name: string = null) {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
-        await elementClick(this.surfaceMenu);
         await WaitHelper.waitForElementToBeDisplayed(this.surfacelist, 3000, 'list displayed');
+        await elementClick(this.surfaceMenu);
         await browser.logger.info('Surface Page Displayed');
 
         // Click On Surface Drop Down

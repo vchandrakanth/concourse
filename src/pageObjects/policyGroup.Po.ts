@@ -86,6 +86,7 @@ export class PolicyGroup {
 
   get editButton() { return element(by.css('button[data-e2e="editPolicyGroup"]')); }
   get policiesEditButton() { return element(by.css('button[data-e2e="editPolicies"]')); }
+  clickOnService(service: any) { return element(by.css(`//span[.='${service}']`)); }
   deselectService(service: any) { return element(by.xpath(`//div[.='${service}']`)); }
   // deselectService(service: any) { return element(by.xpath(`//div['${service}']/span[@class='ng-value-icon left ng-star-inserted']`)); }
   get closeDropDown() { return element(by.xpath('//span[@class="ng-arrow-wrapper"]')); }
@@ -399,8 +400,8 @@ export class PolicyGroup {
     await browser.logger.info(policyGroupName, 'Selected');
 
     // Click Edit Icon
-    await browser.actions().mouseDown(this.editPoliciesButton).perform();
     await WaitHelper.waitForElementToBePresent(this.editPoliciesButton, 5000, 'Edit Policies Button');
+    await browser.actions().mouseMove(this.editPoliciesButton).perform();
     await elementClick(this.editPoliciesButton);
     await browser.logger.info('Edit Button Clicked');
 
@@ -435,10 +436,12 @@ export class PolicyGroup {
     await browser.logger.info('Publish Button ');
 
     await WaitHelper.waitForElementToBeClickable(this.policyGroupPublished, 2000, 'Published ');
+    await browser.actions().mouseMove(this.policyGroupPublished).perform();
     await elementClick(this.policyGroupPublished);
     await browser.logger.info(' Selected Published');
 
     await WaitHelper.waitForElementToBeClickable(this.policyGroupMinor, 2000, 'Minor ');
+    await browser.actions().mouseMove(this.policyGroupMinor).perform();
     await elementClick(this.policyGroupMinor);
     await browser.logger.info(' Selected Minor');
 
@@ -523,14 +526,26 @@ export class PolicyGroup {
     await elementClick(this.selectAllServices);
     await browser.logger.info('Select All Services');
 
-    await WaitHelper.waitForElementToBePresent(this.deselectService(service[0]), 5000, 'DeSelect Services ');
-    await elementClick(this.deselectService(service[0]));
-    await browser.logger.info('DeSelect Services');
+    // await WaitHelper.waitForElementToBePresent(this.clickOnService(service), 5000, 'DeSelect Services ');
+    // await elementClick(this.clickOnService(service));
+    // await browser.logger.info('DeSelect Services');
 
     // await WaitHelper.waitForElementToBeClickable(this.deselectService(service), 5000, 'Deselect Service ');
     // await browser.actions().mouseMove(this.deselectService(service)).perform();
     // await elementClick(this.deselectService(service));
     // await browser.logger.info('Deselect Service ');
+
+    // await elementClick(this.blankClick);
+    await elementClick(this.blankClick);
+
+    await WaitHelper.waitForElementToBePresent(this.servicesDropDown, 5000, 'Services Drop Down ');
+    await elementClick(this.servicesDropDown);
+    await browser.logger.info('Services Drop Down');
+
+    await WaitHelper.waitForElementToBeClickable(this.deselectService(service), 5000, 'Deselect Service ');
+    await browser.actions().mouseMove(this.deselectService(service)).perform();
+    await elementClick(this.deselectService(service));
+    await browser.logger.info('Deselect Service ');
 
     await elementClick(this.blankClick);
 
@@ -627,7 +642,7 @@ export class PolicyGroup {
     await elementClick(this.blankClick);
 
     await WaitHelper.waitForElementToBeClickable(this.confirmChanges, 5000, 'Confirm Changes ');
-    await browser.actions().mouseDown(this.confirmChanges).perform();
+    await browser.actions().mouseMove(this.confirmChanges).perform();
     await elementClick(this.confirmChanges);
     await browser.logger.info('Confirm Changes ');
     await browser.sleep(2000);
@@ -746,7 +761,7 @@ export class PolicyGroup {
 
     // Select Attribute Tag
     await WaitHelper.waitForElementToBeClickable(this.selectAttributeTag(attributeTagName), 5000, 'Attribute');
-    await browser.actions().mouseDown(this.selectAttributeTag(attributeTagName)).perform();
+    await browser.actions().mouseMove(this.selectAttributeTag(attributeTagName)).perform();
     await browser.sleep(1000);
     await elementClick(this.selectAttributeTag(attributeTagName));
     await browser.logger.info('Attribute Selected');

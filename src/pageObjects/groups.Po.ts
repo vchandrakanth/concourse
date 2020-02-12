@@ -58,7 +58,8 @@ export class Group {
     get deleteGroupButton() { return element(by.css('.btn-danger')); }
     selectsurface(name: string) { return element(by.xpath(`//option[contains(.,'${name}')]`)); }
     get surfaceDropDown() { return element(by.css('[data-e2e="surfaceSwitcherDropdown"]')); }
-    get blankClick() { return element(by.css('form')); }
+    // get blankClick() { return element(by.css('form')); }
+    get blankClick() { return element(by.css('element(by.css("tab:nth-of-type(3)>div:nth-of-type(4)>div:nth-of-type(3)"))')); }
     selectGroup(groupName: string) { return element(by.xpath(`//option[contains(.,'${groupName}')]`)); }
     get editAllowedgroupsButton() { return element(by.css('button[data-e2e="addGroupsToSurface"]')); }
     selectGroupToDeAssociate(groupId: string) { return element(by.css(`span[data-e2e='${groupId}']`)); }
@@ -215,16 +216,16 @@ export class Group {
         await browser.logger.info('Users Tab Selected');
 
         // Click User Drop Down
-        await WaitHelper.waitForElementToBeClickable(this.userDropDown, 2000, 'Users Drop Down ');
-        await browser.actions().mouseMove(this.userDropDown).perform();
-        await elementClick(this.userDropDown);
-        await browser.logger.info('User Drop Down Selected');
+        // await WaitHelper.waitForElementToBeClickable(this.userDropDown, 2000, 'Users Drop Down ');
+        // await browser.actions().mouseMove(this.userDropDown).perform();
+        // await elementClick(this.userDropDown);
+        // await browser.logger.info('User Drop Down Selected');
 
         // Select User
-        await WaitHelper.waitForElementToBeClickable(this.selectUser(user), 2000, 'ramakrishna+e2e@concourselabs.com');
-        await browser.actions().mouseMove(this.selectUser(user)).perform();
-        await elementClick(this.selectUser(user));
-        await browser.logger.info('User Selected');
+        // await WaitHelper.waitForElementToBeClickable(this.selectUser(user), 2000, 'ramakrishna+e2e@concourselabs.com');
+        // await browser.actions().mouseMove(this.selectUser(user)).perform();
+        // await elementClick(this.selectUser(user));
+        // await browser.logger.info('User Selected');
 
         // Click On Add
         await elementClick(this.addButton);
@@ -312,21 +313,23 @@ export class Group {
             await browser.actions().mouseDown(this.selectResponsibility(responsibilityName)).perform();
             await elementClick(this.selectResponsibility(responsibilityName));
             await browser.logger.info('Responsibilities Selected');
-            await browser.sleep(1000);
+            await browser.sleep(2000);
         }
 
         if (organization) {
             await this.addOrganization(organization);
             await browser.logger.info(organization, 'Selected');
-            await browser.sleep(1000);
+            await browser.sleep(2000);
         }
 
+        // await elementClick(this.blankClick);
         // Click On Submit Button
         await WaitHelper.waitForElementToBeClickable(this.submitButton, 2000, 'Submit ');
+        await browser.actions().mouseMove(this.submitButton).perform();
         await elementClick(this.submitButton);
         await browser.logger.info('Group Updated');
         await browser.logger.info(role, 'Role Added To The Group');
-        await browser.sleep(1000);
+        await browser.sleep(2000);
     }
 
     async removeRolesFromGroup(surfaceName: string = null, groupName: string = null, roles: string[]) {

@@ -230,7 +230,7 @@ export class CloudRoles {
       await elementClick(this.editAwsActions);
       await browser.logger.info('Edit Button Clicked');
 
-      await WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 2000, 'AWS Action');
+      await WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 5000, 'AWS Action');
       await browser.actions().mouseMove(this.searchInEditWindow).perform();
       await elementClick(this.searchInEditWindow);
       await this.searchInEditWindow.sendKeys(awsActionName);
@@ -260,7 +260,7 @@ export class CloudRoles {
       await elementClick(this.editAwsNonActions);
       await browser.logger.info('Edit Button Clicked');
 
-      await WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 2000, 'AWS Non Action');
+      await WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 5000, 'AWS Non Action');
       await browser.actions().mouseMove(this.searchInEditWindow).perform();
       await elementClick(this.searchInEditWindow);
       await this.searchInEditWindow.sendKeys(awsNonActionName);
@@ -291,7 +291,7 @@ export class CloudRoles {
       await elementClick(this.editAzureActions);
       await browser.logger.info('Edit Button Clicked');
 
-      await WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 2000, 'Azure Action');
+      await WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 5000, 'Azure Action');
       await browser.actions().mouseMove(this.searchInEditWindow).perform();
       await elementClick(this.searchInEditWindow);
       await this.searchInEditWindow.sendKeys(azureActionName);
@@ -322,7 +322,7 @@ export class CloudRoles {
       await elementClick(this.editAzureNonActions);
       await browser.logger.info('Edit Button Clicked');
 
-      await WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 2000, 'Azure Non Action');
+      await WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 5000, 'Azure Non Action');
       await browser.actions().mouseMove(this.searchInEditWindow).perform();
       await elementClick(this.searchInEditWindow);
       await this.searchInEditWindow.sendKeys(azureNonActionName);

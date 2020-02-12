@@ -1,7 +1,7 @@
 module.exports = {
 
-  qaUrl: 'https://adhoc.concourse.company/',
-  // qaUrl: 'https://beta.concourse.company/',
+  // qaUrl: 'https://adhoc.concourse.company/',
+  qaUrl: 'https://beta.concourse.company/',
   // qaUrl: 'https://prod.concourselabs.io/',
   seleniumServerUrl: 'http://localhost:4444/wd/hub',
 
@@ -98,8 +98,8 @@ module.exports = {
   {
     groupName: 'E2E Test Group',
     groupDescription: 'Description Of E2E Test Group',
-    user: 'e2e Test <ramakrishna+e2etest@concourselabs.com>'
-    // user: 'e2e Test <ramakrishna+e2e@concourselabs.com>',
+    // user: 'e2e Test <ramakrishna+e2etest@concourselabs.com>'
+    user: 'e2e Test <ramakrishna+e2e@concourselabs.com>',
     // user: 'Prod E2E Test <ramakrishna+e2e@concourselabs.com>'
     // user: 'e2e Test <ramakrishna+e2etestuser@concourselabs.com>'
     // user: 'E2E test <jian+e2e@concourselabs.com>'
@@ -191,6 +191,17 @@ module.exports = {
     createSkillGroup: 'a4b:CreateSkillGroup',
     associateDeviceWithRoom: 'a4b:AssociateDeviceWithRoom',
     putRoomSkillParameter: 'a4b:PutRoomSkillParameter',
+  },
+
+  BaseLineAssetData:
+  {
+    accountName: '0ecb99ea-ca1a-4be6-96cc-ceb57b7b63d4',
+    subscription: '3263f5e2-3561-433c-97f2-e31b389e45ff',
+    resourceGroup: 'TestConnection',
+    product: 'Microsoft.Batch/batchAccounts',
+    region: 'South India',
+    key: 'creation_data:20200129',
+    value: ''
   }
 
 };

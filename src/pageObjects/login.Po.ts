@@ -26,7 +26,6 @@ export class LoginPage {
 
   async login(user: any, pass: any) {
     // Wait for 5 sec before entering the login information.
-
     await this.setName(user);
     await this.setpassWD(pass);
     await this.clickButton();

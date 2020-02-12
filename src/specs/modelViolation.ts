@@ -104,7 +104,7 @@ describe('Creaing Model Violations ', async function () {
 
   it('Step 8: Delete Enclave Model', async function (): Promise<any> {
     // Deleting Enclave Model
-    await assetsManager.deleteEnclaveModel(baseSurface, assetName);
+    await assetsManager.deleteEnclaveModel(baseSurface, assetName, 'false');
     await ExpectHelper.expectDoesNotExists(assetsManager.enclaveModelElement(assetName));
   });
 

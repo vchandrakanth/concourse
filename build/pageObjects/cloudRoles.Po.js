@@ -210,7 +210,7 @@ class CloudRoles {
                 yield protractor_1.browser.actions().mouseDown(this.editAwsActions).perform();
                 yield utils_1.elementClick(this.editAwsActions);
                 yield protractor_1.browser.logger.info('Edit Button Clicked');
-                yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 2000, 'AWS Action');
+                yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 5000, 'AWS Action');
                 yield protractor_1.browser.actions().mouseMove(this.searchInEditWindow).perform();
                 yield utils_1.elementClick(this.searchInEditWindow);
                 yield this.searchInEditWindow.sendKeys(awsActionName);
@@ -237,7 +237,7 @@ class CloudRoles {
                 yield protractor_1.browser.actions().mouseDown(this.editAwsNonActions).perform();
                 yield utils_1.elementClick(this.editAwsNonActions);
                 yield protractor_1.browser.logger.info('Edit Button Clicked');
-                yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 2000, 'AWS Non Action');
+                yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 5000, 'AWS Non Action');
                 yield protractor_1.browser.actions().mouseMove(this.searchInEditWindow).perform();
                 yield utils_1.elementClick(this.searchInEditWindow);
                 yield this.searchInEditWindow.sendKeys(awsNonActionName);
@@ -264,7 +264,7 @@ class CloudRoles {
                 yield protractor_1.browser.actions().mouseDown(this.editAzureActions).perform();
                 yield utils_1.elementClick(this.editAzureActions);
                 yield protractor_1.browser.logger.info('Edit Button Clicked');
-                yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 2000, 'Azure Action');
+                yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 5000, 'Azure Action');
                 yield protractor_1.browser.actions().mouseMove(this.searchInEditWindow).perform();
                 yield utils_1.elementClick(this.searchInEditWindow);
                 yield this.searchInEditWindow.sendKeys(azureActionName);
@@ -291,7 +291,7 @@ class CloudRoles {
                 yield protractor_1.browser.actions().mouseDown(this.editAzureNonActions).perform();
                 yield utils_1.elementClick(this.editAzureNonActions);
                 yield protractor_1.browser.logger.info('Edit Button Clicked');
-                yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 2000, 'Azure Non Action');
+                yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 5000, 'Azure Non Action');
                 yield protractor_1.browser.actions().mouseMove(this.searchInEditWindow).perform();
                 yield utils_1.elementClick(this.searchInEditWindow);
                 yield this.searchInEditWindow.sendKeys(azureNonActionName);

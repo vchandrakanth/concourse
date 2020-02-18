@@ -45,7 +45,7 @@ export let config: Config = {
             args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
             // '--headless',
         },
-        specs: ['../specs/assetManager.js']
+        specs: ['../specs/baseLineAssets.js']
         // ['../specs/attributeTags.js', '../specs/assetManager.js',
         //     '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
         //     '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',

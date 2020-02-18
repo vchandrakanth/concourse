@@ -1,7 +1,7 @@
 module.exports = {
 
-  // qaUrl: 'https://adhoc.concourse.company/',
-  qaUrl: 'https://beta.concourse.company/',
+  qaUrl: 'https://adhoc.concourse.company/',
+  // qaUrl: 'https://beta.concourse.company/',
   // qaUrl: 'https://prod.concourselabs.io/',
   seleniumServerUrl: 'http://localhost:4444/wd/hub',
 
@@ -98,8 +98,8 @@ module.exports = {
   {
     groupName: 'E2E Test Group',
     groupDescription: 'Description Of E2E Test Group',
-    // user: 'e2e Test <ramakrishna+e2etest@concourselabs.com>'
-    user: 'e2e Test <ramakrishna+e2e@concourselabs.com>',
+    user: 'e2e Test <ramakrishna+e2etest@concourselabs.com>'
+    // user: 'e2e Test <ramakrishna+e2e@concourselabs.com>',
     // user: 'Prod E2E Test <ramakrishna+e2e@concourselabs.com>'
     // user: 'e2e Test <ramakrishna+e2etestuser@concourselabs.com>'
     // user: 'E2E test <jian+e2e@concourselabs.com>'

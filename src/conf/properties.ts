@@ -206,7 +206,7 @@ module.exports = {
 
   InviteUserData:
   {
-    mail: 'ramakrishna+'
+    mail: 'michael+'
   }
 
 };

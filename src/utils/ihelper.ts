@@ -8,7 +8,7 @@ const chalk = require('chalk');
 const util = require('util');
 import * as _ from 'lodash';
 // import { StackHelper } from './stackHelper';
-import { IHelperJasmineReporter as r } from './ihelper-jasmine-reporter';
+// import { IHelperJasmineReporter as r } from './ihelper-jasmine-reporter';
 
 import { IHelperNative } from './ihelper-native';
 import { IHelper as I } from './ihelper';

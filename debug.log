@@ -21,3 +21,4 @@
 [0930/162014.018:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
 [1105/193030.855:ERROR:prune_crash_reports.cc(34)] PruneCrashReportDatabase: Failed to get pending reports
 [0203/212510.549:ERROR:file_io.cc(89)] ReadExactly: expected 36, observed 0
+[0219/220220.052:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)

@@ -202,6 +202,11 @@ module.exports = {
     region: 'South India',
     key: 'creation_data:20200129',
     value: ''
+  },
+
+  InviteUserData:
+  {
+    mail: 'ramakrishna+'
   }
 
 };

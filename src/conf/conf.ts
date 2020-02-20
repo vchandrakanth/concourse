@@ -4,6 +4,7 @@ import fs = require('fs');
 import { goToMainPage, getUrl } from '../utils/utils';
 import { LoginPage } from '../pageObjects/login.Po';
 let configProperties = require('../conf/properties');
+let HtmlReporter = require('protractor-beautiful-reporter');
 
 export let config: Config = {
 
@@ -45,7 +46,7 @@ export let config: Config = {
             args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
             // '--headless',
         },
-        specs: ['../specs/baseLineAssets.js']
+        specs: ['../specs/inviteUser.js']
         // ['../specs/attributeTags.js', '../specs/assetManager.js',
         //     '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
         //     '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
@@ -89,6 +90,9 @@ export let config: Config = {
         browser.manage().window().maximize();
         browser.manage().timeouts().implicitlyWait(10000);
         browser.logger = log4js.getLogger('protractorLog4js');
+        jasmine.getEnv().addReporter(new HtmlReporter({
+            baseDirectory: 'e2e_Results/test_Results'
+         }).getJasmine2Reporter());
         // browser.logger = log4js.verboseLogging ('');
         // const isVerboseLoggingEnabled: boolean = browser.params.verboseLogging;
         // Login before

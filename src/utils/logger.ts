@@ -1,5 +1,5 @@
-import * as log4js from 'log4js';
-import { Logger } from 'log4js';
+import * as log4js from 'log4js-protractor-appender';
+import { Logger } from 'log4js-protractor-appender';
 import { browser, ElementFinder } from 'protractor';
 
 const isVerboseLoggingEnabled: boolean = true;

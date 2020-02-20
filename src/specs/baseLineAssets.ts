@@ -6,7 +6,6 @@ import { AttributeTag } from '../pageObjects/attributeTags.Po';
 
 describe('Creating BaseLine Asset', async function () {
   let originalTimeout;
-  let EC = ExpectedConditions;
   let baseLineAsset = new BaseLineAsset();
   let properties = require('../conf/properties');
   let attributeTag = new AttributeTag();

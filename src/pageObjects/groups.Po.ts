@@ -216,16 +216,16 @@ export class Group {
         await browser.logger.info('Users Tab Selected');
 
         // Click User Drop Down
-        // await WaitHelper.waitForElementToBeClickable(this.userDropDown, 2000, 'Users Drop Down ');
-        // await browser.actions().mouseMove(this.userDropDown).perform();
-        // await elementClick(this.userDropDown);
-        // await browser.logger.info('User Drop Down Selected');
+        await WaitHelper.waitForElementToBeClickable(this.userDropDown, 2000, 'Users Drop Down ');
+        await browser.actions().mouseMove(this.userDropDown).perform();
+        await elementClick(this.userDropDown);
+        await browser.logger.info('User Drop Down Selected');
 
         // Select User
-        // await WaitHelper.waitForElementToBeClickable(this.selectUser(user), 2000, 'ramakrishna+e2e@concourselabs.com');
-        // await browser.actions().mouseMove(this.selectUser(user)).perform();
-        // await elementClick(this.selectUser(user));
-        // await browser.logger.info('User Selected');
+        await WaitHelper.waitForElementToBeClickable(this.selectUser(user), 2000, 'ramakrishna+e2e@concourselabs.com');
+        await browser.actions().mouseMove(this.selectUser(user)).perform();
+        await elementClick(this.selectUser(user));
+        await browser.logger.info('User Selected');
 
         // Click On Add
         await elementClick(this.addButton);

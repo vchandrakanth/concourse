@@ -1,7 +1,7 @@
 module.exports = {
 
-  qaUrl: 'https://adhoc.concourse.company/',
-  // qaUrl: 'https://beta.concourse.company/',
+  // qaUrl: 'https://adhoc.concourse.company/',
+  qaUrl: 'https://beta.concourse.company/',
   // qaUrl: 'https://prod.concourselabs.io/',
   seleniumServerUrl: 'http://localhost:4444/wd/hub',
 
@@ -114,7 +114,7 @@ module.exports = {
   logicalDeploymentData:
   {
     deploymentName: 'E2E Test Deployment',
-    stackName: 'E2E Test Stack-123',
+    stackName: 'E2E-TestStack-123',
     version: ' (v0.2)'
   },
 
@@ -206,7 +206,14 @@ module.exports = {
 
   InviteUserData:
   {
-    mail: 'michael+'
+    mail: 'ramakrishna+'
+  },
+
+  CloudAccountData:
+  {
+    awsAccountName: 'e2e AWS Account',
+    awsAccountDescription: 'Description For e2e AWS Account',
+    awsAccountId: '123456987456'
   }
 
 };

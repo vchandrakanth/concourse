@@ -30,10 +30,13 @@ export class PolicyGroup {
   // get policyGroupMinor() { return element(by.css('#Minor')); }
   policyGroupTemplate(policyGroupTemplateName: any) { return element(by.xpath(`//h5[contains(.,'PGT ${policyGroupTemplateName}')]`)); }
   // get allowDisAllowDropDown() { return element(by.css('select[ng-reflect-form="[object Object]"]')); }
-  get allowDisAllowDropDown() { return element(by.css('template-allow > .form-group')); }
-  get selectAllow() { return element(by.xpath('//option[.="Allow"]')); }
+  // get allowDisAllowDropDown() { return element(by.css('template-allow > .form-group')); }
+  get allowDisAllowDropDown() { return element(by.css('app-aws-products .form-control')); }
+  // get selectAllow() { return element(by.xpath('//option[.="Allow"]')); }
+  get selectAllow() { return element(by.css('option[value="ALLOW"]')); }
   get selectDisAllow() { return element(by.xpath('//option[.="Disallow"]')); }
-  get servicesDropDown() { return element(by.css('[data-e2e="serviceDropdown"]')); }
+  // get servicesDropDown() { return element(by.css('[data-e2e="serviceDropdown"]')); }
+  get servicesDropDown() { return element(by.css('ng-select[placeholder="Select Product"]')); }
   get selectAllServices() { return element(by.css('button[data-e2e="dropdownSelectAll"]')); }
   selectService(service: any) { return element(by.xpath(`//span[.='${service}']`)); }
   get dropDownClose() { return element(by.css('.dropdown-up')); }
@@ -45,6 +48,7 @@ export class PolicyGroup {
   selectEvent(events: any) { return element(by.xpath(`//span[.='${events}']`)); }
   get eventsBlankClick() { return element(by.css('app-policy-template-form>div:nth-of-type(1)>div:nth-of-type(1)')); }
   get approvalGroupsDropDown() { return element(by.css('[placeholder="Select Approval Groups"]')); }
+  // get approvalGroupsDropDown() { return element(by.css('[ng-reflect-placeholder="Select Approval Groups"]')); }
   selectGroup(group: any) { return element(by.xpath(`//div[.='${group}']`)); }
   get regionDropDown() { return element(by.css('ng-multiselect-dropdown[name="AwsRegions"] .dropdown-down')); }
   selectRegion(region: any) { return element(by.xpath(`//div[.='${region}']`)); }
@@ -53,6 +57,8 @@ export class PolicyGroup {
   selectSurfaceLayer(surfacelayer: any) { return element(by.xpath(`//label[.='${surfacelayer}']`)); }
   get policySubmit() { return element(by.xpath('//button[.=\'Submit\']')); }
   get editPoliciesButton() { return element(by.css('button[data-e2e="editPolicies"]')); }
+  get editProductsDropDown() { return element(by.xpath('//span[@class="ng-arrow-wrapper"]')); }
+  get editAttributeTagsDropDown() { return element(by.xpath('//span[@class="ng-arrow-wrapper"]')); }
   get editSurfaceLayerButton() { return element(by.css('.btn-outline-primary[data-e2e="editSurfaceLayers"]')); }
   get updateSurfaceLayers() { return element(by.css('button[data-e2e="updateSurfaceLayers"]')); }
   get toast() { return $('#toast-container'); }
@@ -406,8 +412,8 @@ export class PolicyGroup {
     await browser.logger.info('Edit Button Clicked');
 
     // Select Service
-    await WaitHelper.waitForElementToBeClickable(this.servicesDropDown, 2000, 'servicesDropDown ');
-    await elementClick(this.servicesDropDown);
+    await WaitHelper.waitForElementToBeClickable(this.editProductsDropDown, 2000, 'servicesDropDown ');
+    await elementClick(this.editProductsDropDown);
     await browser.logger.info('servicesDropDown Page');
 
     await elementClick(this.selectService(`${service}`));

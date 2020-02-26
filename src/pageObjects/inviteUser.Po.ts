@@ -14,16 +14,12 @@ export class InviteUser {
     get toast() { return $('#toast-container'); }
     get alert() { return element(by.css('.alert')); }
 
-    async inviteNewUser(surfaceName: string = null, mail: any = null) {
+    async inviteNewUser(mail: any = null) {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
         await elementClick(this.usersLink);
         // await browser.get(configProperties.qaUrl + 'user-management/users');
         await browser.logger.info('Users Menu Clicked');
-
-        await WaitHelper.waitForElementToBeDisplayed(this.list, 2000, 'List');
-        await this.selectSurfaceFromDropDown(surfaceName);
-        await browser.logger.info('Selected E2E Surface');
 
         // Click on '+' Button to Invite User
         await elementClick(this.inviteUserButton);
@@ -43,17 +39,6 @@ export class InviteUser {
     getRandomNum = function (min, max) {
         return parseInt(Math.random() * (max - min) + min);
     };
-
-    async selectSurfaceFromDropDown(surfaceName: string = null) {
-        await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
-        await elementClick(this.surfaceDropDown);
-        await browser.logger.info(surfaceName, 'Surface Drop Down Clicked');
-
-        await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
-        await elementClick(this.selectSurface(surfaceName));
-        await browser.logger.info('Surface Selcted');
-        await browser.sleep(2000);
-    }
 
     async getPageTitle() {
         return browser.getTitle();

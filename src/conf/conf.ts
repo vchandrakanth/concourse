@@ -46,18 +46,18 @@ export let config: Config = {
             args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
             // '--headless',
         },
-        specs: ['../specs/inviteUser.js']
-        // ['../specs/attributeTags.js', '../specs/assetManager.js',
-        //     '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
-        //     '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
-        //     '../specs/approvals.js', '../specs/group.js', '../specs/surfaces.js',
-        //     '../specs/cloudRoles.js', '../specs/modelViolation.js', '../specs/policyViolations.js',
-        //      '../specs/UpdatePolicyViolation.js',
-        //     '../specs/addAttributeTagForPG.js', '../specs/removeAttributeTagForPG.js',
-        //      '../specs/manageInstitutionData.js', '../specs/requestForModel.js',
-        //     '../specs/requestForLogicalDeployment.js', '../specs/requestForCloudRoles.js',
-        //     '../specs/removeBusinessAuthorRoleAssignment.js', '../specs/removeControlAuthorRoleAssignment.js']
-        // '../specs/permissions.js', '../specs/nestedTemplates.js',
+        specs: ['../specs/createAWSAccount.js']
+            // ['../specs/attributeTags.js', '../specs/assetManager.js',
+            //     '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
+            //     '../specs/policyGroupTemplate.js', '../specs/policyGroup.js',
+            //     '../specs/surfaces.js',
+            //     '../specs/cloudRoles.js', '../specs/modelViolation.js', '../specs/policyViolations.js',
+            //     '../specs/UpdatePolicyViolation.js', '../specs/inviteUser.js',
+            //     '../specs/addAttributeTagForPG.js', '../specs/removeAttributeTagForPG.js',
+            //     '../specs/manageInstitutionData.js', '../specs/requestForModel.js',
+            //     '../specs/requestForLogicalDeployment.js', '../specs/requestForCloudRoles.js']
+                // '../specs/removeBusinessAuthorRoleAssignment.js', '../specs/removeControlAuthorRoleAssignment.js']
+        // '../specs/permissions.js', '../specs/nestedTemplates.js', '../specs/approvals.js', '../specs/group.js'
     },
 
     seleniumAddress: 'http://localhost:4444/wd/hub',
@@ -92,7 +92,7 @@ export let config: Config = {
         browser.logger = log4js.getLogger('protractorLog4js');
         jasmine.getEnv().addReporter(new HtmlReporter({
             baseDirectory: 'e2e_Results/test_Results'
-         }).getJasmine2Reporter());
+        }).getJasmine2Reporter());
         // browser.logger = log4js.verboseLogging ('');
         // const isVerboseLoggingEnabled: boolean = browser.params.verboseLogging;
         // Login before
@@ -120,15 +120,17 @@ export let config: Config = {
         }
 
         loginPage.login(username, password);
+
         // Slack integration.
         let webRep = require('jasmine-slack-reporter');
         browser.getProcessedConfig().then(function (config) {
             let browserName = config.capabilities.browserName;
+            let currentUrl = getUrl();
             jasmine.getEnv().addReporter(new webRep.WebReporter({
                 projectName: 'Concourse Labs',
                 environment: 'adhoc',
                 testname: jasmine.getEnv().currentSpec,
-                slackUrl: 'https://hooks.slack.com/services/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',
+                // slackUrl: 'https://hooks.slack.com/services/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',
                 channel: 'qa-e2e-test',
                 get itName() { let cs = jasmine.getEnv().currentSpec; return cs ? cs.description : ''; }
             }));

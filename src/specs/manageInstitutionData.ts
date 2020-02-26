@@ -10,7 +10,7 @@ describe('Surface Creation Concourse ', async function () {
     let surface = new Surface();
     let institutionData = new InstitutionData();
     let baseSurface = properties.SurfaceData.surfaceName;
-    let awsAccount = ['Aws Accounts'];
+    let discoveredModelOwningGroupId = ['Discovered Model Owning Group Id'];
     let azureSubscription = ['Azure Subscriptions'];
     let azureAccount = ['Azure Account'];
     let networkWhitelists = ['Network Whitelists'];
@@ -38,7 +38,7 @@ describe('Surface Creation Concourse ', async function () {
     });
 
     it('Step 2: Create AWS Data For Institution', async function (): Promise<any> {
-        await institutionData.createDataForInstitution(baseSurface, awsAccount, 0, accountKey, accountValue);
+        await institutionData.createDataForInstitution(baseSurface, discoveredModelOwningGroupId, 0, accountKey, accountValue);
         await ExpectHelper.isListElementExists(institutionData.dataAccountList, 'Aws Accounts');
     });
 
@@ -58,11 +58,11 @@ describe('Surface Creation Concourse ', async function () {
     });
 
     it('Step 6: Update AWS Data For Institurion', async function (): Promise<any> {
-        await institutionData.updateValueForInstitutionData(baseSurface, awsAccount, 1, updatedAccountKey, updatedAccountValue);
+        await institutionData.updateValueForInstitutionData(baseSurface, discoveredModelOwningGroupId, 1, updatedAccountKey, updatedAccountValue);
     });
 
     it('Step 7: Remove AWS Value For Institurion', async function (): Promise<any> {
-        await institutionData.deleteValueForInstitutionData(baseSurface, awsAccount, 1);
+        await institutionData.deleteValueForInstitutionData(baseSurface, discoveredModelOwningGroupId, 1);
     });
 
     it('Step 8: Update InsightUrl Data For Institurion', async function (): Promise<any> {
@@ -90,8 +90,8 @@ describe('Surface Creation Concourse ', async function () {
     });
 
     it('Step 14: Delete AWS Account Data For Institution', async function (): Promise<any> {
-        await institutionData.deleteDataAccountForInstitution(baseSurface, awsAccount);
-        await ExpectHelper.expectDoesNotExists(institutionData.selectAccount(awsAccount));
+        await institutionData.deleteDataAccountForInstitution(baseSurface, discoveredModelOwningGroupId);
+        await ExpectHelper.expectDoesNotExists(institutionData.selectAccount(discoveredModelOwningGroupId));
     });
 
     it('Step 15: Delete AZURE Account Data For Institution', async function (): Promise<any> {

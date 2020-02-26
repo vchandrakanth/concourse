@@ -96,11 +96,13 @@ export class AttributeTag {
 
     // Edit Attribute Tag Name
     await WaitHelper.waitForElementToBePresent(this.enterTagName, 5000, 'AttributeTag Name ');
+    await browser.sleep(2000);
     await elementSendkeys(this.enterTagName, ' Updated');
     await browser.logger.info('Asset Name Entered: ', name + ' Updated');
 
     // Edit Attribute Tag Description
     await WaitHelper.waitForElementToBePresent(this.enterTagDescription, 5000, 'AttributeTag Description ');
+    await browser.sleep(2000);
     await elementSendkeys(this.enterTagDescription, ' Updated');
     await browser.logger.info('Asset Description Entered: ', description + ' Updated');
 

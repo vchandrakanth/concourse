@@ -47,6 +47,14 @@ export class Surface {
     get addDataForSurfaceLayer() { return element(by.xpath('//button[contains(.,"Add Data")]')); }
     editDataForSurfaceLayer(value: any) { return element(by.xpath(`//ul[@class='list-group ng-star-inserted']/li[${value}]//button[@class='btn btn-primary ng-star-inserted']`)); }
     deleteDataForSurfaceLayer(value: any) { return element(by.xpath(`//ul[@class='list-group ng-star-inserted']/li[${value}]//button[@class='btn btn-primary btn-danger ng-star-inserted']`)); }
+    get assignAWSAccountsButton() { return element(by.css('[data-e2e="addAWSAccountsToSurface"]')); }
+    get awsAccountsDropDown() { return element(by.css('[placeholder="Select Aws Account"]')); }
+    selectAWSAccount(awsAccount: any) { return element(by.xpath(`//span[.='${awsAccount}']`)); }
+    get saveAWSAccount() { return element(by.xpath('//button[@class="btn btn-primary mt-2"]')); }
+    get removeAWSAccountsButton() { return element(by.css('[data-e2e="removeAWSAccountsToSurface"]')); }
+    selectAWSAccountToRemove(awsAccount: any) { return element(by.xpath(`//span[.='${awsAccount}']`)); }
+    get disableAWSAccount() { return element(by.xpath('//button[@class="btn btn-primary mt-2"]')); }
+
 
     async createNewSurface(surface: string = null, name: string = null, description: string = null, group: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
@@ -404,6 +412,78 @@ export class Surface {
         await browser.actions().mouseMove(this.closeManageSurfaceWindow).perform();
         await elementClick(this.closeManageSurfaceWindow);
         await browser.logger.info('Manage Surface Window Closed');
+    }
+
+    async assignAWSAccountsToSurface(name: string = null, awsAccount: string = null) {
+
+        await WaitHelper.waitForElementToBeHidden(this.toast);
+        await elementClick(this.surfaceMenu);
+        await WaitHelper.waitForElementToBeDisplayed(this.surfacelist, 3000, 'list displayed');
+        await browser.logger.info('Surface Page Displayed');
+
+        await this.selectSurfaceFromDropDown(name);
+
+        await WaitHelper.waitForElementToBePresent(this.surfaceMenu, 5000, 'Surface Menu');
+        await browser.actions().mouseMove(this.surfaceMenu).perform();
+        await elementClick(this.surfaceMenu);
+        await browser.logger.info('Surface Clicked');
+
+        await WaitHelper.waitForElementToBePresent(this.assignAWSAccountsButton, 5000, 'Assign AWS Account');
+        await browser.actions().mouseMove(this.assignAWSAccountsButton).perform();
+        await elementClick(this.assignAWSAccountsButton);
+        await browser.logger.info('Assign AWS Account Button Clicked');
+
+        await WaitHelper.waitForElementToBePresent(this.awsAccountsDropDown, 5000, 'AWS Accounts Drop Down');
+        await browser.actions().mouseMove(this.awsAccountsDropDown).perform();
+        await elementClick(this.awsAccountsDropDown);
+        await browser.logger.info('AWS Accounts Drop Down Button Clicked');
+
+        await WaitHelper.waitForElementToBePresent(this.selectAWSAccount(awsAccount), 5000, 'AWS Account');
+        await browser.actions().mouseMove(this.selectAWSAccount(awsAccount)).perform();
+        await elementClick(this.selectAWSAccount(awsAccount));
+        await browser.logger.info('AWS Account Selected');
+
+        await WaitHelper.waitForElementToBePresent(this.saveAWSAccount, 5000, ' Save AWS Account');
+        await browser.actions().mouseMove(this.saveAWSAccount).perform();
+        await elementClick(this.saveAWSAccount);
+        await browser.logger.info('Save');
+
+    }
+
+    async removeAWSAccountsFromSurface(name: string = null, awsAccount: string = null) {
+
+        await WaitHelper.waitForElementToBeHidden(this.toast);
+        await elementClick(this.surfaceMenu);
+        await WaitHelper.waitForElementToBeDisplayed(this.surfacelist, 3000, 'list displayed');
+        await browser.logger.info('Surface Page Displayed');
+
+        await this.selectSurfaceFromDropDown(name);
+
+        await WaitHelper.waitForElementToBePresent(this.surfaceMenu, 5000, 'Surface Menu');
+        await browser.actions().mouseMove(this.surfaceMenu).perform();
+        await elementClick(this.surfaceMenu);
+        await browser.logger.info('Surface Clicked');
+
+        await WaitHelper.waitForElementToBePresent(this.removeAWSAccountsButton, 5000, 'Remove AWS Account');
+        await browser.actions().mouseMove(this.removeAWSAccountsButton).perform();
+        await elementClick(this.removeAWSAccountsButton);
+        await browser.logger.info('Remove AWS Account Button Clicked');
+
+        await WaitHelper.waitForElementToBePresent(this.awsAccountsDropDown, 5000, 'AWS Accounts Drop Down');
+        await browser.actions().mouseMove(this.awsAccountsDropDown).perform();
+        await elementClick(this.awsAccountsDropDown);
+        await browser.logger.info('AWS Accounts Drop Down Button Clicked');
+
+        await WaitHelper.waitForElementToBePresent(this.selectAWSAccount(awsAccount), 5000, 'AWS Account');
+        await browser.actions().mouseMove(this.selectAWSAccount(awsAccount)).perform();
+        await elementClick(this.selectAWSAccount(awsAccount));
+        await browser.logger.info('AWS Account Selected');
+
+        await WaitHelper.waitForElementToBePresent(this.disableAWSAccount, 5000, 'Disable AWS Account');
+        await browser.actions().mouseMove(this.disableAWSAccount).perform();
+        await elementClick(this.disableAWSAccount);
+        await browser.logger.info('Disable');
+
     }
 
     getRandomNum = function (min, max) {

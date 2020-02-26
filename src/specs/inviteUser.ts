@@ -8,7 +8,6 @@ describe('Invite Users', async function () {
     let inviteUser = new InviteUser();
     let properties = require('../conf/properties');
     let mail = properties.InviteUserData.mail + inviteUser.getRandomNum(1, 1000) + '@concourselabs.com';
-    let baseSurface = properties.SurfaceData.surfaceName;
 
     beforeEach(function () {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -17,7 +16,7 @@ describe('Invite Users', async function () {
 
     it('Step 1:Invite User', async function (): Promise<any> {
         // Inviting New User
-        await inviteUser.inviteNewUser(baseSurface, mail);
+        await inviteUser.inviteNewUser(mail);
         await ExpectHelper.verifyContainsText(inviteUser.alert, 'alert', 'User Invitation Email Sent');
         await console.log(mail);
     });

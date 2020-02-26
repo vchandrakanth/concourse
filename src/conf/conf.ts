@@ -46,6 +46,7 @@ export let config: Config = {
             args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
             // '--headless',
         },
+<<<<<<< HEAD
         specs: ['../specs/createAWSAccount.js']
             // ['../specs/attributeTags.js', '../specs/assetManager.js',
             //     '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
@@ -58,6 +59,19 @@ export let config: Config = {
             //     '../specs/requestForLogicalDeployment.js', '../specs/requestForCloudRoles.js']
                 // '../specs/removeBusinessAuthorRoleAssignment.js', '../specs/removeControlAuthorRoleAssignment.js']
         // '../specs/permissions.js', '../specs/nestedTemplates.js', '../specs/approvals.js', '../specs/group.js'
+=======
+        specs: ['../specs/attributeTags.js', '../specs/assetManager.js',
+            '../specs/logicalDeployment.js', '../specs/logicalDeploymentViolation.js',
+            '../specs/policyGroupTemplate.js', '../specs/policyGroup.js', '../specs/inviteUser.js',
+            '../specs/approvals.js', '../specs/group.js', '../specs/surfaces.js',
+            '../specs/cloudRoles.js', '../specs/modelViolation.js', '../specs/policyViolations.js',
+             '../specs/UpdatePolicyViolation.js',
+            '../specs/addAttributeTagForPG.js', '../specs/removeAttributeTagForPG.js',
+             '../specs/manageInstitutionData.js', '../specs/requestForModel.js',
+            '../specs/requestForLogicalDeployment.js', '../specs/requestForCloudRoles.js',
+            '../specs/removeBusinessAuthorRoleAssignment.js', '../specs/removeControlAuthorRoleAssignment.js',
+        '../specs/permissions.js', '../specs/nestedTemplates.js',]
+>>>>>>> c1925feaf08e7ba5b04ebfcf706014ba3bc29c9c
     },
 
     seleniumAddress: 'http://localhost:4444/wd/hub',

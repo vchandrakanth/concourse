@@ -1,6 +1,6 @@
 module.exports = {
 
-  // qaUrl: 'https://adhoc.concourse.company/',
+  //  qaUrl: 'https://adhoc.concourse.company/',
   qaUrl: 'https://beta.concourse.company/',
   // qaUrl: 'https://prod.concourselabs.io/',
   seleniumServerUrl: 'http://localhost:4444/wd/hub',
@@ -141,6 +141,7 @@ module.exports = {
     azureSubscriptionKey: 'Account-123454321',
     azureSubscriptionValue: '123456978',
     UpdatedWhiteListValue: '10.10.10.2',
+    value: '123'
   },
 
   ServicesData:

@@ -25,7 +25,7 @@ describe('Surface Creation Concourse ', async function () {
     let azureSubscriptionKey = properties.SurfaceData.azureSubscriptionKey;
     let azureSubscriptionValue = properties.SurfaceData.azureSubscriptionValue;
     let updatedWhiteListValue = properties.SurfaceData.UpdatedWhiteListValue;
-    let getInstitutionDataName;
+    let discoveredModelOwningGroupIdValue = properties.SurfaceData.Value;
 
     beforeEach(function () {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
@@ -37,9 +37,9 @@ describe('Surface Creation Concourse ', async function () {
         await ExpectHelper.isListElementExists(institutionData.dataAccountList, 'Azure Subscriptions');
     });
 
-    it('Step 2: Create AWS Data For Institution', async function (): Promise<any> {
-        await institutionData.createDataForInstitution(baseSurface, discoveredModelOwningGroupId, 0, accountKey, accountValue);
-        await ExpectHelper.isListElementExists(institutionData.dataAccountList, 'Aws Accounts');
+    it('Step 2: Create Discovered Model Owning GroupId For Institution', async function (): Promise<any> {
+        await institutionData.createDataForInstitution(baseSurface, discoveredModelOwningGroupId, discoveredModelOwningGroupIdValue);
+        await ExpectHelper.isListElementExists(institutionData.dataAccountList, 'Discovered Model Owning GroupId');
     });
 
     it('Step 3: Create AzureAccount Data For Institution', async function (): Promise<any> {

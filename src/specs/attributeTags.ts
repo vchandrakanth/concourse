@@ -14,7 +14,7 @@ describe('Creaing Attribute Tags', async function () {
 
     beforeEach(function () {
         originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 500000;
     });
 
     it('Step 1: Create Attribute Tag', async function (): Promise<any> {

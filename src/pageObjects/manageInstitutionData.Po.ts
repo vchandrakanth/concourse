@@ -76,9 +76,9 @@ export class InstitutionData {
             await this.enterData(value, dataKey, keyValue);
         }
 
-        if (accountNames.includes('Aws Accounts')) {
+        if (accountNames.includes('Discovered Model Owning Group Id')) {
             await browser.logger.info('Account Name' + accountNames);
-            await this.enterData(value, dataKey, keyValue);
+            await this.enterNewData(value);
         }
 
         if (accountNames.includes('Network Whitelists')) {
@@ -129,9 +129,9 @@ export class InstitutionData {
             await browser.sleep(2000);
         }
 
-        if (accountNames.includes('Aws Accounts')) {
+        if (accountNames.includes('Discovered Model Owning Group Id')) {
             await browser.logger.info('Account Name' + accountNames);
-            await this.enterData(value, dataKey, keyValue);
+            await this.enterNewData(value);
         }
 
         if (accountNames.includes('Insights Urls')) {

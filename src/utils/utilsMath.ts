@@ -9,6 +9,10 @@ export class UtilMath {
         return arr;
     }
 
+
+    static randomFixedInteger (length) {
+        return Math.floor(Math.pow(10, length - 1) + Math.random() * (Math.pow(10, length) - Math.pow(10, length - 1) - 1));
+    }
     /**
      * Returns dd MMM yyyy as 8  Mar 2019
      * @returns {string}

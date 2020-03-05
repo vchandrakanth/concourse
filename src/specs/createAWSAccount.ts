@@ -1,7 +1,8 @@
-import { ExpectedConditions } from 'protractor';
+import { ExpectedConditions, utils } from 'protractor';
 import { ExpectHelper } from '../utils/expectHelper';
 import { CreateCloudAccount } from '../pageObjects/createAWSAccount.Po';
 import { Surface } from '../pageObjects/surfaces.Po';
+import { UtilMath } from '../utils/utilsMath';
 
 
 describe('Managing AWS Accounts', async function () {
@@ -21,26 +22,27 @@ describe('Managing AWS Accounts', async function () {
     });
 
     it('Step 1: Create AWS Account', async function (): Promise<any> {
+        awsAccountId = UtilMath.randomFixedInteger(12) ;
 
         await createCloudAccount.createNewCloudAccount(awsAccountName, awsAccountDescription, awsAccountId);
 
     });
 
-    it('Step 2: Edit AWS Account', async function (): Promise<any> {
-
-        await createCloudAccount.editAWSAccount(awsAccountName, awsAccountDescription);
-
-    });
-
-    it('Step 3: Assign AWS Account To Surface', async function (): Promise<any> {
+    it('Step 2: Assign AWS Account To Surface', async function (): Promise<any> {
 
         await surface.assignAWSAccountsToSurface(baseSurface, awsAccountName);
 
     });
 
-    it('Step 4: Remove AWS Account From Surface', async function (): Promise<any> {
+    it('Step 3: Remove AWS Account From Surface', async function (): Promise<any> {
 
         await surface.removeAWSAccountsFromSurface(baseSurface, awsAccountName);
+
+    });
+
+    it('Step 4: Edit AWS Account', async function (): Promise<any> {
+
+        await createCloudAccount.editAWSAccount(awsAccountName, awsAccountDescription);
 
     });
 

@@ -23,7 +23,7 @@ describe('Creaing Attribute Tags', function () {
         let baseSurface = properties.SurfaceData.surfaceName;
         beforeEach(function () {
             originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
-            jasmine.DEFAULT_TIMEOUT_INTERVAL = 300000;
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 500000;
         });
         it('Step 1: Create Attribute Tag', function () {
             return __awaiter(this, void 0, void 0, function* () {

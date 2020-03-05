@@ -18,13 +18,13 @@ export class PolicyGroup {
   get enterEditPolicyGroupName() { return element(by.xpath('//input[@id="name"]')); }
   get ownigGroupDropDown() { return element(by.css('ng-select[formcontrolname="owningGroupId"]')); }
   selectOowningGroup(owningGroup: any) { return element(by.xpath(`//span[@class='ng-option-label ng-star-inserted'][contains(text(),'${owningGroup}')]`)); } // //span[.='Root Group']
-  get policyGroupStatusDropdown() { return element(by.css('select[formcontrolname="status"]')); }
+  // get policyGroupStatusDropdown() { return element(by.css('select[formcontrolname="status"]')); }
   // get policyGroupDraft() { return element(by.css('option[value="DRAFT"]')); }
   get policyGroupDraft() { return element(by.css('[for="draft"]')); }
   // get policyGroupPublished() { return element(by.css('option[value="PUBLISHED"]')); }
   get policyGroupPublished() { return element(by.css('[for="published"]')); }
-  get policyGroupIncrementByDropdown() { return element(by.css('select[ng-reflect-name="versionBump"]')); }
-  // get policyGroupMajor() { return element(by.css('[for="major"]')); }
+  // get policyGroupIncrementByDropdown() { return element(by.css('select[ng-reflect-name="versionBump"]')); }
+  get policyGroupMajor() { return element(by.css('[for="major"]')); }
   // get policyGroupMajor() { return element(by.css('#major')); }
   get policyGroupMinor() { return element(by.css('[for="minor"]')); }
   // get policyGroupMinor() { return element(by.css('#Minor')); }
@@ -48,7 +48,7 @@ export class PolicyGroup {
   selectEvent(events: any) { return element(by.xpath(`//span[.='${events}']`)); }
   get eventsBlankClick() { return element(by.css('app-policy-template-form>div:nth-of-type(1)>div:nth-of-type(1)')); }
   get approvalGroupsDropDown() { return element(by.css('[placeholder="Select Approval Groups"]')); }
-  // get approvalGroupsDropDown() { return element(by.css('[ng-reflect-placeholder="Select Approval Groups"]')); }
+  // get approvalGroupsDropDown() { return element(by.css('ng-select[formcontrolname="30008"] > div > span')); }
   selectGroup(group: any) { return element(by.xpath(`//div[.='${group}']`)); }
   get regionDropDown() { return element(by.css('ng-multiselect-dropdown[name="AwsRegions"] .dropdown-down')); }
   selectRegion(region: any) { return element(by.xpath(`//div[.='${region}']`)); }
@@ -269,9 +269,6 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeClickable(this.selectAllEvents, 2000, 'Select All Events ');
     await elementClick(this.selectAllEvents);
     await browser.logger.info('Events Selected');
-    // await browser.sleep(2000);
-
-    await elementClick(this.eventsBlankClick);
 
     await WaitHelper.waitForElementToBeClickable(this.approvalGroupsDropDown, 2000, 'Approval Groups ');
     await elementClick(this.approvalGroupsDropDown);
@@ -1000,3 +997,5 @@ export class PolicyGroup {
     return await browser.getTitle();
   }
 }
+
+

@@ -5,8 +5,8 @@ let params = require('../conf/properties');
 
 export async function goToMainPage() {
     // browser.ignoreSynchronization=true;
-    await browser.get(browser.params.login.url);
-    console.log(browser.params.login.url);
+  return  await browser.get(browser.params.login.url);
+    // return console.log(browser.params.login.url);
 }
 
 export async function elementClick(targetElement: ElementFinder) {

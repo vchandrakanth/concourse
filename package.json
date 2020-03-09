@@ -8,6 +8,7 @@
     "@types/node": "^11.13.19",
     "bash": "0.0.1",
     "body-parser": "^1.18.3",
+    "chromedriver": "^80.0.1",
     "express": "^4.16.4",
     "g": "^2.0.1",
     "jasmine-slack-reporter": "^1.4.0",

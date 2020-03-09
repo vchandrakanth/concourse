@@ -34,19 +34,19 @@ export let config: Config = {
 
         // }
     ],
+    'directConnect': true,
     capabilities: {
         browserName: 'chrome',
         'shardTestFiles': false,
         'maxInstances': 1,
-        'directConnect': true,
-        'chromeOnly': true,
+         // 'chromeOnly': true,
         loggingPrefs: {
             'driver': 'INFO',
             'browser': 'INFO',
         },
         chromeOptions: {
 
-            args: ['--headless', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
+            args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
             // '--headless', --incognito
         },
         specs: [
@@ -79,7 +79,7 @@ export let config: Config = {
             ]
     },
 
-    // seleniumAddress: 'http://localhost:4444/wd/hub',
+   // seleniumAddress: 'http://localhost:4444/wd/hub',
     SELENIUM_PROMISE_MANAGER: true,
     beforeLaunch: function () {
         let filepath = './logs/ExecutionLog.log';
@@ -106,8 +106,9 @@ export let config: Config = {
         const browser = global.browser;
         // Browser setting
         browser.ignoreSynchronization = true;
-        browser.manage().window().maximize();
+        // browser.manage().window().maximize();
         browser.manage().timeouts().implicitlyWait(10000);
+      //  browser.manage().window().maximize();
         browser.logger = log4js.getLogger('protractorLog4js');
         jasmine.getEnv().addReporter(new HtmlReporter({
             // baseDirectory: 'e2e_Results/test_Results'
@@ -125,24 +126,30 @@ export let config: Config = {
         browser.logger.info('Logging into concourse website');
         // loginPage.login(configProperties.loginData.username, configProperties.loginData.password);
         let currentUrl = browser.params.login.url;
+        console.log('Here me');
+        username = configProperties.loginData.adhocUserName;
+        password = configProperties.loginData.adhocPassWord;
 
-        if (currentUrl.includes('adhoc')) {
-            username = configProperties.loginData.adhocUserName;
-            password = configProperties.loginData.adhocPassWord;
-            environment = 'adhoc';
-        }
+        // if (currentUrl.includes('adhoc')) {
+        //     username = configProperties.loginData.adhocUserName;
+        //     password = configProperties.loginData.adhocPassWord;
+        //     environment = 'adhoc';
+        //     console.log('Here Adhoc');
+        // }
 
-        if (currentUrl.includes('beta')) {
-            username = configProperties.loginData.betaUserName;
-            password = configProperties.loginData.betaPassWord;
-            environment = 'beta';
-        }
+        // if (currentUrl.includes('beta')) {
+        //     username = configProperties.loginData.betaUserName;
+        //     password = configProperties.loginData.betaPassWord;
+        //     environment = 'beta';
+        //     console.log('Here beta');
+        // }
 
-        if (currentUrl.includes('prod')) {
-            username = configProperties.loginData.prodUserName;
-            password = configProperties.loginData.prodPassWord;
-            environment = 'prod';
-        }
+        // if (currentUrl.includes('prod')) {
+        //     username = configProperties.loginData.prodUserName;
+        //     password = configProperties.loginData.prodPassWord;
+        //     environment = 'prod';
+        //     console.log('Here prod');
+        // }
 
         loginPage.login(username, password);
 
@@ -192,4 +199,5 @@ export let config: Config = {
         //     return global.browser.getProcessedConfig().then(function (config) {
         //         //it is ok to be empty
         //     });
-    } };
+    }
+};

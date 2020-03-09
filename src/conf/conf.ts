@@ -49,7 +49,7 @@ export let config: Config = {
             // '--headless',
         },
         specs: [
-            // '../specs/attributeTags.js',
+            '../specs/attributeTags.js',
                 // '../specs/assetManager.js',
                 // '../specs/logicalDeployment.js',
                 // '../specs/logicalDeploymentViolation.js',
@@ -74,7 +74,7 @@ export let config: Config = {
                 // '../specs/nestedTemplates.js',
                 // '../specs/permissions.js',
                 // '../specs/baseLineAssets.js',
-                '../specs/createAWSAccount.js'
+                // '../specs/createAWSAccount.js'
             ]
     },
 
@@ -123,7 +123,7 @@ export let config: Config = {
         let environment;
         browser.logger.info('Logging into concourse website');
         // loginPage.login(configProperties.loginData.username, configProperties.loginData.password);
-        let currentUrl = await getUrl();
+        let currentUrl = browser.params.login.url;
 
         if (currentUrl.includes('adhoc')) {
             username = configProperties.loginData.adhocUserName;
@@ -149,7 +149,7 @@ export let config: Config = {
         let webRep = require('jasmine-slack-reporter');
         browser.getProcessedConfig().then(function (config) {
             let browserName = config.capabilities.browserName;
-            let currentUrl = getUrl();
+            // let currentUrl = getUrl();
 
             jasmine.getEnv().addReporter(new webRep.WebReporter({
                 projectName: 'Concourse Labs',

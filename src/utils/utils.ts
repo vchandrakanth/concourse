@@ -1,12 +1,12 @@
 import { browser, ExpectedConditions, element, by, ElementFinder } from 'protractor';
 import { stringify } from 'querystring';
 import { async } from 'q';
-let prop1 = require('../conf/properties');
+let params = require('../conf/properties');
 
 export async function goToMainPage() {
     // browser.ignoreSynchronization=true;
-    await browser.get(prop1.qaUrl);
-    console.log(prop1.qaUrl);
+    await browser.get(browser.params.login.url);
+    console.log(browser.params.login.url);
 }
 
 export async function elementClick(targetElement: ElementFinder) {

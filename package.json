@@ -31,13 +31,13 @@
   },
   "scripts": {
     "pretest": "npm run tsc",
-    "test": "protractor ./build/conf/conf.js",
+    "test": "protractor ./build/conf/conf.js --params.login.url=https://adhoc.concourse.company",
     "tsc": "tsc",
     "test-odin": "npm run test0 --test:env=local --test:app_sty=web --test:prot_def=local-chrome --test:capabilities=local-chrome --test:suites=odin --test:timeouts=debug",
     "test-local": "env=local npm run test-local",
-    "test-adhoc": "env=adhoc npm run test-adhoc",
-    "test-beta": "env=beta npm run test-beta",
-    "test-prod": "env=prod npm run test-prod"
+    "e2e:adhoc": "protractor ./build/conf/conf.js --params.login.url=https://adhoc.concourse.company",
+    "e2e:beta": "protractor ./build/conf/conf.js --params.login.url=https://beta.concourse.company/",
+    "e2e:prod": "protractor ./build/conf/conf.js --params.login.url=https://prod.concourselabs.io/"
   },
   "author": "Rama",
   "license": "ISC"

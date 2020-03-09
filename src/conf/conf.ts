@@ -39,14 +39,15 @@ export let config: Config = {
         'shardTestFiles': false,
         'maxInstances': 1,
         'directConnect': true,
+        'chromeOnly': true,
         loggingPrefs: {
             'driver': 'INFO',
             'browser': 'INFO',
         },
         chromeOptions: {
 
-            args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
-            // '--headless',
+            args: ['--headless', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
+            // '--headless', --incognito
         },
         specs: [
             '../specs/attributeTags.js',
@@ -78,7 +79,7 @@ export let config: Config = {
             ]
     },
 
-    seleniumAddress: 'http://localhost:4444/wd/hub',
+    // seleniumAddress: 'http://localhost:4444/wd/hub',
     SELENIUM_PROMISE_MANAGER: true,
     beforeLaunch: function () {
         let filepath = './logs/ExecutionLog.log';

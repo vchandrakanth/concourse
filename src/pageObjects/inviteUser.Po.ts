@@ -5,8 +5,10 @@ import { WaitHelper } from '../utils/waitHelper';
 export class InviteUser {
     get usersLink() { return element(by.css('a[data-e2e="linkUsers"]')); }
     get inviteUserButton() { return element(by.xpath('//button[contains(text(),"Invite User")]')); }
-    get enterEmail() { return element(by.css('[data-e2e="email"]')); }
-    get inviteButton() { return element(by.css('.Invite')); }
+    // get enterEmail() { return element(by.css('[data-e2e="email"]')); }
+    get enterEmail() { return element(by.css('[placeholder="Email"]')); }
+    // get inviteButton() { return element(by.css('.Invite')); }
+    get inviteButton() { return element(by.css('button[type="submit"]')); }
     get list() { return element(by.xpath('//div[@class="list"]')); }
     get search() { return element(by.css('[placeholder="Search"]')); }
     get surfaceDropDown() { return element(by.css('[data-e2e="surfaceSwitcherDropdown"]')); }

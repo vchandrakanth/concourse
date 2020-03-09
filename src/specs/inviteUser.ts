@@ -17,7 +17,7 @@ describe('Invite Users', async function () {
     it('Step 1:Invite User', async function (): Promise<any> {
         // Inviting New User
         await inviteUser.inviteNewUser(mail);
-        await ExpectHelper.verifyContainsText(inviteUser.alert, 'alert', 'User Invitation Email Sent');
+        await ExpectHelper.verifyContainsText(inviteUser.toast, 'alert', 'User Invitation Email Sent');
         await console.log(mail);
     });
 

@@ -27,7 +27,7 @@ describe('Invite Users', function () {
             return __awaiter(this, void 0, void 0, function* () {
                 // Inviting New User
                 yield inviteUser.inviteNewUser(mail);
-                yield expectHelper_1.ExpectHelper.verifyContainsText(inviteUser.alert, 'alert', 'User Invitation Email Sent');
+                yield expectHelper_1.ExpectHelper.verifyContainsText(inviteUser.toast, 'alert', 'User Invitation Email Sent');
                 yield console.log(mail);
             });
         });

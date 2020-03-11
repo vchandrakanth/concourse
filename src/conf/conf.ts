@@ -34,13 +34,13 @@ export let config: Config = {
 
         // }
     ],
+
     'directConnect': true,
     capabilities: {
         browserName: 'chrome',
         'shardTestFiles': false,
         'maxInstances': 1,
-         // 'chromeOnly': true,
-        loggingPrefs: {
+         loggingPrefs: {
             'driver': 'INFO',
             'browser': 'INFO',
         },
@@ -50,36 +50,37 @@ export let config: Config = {
             // '--headless', --incognito
         },
         specs: [
-            '../specs/attributeTags.js',
-                // '../specs/assetManager.js',
-                // '../specs/logicalDeployment.js',
-                // '../specs/logicalDeploymentViolation.js',
-                // '../specs/policyGroupTemplate.js',
-                // '../specs/policyGroup.js',
-                // '../specs/surfaces.js',
-                // '../specs/approvals.js',
-                // '../specs/modelViolation.js',
-                // '../specs/policyViolations.js',
-                // '../specs/UpdatePolicyViolation.js',
-                // '../specs/inviteUser.js',
-                // '../specs/addAttributeTagForPG.js',
-                // '../specs/removeAttributeTagForPG.js',
-                // '../specs/manageInstitutionData.js',
-                // '../specs/requestForModel.js',
-                // '../specs/requestForLogicalDeployment.js',
-                // '../specs/requestForCloudRoles.js',
-                // '../specs/cloudRoles.js',
-                // '../specs/group.js',
-                // '../specs/removeBusinessAuthorRoleAssignment.js',
-                // '../specs/removeControlAuthorRoleAssignment.js',
-                // '../specs/nestedTemplates.js',
-                // '../specs/permissions.js',
-                // '../specs/baseLineAssets.js',
-                // '../specs/createAWSAccount.js'
-            ]
+            // '../specs/attributeTags.js',
+            // '../specs/assetManager.js',
+            // '../specs/logicalDeployment.js',
+            // '../specs/logicalDeploymentViolation.js',
+            // '../specs/policyGroupTemplate.js',
+            // '../specs/policyGroup.js',
+            '../specs/policyGroupV3.js',
+            // '../specs/surfaces.js',
+            // '../specs/approvals.js',
+            // '../specs/modelViolation.js',
+            // '../specs/policyViolations.js',
+            // '../specs/UpdatePolicyViolation.js',
+            // '../specs/inviteUser.js',
+            // '../specs/addAttributeTagForPG.js',
+            // '../specs/removeAttributeTagForPG.js',
+            // '../specs/manageInstitutionData.js',
+            // '../specs/requestForModel.js',
+            // '../specs/requestForLogicalDeployment.js',
+            // '../specs/requestForCloudRoles.js',
+            // '../specs/cloudRoles.js',
+            // '../specs/group.js',
+            // '../specs/removeBusinessAuthorRoleAssignment.js',
+            // '../specs/removeControlAuthorRoleAssignment.js',
+            // '../specs/nestedTemplates.js',
+            // '../specs/permissions.js',
+            // '../specs/baseLineAssets.js',
+            // '../specs/createAWSAccount.js'
+        ]
     },
 
-   // seleniumAddress: 'http://localhost:4444/wd/hub',
+  //  seleniumAddress: 'http://localhost:4444/wd/hub',
     SELENIUM_PROMISE_MANAGER: true,
     beforeLaunch: function () {
         let filepath = './logs/ExecutionLog.log';
@@ -106,14 +107,13 @@ export let config: Config = {
         const browser = global.browser;
         // Browser setting
         browser.ignoreSynchronization = true;
-        // browser.manage().window().maximize();
+        browser.manage().window().maximize();
         browser.manage().timeouts().implicitlyWait(10000);
-      //  browser.manage().window().maximize();
         browser.logger = log4js.getLogger('protractorLog4js');
         jasmine.getEnv().addReporter(new HtmlReporter({
             // baseDirectory: 'e2e_Results/test_Results'
             // baseDirectory: 'e2e_Results/' +  (new Date()).getTime()
-            baseDirectory: 'e2e_Results/' +  (new Date()).getTime()
+            baseDirectory: 'e2e_Results/' + (new Date()).getTime()
         }).getJasmine2Reporter());
         // browser.logger = log4js.verboseLogging ('');
         // const isVerboseLoggingEnabled: boolean = browser.params.verboseLogging;
@@ -126,30 +126,30 @@ export let config: Config = {
         browser.logger.info('Logging into concourse website');
         // loginPage.login(configProperties.loginData.username, configProperties.loginData.password);
         let currentUrl = browser.params.login.url;
-        console.log('Here me');
-        username = configProperties.loginData.adhocUserName;
-        password = configProperties.loginData.adhocPassWord;
+        // console.log('Here me');
+        // username = configProperties.loginData.adhocUserName;
+        // password = configProperties.loginData.adhocPassWord;
 
-        // if (currentUrl.includes('adhoc')) {
-        //     username = configProperties.loginData.adhocUserName;
-        //     password = configProperties.loginData.adhocPassWord;
-        //     environment = 'adhoc';
-        //     console.log('Here Adhoc');
-        // }
+        if (currentUrl.includes('adhoc')) {
+            username = configProperties.loginData.adhocUserName;
+            password = configProperties.loginData.adhocPassWord;
+            environment = 'adhoc';
+            console.log('Here Adhoc');
+        }
 
-        // if (currentUrl.includes('beta')) {
-        //     username = configProperties.loginData.betaUserName;
-        //     password = configProperties.loginData.betaPassWord;
-        //     environment = 'beta';
-        //     console.log('Here beta');
-        // }
+        if (currentUrl.includes('beta')) {
+            username = configProperties.loginData.betaUserName;
+            password = configProperties.loginData.betaPassWord;
+            environment = 'beta';
+            console.log('Here beta');
+        }
 
-        // if (currentUrl.includes('prod')) {
-        //     username = configProperties.loginData.prodUserName;
-        //     password = configProperties.loginData.prodPassWord;
-        //     environment = 'prod';
-        //     console.log('Here prod');
-        // }
+        if (currentUrl.includes('prod')) {
+            username = configProperties.loginData.prodUserName;
+            password = configProperties.loginData.prodPassWord;
+            environment = 'prod';
+            console.log('Here prod');
+        }
 
         loginPage.login(username, password);
 

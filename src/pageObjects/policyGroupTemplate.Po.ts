@@ -67,9 +67,9 @@ export class PolicyGroupTemplatePage {
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
     // Click on the PolicyGroups Template
-    await browser.get(configProperties.qaUrl + '/policy-group-templates');
+    // await browser.get(configProperties.qaUrl + '/policy-group-templates');
     // await browser.actions().mouseDown(this.policyGroupTemplateLink).perform();
-    // await elementClick(this.policyGroupTemplateLink);
+    await elementClick(this.policyGroupTemplateLink);
 
     await browser.logger.info('Policy Group Template Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list);
@@ -145,8 +145,8 @@ export class PolicyGroupTemplatePage {
 
   async searchPolicyGroupTemplate(surfaceName: string = null, name: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await browser.get(configProperties.qaUrl + '/policy-group-templates');
-    // await elementClick(this.policyGroupTemplateLink);
+    // await browser.get(configProperties.qaUrl + '/policy-group-templates');
+    await elementClick(this.policyGroupTemplateLink);
 
     await browser.logger.info('Policy Group Template Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
@@ -160,8 +160,8 @@ export class PolicyGroupTemplatePage {
 
   async editPolicyGroupTemplate(surfaceName: string = null, name: string = null, desc) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await browser.get(configProperties.qaUrl + '/policy-group-templates');
-    // await elementClick(this.policyGroupTemplateLink);
+    // await browser.get(configProperties.qaUrl + '/policy-group-templates');
+    await elementClick(this.policyGroupTemplateLink);
 
     await browser.logger.info('Policy Group Template Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
@@ -199,9 +199,9 @@ export class PolicyGroupTemplatePage {
   async deletePolicyGroupTemplate(surfaceName: string = null, name: string = null, deleteOnly: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Policy Group Template Menu Button
-    await browser.get(configProperties.qaUrl + '/policy-group-templates');
-    // await browser.actions().mouseDown(this.policyGroupTemplateLink).perform();
-    // await elementClick(this.policyGroupTemplateLink);
+    // await browser.get(configProperties.qaUrl + '/policy-group-templates');
+    await browser.actions().mouseDown(this.policyGroupTemplateLink).perform();
+    await elementClick(this.policyGroupTemplateLink);
 
     await browser.logger.info('Policy Group Template Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list);

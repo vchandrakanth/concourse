@@ -20,7 +20,7 @@
     "selenium-webdriver": "^4.0.0-alpha.7",
     "update": "^0.7.4",
     "webdriver-manager": "^12.1.7",
-    "yarn": "^1.16.0"
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "html-dnd": "^1.2.0",

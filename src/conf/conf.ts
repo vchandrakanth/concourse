@@ -34,51 +34,53 @@ export let config: Config = {
 
         // }
     ],
+
+    'directConnect': true,
     capabilities: {
         browserName: 'chrome',
         'shardTestFiles': false,
         'maxInstances': 1,
-        'directConnect': true,
-        loggingPrefs: {
+         loggingPrefs: {
             'driver': 'INFO',
             'browser': 'INFO',
         },
         chromeOptions: {
 
             args: ['--incognito', '--disable-infobars', '--disable-gpu', '--no-sandbox', '--disable-extensions', '--disable-dev-shm-usage'],
-            // '--headless',
+            // '--headless', --incognito
         },
         specs: [
-            '../specs/attributeTags.js',
-                '../specs/assetManager.js',
-                '../specs/logicalDeployment.js',
-                '../specs/logicalDeploymentViolation.js',
-                '../specs/policyGroupTemplate.js',
-                '../specs/policyGroup.js',
-                '../specs/surfaces.js',
-                '../specs/approvals.js',
-                '../specs/modelViolation.js',
-                '../specs/policyViolations.js',
-                '../specs/UpdatePolicyViolation.js',
-                '../specs/inviteUser.js',
-                '../specs/addAttributeTagForPG.js',
-                '../specs/removeAttributeTagForPG.js',
-                '../specs/manageInstitutionData.js',
-                '../specs/requestForModel.js',
-                '../specs/requestForLogicalDeployment.js',
-                '../specs/requestForCloudRoles.js',
-                '../specs/cloudRoles.js',
-                '../specs/group.js',
-                '../specs/removeBusinessAuthorRoleAssignment.js',
-                '../specs/removeControlAuthorRoleAssignment.js',
-                '../specs/nestedTemplates.js',
-                '../specs/permissions.js',
-                '../specs/baseLineAssets.js',
-                '../specs/createAWSAccount.js'
-            ]
+            // '../specs/attributeTags.js',
+            // '../specs/assetManager.js',
+            // '../specs/logicalDeployment.js',
+            // '../specs/logicalDeploymentViolation.js',
+            // '../specs/policyGroupTemplate.js',
+            // '../specs/policyGroup.js',
+            '../specs/policyGroupV3.js',
+            // '../specs/surfaces.js',
+            // '../specs/approvals.js',
+            // '../specs/modelViolation.js',
+            // '../specs/policyViolations.js',
+            // '../specs/UpdatePolicyViolation.js',
+            // '../specs/inviteUser.js',
+            // '../specs/addAttributeTagForPG.js',
+            // '../specs/removeAttributeTagForPG.js',
+            // '../specs/manageInstitutionData.js',
+            // '../specs/requestForModel.js',
+            // '../specs/requestForLogicalDeployment.js',
+            // '../specs/requestForCloudRoles.js',
+            // '../specs/cloudRoles.js',
+            // '../specs/group.js',
+            // '../specs/removeBusinessAuthorRoleAssignment.js',
+            // '../specs/removeControlAuthorRoleAssignment.js',
+            // '../specs/nestedTemplates.js',
+            // '../specs/permissions.js',
+            // '../specs/baseLineAssets.js',
+            // '../specs/createAWSAccount.js'
+        ]
     },
 
-    seleniumAddress: 'http://localhost:4444/wd/hub',
+  //  seleniumAddress: 'http://localhost:4444/wd/hub',
     SELENIUM_PROMISE_MANAGER: true,
     beforeLaunch: function () {
         let filepath = './logs/ExecutionLog.log';
@@ -111,7 +113,7 @@ export let config: Config = {
         jasmine.getEnv().addReporter(new HtmlReporter({
             // baseDirectory: 'e2e_Results/test_Results'
             // baseDirectory: 'e2e_Results/' +  (new Date()).getTime()
-            baseDirectory: 'e2e_Results/' +  (new Date()).getTime()
+            baseDirectory: 'e2e_Results/' + (new Date()).getTime()
         }).getJasmine2Reporter());
         // browser.logger = log4js.verboseLogging ('');
         // const isVerboseLoggingEnabled: boolean = browser.params.verboseLogging;
@@ -123,24 +125,30 @@ export let config: Config = {
         let environment;
         browser.logger.info('Logging into concourse website');
         // loginPage.login(configProperties.loginData.username, configProperties.loginData.password);
-        let currentUrl = await getUrl();
+        let currentUrl = browser.params.login.url;
+        // console.log('Here me');
+        // username = configProperties.loginData.adhocUserName;
+        // password = configProperties.loginData.adhocPassWord;
 
         if (currentUrl.includes('adhoc')) {
             username = configProperties.loginData.adhocUserName;
             password = configProperties.loginData.adhocPassWord;
             environment = 'adhoc';
+            console.log('Here Adhoc');
         }
 
         if (currentUrl.includes('beta')) {
             username = configProperties.loginData.betaUserName;
             password = configProperties.loginData.betaPassWord;
             environment = 'beta';
+            console.log('Here beta');
         }
 
         if (currentUrl.includes('prod')) {
             username = configProperties.loginData.prodUserName;
             password = configProperties.loginData.prodPassWord;
             environment = 'prod';
+            console.log('Here prod');
         }
 
         loginPage.login(username, password);
@@ -149,14 +157,14 @@ export let config: Config = {
         let webRep = require('jasmine-slack-reporter');
         browser.getProcessedConfig().then(function (config) {
             let browserName = config.capabilities.browserName;
-            let currentUrl = getUrl();
+            // let currentUrl = getUrl();
 
             jasmine.getEnv().addReporter(new webRep.WebReporter({
                 projectName: 'Concourse Labs',
                 environment: environment,
                 testname: jasmine.getEnv().currentSpec,
-                // slackUrl: 'https://hooks.slack.com/services/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',
-                slackUrl: 'https://hooks.slack.com/services/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',
+                // slackUrl: 'https://hooks.slack.com/services/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',
+                // slackUrl: 'https://hooks.slack.com/services/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',
                 channel: 'qa-e2e-test',
                 // get itName() { let cs = jasmine.getEnv().currentSpec; return cs ? cs.description : ''; }                  });
             }));
@@ -191,4 +199,5 @@ export let config: Config = {
         //     return global.browser.getProcessedConfig().then(function (config) {
         //         //it is ok to be empty
         //     });
-    } };
+    }
+};

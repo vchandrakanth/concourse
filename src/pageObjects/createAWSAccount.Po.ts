@@ -14,8 +14,9 @@ export class CreateCloudAccount {
     get awsAccountId() { return element(by.css('input[formcontrolname="account"]')); }
     // get saveButton() { return $('[data-e2e="createAwsAccountButton"]'); }
     get closeButton() { return $('.close'); }
-
-    get saveButton() { return element(by.xpath('//button[@class="btn btn-primary mt-2"][contains(.,"Save")]')); }
+    get saveButton() { return element(by.css('[data-e2e="createAwsAccountButton"]')); }
+    // get saveButton() { return element(by.xpath('//button[@class="btn btn-primary mt-2"][contains(.,"Save")]')); }
+    get saveOnEdit() { return element(by.css('button.mt-2')); }
     get toast() { return $('#toast-container'); }
     get surfaceDropDown() { return element(by.css('[data-e2e="surfaceSwitcherDropdown"]')); }
     selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
@@ -90,10 +91,9 @@ export class CreateCloudAccount {
         await elementSendkeys(this.awsAccountDescription, ' Updated');
         await browser.logger.info(description + 'Updated', 'Entered');
 
-        await WaitHelper.waitForElementToBeClickable(this.saveButton, 10000, 'Save ');
-        await browser.actions().mouseMove(this.saveButton).perform();
-        await browser.sleep(10000);
-        await elementClick(this.saveButton);
+        await WaitHelper.waitForElementToBeClickable(this.saveOnEdit, 10000, 'Save ');
+        await browser.actions().mouseMove(this.saveOnEdit).perform();
+        await elementClick(this.saveOnEdit);
         await browser.logger.info('AWS Account Updated');
         await console.log('AWS Account Name Is', name);
     }

@@ -1,8 +1,8 @@
 module.exports = {
 
-  //  qaUrl: 'https://adhoc.concourse.company/',
- // qaUrl: 'https://beta.concourse.company/',
-   qaUrl: 'https://prod.concourselabs.io/',
+  adhoc: 'https://adhoc.concourse.company/',
+  beta: 'https://beta.concourse.company/',
+  prod: 'https://prod.concourselabs.io/',
   seleniumServerUrl: 'http://localhost:4444/wd/hub',
 
   // Login Data

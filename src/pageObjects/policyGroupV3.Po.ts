@@ -19,9 +19,9 @@ export class PolicyGroup {
   get policyGroupPublished() { return element(by.css('[for="published"]')); }
   get policyGroupMajor() { return element(by.css('[for="major"]')); }
   get policyGroupMinor() { return element(by.css('[for="minor"]')); }
-  get policyGroupTemplateSearch() { return element(by.xpath('//input[@class="form-control ng-pristine ng-valid ng-touched"]')); }
+  get policyGroupTemplateSearch() { return element(by.css('[data-e2e="policyGroupTemplateSearch"]')); }
   policyGroupTemplate(policyGroupTemplateName: any) { return element(by.xpath(`//h5[contains(.,'PGT ${policyGroupTemplateName}')]`)); }
-  selectPermissions(permission: any, num: any) { return element(by.css(`//label[.='${permission} ${num}']`)); }
+  selectPermissions(permission: any, num: any) { return element(by.css(`[data-e2e='${permission} ${num}']`)); }
   get allowDisAllowDropDown() { return element(by.css('app-aws-products .form-control')); }
   get selectAllow() { return element(by.css('option[value="ALLOW"]')); }
   get selectDisAllow() { return element(by.xpath('//option[.="Disallow"]')); }
@@ -68,7 +68,8 @@ export class PolicyGroup {
     }
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
-    await browser.get(configProperties.qaUrl + '/policy-groups');
+    // await browser.get(configProperties.qaUrl + '/policy-groups');
+    await elementClick(this.policyGroupMenu);
     await browser.logger.info('Clicked On Policy Group Menu');
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -124,7 +125,7 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeClickable(this.policyGroupTemplateSearch, 5000, 'Policy group Template List Displayed');
     // await elementClick(this.policyGroupTemplateSearch);
     // await elementSendkeys(this.policyGroupTemplateSearch, policyGroupTemplateName);
-    await PageHelper.sendKeysToInputField(this.policyGroupTemplateSearch, policyGroupTemplateName);
+    await elementSendkeys(this.policyGroupTemplateSearch, policyGroupTemplateName);
     await elementClick(this.policyGroupTemplate(`${policyGroupTemplateName}`));
     await browser.logger.info('Policy Template Selected');
 

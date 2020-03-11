@@ -156,7 +156,7 @@ export let config: Config = {
                 environment: environment,
                 testname: jasmine.getEnv().currentSpec,
                 // slackUrl: 'https://hooks.slack.com/services/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',
-                // slackUrl: 'https://hooks.slack.com/services/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',
+                slackUrl: 'https://hooks.slack.com/services/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',
                 channel: 'qa-e2e-test',
                 // get itName() { let cs = jasmine.getEnv().currentSpec; return cs ? cs.description : ''; }                  });
             }));

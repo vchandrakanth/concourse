@@ -7,6 +7,7 @@ import { getDefaultService } from 'selenium-webdriver/chrome';
 let configProperties = require('../conf/properties');
 let HtmlReporter = require('protractor-beautiful-reporter');
 let nodemailer = require('nodemailer');
+let browserurltest;
 
 export let config: Config = {
 
@@ -35,12 +36,12 @@ export let config: Config = {
         // }
     ],
 
-    'directConnect': true,
+    directConnect: true,
     capabilities: {
         browserName: 'chrome',
         'shardTestFiles': false,
         'maxInstances': 1,
-         loggingPrefs: {
+        loggingPrefs: {
             'driver': 'INFO',
             'browser': 'INFO',
         },
@@ -55,8 +56,7 @@ export let config: Config = {
             // '../specs/logicalDeployment.js',
             // '../specs/logicalDeploymentViolation.js',
             // '../specs/policyGroupTemplate.js',
-            // '../specs/policyGroup.js',
-            '../specs/policyGroupV3.js',
+            '../specs/policyGroup.js',
             // '../specs/surfaces.js',
             // '../specs/approvals.js',
             // '../specs/modelViolation.js',
@@ -80,7 +80,7 @@ export let config: Config = {
         ]
     },
 
-  //  seleniumAddress: 'http://localhost:4444/wd/hub',
+    //  seleniumAddress: 'http://localhost:4444/wd/hub',
     SELENIUM_PROMISE_MANAGER: true,
     beforeLaunch: function () {
         let filepath = './logs/ExecutionLog.log';
@@ -111,47 +111,54 @@ export let config: Config = {
         browser.manage().timeouts().implicitlyWait(10000);
         browser.logger = log4js.getLogger('protractorLog4js');
         jasmine.getEnv().addReporter(new HtmlReporter({
-            // baseDirectory: 'e2e_Results/test_Results'
-            // baseDirectory: 'e2e_Results/' +  (new Date()).getTime()
             baseDirectory: 'e2e_Results/' + (new Date()).getTime()
         }).getJasmine2Reporter());
         // browser.logger = log4js.verboseLogging ('');
         // const isVerboseLoggingEnabled: boolean = browser.params.verboseLogging;
         // Login before
+
+        params: {
+            env: null;
+        }
+
+        const env = process.argv.filter(arg => {
+            return arg.includes('--params.env');
+        })[0];
+        console.log('Current URl' + env);
+        if (env.includes('adhoc'))
+            browserurltest = 'https://adhoc.concourse.company';
         let loginPage = new LoginPage();
-        goToMainPage();
+        console.log('Current URl' + browserurltest);
+        goToMainPage(browserurltest);
         let username;
         let password;
         let environment;
         browser.logger.info('Logging into concourse website');
-        // loginPage.login(configProperties.loginData.username, configProperties.loginData.password);
-        let currentUrl = browser.params.login.url;
-        // console.log('Here me');
-        // username = configProperties.loginData.adhocUserName;
-        // password = configProperties.loginData.adhocPassWord;
+        let currentUrl = browserurltest;
 
         if (currentUrl.includes('adhoc')) {
             username = configProperties.loginData.adhocUserName;
             password = configProperties.loginData.adhocPassWord;
             environment = 'adhoc';
-            console.log('Here Adhoc');
+            console.log('Adhoc Environment');
         }
 
         if (currentUrl.includes('beta')) {
             username = configProperties.loginData.betaUserName;
             password = configProperties.loginData.betaPassWord;
             environment = 'beta';
-            console.log('Here beta');
+            console.log('Beta Environment');
         }
 
         if (currentUrl.includes('prod')) {
             username = configProperties.loginData.prodUserName;
             password = configProperties.loginData.prodPassWord;
             environment = 'prod';
-            console.log('Here prod');
+            console.log('Prod Environment');
         }
 
         loginPage.login(username, password);
+
 
         // Slack integration.
         let webRep = require('jasmine-slack-reporter');
@@ -185,7 +192,6 @@ export let config: Config = {
 
         }, 15000);
         return global.browser.getProcessedConfig().then(function (config) {
-            // it is ok to be empty
         });
 
         // onPrepare: function () {

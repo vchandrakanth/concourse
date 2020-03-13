@@ -50,8 +50,7 @@ export class LogicalDeployment {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
-        await browser.get(configProperties.qaUrl + '/assets');
-        // await elementClick(this.assetsManagerMenu);
+        await elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);
@@ -61,7 +60,6 @@ export class LogicalDeployment {
         // Select Created Enclave Model
         await WaitHelper.waitForElementToBeDisplayed(this.assetList, 5000, 'Enclave Model List Displayed');
         await this.search.sendKeys(assetName);
-        await browser.sleep(2000);
         await elementClick(this.searchEnclaveModel(assetName));
         await browser.logger.info(assetName, 'Selected');
 
@@ -80,13 +78,11 @@ export class LogicalDeployment {
         await browser.actions().mouseDown(this.enterDeploymentName).perform();
         await elementSendkeys(this.enterDeploymentName, deploymentName);
         await browser.logger.info('Deployment Name Entered');
-        await browser.sleep(2000);
 
         // Enter Stack Name
         await WaitHelper.waitForElementToBeClickable(this.enterStackName, 5000, 'Stack Name');
         await elementSendkeys(this.enterStackName, stackName);
         await browser.logger.info('Stack Name Entered');
-        await browser.sleep(2000);
 
         await WaitHelper.waitForElementToBeClickable(this.cloudRegionDropDown, 2000, 'Cloud Region Drop Down ');
         await browser.actions().mouseDown(this.cloudRegionDropDown).perform();
@@ -125,7 +121,7 @@ export class LogicalDeployment {
         await WaitHelper.waitForElement(this.submitButton, 5000, 'Submit ');
         await elementClick(this.submitButton);
         await browser.logger.info('Submitted Deployment');
-        await browser.sleep(2000);
+        await browser.sleep(3000);
     }
 
     getRandomNum = function (min, max) {
@@ -145,7 +141,8 @@ export class LogicalDeployment {
     async searchLogicalDeployment(surfaceName: string = null, deploymentName: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on LogicalDeployment Menu Button
-        await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
+        // await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
+        await elementClick(this.logicalDeployementMenu);
         await browser.logger.info('Clicked on Logical Deployment Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);
@@ -162,7 +159,7 @@ export class LogicalDeployment {
     async updateLogicalDeployment(surfaceName: string = null, deploymentName: string = null, assetName: string = null, version: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on LogicalDeployment Menu Button
-        await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
+        await elementClick(this.logicalDeployementMenu);
         await browser.logger.info('Clicked on Logical Deployment Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);
@@ -204,20 +201,17 @@ export class LogicalDeployment {
         await WaitHelper.waitForElement(this.submitButton, 5000, 'Submit ');
         await elementClick(this.submitButton);
         await browser.logger.info('Submitted Deployment');
-        await browser.sleep(2000);
     }
 
     async deleteLogicalDeployement(surfaceName: string = null, deploymentName: any = null) {
         // wait till the toast element flash is hidden.
         await WaitHelper.waitForElementToBeHidden(this.toast);
-
-        await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
+        await elementClick(this.logicalDeployementMenu);
         await browser.logger.info('Clicked on Logical Deployments Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);
 
         await this.search.sendKeys(deploymentName);
-        await browser.sleep(2000);
         await elementClick(this.logicalDeployementElement(deploymentName));
         await browser.logger.info(deploymentName, 'Selected');
 
@@ -236,7 +230,7 @@ export class LogicalDeployment {
     async verifyLogicalDeployment(surfaceName: string = null, deploymentName: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on LogicalDeployment Menu Button
-        await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
+        await elementClick(this.logicalDeployementMenu);
         await browser.logger.info('Clicked on Logical Deployment Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);
@@ -252,7 +246,6 @@ export class LogicalDeployment {
         await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
         await elementClick(this.selectSurface(surfaceName));
         await browser.logger.info('Surface Selcted');
-        await browser.sleep(2000);
       }
 
     async getPageTitle() {

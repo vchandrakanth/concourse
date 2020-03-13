@@ -43,7 +43,7 @@ describe('Policy Group Concourse ', async function () {
     });
 
     it('Step 3: Creating Policy Group', async function (): Promise<any> {
-        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services, 'Default Surface - Root Surface Layer', 'POLICY_GROUP', 'E2E Admin');
+        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services, 'Default Surface - Root Surface Layer', 'POLICY_GROUP', 'E2E Admin', 'Require Approval of Institutional Entities 1');
         policyGroupId = await getIdFromUrl();
         await console.log('Policy Group id Is', policyGroupId);
         await policyPage.searchPolicyGroup(baseSurface, policyGroupName);

@@ -67,7 +67,7 @@ describe('Creaing Model Violations ', async function () {
 
   it('Step 4: Creating Policy Group with S3 ', async function (): Promise<any> {
     // // Creating Policy Group
-    await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDescription, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, service);
+    await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDescription, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, service,  ' ', ' ', ' ', 'Allowed AWS Products in Stacks 1');
     let s3PolicyGroupId = await getIdFromUrl();
     await console.log('Policy Group name is', s3PolicyGroupId);
     await console.log('Policy Group name is', policyGroupName);
@@ -77,7 +77,7 @@ describe('Creaing Model Violations ', async function () {
 
   it('Step 5: Creating Policy Group with EC2 ', async function (): Promise<any> {
     // // Creating Policy Group
-    await policyPage.createPolicyGroup(baseSurface, policyGroupName1, policyGroupDescription1, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, service1);
+    await policyPage.createPolicyGroup(baseSurface, policyGroupName1, policyGroupDescription1, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, service1,  ' ', ' ', ' ', 'Allowed AWS Products in Stacks 1');
     let ec2PolicyGroupId = await getIdFromUrl();
     await console.log('Policy Group name is', policyGroupName1);
     await console.log('Policy Group id is', ec2PolicyGroupId);

@@ -29,7 +29,7 @@ describe('Creating Groups Concourse ', async function () {
     it('Step 1: Create New Group', async function (): Promise<any> {
         // Creating New Group
         await group.createGroup(surfaceName, groupName, groupDescription, 0);
-        // Verify if the Group is created
+        await group.searchGroupName(surfaceName, groupName);
         await ExpectHelper.isListElementExists(group.groupList, groupName);
         groupId = await group.getId();
         await console.log('Group id is', groupId);

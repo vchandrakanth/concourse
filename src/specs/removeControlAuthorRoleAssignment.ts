@@ -43,6 +43,7 @@ describe('Deleting Control Author Role Assignment with dependent Policy Group', 
         await ExpectHelper.isListElementExists(group.groupList, groupName);
         groupId = await group.getId();
         await console.log('Group id is', groupId);
+        await console.log('Group Name Is: ', groupName);
         await browser.refresh();
     });
 
@@ -76,9 +77,9 @@ describe('Deleting Control Author Role Assignment with dependent Policy Group', 
 
     it('Step 6: Creating Policy Group', async function (): Promise<any> {
         // // Creating Policy Group
-        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDescription, groupName, 'PUBLISHED', policyGroupTemplateName, attributeTagName, service, 'Default Surface - Root Surface Layer');
-        let s3PolicyGroupId = await getIdFromUrl();
-        await console.log('Policy Group name is', s3PolicyGroupId);
+        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDescription, groupName, 'PUBLISHED', policyGroupTemplateName, attributeTagName, service, 'Default Surface - Root Surface Layer', ' ', ' ', 'Allowed AWS Products in Stacks 1');
+        let policyGroupId = await getIdFromUrl();
+        await console.log('Policy Group name is', policyGroupId);
         await console.log('Policy Group name is', policyGroupName);
         await policyPage.searchPolicyGroup(baseSurface, policyGroupName);
         await ExpectHelper.isListElementExists(policyPage.list, policyGroupName);
@@ -87,7 +88,8 @@ describe('Deleting Control Author Role Assignment with dependent Policy Group', 
     it('Step 7: Try To Remove Role Assignment From Group with dependent Policy Group', async function (): Promise<any> {
         // Removing Role From Group
         await group.removeRolesFromGroup(baseSurface, groupName, controlAuthorRole);
-        await ExpectHelper.verifyContainsText(group.alertMessage, 'alertWindow', 'Cannot remove role because owned Policy Group will no longer be permitted on their Surface Layer(s).');
+        await ExpectHelper.verifyContainsText(group.alertWindow, 'alertWindow', 'Cannot remove role because owned Policy Group will no longer be permitted on their Surface Layer(s).');
+        await browser.refresh();
     });
 
     it('Step 8: Deleting Policy Group', async function (): Promise<any> {

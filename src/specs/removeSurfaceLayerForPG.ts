@@ -95,7 +95,7 @@ describe('Remove Surface Layer For Policy Group and Verify Violation created ', 
 
     it('Step 6: Creating Policy Group with EC2 and S3 ', async function (): Promise<any> {
         // Creating Policy Group
-        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, services, 'Default Surface - Root Surface Layer');
+        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, services, 'Default Surface - Root Surface Layer',  ' ', ' ', 'Allowed AWS Products in Stacks 1');
         policyId = await getIdFromUrl();
         await console.log('Policy Group  id is', policyId);
         await policyPage.searchPolicyGroup(baseSurface, policyGroupName);

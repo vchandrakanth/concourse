@@ -6,7 +6,7 @@ let configProperties = require('../conf/properties');
 
 export class PolicyGroupTemplatePage {
 
-  get policyGroupTemplateLink() { return element(by.css('[data-e2e="linkPolicyGroupTemplates"]')); }
+  get policyGroupTemplateLink() { return element(by.css('a[data-e2e="linkPolicyGroupTemplates"]')); }
 
   get createNewPolicyGroupTemplate() { return element(by.css('button[data-e2e="createNewPGT"]')); }
   // get policyGroupTemplateName() { return element(by.css('[data-e2e="PGTname"]')); }
@@ -67,7 +67,6 @@ export class PolicyGroupTemplatePage {
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
     // Click on the PolicyGroups Template
-    // await browser.get(configProperties.qaUrl + '/policy-group-templates');
     // await browser.actions().mouseDown(this.policyGroupTemplateLink).perform();
     await elementClick(this.policyGroupTemplateLink);
 
@@ -90,11 +89,6 @@ export class PolicyGroupTemplatePage {
     await WaitHelper.waitForElementToBePresent(this.policyGroupTemplateDescription, 10000, 'Description ');
     await elementSendkeys(this.policyGroupTemplateDescription, desc);
     await browser.logger.info('Description Entered', desc);
-
-    // Select Draft status
-    // await WaitHelper.waitForElementToBeClickable(this.policyGroupTemplateStatusDropdown, 2000, 'Status Drop Down ');
-    // await elementClick(this.policyGroupTemplateStatusDropdown);
-    // await browser.logger.info('Selected Status DropDown');
 
     // If selected published following code is executed.
     if (status === 'PUBLISHED') {
@@ -145,13 +139,16 @@ export class PolicyGroupTemplatePage {
 
   async searchPolicyGroupTemplate(surfaceName: string = null, name: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await browser.get(configProperties.qaUrl + '/policy-group-templates');
+    await WaitHelper.waitForElementToBeDisplayed(this.policyGroupTemplateLink, 5000, 'Menu Displayed');
+    await browser.actions().mouseMove(this.policyGroupTemplateLink).perform();
     await elementClick(this.policyGroupTemplateLink);
-
     await browser.logger.info('Policy Group Template Clicked');
+
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
 
     await this.selectSurfaceFromDropDown(surfaceName);
+
+    await elementClear(this.search, name);
 
     // Select Created Policy group Template
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'Policy group Template List Displayed');
@@ -160,7 +157,6 @@ export class PolicyGroupTemplatePage {
 
   async editPolicyGroupTemplate(surfaceName: string = null, name: string = null, desc) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await browser.get(configProperties.qaUrl + '/policy-group-templates');
     await elementClick(this.policyGroupTemplateLink);
 
     await browser.logger.info('Policy Group Template Clicked');
@@ -181,10 +177,6 @@ export class PolicyGroupTemplatePage {
     await elementSendkeys(this.policyGroupTemplateName, ' Updated');
     await browser.logger.info('Policy Group Template Name Entered: ');
 
-    // await WaitHelper.waitForElementToBePresent(this.policyGroupTemplateEditStatusDropdown, 5000, 'Policy Group Template Drop Down ');
-    // await elementClick(this.policyGroupTemplateEditStatusDropdown);
-    // await browser.logger.info('Policy Group Template Status Drop DOwn ');
-
     // await WaitHelper.waitForElementToBeClickable(this.policyGroupTemplateDraft, 2000, 'DRAFT ');
     // await browser.actions().mouseDown(this.policyGroupTemplateDraft).perform();
     // await elementClick(this.policyGroupTemplateDraft);
@@ -200,6 +192,7 @@ export class PolicyGroupTemplatePage {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Policy Group Template Menu Button
     // await browser.get(configProperties.qaUrl + '/policy-group-templates');
+    await WaitHelper.waitForElementToBeDisplayed(this.policyGroupTemplateLink, 5000, 'Menu');
     await browser.actions().mouseDown(this.policyGroupTemplateLink).perform();
     await elementClick(this.policyGroupTemplateLink);
 

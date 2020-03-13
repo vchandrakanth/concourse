@@ -20,7 +20,6 @@ export class InviteUser {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
         await elementClick(this.usersLink);
-        // await browser.get(configProperties.qaUrl + 'user-management/users');
         await browser.logger.info('Users Menu Clicked');
 
         // Click on '+' Button to Invite User
@@ -35,7 +34,6 @@ export class InviteUser {
         await WaitHelper.waitForElementToBeClickable(this.inviteButton, 5000, 'Invite');
         await elementClick(this.inviteButton);
         await browser.logger.info('Invite Button Clicked');
-        await browser.sleep(2000);
     }
 
     getRandomNum = function (min, max) {

@@ -30,13 +30,10 @@ export class AttributeTag {
 
   async createAttributeTag(surfaceName: string = null, name: string = null, description: any) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await browser.get(configProperties.qaUrl + '/attribute-tags');
     // await browser.actions().mouseDown(this.attributeTagsLink).perform();
     await elementClick(this.attributeTagsLink);
 
     await browser.logger.info('AttributeTags Menu Clicked');
-    // await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
-    // await WaitHelper.waitAny(5000, this.list);
 
     await this.selectSurfaceFromDropDown(surfaceName);
     await browser.logger.info('Selected E2E Surface');
@@ -58,7 +55,7 @@ export class AttributeTag {
     // Save Attribute Tag
     await WaitHelper.waitForElementToBeClickable(this.saveButton, 5000, 'Save ');
     await elementClick(this.saveButton);
-    await browser.sleep(3000);
+    await browser.sleep(2000);
     await browser.logger.info('Attribute Tag Created');
     await console.log('Attribute Tag Is', name);
   }
@@ -70,17 +67,18 @@ export class AttributeTag {
   async searchAttribute(surfaceName: string = null, name: string = null, description: any = null) {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
-
-    // await browser.get(configProperties.qaUrl + '/attribute-tags');
     await browser.actions().mouseMove(this.attributeTagsLink).perform();
     await elementClick(this.attributeTagsLink);
     await browser.logger.info('AttributeTags Menu Clicked');
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
+    await elementClear(this.search, name);
+
     // Select Created Attribute Tag
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'AttributeTag List Displayed');
     await this.search.sendKeys(name);
+    await browser.sleep(2000);
     await elementClick(this.searchAttributeName(name));
     await browser.logger.info(name, 'Selected');
   }
@@ -127,7 +125,7 @@ export class AttributeTag {
   async deleteAttributeTag(surfaceName: string = null, name: string = null, deleteOnly: string = null) {
     // wait till the toast element flash is hidden.
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await browser.get(configProperties.qaUrl + '/attribute-tags');
+    await browser.actions().mouseMove(this.attributeTagsLink).perform();
     await elementClick(this.attributeTagsLink);
     await browser.logger.info('AttributeTags Menu Clicked');
 
@@ -136,7 +134,6 @@ export class AttributeTag {
 
     await elementClear(this.search, name);
 
-    // Select Created Attribute Tag/attr
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'AttributeTag List Displayed');
     if (!deleteOnly)
       name = name + ' Updated';

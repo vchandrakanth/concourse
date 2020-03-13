@@ -54,7 +54,6 @@ export class Approvals {
     let approvalRequest = element(by.css('.list-group')).all(by.className('mb-3 ng-star-inserted'));
     approvalRequest.first().click();
     await browser.logger.info(entityId, 'Selected');
-    await browser.sleep(2000);
 
     await WaitHelper.waitForElementToBeClickable(this.approveButton, 2000, 'Approve Button ');
     await browser.actions().mouseMove(this.approveButton).perform();
@@ -103,7 +102,6 @@ export class Approvals {
     await browser.actions().mouseMove(this.confirmDeleteButton).perform();
     await elementClick(this.confirmDeleteButton);
     await browser.logger.info('Confirm Delete');
-    await browser.sleep(2000);
   }
 
   async VerifyDeleteApprovalRequest(surfaceName: string = null, Id: any = null) {
@@ -130,7 +128,6 @@ export class Approvals {
     await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
     await elementClick(this.selectSurface(surfaceName));
     await browser.logger.info('Surface Selcted');
-    await browser.sleep(2000);
   }
 
   async getId() {

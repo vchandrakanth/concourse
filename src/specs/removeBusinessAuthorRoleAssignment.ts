@@ -64,7 +64,6 @@ describe('Removing Business Author Role Assignments with Underlying LogicalDeplo
         await attributeTag.createAttributeTag(baseSurface, attributeTagName, attributeTagdescription);
         await attributeTag.searchAttribute(baseSurface, attributeTagName, 'Description');
         await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName);
-        await browser.refresh();
     });
 
     it('Step 5: Create New Enclave Model', async function (): Promise<any> {
@@ -90,8 +89,9 @@ describe('Removing Business Author Role Assignments with Underlying LogicalDeplo
     it('Step 7: Remove Role Assignment From Group', async function (): Promise<any> {
         // Removing Role From Group
         await group.removeRolesFromGroup(baseSurface, groupName, businessAuthorRole);
-        await ExpectHelper.verifyContainsText(group.alertWindow, 'alertWindow', 'Cannot remove role because Logical Deployment to Surface Layer will no longer be covered by this Enclave Model owning group.');
-        // await console.log('Cannot remove specified Business Author role because Logical Deployment(s) to Surface Layer(s) of owned Enclave Model(s)');
+        await ExpectHelper.verifyContainsText(group.alertWindow, 'alertWindow', `Cannot remove role because Group ${groupId} is discovery owning group of Enclave Model.`);
+        // Cannot remove role because Logical Deployment to Surface Layer will no longer be covered by this Enclave Model owning group.
+        await browser.refresh();
     });
 
     it('Step 8: Delete Logical Deployment', async function (): Promise<any> {
@@ -99,6 +99,12 @@ describe('Removing Business Author Role Assignments with Underlying LogicalDeplo
         await logicalDeployment.deleteLogicalDeployement(baseSurface, deploymentName);
         await ExpectHelper.expectDoesNotExists(logicalDeployment.logicalDeployementElement(deploymentName));
     });
+
+    it('Step 12: Delete Enclave Model', async function (): Promise<any> {
+            // Deleting Enclave Model
+            await assetsManager.deleteEnclaveModel(baseSurface, assetName, 'false');
+            await ExpectHelper.expectDoesNotExists(assetsManager.enclaveModelElement(assetName));
+        });
 
     it('Step 9: Remove Role Assignment From Group', async function (): Promise<any> {
         // Removing Role From Group
@@ -118,11 +124,11 @@ describe('Removing Business Author Role Assignments with Underlying LogicalDeplo
         await ExpectHelper.isListElementExists(group.groupList, groupName);
     });
 
-    it('Step 12: Delete Enclave Model', async function (): Promise<any> {
-        // Deleting Enclave Model
-        await assetsManager.deleteEnclaveModel(baseSurface, assetName, 'false');
-        await ExpectHelper.expectDoesNotExists(assetsManager.enclaveModelElement(assetName));
-    });
+    // it('Step 12: Delete Enclave Model', async function (): Promise<any> {
+    //     // Deleting Enclave Model
+    //     await assetsManager.deleteEnclaveModel(baseSurface, assetName, 'false');
+    //     await ExpectHelper.expectDoesNotExists(assetsManager.enclaveModelElement(assetName));
+    // });
 
     it('Step 13: Delete Attribute Tag', async function (): Promise<any> {
         // Deleting Attribute Tag

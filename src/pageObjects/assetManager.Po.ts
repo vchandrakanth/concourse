@@ -46,7 +46,6 @@ export class AssetManager {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    // await browser.get(configProperties.qaUrl + '/assets');
     await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Assets Manager Menu Clicked');
     await browser.sleep(2000);
@@ -93,7 +92,7 @@ export class AssetManager {
 
     await WaitHelper.waitForElementToBeSelected(this.chooseFile, 2000, 'Choose File ');
     await console.log(`This platform is ${process.platform}`);
-    await browser.sleep(3000);
+    await browser.sleep(2000);
 
     await this.fileUpload(fileName);
 
@@ -123,7 +122,6 @@ export class AssetManager {
     await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Enclave Model Evaluations ');
     await elementClick(this.nextButton);
     await browser.logger.info('Moved to Review Enclave Model Page');
-    await browser.sleep(3000);
 
     // Select Review Enclave Model Page
     await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Review Enclave Model ');
@@ -134,7 +132,7 @@ export class AssetManager {
     await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
     await elementClick(this.submitButton);
     await browser.logger.info('Enclave Model Submitted');
-    await browser.sleep(5000);
+    await browser.sleep(3000);
   }
 
   getRandomNum = function (min, max) {
@@ -158,11 +156,10 @@ export class AssetManager {
   }
 
   async searchAssetManager(surfaceName: string = null, assetName: string = null, searchOnly: string = null) {
-    await WaitHelper.waitForElementToBeHidden(this.toast);
+    // await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-
-    await browser.get(configProperties.qaUrl + '/assets');
-    // await elementClick(this.assetsManagerMenu);
+    await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
+    await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -179,7 +176,6 @@ export class AssetManager {
     await this.searchAssetManager(surfaceName, assetName, desc);
     await elementClick(this.searchEnclaveModel(assetName));
     await browser.logger.info(assetName, 'Selected');
-    await browser.sleep(3000);
 
     // Click Edit Icon
     await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button ');
@@ -212,13 +208,14 @@ export class AssetManager {
     await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
     await elementClick(this.submitButton);
     await browser.logger.info('Enclave Model Updated', assetName + '  Updated');
+    await WaitHelper.waitForElementToBeHidden(this.toast);
   }
 
   async deleteEnclaveModel(surfaceName: string = null, assetName: string = null, deleteOnly: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    await browser.get(configProperties.qaUrl + '/assets');
-    // await elementClick(this.assetsManagerMenu);
+    await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
+    await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -244,20 +241,19 @@ export class AssetManager {
     await browser.actions().mouseMove(this.confirmDeleteButton).perform();
     await elementClick(this.confirmDeleteButton);
     await browser.logger.info(assetName, 'Deleted');
+    await WaitHelper.waitForElementToBeHidden(this.toast);
   }
 
   async updateEnclaveModel(surfaceName: string = null, assetName: string = null, attributeTagName: string = null) {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    // await browser.get(configProperties.qaUrl + '/assets');
     await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
     // Search the enclaveModel
     await this.searchAssetManager(surfaceName, assetName);
     await elementClick(this.searchEnclaveModel(assetName));
     await browser.logger.info(assetName, 'Selected');
-    await browser.sleep(3000);
 
     // Click Edit Icon
     await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button ');
@@ -293,6 +289,7 @@ export class AssetManager {
     await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
     await elementClick(this.submitButton);
     await browser.logger.info('Enclave Model Updated', assetName);
+    await WaitHelper.waitForElementToBeHidden(this.toast);
   }
 
   async verifyEnclaveModel(assetName: any) {
@@ -310,7 +307,6 @@ export class AssetManager {
     await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
     await elementClick(this.selectSurface(surfaceName));
     await browser.logger.info('Surface Selcted');
-    await browser.sleep(2000);
   }
 
   async getPageTitle() {

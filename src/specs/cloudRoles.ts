@@ -78,8 +78,8 @@ describe('Creating Cloud Roles', async function () {
 
     it('Step 9: Edit Cloud Role', async function (): Promise<any> {
         await cloudRole.editCloudRoleNameAndPublish(baseSurface, cloudRoleName, description);
-        await cloudRole.searchCloudRole(baseSurface, cloudRoleName + ' Updated');
-        await ExpectHelper.isListElementExists(cloudRole.list, cloudRoleName + ' Updated');
+        await cloudRole.searchCloudRole(baseSurface, cloudRoleName);
+        await ExpectHelper.isListElementExists(cloudRole.list, cloudRoleName);
     });
 
     it('Step 10: Remove Cloud Role', async function (): Promise<any> {

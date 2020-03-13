@@ -7,6 +7,7 @@ export class Risk {
 
   get policyViolationsMenu() { return element(by.css('a[data-e2e="linkPolicyViolations"]')); }
   get gridTable() { return element(by.css('.grid-table')); }
+  get riskMenu() { return element(by.css('a[data-e2e="linkPolicyViolations"]')); }
   // get risklist() { return element(by.css('.datatable-body')); }.app-container
   get risklist() { return element(by.css('.app-container')); }
   // get riskdetail() { return element(by.css('.detail')); }
@@ -26,7 +27,9 @@ export class Risk {
 
   async openRisk(ID: any) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await browser.get(configProperties.qaUrl + '/workflows/risks');
+    // await browser.get(configProperties.qaUrl + '/workflows/risks');
+    await WaitHelper.waitForElementToBeDisplayed(this.riskMenu, 2000, 'Menu');
+    await elementClick(this.riskMenu);
     await WaitHelper.waitForElementToBeDisplayed(this.risklist, 3000, 'list displayed');
     await browser.logger.info('Risk Page Displayed');
 
@@ -54,7 +57,9 @@ export class Risk {
 
   async verifyRisk(ID: any) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await browser.get(configProperties.qaUrl + '/workflows/risks');
+    // await browser.get(configProperties.qaUrl + '/workflows/risks');
+    await WaitHelper.waitForElementToBeDisplayed(this.riskMenu, 2000, 'Menu');
+    await elementClick(this.riskMenu);
     await WaitHelper.waitForElementToBeDisplayed(this.risklist, 3000, 'list displayed');
     await browser.logger.info('Risk Page Displayed');
 

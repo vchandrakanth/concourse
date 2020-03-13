@@ -70,7 +70,7 @@ describe('Creaing Logical Deployment Violations', async function () {
 
   it('Step 4: Creating Policy Group with  Published', async function (): Promise<any> {
     // Creating Policy Group with  Published
-    await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services);
+    await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services, ' ', ' ', ' ', 'Allowed AWS Products in Stacks 1');
     policyId = await getIdFromUrl();
     await console.log('Policy Group name is', policyId);
     await console.log('Policy Group name is', policyGroupName);

@@ -2,7 +2,7 @@ import { Risk } from '../pageObjects/risks.Po';
 import { ExpectHelper } from '../utils/expectHelper';
 import { Approvals } from '../pageObjects/approvals.Po';
 import { PolicyGroup } from '../pageObjects/policyGroup.Po';
-import { element, by, ExpectedConditions } from 'protractor';
+import { element, by, ExpectedConditions, browser } from 'protractor';
 import { AssetManager } from '../pageObjects/assetManager.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { LogicalDeployment } from '../pageObjects/logicalDeployment.Po';
@@ -55,6 +55,7 @@ describe('Add Attribute Tag For Policy Group and Verify Violation created ', asy
     await attributeTag.searchAttribute(baseSurface, attributeTagName, 'description');
     await ExpectHelper.isListElementExists(attributeTag.list, attributeTagName);
     await console.log('Attribute Tag name is', attributeTagName);
+    await browser.refresh();
   });
 
   it('Step 2: Create Another Attribute Tag', async function (): Promise<any> {
@@ -94,7 +95,7 @@ describe('Add Attribute Tag For Policy Group and Verify Violation created ', asy
 
   it('Step 6: Creating Policy Group with EC2 and S3 ', async function (): Promise<any> {
     // Creating Policy Group
-    await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services);
+    await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services,  ' ', ' ', ' ', 'Allowed AWS Products in Stacks 1');
     policyId = await getIdFromUrl();
     await console.log('Policy Group  id is', policyId);
     await policyPage.searchPolicyGroup(baseSurface, policyGroupName);

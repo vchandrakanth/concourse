@@ -65,7 +65,7 @@ describe('Verifying Policy Violation', async function () {
 
     it('Step 4: Creating Policy Group with S3 ', async function (): Promise<any> {
         // Creating Policy Group
-        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDescription, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, service);
+        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDescription, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, service,  ' ', ' ', ' ', 'Allowed AWS Products in Stacks 1');
         let policyId = await getIdFromUrl();
         await console.log('Policy Group Id is', policyId);
         await console.log('Policy Group name is', policyGroupName);

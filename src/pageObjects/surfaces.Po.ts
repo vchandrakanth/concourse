@@ -104,7 +104,6 @@ export class Surface {
         await WaitHelper.waitForElementToBeClickable(this.createButton, 2000, 'Create ');
         await elementClick(this.createButton);
         await browser.logger.info('Surface Created: ', name);
-        await browser.sleep(3000);
         await browser.refresh();
 
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
@@ -167,7 +166,7 @@ export class Surface {
     async verifySurface(name: string = null) {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
-        await WaitHelper.waitForElementToBeDisplayed(this.surfacelist, 3000, 'list displayed');
+        await WaitHelper.waitForElementToBeDisplayed(this.surfaceMenu, 3000, 'Menu');
         await elementClick(this.surfaceMenu);
         await browser.logger.info('Surface Page Displayed');
 
@@ -217,7 +216,6 @@ export class Surface {
         await WaitHelper.waitForElementToBePresent(this.createDataButton, 5000, 'Data Key Value');
         await elementClick(this.createDataButton);
         await browser.logger.info(dataKey, 'Created');
-        await browser.sleep(2000);
 
         await this.closeDataWindow();
     }
@@ -246,7 +244,6 @@ export class Surface {
         await WaitHelper.waitForElementToBePresent(this.updateData, 5000, 'Update Data');
         await elementClick(this.updateData);
         await browser.logger.info(dataKey, 'Updated');
-        await browser.sleep(3000);
 
         await this.closeDataWindow();
     }
@@ -273,7 +270,6 @@ export class Surface {
         await browser.actions().mouseMove(this.confirmDeleteButton).perform();
         await elementClick(this.confirmDeleteButton);
         await browser.logger.info(name, 'Deleted');
-        await browser.sleep(2000);
 
         await this.closeDataWindow();
     }
@@ -320,7 +316,6 @@ export class Surface {
         await WaitHelper.waitForElementToBePresent(this.createDataButton, 5000, 'Data Key Value');
         await elementClick(this.createDataButton);
         await browser.logger.info(dataKey, 'Created');
-        await browser.sleep(2000);
 
         await this.closeDataWindow();
     }
@@ -354,7 +349,6 @@ export class Surface {
         await WaitHelper.waitForElementToBePresent(this.updateData, 5000, 'Update Data');
         await elementClick(this.updateData);
         await browser.logger.info(dataKey, 'Updated');
-        await browser.sleep(3000);
 
         await this.closeDataWindow();
     }
@@ -381,8 +375,6 @@ export class Surface {
         await browser.actions().mouseMove(this.confirmDeleteButton).perform();
         await elementClick(this.confirmDeleteButton);
         await browser.logger.info(name, 'Deleted');
-        await browser.sleep(2000);
-
         await this.closeDataWindow();
     }
 
@@ -394,7 +386,6 @@ export class Surface {
         await WaitHelper.waitForElementToBePresent(this.selectsurface(name), 5000, 'Surface');
         await elementClick(this.selectsurface(name));
         await browser.logger.info('Surface Selcted');
-        await browser.sleep(2000);
     }
 
     async enterData(value: any = null, dataKey: string = null, keyValue: string = null) {

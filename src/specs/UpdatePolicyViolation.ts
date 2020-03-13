@@ -85,7 +85,7 @@ describe('Update Policy Violation ', async function () {
 
     it('Step 5: Creating Policy Group with EC2 and S3 ', async function (): Promise<any> {
         // Creating Policy Group
-        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services);
+        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName, services,  ' ', ' ', ' ', 'Allowed AWS Products in Stacks 1');
         policyId = await getIdFromUrl();
         await console.log('Policy Group name is', policyId);
         await console.log('Policy Group name is', policyGroupName);
@@ -95,7 +95,7 @@ describe('Update Policy Violation ', async function () {
 
     it('Step 6: Update Policy Group with all Products Except EC2', async function (): Promise<any> {
         // Updating Policy Group With EC2
-        await policyPage.updatePolicyGroupWithEC2(baseSurface, policyGroupName, ec2Service);
+        await policyPage.updatePolicyGroupWithEC2(baseSurface, policyGroupName, removeEC2Service);
         ec2PolicyId = await getIdFromUrl();
         await console.log(' Published Policy Group id is', ec2PolicyId);
         await console.log('Policy Group name is', policyGroupName);
@@ -111,7 +111,7 @@ describe('Update Policy Violation ', async function () {
 
     it('Step 8: Update Policy Group with all Products Except S3 Service', async function (): Promise<any> {
         // Update Policy Group With S3
-        await policyPage.updatePolicyGroupWithS3(baseSurface, policyGroupName, s3Service);
+        await policyPage.updatePolicyGroupWithS3(baseSurface, policyGroupName, removeS3Service);
         s3PolicyId = await getIdFromUrl();
         await console.log(' Published Policy Group id is', s3PolicyId);
         await console.log('Policy Group name is', policyGroupName);

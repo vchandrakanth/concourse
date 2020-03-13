@@ -74,7 +74,7 @@ export class Group {
     // selectCloudRoleToDelete(cloudRole: any) { return element(by.xpath(`//li[contains(.,'${cloudRole}')]//button[@data-e2e='deleteCloudRoleAssignment']`)); }
     selectCloudRoleToDelete(cloudRole: any) { return element(by.xpath(`//li[contains(.,'${cloudRole}')]//button[@data-e2e='deleteCloudRoleAssignment']`)); }
     get alertWindow() { return element(by.css('div.modal-body .alert-container')); }
-    get alertMessage() { return element(by.css('//div[@class="modal-body"]//div[@class="alert alert-danger alert-dismissible ng-star-inserted"]')); }
+    get alertMessage() { return element(by.xpath('//div[@class="modal-body"]//div[@class="alert alert-danger alert-dismissible ng-star-inserted"]')); }
 
     // Group methods
     async createGroup(surfaceName: string = null, groupName: string = null, description: string = null, roleCount: any) {
@@ -112,7 +112,7 @@ export class Group {
         await elementClick(this.createButton);
         await browser.logger.info('Group Created');
         await browser.logger.info('GroupName IS: ', groupName);
-        await browser.sleep(2000);
+        // await browser.sleep(2000);
 
         // Click On Roles Assignment Tab
         await WaitHelper.waitForElementToBeClickable(this.rolesAssignments, 2000, 'Roles Assignment ');
@@ -123,7 +123,7 @@ export class Group {
         await WaitHelper.waitForElementToBeClickable(this.associateGroup, 2000, 'Associate Group ');
         await elementClick(this.associateGroup);
         await browser.logger.info('Clicked Associate Group');
-        await browser.sleep(2000);
+        // await browser.sleep(2000);
     }
 
     async searchGroupName(surfaceName: string = null, groupName: string = null) {
@@ -182,8 +182,8 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
 
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Menu');
-        // await elementClick(this.groupsMenu);
-        await browser.get(configProperties.qaUrl + '/user-management/groups');
+        // await browser.actions().mouseMove(this.groupsMenu).perform();
+        await elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await this.searchGroupName(surfaceName, groupName);
@@ -216,21 +216,21 @@ export class Group {
         await browser.logger.info('Users Tab Selected');
 
         // Click User Drop Down
-        // await WaitHelper.waitForElementToBeClickable(this.userDropDown, 2000, 'Users Drop Down ');
-        // await browser.actions().mouseMove(this.userDropDown).perform();
-        // await elementClick(this.userDropDown);
-        // await browser.logger.info('User Drop Down Selected');
+        await WaitHelper.waitForElementToBeClickable(this.userDropDown, 2000, 'Users Drop Down ');
+        await browser.actions().mouseMove(this.userDropDown).perform();
+        await elementClick(this.userDropDown);
+        await browser.logger.info('User Drop Down Selected');
 
-        // // Select User
-        // await WaitHelper.waitForElementToBeClickable(this.selectUser(user), 2000, 'ramakrishna+e2e@concourselabs.com');
-        // await browser.actions().mouseMove(this.selectUser(user)).perform();
-        // await elementClick(this.selectUser(user));
-        // await browser.logger.info('User Selected');
+        // Select User
+        await WaitHelper.waitForElementToBeClickable(this.selectUser(user), 2000, 'ramakrishna+e2e@concourselabs.com');
+        await browser.actions().mouseMove(this.selectUser(user)).perform();
+        await elementClick(this.selectUser(user));
+        await browser.logger.info('User Selected');
 
         // Click On Add
         await elementClick(this.addButton);
         await browser.logger.info(user, 'User Added To The Group');
-        await browser.sleep(2000);
+        // await browser.sleep(2000);
     }
 
     async removeUserForGroup(surfaceName: string = null, groupName: string = null, user: string = null) {
@@ -238,6 +238,7 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
 
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
+        // await browser.actions().mouseMove(this.groupsMenu).perform();
         await elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
@@ -299,7 +300,7 @@ export class Group {
             await browser.actions().mouseMove(this.selectRole(roleName)).perform();
             await elementClick(this.selectRole(roleName));
             await browser.logger.info('Role Selected');
-            await browser.sleep(2000);
+            // await browser.sleep(2000);
         }
 
         for (let responsibilityName of responsibility) {
@@ -313,13 +314,13 @@ export class Group {
             await browser.actions().mouseDown(this.selectResponsibility(responsibilityName)).perform();
             await elementClick(this.selectResponsibility(responsibilityName));
             await browser.logger.info('Responsibilities Selected');
-            await browser.sleep(2000);
+            // await browser.sleep(2000);
         }
 
         if (organization) {
             await this.addOrganization(organization);
             await browser.logger.info(organization, 'Selected');
-            await browser.sleep(2000);
+            // await browser.sleep(2000);
         }
 
         // await elementClick(this.blankClick);
@@ -329,7 +330,7 @@ export class Group {
         await elementClick(this.submitButton);
         await browser.logger.info('Group Updated');
         await browser.logger.info(role, 'Role Added To The Group');
-        await browser.sleep(2000);
+        // await browser.sleep(2000);
     }
 
     async removeRolesFromGroup(surfaceName: string = null, groupName: string = null, roles: string[]) {
@@ -338,6 +339,7 @@ export class Group {
         // Click On Groups Menu
 
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
+        await browser.actions().mouseMove(this.groupsMenu).perform();
         await elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
@@ -385,7 +387,7 @@ export class Group {
 
             await WaitHelper.waitForElementToBeClickable(this.cloudRoleDropDown, 2000, 'Cloud Roles Drop Down ');
             await elementClick(this.cloudRoleDropDown);
-            await browser.sleep(2000);
+            // await browser.sleep(2000);
             // Select Cloud Role
             await WaitHelper.waitForElementToBeClickable(this.selectCloudRole(cloudRoleName), 3000, 'Cloud Roles');
             await browser.actions().mouseMove(this.selectCloudRole(cloudRoleName)).perform();
@@ -427,25 +429,26 @@ export class Group {
             console.log('value', cloudRoleName);
             await WaitHelper.waitForElementToBeClickable(this.selectCloudRoleToDelete(cloudRoleName), 5000, 'Cloud Role Selected ');
             await browser.actions().mouseMove(this.selectCloudRoleToDelete(cloudRoleName)).perform();
-            await browser.sleep(2000);
+            // await browser.sleep(2000);
             await elementClick(this.selectCloudRoleToDelete(cloudRoleName));
             await browser.logger.info('Selected Cloud Roles Assignment');
-            await browser.sleep(2000);
+            // await browser.sleep(2000);
         }
 
         // Click On Roles Assignment Tab
         await WaitHelper.waitForElementToBeClickable(this.confirmDeleteButton, 2000, 'Confirm Delete Cloud Roles Assignment ');
         await browser.actions().mouseDown(this.confirmDeleteButton).perform();
-        await browser.sleep(2000);
+        // await browser.sleep(2000);
         await elementClick(this.confirmDeleteButton);
         await browser.logger.info(cloudRoles, 'Cloud Role Assignment Deleted');
-        await browser.sleep(3000);
+        // await browser.sleep(3000);
     }
 
     async verifyRolesInUI(surfaceName: string = null, groupName: string = null, roles: string[]) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click On Groups Menu
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
+        await browser.actions().mouseMove(this.groupsMenu).perform();
         await elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
@@ -493,7 +496,7 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         await this.logOut(user);
         await elementClear(this.inputUserName, user);
-        await browser.sleep(2000);
+        // await browser.sleep(2000);
         await loginpage.login(user1, pass);
         await WaitHelper.waitForElementToBeHidden(this.toast);
     }
@@ -506,7 +509,7 @@ export class Group {
         await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
         await elementClick(this.selectSurface(surfaceName));
         await browser.logger.info('Surface Selcted');
-        await browser.sleep(2000);
+        // await browser.sleep(2000);
     }
 
     getRandomNum = function (min, max) {

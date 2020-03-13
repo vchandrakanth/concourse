@@ -50,8 +50,8 @@ export class CloudRoles {
     status: any, action: string[] = null, nonAction: string[] = null) {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await elementClick(this.cloudRolesLink);
-    await browser.get(configProperties.qaUrl + '/cloud-roles');
+    await elementClick(this.cloudRolesLink);
+    // await browser.get(configProperties.qaUrl + '/cloud-roles');
     await browser.logger.info('Cloud Roles Menu Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
 
@@ -142,10 +142,9 @@ export class CloudRoles {
   async searchCloudRole(surfaceName: string = null, name: string = null) {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await elementClick(this.cloudRolesLink);
-    await browser.get(configProperties.qaUrl + '/cloud-roles');
+    await WaitHelper.waitForElementToBeDisplayed(this.cloudRolesLink, 5000, 'Menu');
+    await elementClick(this.cloudRolesLink);
     await browser.logger.info('Cloud Roles Menu Clicked');
-    await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
 
     await this.selectSurfaceFromDropDown(surfaceName);
     await browser.logger.info('Selected E2E Surface');
@@ -374,8 +373,8 @@ export class CloudRoles {
 
   async verifyCloudRole(surfaceName: string = null, name: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await elementClick(this.cloudRolesLink);
-    await browser.get(configProperties.qaUrl + '/cloud-roles');
+    await elementClick(this.cloudRolesLink);
+    // await browser.get(configProperties.qaUrl + '/cloud-roles');
     await browser.logger.info('Cloud Roles Menu Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
 

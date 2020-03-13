@@ -79,7 +79,7 @@ describe('Login Concourse ', async function () {
     });
 
     it('Step 5: Create Policy Group With Second Attribute Tag', async function (): Promise<any> {
-        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, services);
+        await policyPage.createPolicyGroup(baseSurface, policyGroupName, policyGroupDesc, 'E2E Admin', 'PUBLISHED', policyGroupTemplateName, attributeTagName1, services,  ' ', ' ', ' ', 'Allowed AWS Products in Stacks 1');
         policyId = await getIdFromUrl();
         await console.log('Policy Group  id is', policyId);
         await policyPage.searchPolicyGroup(baseSurface, policyGroupName);

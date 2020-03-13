@@ -1,11 +1,15 @@
 import { browser, ExpectedConditions, element, by, ElementFinder } from 'protractor';
 import { stringify } from 'querystring';
 import { async } from 'q';
+import { eventNames } from 'cluster';
+import { TestObject } from 'protractor/built/driverProviders';
 let params = require('../conf/properties');
+let browserurltest;
 
-export async function goToMainPage() {
+export async function goToMainPage(browserurltest: any = null) {
     // browser.ignoreSynchronization=true;
-  return  await browser.get(browser.params.login.url);
+
+  return  await browser.get(browserurltest);
     // return console.log(browser.params.login.url);
 }
 

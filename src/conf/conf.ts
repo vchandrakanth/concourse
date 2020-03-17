@@ -12,7 +12,7 @@ let browserurltest;
 export let config: Config = {
 
     framework: 'jasmine2',
-    //    directConnect: true,
+
     plugins: [{
         package: 'protractor-screenshoter-plugin',
         screenshotPath: '../src/REPORTS/e2e',
@@ -26,14 +26,6 @@ export let config: Config = {
         dumpOnSpec: 'failure+success',
     },
 
-        // {
-        //     // Plugin into interact with slack
-        //     package: 'protractor-slack-plugin',
-        //     failMessage: 'Oh No {totalFailed} tests failed',
-        //     token: 'xoxp-289623592503-547602551475-559932030867-31b30345743e644d6fbf7570277420e0',
-        //     channel: 'qa-e2e-test'
-
-        // }
     ],
 
     directConnect: true,
@@ -56,7 +48,7 @@ export let config: Config = {
             // '../specs/logicalDeployment.js',
             // '../specs/logicalDeploymentViolation.js',
             // '../specs/policyGroupTemplate.js',
-            '../specs/policyGroup.js',
+            // '../specs/policyGroup.js',
             // '../specs/surfaces.js',
             // '../specs/approvals.js',
             // '../specs/modelViolation.js',
@@ -65,10 +57,11 @@ export let config: Config = {
             // '../specs/inviteUser.js',
             // '../specs/addAttributeTagForPG.js',
             // '../specs/removeAttributeTagForPG.js',
-            // '../specs/manageInstitutionData.js',
+            '../specs/manageInstitutionData.js',
             // '../specs/requestForModel.js',
             // '../specs/requestForLogicalDeployment.js',
             // '../specs/requestForCloudRoles.js',
+            // '../specs/requestForBaseline.js',
             // '../specs/cloudRoles.js',
             // '../specs/group.js',
             // '../specs/removeBusinessAuthorRoleAssignment.js',
@@ -80,7 +73,6 @@ export let config: Config = {
         ]
     },
 
-    //  seleniumAddress: 'http://localhost:4444/wd/hub',
     SELENIUM_PROMISE_MANAGER: true,
     beforeLaunch: function () {
         let filepath = './logs/ExecutionLog.log';
@@ -99,7 +91,7 @@ export let config: Config = {
     },
 
     jasmineNodeOpts: {
-        defaultTimeoutInterval: 20000,
+        defaultTimeoutInterval: 30000,
     },
 
     onPrepare: async function () {
@@ -113,9 +105,6 @@ export let config: Config = {
         jasmine.getEnv().addReporter(new HtmlReporter({
             baseDirectory: 'e2e_Results/' + (new Date()).getTime()
         }).getJasmine2Reporter());
-        // browser.logger = log4js.verboseLogging ('');
-        // const isVerboseLoggingEnabled: boolean = browser.params.verboseLogging;
-        // Login before
 
         params: {
             env: null;
@@ -127,6 +116,10 @@ export let config: Config = {
         console.log('Current URl' + env);
         if (env.includes('adhoc'))
             browserurltest = 'https://adhoc.concourse.company';
+        if (env.includes('beta'))
+            browserurltest = 'https://beta.concourse.company';
+        if (env.includes('prod'))
+            browserurltest = 'https://prod.concourselabs.io';
         let loginPage = new LoginPage();
         console.log('Current URl' + browserurltest);
         goToMainPage(browserurltest);
@@ -140,21 +133,21 @@ export let config: Config = {
             username = configProperties.loginData.adhocUserName;
             password = configProperties.loginData.adhocPassWord;
             environment = 'adhoc';
-            console.log('Adhoc Environment');
+            log4js('Adhoc Environment');
         }
 
         if (currentUrl.includes('beta')) {
             username = configProperties.loginData.betaUserName;
             password = configProperties.loginData.betaPassWord;
             environment = 'beta';
-            console.log('Beta Environment');
+            log4js('Beta Environment');
         }
 
         if (currentUrl.includes('prod')) {
             username = configProperties.loginData.prodUserName;
             password = configProperties.loginData.prodPassWord;
             environment = 'prod';
-            console.log('Prod Environment');
+            log4js('Prod Environment');
         }
 
         loginPage.login(username, password);
@@ -164,25 +157,17 @@ export let config: Config = {
         let webRep = require('jasmine-slack-reporter');
         browser.getProcessedConfig().then(function (config) {
             let browserName = config.capabilities.browserName;
-            // let currentUrl = getUrl();
 
             jasmine.getEnv().addReporter(new webRep.WebReporter({
                 projectName: 'Concourse Labs',
                 environment: environment,
                 testname: jasmine.getEnv().currentSpec,
-                // slackUrl: 'https://hooks.slack.com/services/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',
-                // slackUrl: 'https://hooks.slack.com/services/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',
+                // slackUrl: 'https://hooks.slack.com/services/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',
+                // slackUrl: 'https://hooks.slack.com/services/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',
                 channel: 'qa-e2e-test',
                 // get itName() { let cs = jasmine.getEnv().currentSpec; return cs ? cs.description : ''; }                  });
             }));
         });
-
-        // jasmine.getcurrentSpec().addReporter (new HtmlScreenshotReporter({
-        //     pathBuilder: function(currentSpec, suites, browserCapabilities) {
-        //       // will return chrome/your-spec-name.png
-        //       return browserCapabilities.get('browserName') + '/' + currentSpec.fullName;
-        //     }
-        //   });
 
         // Wait till get the confirmation. tsc
         return browser.driver.wait(function () {
@@ -190,20 +175,9 @@ export let config: Config = {
                 return /dashboard/.test(url);
             });
 
-        }, 15000);
+        }, 30000);
         return global.browser.getProcessedConfig().then(function (config) {
         });
 
-        // onPrepare: function () {
-        //     let global =require('protractor');
-        //     let browser = global.browser;
-        //     browser.ignoreSynchronization = true;
-        //     browser.manage().window().maximize();
-        //     browser.manage().timeouts().implicitlyWait(20000);
-        //    // browser.manage().timeouts().setScriptTimeout(60000);
-        //     browser.logger = log4js.getLogger('protractorLog4js');
-        //     return global.browser.getProcessedConfig().then(function (config) {
-        //         //it is ok to be empty
-        //     });
     }
 };

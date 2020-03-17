@@ -155,10 +155,11 @@ export class AssetManager {
     await this.chooseFile.sendKeys(absolutePath);
   }
 
-  async searchAssetManager(surfaceName: string = null, assetName: string = null, searchOnly: string = null) {
+  async searchAssetManager(surfaceName: string = null, assetName: string = null, desc: string = null) {
     // await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
+    await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 10000, 'Menu');
+    await browser.actions().mouseMove(this.assetsManagerMenu).perform();
     await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
 
@@ -171,7 +172,7 @@ export class AssetManager {
     await this.search.sendKeys(assetName);
   }
 
-  async editEnclaveModel(surfaceName: string = null, assetName: string = null, desc) {
+  async editEnclaveModel(surfaceName: string = null, assetName: string = null, desc: string = null) {
     // Search the enclaveModel
     await this.searchAssetManager(surfaceName, assetName, desc);
     await elementClick(this.searchEnclaveModel(assetName));
@@ -215,6 +216,7 @@ export class AssetManager {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
     await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
+    await browser.actions().mouseMove(this.assetsManagerMenu).perform();
     await elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
 

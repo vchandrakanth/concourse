@@ -138,6 +138,7 @@ export class PolicyGroupTemplatePage {
   };
 
   async searchPolicyGroupTemplate(surfaceName: string = null, name: string = null) {
+
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await WaitHelper.waitForElementToBeDisplayed(this.policyGroupTemplateLink, 5000, 'Menu Displayed');
     await browser.actions().mouseMove(this.policyGroupTemplateLink).perform();

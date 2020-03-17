@@ -146,7 +146,7 @@ export class PolicyGroup {
     await elementSendkeys(this.policyGroupTemplateSearch, policyGroupTemplateName);
     await elementClick(this.policyGroupTemplate(`${policyGroupTemplateName}`));
     await browser.logger.info('Policy Template Selected');
-    await browser.sleep(3000);
+    // await browser.sleep(3000);
 
     if (policyGroupTemplateName.includes('Require')) {
       await browser.logger.info('Entity Type ' + entityType);

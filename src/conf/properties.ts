@@ -133,15 +133,14 @@ module.exports = {
     dataForAzureAccount: 'Azure Account',
     dataForNetworkWhitelists: 'Network Whitelists',
     dataForInsightsUrls: 'Insights Urls',
+    dataForPublicKeys: 'Insights Urls',
     accountKey: 'Account-123456789',
     accountValue: '123456789',
     whiteListValue: '10.10.10.1',
-    insightUrl: '//adhoc.concourse.company',
-    updatedInsightUrl: 'http://adhoc.concourse.com',
     azureSubscriptionKey: 'Account-123454321',
     azureSubscriptionValue: '123456978',
     UpdatedWhiteListValue: '10.10.10.2',
-    value: '123'
+    value: '123',
   },
 
   ServicesData:

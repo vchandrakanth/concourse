@@ -6,10 +6,9 @@ import { TestObject } from 'protractor/built/driverProviders';
 let params = require('../conf/properties');
 let browserurltest;
 
-export async function goToMainPage(browserurltest: any = null) {
-    // browser.ignoreSynchronization=true;
-
-  return  await browser.get(browserurltest);
+export async function goToMainPage(envUrl: string = null) {
+    await console.log('The Enviornment to Test :' + envUrl);
+    return await browser.get(envUrl);
     // return console.log(browser.params.login.url);
 }
 

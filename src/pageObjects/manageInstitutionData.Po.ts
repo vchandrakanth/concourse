@@ -66,22 +66,17 @@ export class InstitutionData {
             await this.enterNewData(value);
         }
 
-        if (accountNames.includes('Insights Urls')) {
-            await browser.logger.info('Account Name' + accountNames);
-            await this.enterNewData(value);
-        }
-
         if (accountNames.includes('Azure Subscriptions')) {
             await browser.logger.info('Account Name' + accountNames);
             await this.enterData(value, dataKey, keyValue);
         }
 
-        if (accountNames.includes('Discovered Model Owning Group Id')) {
+        if (accountNames.includes('Network Whitelists')) {
             await browser.logger.info('Account Name' + accountNames);
-            await this.enterNewData(value);
+            await this.enterData(value, dataKey, keyValue);
         }
 
-        if (accountNames.includes('Network Whitelists')) {
+        if (accountNames.includes('Public Keys')) {
             await browser.logger.info('Account Name' + accountNames);
             await this.enterData(value, dataKey, keyValue);
         }
@@ -129,15 +124,11 @@ export class InstitutionData {
             await browser.sleep(2000);
         }
 
-        if (accountNames.includes('Discovered Model Owning Group Id')) {
+        if (accountNames.includes('Azure Account')) {
             await browser.logger.info('Account Name' + accountNames);
             await this.enterNewData(value);
         }
 
-        if (accountNames.includes('Insights Urls')) {
-            await browser.logger.info('Account Name' + accountNames);
-            await this.enterNewUrl(value, url);
-        }
 
         if (accountNames.includes('Azure Subscriptions')) {
             await browser.logger.info('Account Name' + accountNames);
@@ -145,6 +136,11 @@ export class InstitutionData {
         }
 
         if (accountNames.includes('Network Whitelists')) {
+            await browser.logger.info('Account Name' + accountNames);
+            await this.enterData(value, dataKey, keyValue);
+        }
+
+        if (accountNames.includes('Public Keys')) {
             await browser.logger.info('Account Name' + accountNames);
             await this.enterData(value, dataKey, keyValue);
         }
@@ -177,22 +173,23 @@ export class InstitutionData {
 
         await browser.sleep(2000);
 
-        if (accountNames.includes('Insights Urls')) {
+        if (accountNames.includes('Azure Account')) {
             await browser.logger.info('Account Name' + accountNames);
-            await this.removeNewUrlFromInsightUrl(value);
+            await this.removeWhiteListData(value);
         }
 
-        if (accountNames.includes('Aws Accounts')) {
+        if (accountNames.includes('Network Whitelists')) {
             await browser.logger.info('Account Name' + accountNames);
-            await this.removeDataValue(value);
+            await this.removeWhiteListData(value);
         }
+
 
         if (accountNames.includes('Azure Subscriptions')) {
             await browser.logger.info('Account Name' + accountNames);
             await this.removeDataValue(value);
         }
 
-        if (accountNames.includes('Network Whitelists')) {
+        if (accountNames.includes('Public Keys')) {
             await browser.logger.info('Account Name' + accountNames);
             await this.removeWhiteListData(value);
         }

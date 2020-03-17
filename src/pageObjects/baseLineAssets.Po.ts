@@ -41,6 +41,10 @@ export class BaseLineAsset {
     get list() { return $('.list'); }
     get surfaceDropDown() { return element(by.css('[data-e2e="surfaceSwitcherDropdown"]')); }
     selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
+    searchBaseLineAsset(baseline: string) { return element(by.css(`h5[data-e2e='${baseline}']`)); }
+    get search() { return element(by.css('[placeholder="Search"]')); }
+    get deleteBaselineAsset() { return element(by.css('[data-e2e="deleteAssetButton"]')); }
+    get confirmDeleteButton() { return element(by.css('[data-e2e="confirmDeleteModalBtn"]')); }
 
     async createBaseLineAsset(surfaceName: string = null, status: any, baselineAssetName: string = null, desc: any = 'Default description',
         owningGroup: string = null, accountName: string[] = null, subscription: string[] = null, resourceGroup: string[] = null,
@@ -165,19 +169,19 @@ export class BaseLineAsset {
             await browser.logger.info('Region Selected');
         }
 
-        for (let regionName of region) {
-            console.log('value', regionName);
+        // for (let regionName of region) {
+        //     console.log('value', regionName);
 
-            await WaitHelper.waitForElementToBeClickable(this.regionDropDown, 2000, 'Regions Drop Down  ');
-            await elementClick(this.regionDropDown);
-            await browser.logger.info('Regions Drop Down Selected');
+        //     await WaitHelper.waitForElementToBeClickable(this.regionDropDown, 2000, 'Regions Drop Down  ');
+        //     await elementClick(this.regionDropDown);
+        //     await browser.logger.info('Regions Drop Down Selected');
 
-            // Select Subscription
-            await WaitHelper.waitForElementToBeClickable(this.selectRegion(regionName), 2000, 'Region');
-            await browser.actions().mouseMove(this.selectRegion(regionName)).perform();
-            await elementClick(this.selectRegion(regionName));
-            await browser.logger.info('Region Selected');
-        }
+        //     // Select Subscription
+        //     await WaitHelper.waitForElementToBeClickable(this.selectRegion(regionName), 2000, 'Region');
+        //     await browser.actions().mouseMove(this.selectRegion(regionName)).perform();
+        //     await elementClick(this.selectRegion(regionName));
+        //     await browser.logger.info('Region Selected');
+        // }
 
         for (let tagKey of key) {
             console.log('value', tagKey);
@@ -229,6 +233,39 @@ export class BaseLineAsset {
         await browser.sleep(5000);
     }
 
+    async deleteBaseLineAsset(surfaceName: string = null, baselineAssetName: string = null, deleteOnly: string = null) {
+        await WaitHelper.waitForElementToBeHidden(this.toast);
+        // Click on Assets Manager Menu Button
+        await WaitHelper.waitForElementToBeDisplayed(this.baseLineAssetsMenu, 5000, 'Menu');
+        await elementClick(this.baseLineAssetsMenu);
+        await browser.logger.info('Clicked on BaseLine Assets Menu');
+
+        await this.selectSurfaceFromDropDown(surfaceName);
+
+        await elementClear(this.search, baselineAssetName);
+
+        // Select Created BaseLine Asset
+        await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'Enclave Model List Displayed');
+        if (!deleteOnly)
+        baselineAssetName = baselineAssetName + '  Updated';
+        await this.search.sendKeys(baselineAssetName);
+        await elementClick(this.searchBaseLineAsset(baselineAssetName));
+        await browser.logger.info(baselineAssetName, 'Selected');
+
+        // Click On Delete Button in Base Line Asset Detail Page
+        await WaitHelper.waitForElementToBeDisplayed(this.deleteBaselineAsset, 5000, 'Delete Button');
+        await browser.actions().mouseMove(this.deleteBaselineAsset).perform();
+        await elementClick(this.deleteBaselineAsset);
+        await browser.logger.info(baselineAssetName, 'Clicked Delete Button');
+
+        // Click On Confirm Delete To Delete BAseline Asset
+        await WaitHelper.waitForElementToBeDisplayed(this.confirmDeleteButton, 5000, 'Confirm Delete Button');
+        await browser.actions().mouseMove(this.confirmDeleteButton).perform();
+        await elementClick(this.confirmDeleteButton);
+        await browser.logger.info(baselineAssetName, 'Deleted');
+        await WaitHelper.waitForElementToBeHidden(this.toast);
+      }
+
     getRandomNum = function (min, max) {
         return parseInt(Math.random() * (max - min) + min);
     };
@@ -253,6 +290,25 @@ export class BaseLineAsset {
         await browser.logger.info('Surface Selcted');
         await browser.sleep(2000);
     }
+
+    async searchBaseLine(surfaceName: string = null, name: string = null, description: any = null) {
+
+        await WaitHelper.waitForElementToBeHidden(this.toast);
+        await browser.actions().mouseMove(this.baseLineAssetsMenu).perform();
+        await elementClick(this.baseLineAssetsMenu);
+        await browser.logger.info('BaseLine Assets Menu Clicked');
+
+        await this.selectSurfaceFromDropDown(surfaceName);
+
+        await elementClear(this.search, name);
+
+        // Select Created BaseLine Asset
+        await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'BaseLine List Displayed');
+        await this.search.sendKeys(name);
+        await browser.sleep(2000);
+        await elementClick(this.searchBaseLineAsset(name));
+        await browser.logger.info(name, 'Selected');
+      }
 
     async getPageTitle() {
         return browser.getTitle();

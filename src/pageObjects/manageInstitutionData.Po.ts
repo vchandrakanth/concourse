@@ -191,7 +191,7 @@ export class InstitutionData {
 
         if (accountNames.includes('Public Keys')) {
             await browser.logger.info('Account Name' + accountNames);
-            await this.removeWhiteListData(value);
+            await this.removeDataValue(value);
         }
 
         await WaitHelper.waitForElementToBePresent(this.updateData, 5000, 'Update Data');

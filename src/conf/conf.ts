@@ -57,7 +57,7 @@ export let config: Config = {
             // '../specs/inviteUser.js',
             // '../specs/addAttributeTagForPG.js',
             // '../specs/removeAttributeTagForPG.js',
-            '../specs/manageInstitutionData.js',
+            // '../specs/manageInstitutionData.js',
             // '../specs/requestForModel.js',
             // '../specs/requestForLogicalDeployment.js',
             // '../specs/requestForCloudRoles.js',

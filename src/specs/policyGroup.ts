@@ -45,33 +45,33 @@ describe('Creaing Policy Group Concourse ', async function () {
     await ExpectHelper.isListElementExists(policyGroupTemplatePage.list, policyGroupTemplateName);
   });
 
-  // it('Step 3: Creating Policy Group with  Draft', async function (): Promise<any> {
-  //   // Creating Policy Group With Draft Status
-  //   await policyPage.createPolicyGroup(baseSurface, policyGroupNameDraft, policyGroupDescDraft, 'E2E Admin', 'DRAFT', policyGroupTemplateName, attributeTagName, services, ' ', ' ', '', 'Allowed AWS Products in Stacks 1');
-  //   await policyPage.searchPolicyGroup(baseSurface, policyGroupNameDraft);
-  //   await ExpectHelper.isListElementExists(policyPage.list, policyGroupNameDraft);
-  // });
+  it('Step 3: Creating Policy Group with  Draft', async function (): Promise<any> {
+    // Creating Policy Group With Draft Status
+    await policyPage.createPolicyGroup(baseSurface, policyGroupNameDraft, policyGroupDescDraft, 'E2E Admin', 'DRAFT', policyGroupTemplateName, attributeTagName, services, ' ', ' ', '', 'Allowed AWS Products in Stacks 1');
+    await policyPage.searchPolicyGroup(baseSurface, policyGroupNameDraft);
+    await ExpectHelper.isListElementExists(policyPage.list, policyGroupNameDraft);
+  });
 
-  // it('Step 4: Editing Policy Group with  Draft', async function (): Promise<any> {
-  //   // Edit The Draft Policy Group
-  //   await policyPage.editPolicyGroup(baseSurface, policyGroupNameDraft);
-  //   await policyPage.searchPolicyGroup(baseSurface, policyGroupNameDraft + ' Updated');
-  //   await ExpectHelper.isListElementExists(policyPage.list, policyGroupNameDraft + ' Updated');
-  // });
+  it('Step 4: Editing Policy Group with  Draft', async function (): Promise<any> {
+    // Edit The Draft Policy Group
+    await policyPage.editPolicyGroup(baseSurface, policyGroupNameDraft);
+    await policyPage.searchPolicyGroup(baseSurface, policyGroupNameDraft + ' Updated');
+    await ExpectHelper.isListElementExists(policyPage.list, policyGroupNameDraft + ' Updated');
+  });
 
-  // it('Step 5: Deleting Policy Group with  Draft', async function (): Promise<any> {
-  //   // Deleting Policy Group with Draft Status
-  //   await policyPage.deletePolicyGroup(baseSurface, policyGroupNameDraft);
-  //   // Policy Group Deleted
-  //   await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupNameDraft));
-  // });
+  it('Step 5: Deleting Policy Group with  Draft', async function (): Promise<any> {
+    // Deleting Policy Group with Draft Status
+    await policyPage.deletePolicyGroup(baseSurface, policyGroupNameDraft);
+    // Policy Group Deleted
+    await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupNameDraft));
+  });
 
-  // it('Step 6: Verify Policy Group With Draft Status Deleted or Not', async function (): Promise<any> {
+  it('Step 6: Verify Policy Group With Draft Status Deleted or Not', async function (): Promise<any> {
 
-  //   await policyPage.verifyPolicyGroup(policyGroupNameDraft);
-  //   await policyPage.searchPolicyGroup(baseSurface, policyGroupNameDraft + ' Updated');
-  //   await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupNameDraft + ' Updated'));
-  // });
+    await policyPage.verifyPolicyGroup(policyGroupNameDraft);
+    await policyPage.searchPolicyGroup(baseSurface, policyGroupNameDraft + ' Updated');
+    await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupNameDraft + ' Updated'));
+  });
 
   it('Step 7: Creating Policy Group with  Published', async function (): Promise<any> {
     // Creating Policy Group with  Published
@@ -80,25 +80,25 @@ describe('Creaing Policy Group Concourse ', async function () {
     await ExpectHelper.isListElementExists(policyPage.list, policyGroupNamePublish);
   });
 
-  // it('Step 8: Edit Policies And Publish Policy Group', async function (): Promise<any> {
-  //   // Edit Policies And Publish Policy Group
-  //   await policyPage.editPoliciesandPublish(baseSurface, policyGroupNamePublish, 'AWS::S3');
-  //   await policyPage.searchPolicyGroup(baseSurface, policyGroupNamePublish);
-  //   await ExpectHelper.isListElementExists(policyPage.list, policyGroupNamePublish);
-  // });
+  it('Step 8: Edit Policies And Publish Policy Group', async function (): Promise<any> {
+    // Edit Policies And Publish Policy Group
+    await policyPage.editPoliciesandPublish(baseSurface, policyGroupNamePublish, 'AWS::S3');
+    await policyPage.searchPolicyGroup(baseSurface, policyGroupNamePublish);
+    await ExpectHelper.isListElementExists(policyPage.list, policyGroupNamePublish);
+  });
 
-  // it('Step 9: Delete Published Policy Group', async function (): Promise<any> {
-  //   // Edit Policies And Publish Policy Group
-  //   await policyPage.deletePolicyGroup(baseSurface, policyGroupNamePublish, 'false');
-  //   // await policyPage.searchPolicyGroup(baseSurface, policyGroupNamePublish);
-  //   await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupNameDraft));
-  // });
+  it('Step 9: Delete Published Policy Group', async function (): Promise<any> {
+    // Edit Policies And Publish Policy Group
+    await policyPage.deletePolicyGroup(baseSurface, policyGroupNamePublish, 'false');
+    // await policyPage.searchPolicyGroup(baseSurface, policyGroupNamePublish);
+    await ExpectHelper.expectDoesNotExists(policyPage.searchPolicyGroupName(policyGroupNameDraft));
+  });
 
-  // it('Step 10: CleanUp', async function (): Promise<any> {
-  //   // CleanUp
-  //   await policyGroupTemplatePage.deletePolicyGroupTemplate(baseSurface, policyGroupTemplateName, 'false');
-  //   await attributeTag.deleteAttributeTag(baseSurface, attributeTagName, 'false');
-  // });
+  it('Step 10: CleanUp', async function (): Promise<any> {
+    // CleanUp
+    await policyGroupTemplatePage.deletePolicyGroupTemplate(baseSurface, policyGroupTemplateName, 'false');
+    await attributeTag.deleteAttributeTag(baseSurface, attributeTagName, 'false');
+  });
 
   afterEach(function () {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;

@@ -387,7 +387,7 @@ export class Group {
 
             await WaitHelper.waitForElementToBeClickable(this.cloudRoleDropDown, 2000, 'Cloud Roles Drop Down ');
             await elementClick(this.cloudRoleDropDown);
-            // await browser.sleep(2000);
+            await browser.sleep(2000);
             // Select Cloud Role
             await WaitHelper.waitForElementToBeClickable(this.selectCloudRole(cloudRoleName), 3000, 'Cloud Roles');
             await browser.actions().mouseMove(this.selectCloudRole(cloudRoleName)).perform();

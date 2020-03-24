@@ -37,8 +37,8 @@ describe('Creating Enclave Models ', async function () {
     modelId = await assetsManager.getId();
     await console.log('Enclave Model name is', assetName);
     await console.log('Enclave Model id is', modelId);
-    await assetsManager.searchAssetManager(baseSurface, assetName);
-    await ExpectHelper.isListElementExists(assetsManager.assetList, assetName);
+    // await assetsManager.searchAssetManager(baseSurface, assetName);
+    // await ExpectHelper.isListElementExists(assetsManager.assetList, assetName);
   });
 
   it('Step 3: Edit Enclave Model', async function (): Promise<any> {

@@ -124,7 +124,7 @@ class AssetManager {
             yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
             yield utils_1.elementClick(this.submitButton);
             yield protractor_1.browser.logger.info('Enclave Model Submitted');
-            yield protractor_1.browser.sleep(3000);
+            yield protractor_1.browser.sleep(5000);
         });
     }
     getId() {

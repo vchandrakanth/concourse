@@ -132,7 +132,7 @@ export class AssetManager {
     await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
     await elementClick(this.submitButton);
     await browser.logger.info('Enclave Model Submitted');
-    await browser.sleep(3000);
+    await browser.sleep(5000);
   }
 
   getRandomNum = function (min, max) {

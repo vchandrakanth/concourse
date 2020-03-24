@@ -35,7 +35,6 @@ describe('Surface Creation Concourse ', async function () {
         await group.searchGroupName(surfaceName, groupName);
         groupId = await group.getId();
         await console.log('Group id is', groupId);
-        await browser.sleep(5000);
         await ExpectHelper.isListElementExists(group.groupList, groupName);
     });
 

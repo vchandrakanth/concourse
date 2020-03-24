@@ -105,7 +105,6 @@ export class Surface {
         await elementClick(this.createButton);
         await browser.logger.info('Surface Created: ', name);
         await browser.refresh();
-
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
         await browser.actions().mouseDown(this.surfaceDropDown).perform();
         await elementClick(this.surfaceDropDown);

@@ -62,7 +62,7 @@ export let config: Config = {
             // '../specs/requestForLogicalDeployment.js',
             // '../specs/requestForCloudRoles.js',
             // '../specs/requestForBaseline.js',
-            // '../specs/cloudRoles.js',
+            '../specs/cloudRoles.js',
             // '../specs/group.js',
             // '../specs/removeBusinessAuthorRoleAssignment.js',
             // '../specs/removeControlAuthorRoleAssignment.js',
@@ -133,21 +133,21 @@ export let config: Config = {
             username = configProperties.loginData.adhocUserName;
             password = configProperties.loginData.adhocPassWord;
             environment = 'adhoc';
-            log4js('Adhoc Environment');
+            // log4js.configure(environment);
         }
 
         if (currentUrl.includes('beta')) {
             username = configProperties.loginData.betaUserName;
             password = configProperties.loginData.betaPassWord;
             environment = 'beta';
-            log4js('Beta Environment');
+            // log4js.configure(environment);
         }
 
         if (currentUrl.includes('prod')) {
             username = configProperties.loginData.prodUserName;
             password = configProperties.loginData.prodPassWord;
             environment = 'prod';
-            log4js('Prod Environment');
+            // log4js.configure(environment);
         }
 
         loginPage.login(username, password);
@@ -163,7 +163,7 @@ export let config: Config = {
                 environment: environment,
                 testname: jasmine.getEnv().currentSpec,
                 // slackUrl: 'https://hooks.slack.com/services/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',
-                // slackUrl: 'https://hooks.slack.com/services/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',
+                slackUrl: 'https://hooks.slack.com/services/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',
                 channel: 'qa-e2e-test',
                 // get itName() { let cs = jasmine.getEnv().currentSpec; return cs ? cs.description : ''; }                  });
             }));

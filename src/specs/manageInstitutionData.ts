@@ -51,6 +51,7 @@ describe('Surface Creation Concourse ', async function () {
 
     it('Step 5: Update Azure Subscriptions Data For Institurion', async function (): Promise<any> {
         await institutionData.updateValueForInstitutionData(baseSurface, azureSubscription, 1, azureSubscriptionKey, azureSubscriptionValue);
+        await browser.refresh();
     });
 
     it('Step 6: Remove Azure Subscriptions Data For Institurion', async function (): Promise<any> {
@@ -59,6 +60,7 @@ describe('Surface Creation Concourse ', async function () {
 
     it('Step 7: Update WhiteList Data For Institurion', async function (): Promise<any> {
         await institutionData.updateValueForInstitutionData(baseSurface, networkWhitelists, 1, updatedWhiteListValue, updatedWhiteListValue);
+        await browser.refresh();
     });
 
     it('Step 8: Remove WhiteList Data For Institurion', async function (): Promise<any> {
@@ -75,7 +77,7 @@ describe('Surface Creation Concourse ', async function () {
         await ExpectHelper.expectDoesNotExists(institutionData.selectAccount(azureSubscription));
     });
 
-    it('Step 11: Delete PublicKeys Data For Institution', async function (): Promise<any> {
+    it('Step 11: Delete Public Keys Data For Institution', async function (): Promise<any> {
         await institutionData.deleteDataAccountForInstitution(baseSurface, publicKeys);
         await ExpectHelper.expectDoesNotExists(institutionData.selectAccount(publicKeys));
     });

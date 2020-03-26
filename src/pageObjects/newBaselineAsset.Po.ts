@@ -8,10 +8,10 @@ export class BaseLineAsset {
   get createNewBaseLine() { return element(by.css('[data-e2e="newAssetButton"]')); }
   get enterBaseLineName() { return element(by.css('[data-e2e="name"]')); }
   get enterBaseLineDescription() { return element(by.css('[data-e2e="description"]')); }
+  get filterStrategyAnd() { return element(by.xpath('//label[.="And"]')); }
+  get filterStrategyOr() { return element(by.xpath('//label[.="Or"]')); }
   get draftStatus() { return element(by.css('[for="draft"]')); }
   get publishedStatus() { return element(by.css('[for="published"]')); }
-  // get minor() { return element(by.css('#Minor')); }
-  // get major() { return element(by.css('#major')); }
   get minor() { return element(by.css('[for="minor"]')); }
   get major() { return element(by.css('[for="major"]')); }
   get ownigGroupDropDown() { return element(by.css('[placeholder="Select Owning Group"]')); }
@@ -61,16 +61,6 @@ export class BaseLineAsset {
     await WaitHelper.waitForElementToBeClickable(this.enterBaseLineDescription, 2000, 'Description ');
     await elementSendkeys(this.enterBaseLineDescription, description);
     await browser.logger.info('Base line Description Entered');
-
-    if (status === 'PUBLISHED') {
-      await WaitHelper.waitForElementToBeClickable(this.publishedStatus, 2000, 'Published ');
-      await elementClick(this.publishedStatus);
-      await browser.logger.info('Selected Published');
-
-      await WaitHelper.waitForElementToBeClickable(this.minor, 2000, 'Minor ');
-      await elementClick(this.minor);
-      await browser.logger.info('Selected Minor');
-    }
 
     // Owning Group DropDown
     await WaitHelper.waitForElementToBePresent(this.ownigGroupDropDown, 5000, 'Ownig Group DropDown');

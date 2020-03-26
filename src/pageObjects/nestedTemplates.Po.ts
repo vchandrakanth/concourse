@@ -7,6 +7,7 @@ let path = require('path');
 
 export class NestedEnClaveModel {
 
+    get assetsManagerMenu() { return element(by.css('a[data-e2e="linkAssets"]')); }
     get createNewAssets() { return element(by.xpath('//button[contains(text(),"New Asset")]')); }
     get assetTypeDropDown() { return element(by.xpath('//*[@id="assetType"]/select')); }
     get assetEnclave() { return element(by.xpath('//option[.="Enclave"]')); }
@@ -46,15 +47,16 @@ export class NestedEnClaveModel {
     // get surfaceDropDown() { return element(by.css('select')); }
     selectSurface(surface: string) { return element(by.xpath(`//option[contains(.,'${surface}')]`)); }
     get addNestedTemplate() { return element(by.xpath('//button[contains(.,"Add Nested Template")]')); }
-    chooseTemplate(num: string) { return element(by.css('input[xpath="1"]')); }
-    // chooseTemplate(num: string) { return element(by.xpath(`//div[@class='form-group']/div[${num}]`)); }
+    // chooseTemplate(num: string) { return element(by.css('input[xpath="1"]')); }
+    chooseTemplate(num: any) { return element(by.css(`div.form-group > div:nth-of-type(${num}) .form-control-file`)); }
 
     async createNestedEnclaveModel(status: any, assetName: string = null, desc: any = 'Default description', attributeTagName: string[] = null,
-        fileName: string = null, nestedTemplateName: any[], owningGroup: string = null, platform: string = null) {
+        fileName: string = null, nestedTemplateName: string[], owningGroup: string = null, platform: string = null, num: any = null) {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
-        await browser.get(configProperties.qaUrl + '/assets');
+        // await browser.get(configProperties.qaUrl + '/assets');
+        await elementClick(this.assetsManagerMenu);
         await browser.logger.info('Assets Manager Menu Clicked');
 
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
@@ -106,35 +108,22 @@ export class NestedEnClaveModel {
         await console.log('Cloud Formation Template Uploaded', fileName);
         await browser.sleep(2000);
 
-        // for (let i = 1; i <= 4; i++) {
-        //     await WaitHelper.waitForElementToBePresent(this.addNestedTemplate, 5000, 'Add Nested Template ');
-        //     await browser.actions().mouseMove(this.addNestedTemplate).perform();
-        //     await elementClick(this.addNestedTemplate);
-        //     // await browser.sleep(2000);
-        //     await console.log('value', i);
-        //     await console.log('Nested Template Name', nestedTemplateName[i]);
-        //     await this.uploadNestedTemplate(nestedTemplateName[i], i);
-        //     await browser.logger.info('Clicked on AddNested Template');
-        // }
-
         for (let i = 1; i <= 4; i++) {
             await WaitHelper.waitForElementToBePresent(this.addNestedTemplate, 5000, 'Add Nested Template ');
             await browser.actions().mouseMove(this.addNestedTemplate).perform();
             await elementClick(this.addNestedTemplate);
-            // await browser.sleep(2000);
-            // await console.log('value', i);
-            // await console.log('Nested Template Name', nestedTemplateName[i]);
-            // await this.uploadNestedTemplate(nestedTemplateName[i], i);
-            await WaitHelper.waitForElementToBeSelected(this.chooseFile, 2000, 'Choose File ');
-            await console.log(`This platform is ${process.platform}`);
-            await this.fileUpload(fileName);
-            await console.log('Cloud Formation Template Uploaded', fileName);
-            await browser.sleep(2000);
+            await console.log('Nested Template Name', nestedTemplateName[i]);
             await browser.logger.info('Clicked on AddNested Template');
+            await WaitHelper.waitForElementToBePresent(this.chooseTemplate(i), 5000, 'Choose File ');
+            await browser.sleep(2000);
+            let linenum = i - 1;
+            await console.log('value', linenum);
+            await this.uploadNestedTemplate(nestedTemplateName[linenum], i);
         }
+
         // Select Status Drop Down
         await WaitHelper.waitForElementToBeClickable(this.statusDropdown, 2000, 'Status Drop Down ');
-        await browser.actions().mouseDown(this.statusDropdown).perform();
+        await browser.actions().mouseMove(this.statusDropdown).perform();
         await elementClick(this.statusDropdown);
         await browser.logger.info('Status Drop DOwn Selected');
 
@@ -153,12 +142,12 @@ export class NestedEnClaveModel {
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Template Mapping ');
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Template Mapping Page');
+        await browser.sleep(5000);
 
         // click on next to Enclave Model Evaluations Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Enclave Model Evaluations ');
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Review Enclave Model Page');
-        await browser.sleep(3000);
 
         // Select Review Enclave Model Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Review Enclave Model ');
@@ -167,9 +156,10 @@ export class NestedEnClaveModel {
 
         // Click on Submit button to submit the EnClave Model
         await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
+        await browser.actions().mouseMove(this.submitButton).perform();
         await elementClick(this.submitButton);
         await browser.logger.info('Nested Enclave Model Submitted');
-        await browser.sleep(4000);
+        await browser.sleep(10000);
     }
 
     async getId() {
@@ -188,19 +178,15 @@ export class NestedEnClaveModel {
         await this.chooseFile.sendKeys(absolutePath);
     }
 
-    async uploadNestedTemplate(nestedTemplate: string = null, num: any = null) {
+    async uploadNestedTemplate(nestedTemplate: string, num: any) {
+        let linenum = num - 1;
         let fileToUpload = `C:/Users/intone-wv/Desktop/e2e/src/conf/${nestedTemplate}`;
-        let absolutePath = path.join(__dirname, fileToUpload);
-        await PageHelper.uploadFile(this.chooseTemplate(num), absolutePath);
+        await console.log(fileToUpload);
+        await console.log(nestedTemplate);
+        let absolutePath = path.resolve(__dirname, fileToUpload);
+        await this.chooseTemplate(num).sendKeys(absolutePath);
         await browser.logger.info('Nested Template Uploaded');
     }
-
-    // async uploadNestedTemplate(nestedTemplateName: any[], num: any) {
-    //     let fileToUpload = `C:/Users/intone-wv/Desktop/e2e/src/conf/${nestedTemplateName}`;
-    //     let absolutePath = path.resolve(__dirname, fileToUpload);
-    //     await PageHelper.uploadFile(this.chooseTemplate(num), absolutePath);
-    //     await browser.logger.info('Nested Template Uploaded');
-    // }
 
     getRandomNum = function (min, max) {
         return parseInt(Math.random() * (max - min) + min);
@@ -209,9 +195,8 @@ export class NestedEnClaveModel {
     async searchNestedEnclaveModel(assetName: string = null, searchOnly: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
-
-        await browser.get(configProperties.qaUrl + '/assets');
-        // await elementClick(this.assetsManagerMenu);
+        await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
+        await elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
@@ -241,21 +226,18 @@ export class NestedEnClaveModel {
         await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button ');
         await elementClick(this.editButton);
         await browser.logger.info('Edit Button Clicked');
-        await browser.sleep(2000);
 
         // Edit Enclave Model Name
         await WaitHelper.waitForElementToBePresent(this.enterAssetName, 5000, 'Enclave Model Name ');
         await elementSendkeys(this.enterAssetName, '  Updated');
         await browser.logger.info('Asset Name Entered: ', assetName + '  Updated');
-        await browser.sleep(2000);
 
         // click on next to Template Mapping Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Template Mapping ');
         await browser.actions().mouseDown(this.nextButton).perform();
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Template Mapping Page');
-        await browser.sleep(2000);
-        // click on next to Enclave Model Evaluations Page
+         // click on next to Enclave Model Evaluations Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Enclave Model Evaluations ');
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Review Enclave Model Page');
@@ -273,8 +255,7 @@ export class NestedEnClaveModel {
 
     async deleteNestedEnclaveModel(assetName: string = null, deleteOnly: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
-        // Click on Assets Manager Menu Button
-        await browser.get(configProperties.qaUrl + '/assets');
+        await elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');

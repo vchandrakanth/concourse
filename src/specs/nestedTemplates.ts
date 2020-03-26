@@ -19,6 +19,7 @@ describe('Creaing Encalve Model With Nested Templates ', async function () {
   let baseSurface = properties.SurfaceData.surfaceName;
   let attitibuteTag = [attributeTagName];
   let modelId;
+  // let rootTemplate = ['roottemplate.json'];
   let nestedTemplateName = ['AWSAccountVPCLzKmsKey.json', 'AWSAccountVPCLzRole.json', 'AWSAccountVPCLzSecurityGroup.json', 'LandingZoneS3BucketCore.json'];
 
   beforeEach(function () {

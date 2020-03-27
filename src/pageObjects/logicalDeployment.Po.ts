@@ -50,7 +50,7 @@ export class LogicalDeployment {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
-        await elementClick(this.assetsManagerMenu);
+        elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);
@@ -142,7 +142,7 @@ export class LogicalDeployment {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on LogicalDeployment Menu Button
         // await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
-        await elementClick(this.logicalDeployementMenu);
+        elementClick(this.logicalDeployementMenu);
         await browser.logger.info('Clicked on Logical Deployment Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);
@@ -159,7 +159,7 @@ export class LogicalDeployment {
     async updateLogicalDeployment(surfaceName: string = null, deploymentName: string = null, assetName: string = null, version: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on LogicalDeployment Menu Button
-        await elementClick(this.logicalDeployementMenu);
+        elementClick(this.logicalDeployementMenu);
         await browser.logger.info('Clicked on Logical Deployment Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);
@@ -206,7 +206,7 @@ export class LogicalDeployment {
     async deleteLogicalDeployement(surfaceName: string = null, deploymentName: any = null) {
         // wait till the toast element flash is hidden.
         await WaitHelper.waitForElementToBeHidden(this.toast);
-        await elementClick(this.logicalDeployementMenu);
+        elementClick(this.logicalDeployementMenu);
         await browser.logger.info('Clicked on Logical Deployments Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);

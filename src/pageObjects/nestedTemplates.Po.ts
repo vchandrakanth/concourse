@@ -56,7 +56,7 @@ export class NestedEnClaveModel {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
         // await browser.get(configProperties.qaUrl + '/assets');
-        await elementClick(this.assetsManagerMenu);
+        elementClick(this.assetsManagerMenu);
         await browser.logger.info('Assets Manager Menu Clicked');
 
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
@@ -159,7 +159,7 @@ export class NestedEnClaveModel {
         await browser.actions().mouseMove(this.submitButton).perform();
         await elementClick(this.submitButton);
         await browser.logger.info('Nested Enclave Model Submitted');
-        await browser.sleep(10000);
+        await browser.sleep(15000);
     }
 
     async getId() {
@@ -196,7 +196,7 @@ export class NestedEnClaveModel {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
         await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
-        await elementClick(this.assetsManagerMenu);
+        elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
@@ -255,7 +255,7 @@ export class NestedEnClaveModel {
 
     async deleteNestedEnclaveModel(assetName: string = null, deleteOnly: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
-        await elementClick(this.assetsManagerMenu);
+        elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');

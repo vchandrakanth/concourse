@@ -1,4 +1,4 @@
-import { ExpectedConditions } from 'protractor';
+import { ExpectedConditions, browser } from 'protractor';
 import { ExpectHelper } from '../utils/expectHelper';
 import { AssetManager } from '../pageObjects/assetManager.Po';
 import { AttributeTag } from '../pageObjects/attributeTags.Po';
@@ -52,6 +52,7 @@ describe('Creaing Logical Deployment', async function () {
     await console.log('Enclave Model id is', modelid);
     await assetManager.searchAssetManager(baseSurface, assetName);
     await ExpectHelper.isListElementExists(assetManager.assetList, assetName);
+    await browser.refresh();
   });
 
   it('Step 5: Logical Deployement', async function (): Promise<any> {

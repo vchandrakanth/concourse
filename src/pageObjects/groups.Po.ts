@@ -81,7 +81,7 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click On Groups Menu
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Menu');
-        await elementClick(this.groupsMenu);
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Suface Drop Down');
@@ -130,8 +130,8 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
 
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Menu');
-        // await browser.actions().mouseMove(this.groupsMenu).perform();
-        await elementClick(this.groupsMenu);
+        await browser.actions().mouseMove(this.groupsMenu).perform();
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
@@ -183,7 +183,7 @@ export class Group {
 
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Menu');
         // await browser.actions().mouseMove(this.groupsMenu).perform();
-        await elementClick(this.groupsMenu);
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await this.searchGroupName(surfaceName, groupName);
@@ -205,7 +205,7 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
 
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
-        await elementClick(this.groupsMenu);
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await this.searchGroupName(surfaceName, groupName);
@@ -238,8 +238,8 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
 
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
-        // await browser.actions().mouseMove(this.groupsMenu).perform();
-        await elementClick(this.groupsMenu);
+        await browser.actions().mouseMove(this.groupsMenu).perform();
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await this.searchGroupName(surfaceName, groupName);
@@ -279,7 +279,7 @@ export class Group {
         // Click On Groups Menu
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
         await browser.actions().mouseMove(this.groupsMenu).perform();
-        await elementClick(this.groupsMenu);
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await this.searchGroupName(surfaceName, groupName);
@@ -340,7 +340,7 @@ export class Group {
 
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
         await browser.actions().mouseMove(this.groupsMenu).perform();
-        await elementClick(this.groupsMenu);
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await this.searchGroupName(surfaceName, groupName);
@@ -372,7 +372,7 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click On Groups Menu
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
-        await elementClick(this.groupsMenu);
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await this.searchGroupName(surfaceName, groupName);
@@ -414,7 +414,7 @@ export class Group {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click On Groups Menu
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
-        await elementClick(this.groupsMenu);
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await this.searchGroupName(surfaceName, groupName);
@@ -449,7 +449,7 @@ export class Group {
         // Click On Groups Menu
         await WaitHelper.waitForElementToBeDisplayed(this.groupsMenu, 2000, 'Groups Memu');
         await browser.actions().mouseMove(this.groupsMenu).perform();
-        await elementClick(this.groupsMenu);
+        elementClick(this.groupsMenu);
         await browser.logger.info('Groups Menu Clicked');
 
         await this.searchGroupName(surfaceName, groupName);

@@ -46,7 +46,7 @@ export class AssetManager {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    await elementClick(this.assetsManagerMenu);
+    elementClick(this.assetsManagerMenu);
     await browser.logger.info('Assets Manager Menu Clicked');
     await browser.sleep(2000);
 
@@ -92,9 +92,8 @@ export class AssetManager {
 
     await WaitHelper.waitForElementToBeSelected(this.chooseFile, 2000, 'Choose File ');
     await console.log(`This platform is ${process.platform}`);
-    await browser.sleep(2000);
-
     await this.fileUpload(fileName);
+    await browser.sleep(3000);
 
     // Select Status Drop Down
     await WaitHelper.waitForElementToBeClickable(this.statusDropdown, 2000, 'Status Drop Down ');
@@ -132,7 +131,7 @@ export class AssetManager {
     await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
     await elementClick(this.submitButton);
     await browser.logger.info('Enclave Model Submitted');
-    await browser.sleep(5000);
+    await browser.sleep(15000);
   }
 
   getRandomNum = function (min, max) {
@@ -156,11 +155,11 @@ export class AssetManager {
   }
 
   async searchAssetManager(surfaceName: string = null, assetName: string = null, desc: string = null) {
-    // await WaitHelper.waitForElementToBeHidden(this.toast);
+    await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
     await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 10000, 'Menu');
     await browser.actions().mouseMove(this.assetsManagerMenu).perform();
-    await elementClick(this.assetsManagerMenu);
+    elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -207,6 +206,7 @@ export class AssetManager {
 
     // Click on Submit button to submit the EnClave Model
     await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
+    await browser.actions().mouseMove(this.submitButton).perform();
     await elementClick(this.submitButton);
     await browser.logger.info('Enclave Model Updated', assetName + '  Updated');
     await WaitHelper.waitForElementToBeHidden(this.toast);
@@ -215,9 +215,9 @@ export class AssetManager {
   async deleteEnclaveModel(surfaceName: string = null, assetName: string = null, deleteOnly: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
+    await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 10000, 'Menu');
     await browser.actions().mouseMove(this.assetsManagerMenu).perform();
-    await elementClick(this.assetsManagerMenu);
+    elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -250,7 +250,7 @@ export class AssetManager {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    await elementClick(this.assetsManagerMenu);
+    elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
     // Search the enclaveModel
     await this.searchAssetManager(surfaceName, assetName);
@@ -273,25 +273,28 @@ export class AssetManager {
 
     // click on next to Template Mapping Page
     await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Template Mapping ');
-    await browser.actions().mouseDown(this.nextButton).perform();
+    await browser.actions().mouseMove(this.nextButton).perform();
     await elementClick(this.nextButton);
     await browser.logger.info('Moved to Template Mapping Page');
 
     // click on next to Enclave Model Evaluations Page
-    await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Enclave Model Evaluations ');
+    await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Enclave Model Evaluations ');
+    await browser.actions().mouseMove(this.nextButton).perform();
     await elementClick(this.nextButton);
     await browser.logger.info('Moved to Review Enclave Model Page');
 
     // Select Review Enclave Model Page
-    await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Review Enclave Model ');
+    await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Review Enclave Model ');
+    await browser.actions().mouseMove(this.nextButton).perform();
     await elementClick(this.nextButton);
     await browser.logger.info('Moved to Submit Page');
 
     // Click on Submit button to submit the EnClave Model
     await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
+    await browser.actions().mouseMove(this.submitButton).perform();
     await elementClick(this.submitButton);
     await browser.logger.info('Enclave Model Updated', assetName);
-    await WaitHelper.waitForElementToBeHidden(this.toast);
+    await browser.sleep(10000);
   }
 
   async verifyEnclaveModel(assetName: any) {

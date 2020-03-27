@@ -4,7 +4,7 @@ import { WaitHelper } from '../utils/waitHelper';
 let configProperties = require('../conf/properties');
 
 export class AttributeTag {
-  get attributeTagsLink() { return element(by.css('[data-e2e="linkAttributeTags"]')); }
+  get attributeTagsLink() { return element(by.css('a[data-e2e="linkAttributeTags"]')); }
   // get createNewAttributeTag() { return element(by.xpath('//button[contains(text(),"New Attribute")]')); }
   get createNewAttributeTag() { return element(by.css('[data-e2e="newAttributeTagButton"]')); }
   // get enterTagName() { return element(by.xpath('//input[@id="name"]')); }
@@ -30,8 +30,8 @@ export class AttributeTag {
 
   async createAttributeTag(surfaceName: string = null, name: string = null, description: any) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await browser.actions().mouseDown(this.attributeTagsLink).perform();
-    await elementClick(this.attributeTagsLink);
+    await browser.actions().mouseDown(this.attributeTagsLink).perform();
+    elementClick(this.attributeTagsLink);
 
     await browser.logger.info('AttributeTags Menu Clicked');
 
@@ -67,8 +67,9 @@ export class AttributeTag {
   async searchAttribute(surfaceName: string = null, name: string = null, description: any = null) {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
+    await WaitHelper.waitForElementToBeClickable(this.attributeTagsLink, 5000, 'AttributeTag Menu');
     await browser.actions().mouseMove(this.attributeTagsLink).perform();
-    await elementClick(this.attributeTagsLink);
+    elementClick(this.attributeTagsLink);
     await browser.logger.info('AttributeTags Menu Clicked');
 
     await this.selectSurfaceFromDropDown(surfaceName);

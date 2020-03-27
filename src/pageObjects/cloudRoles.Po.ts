@@ -318,7 +318,7 @@ export class CloudRoles {
       console.log('value', azureNonAction);
       await WaitHelper.waitForElementToBePresent(this.editAzureNonActions, 5000, 'Edit Azure Non Operations Button');
       await browser.actions().mouseDown(this.editAzureNonActions).perform();
-      await elementClick(this.editAzureNonActions);
+      elementClick(this.editAzureNonActions);
       await browser.logger.info('Edit Button Clicked');
 
       await WaitHelper.waitForElementToBeClickable(this.searchInEditWindow, 5000, 'Azure Non Action');

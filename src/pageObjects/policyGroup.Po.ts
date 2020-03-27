@@ -41,7 +41,7 @@ export class PolicyGroup {
   selectEvent(events: any) { return element(by.xpath(`//span[.='${events}']`)); }
   get eventsBlankClick() { return element(by.css('app-policy-template-form>div:nth-of-type(1)>div:nth-of-type(1)')); }
   get approvalGroupsDropDown() { return element(by.css('[placeholder="Select Approval Groups"]')); }
-  selectGroup(group: any) { return element(by.xpath(`//div[.='${group}']`)); }
+  selectGroup(group: any) { return element(by.xpath(`//span[.='${group}']`)); }
   get regionDropDown() { return element(by.css('ng-multiselect-dropdown[name="AwsRegions"] .dropdown-down')); }
   selectRegion(region: any) { return element(by.xpath(`//div[.='${region}']`)); }
   get attributeTagDropDown() { return element(by.css('ng-select[formcontrolname="attributeTagIds"] > div > span')); }
@@ -86,7 +86,7 @@ export class PolicyGroup {
       this.policyGroupStatusName = configProperties.policyGroupData.statusPublishedName;
     }
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
     await browser.logger.info('Clicked On Policy Group Menu');
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -192,7 +192,8 @@ export class PolicyGroup {
     await elementClick(this.approvalGroupsDropDown);
     await browser.logger.info('Approval Groups drop Down');
 
-    await WaitHelper.waitForElementToBeClickable(this.selectGroup(group), 2000, ' Select Approval Group ');
+    await WaitHelper.waitForElementToBeClickable(this.selectGroup(group), 5000, ' Select Approval Group ');
+    await browser.actions().mouseMove(this.selectGroup(group)).perform();
     await elementClick(this.selectGroup(group));
     await browser.logger.info('Approval Groups Selected');
   }
@@ -243,7 +244,7 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await WaitHelper.waitForElementToBeDisplayed(this.policyGroupMenu, 5000, 'Policy Group Menu Displayed');
     await browser.actions().mouseMove(this.policyGroupMenu).perform();
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
     await browser.logger.info('Clicked on Policy Group Menu');
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -261,7 +262,7 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
     await WaitHelper.waitForElementToBeDisplayed(this.policyGroupMenu, 5000, 'Policy Group Menu Displayed');
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
     await browser.logger.info('Clicked on Policy Group Menu');
 
     await this.searchPolicyGroup(surfaceName, policyGroupName);
@@ -301,7 +302,7 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await WaitHelper.waitForElementToBeDisplayed(this.policyGroupMenu, 5000, 'Policy Group Menu Displayed');
     await browser.actions().mouseMove(this.policyGroupMenu).perform();
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -329,7 +330,7 @@ export class PolicyGroup {
   async editPoliciesandPublish(surfaceName: string = null, policyGroupName: string = null, service: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await WaitHelper.waitForElementToBeDisplayed(this.policyGroupMenu, 5000, 'Policy Group Menu Displayed');
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -362,7 +363,7 @@ export class PolicyGroup {
 
     await browser.refresh();
 
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await elementClear(this.search, policyGroupName);
 
@@ -404,7 +405,7 @@ export class PolicyGroup {
 
   async updatePolicyGroupWithEC2(surfaceName: string = null, policyGroupName: string = null, service: String[]) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -466,7 +467,7 @@ export class PolicyGroup {
     await browser.refresh();
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -500,7 +501,7 @@ export class PolicyGroup {
 
   async updatePolicyGroupWithS3(surfaceName: string = null, policyGroupName: string = null, service: String[] = null, policyId2: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -548,7 +549,7 @@ export class PolicyGroup {
     await browser.sleep(2000);
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -581,7 +582,7 @@ export class PolicyGroup {
   /****************************************Remove Surface Layer For PolicyGroup********************************************/
   async removeSurfaceLayerForPG(surfaceName: string = null, policyGroupName: string = null, SurfaceLayer: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -606,7 +607,7 @@ export class PolicyGroup {
     await browser.logger.info('Confirm Changes ');
     await browser.sleep(2000);
 
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await elementClear(this.search, policyGroupName);
 
@@ -639,7 +640,7 @@ export class PolicyGroup {
   /*************************************** Add Attribute Tag For Policy Group ******************/
   async addAttributeTagForPG(surfaceName: string = null, policyGroupName: string = null, attributeTagName: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -675,7 +676,7 @@ export class PolicyGroup {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -715,7 +716,7 @@ export class PolicyGroup {
   /****************************************Update Attribute Tag For PG********************************************/
   async removeAttributeTagForPG(surfaceName: string = null, policyGroupName: string = null, attributeTagId: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -742,7 +743,7 @@ export class PolicyGroup {
     await browser.logger.info('Confirm Changes ');
     await browser.sleep(2000);
 
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
     await elementClear(this.search, policyGroupName);
@@ -776,7 +777,7 @@ export class PolicyGroup {
   async editSurfaceLayerAndPublish(surfaceName: string = null, policyGroupName: string = null, surfacelayer: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
@@ -804,7 +805,7 @@ export class PolicyGroup {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
 
-    await elementClick(this.policyGroupMenu);
+    elementClick(this.policyGroupMenu);
     await elementClear(this.search, policyGroupName);
 
     await this.selectSurfaceFromDropDown(surfaceName);

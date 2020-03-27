@@ -142,7 +142,7 @@ export class PolicyGroupTemplatePage {
     // await WaitHelper.waitForElementToBeHidden(this.toast);
     await WaitHelper.waitForElementToBeDisplayed(this.policyGroupTemplateLink, 5000, 'Menu Displayed');
     await browser.actions().mouseMove(this.policyGroupTemplateLink).perform();
-    await elementClick(this.policyGroupTemplateLink);
+    elementClick(this.policyGroupTemplateLink);
     await browser.logger.info('Policy Group Template Clicked');
 
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');

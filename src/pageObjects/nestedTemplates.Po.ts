@@ -50,7 +50,7 @@ export class NestedEnClaveModel {
     // chooseTemplate(num: string) { return element(by.css('input[xpath="1"]')); }
     chooseTemplate(num: any) { return element(by.css(`div.form-group > div:nth-of-type(${num}) .form-control-file`)); }
 
-    async createNestedEnclaveModel(status: any, assetName: string = null, desc: any = 'Default description', attributeTagName: string[] = null,
+    async createNestedEnclaveModel(surfaceName: string = null, status: any, assetName: string = null, desc: any = 'Default description', attributeTagName: string[] = null,
         fileName: string = null, nestedTemplateName: string[], owningGroup: string = null, platform: string = null, num: any = null) {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
@@ -58,15 +58,10 @@ export class NestedEnClaveModel {
         // await browser.get(configProperties.qaUrl + '/assets');
         elementClick(this.assetsManagerMenu);
         await browser.logger.info('Assets Manager Menu Clicked');
+        await browser.sleep(2000);
 
-        await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-        await browser.actions().mouseDown(this.surfaceDropDown).perform();
-        await elementClick(this.surfaceDropDown);
-        await browser.logger.info('Surface Drop Down Selected');
+    await this.selectSurfaceFromDropDown(surfaceName);
 
-        await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-        await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-        await browser.logger.info('Selected E2E Topology');
 
         // Click on '+' Button to Create new policy
         await WaitHelper.waitForElementToBeDisplayed(this.assetList, 5000, 'screen displayed');
@@ -192,21 +187,14 @@ export class NestedEnClaveModel {
         return parseInt(Math.random() * (max - min) + min);
     };
 
-    async searchNestedEnclaveModel(assetName: string = null, searchOnly: string = null) {
+    async searchNestedEnclaveModel(surfaceName: string = null, assetName: string = null, searchOnly: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
         await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
         elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
-        await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-        await browser.actions().mouseDown(this.surfaceDropDown).perform();
-        await elementClick(this.surfaceDropDown);
-        await browser.logger.info('Surface Drop Down Selected');
-
-        await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-        await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-        await browser.logger.info('Selected E2E Topology');
+        await this.selectSurfaceFromDropDown(surfaceName);
 
         await elementClear(this.search, assetName);
 
@@ -215,57 +203,53 @@ export class NestedEnClaveModel {
         await this.search.sendKeys(assetName);
     }
 
-    async editNestedEnclaveModel(assetName: string = null, desc) {
+    async editNestedEnclaveModel(surfaceName: string = null, assetName: string = null, desc: any) {
         // Search the enclaveModel
-        await this.searchNestedEnclaveModel(assetName, desc);
-        await elementClick(this.searchEnclaveModel(assetName));
-        await browser.logger.info(assetName, 'Selected');
-        await browser.sleep(3000);
+    await this.searchNestedEnclaveModel(surfaceName, assetName, desc);
+    await elementClick(this.searchEnclaveModel(assetName));
+    await browser.logger.info(assetName, 'Selected');
 
-        // Click Edit Icon
-        await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button ');
-        await elementClick(this.editButton);
-        await browser.logger.info('Edit Button Clicked');
+    // Click Edit Icon
+    await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button ');
+    await browser.actions().mouseMove(this.editButton).perform();
+    await elementClick(this.editButton);
+    await browser.logger.info('Edit Button Clicked');
 
-        // Edit Enclave Model Name
-        await WaitHelper.waitForElementToBePresent(this.enterAssetName, 5000, 'Enclave Model Name ');
-        await elementSendkeys(this.enterAssetName, '  Updated');
-        await browser.logger.info('Asset Name Entered: ', assetName + '  Updated');
+    // Edit Enclave Model Name
+    await WaitHelper.waitForElementToBePresent(this.enterAssetName, 5000, 'Enclave Model Name ');
+    await elementSendkeys(this.enterAssetName, ' Updated');
+    await browser.logger.info('Asset Name Entered: ', assetName + ' Updated');
 
         // click on next to Template Mapping Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Template Mapping ');
-        await browser.actions().mouseDown(this.nextButton).perform();
+        await browser.actions().mouseMove(this.nextButton).perform();
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Template Mapping Page');
          // click on next to Enclave Model Evaluations Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Enclave Model Evaluations ');
+        await browser.actions().mouseMove(this.nextButton).perform();
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Review Enclave Model Page');
         await browser.sleep(2000);
         // Select Review Enclave Model Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Review Enclave Model ');
+        await browser.actions().mouseMove(this.nextButton).perform();
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Submit Page');
-        await browser.sleep(2000);
+        await browser.sleep(5000);
         // Click on Submit button to submit the EnClave Model
         await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
+        await browser.actions().mouseMove(this.submitButton).perform();
         await elementClick(this.submitButton);
-        await browser.logger.info('Nested Enclave Model Updated', assetName + '  Updated');
+        await browser.logger.info('Nested Enclave Model Updated', assetName + ' Updated');
     }
 
-    async deleteNestedEnclaveModel(assetName: string = null, deleteOnly: string = null) {
+    async deleteNestedEnclaveModel(surfaceName: string = null, assetName: string = null, deleteOnly: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
-        await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
-        await browser.actions().mouseDown(this.surfaceDropDown).perform();
-        await elementClick(this.surfaceDropDown);
-        await browser.logger.info('Surface Drop Down Selected');
-
-        await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
-        await elementClick(this.selectSurface(configProperties.SurfaceData.surfaceName));
-        await browser.logger.info('Selected E2E Topology');
+        await this.selectSurfaceFromDropDown(surfaceName);
 
         await elementClear(this.search, assetName);
         await browser.sleep(2000);
@@ -273,7 +257,7 @@ export class NestedEnClaveModel {
         // Select Created Enclave Model
         await WaitHelper.waitForElementToBeDisplayed(this.assetList, 5000, 'Enclave Model List Displayed');
         if (!deleteOnly)
-            assetName = assetName + '  Updated';
+            assetName = assetName + ' Updated';
         await this.search.sendKeys(assetName);
         await elementClick(this.searchEnclaveModel(assetName));
         await browser.logger.info(assetName, 'Selected');
@@ -299,6 +283,17 @@ export class NestedEnClaveModel {
         await this.search.sendKeys(assetName + '  Updated');
         await browser.logger.info(assetName + '  Updated', ' Is Not Present');
     }
+
+    async selectSurfaceFromDropDown(surfaceName: string = null) {
+        await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
+        await browser.actions().mouseMove(this.surfaceDropDown).perform();
+        await elementClick(this.surfaceDropDown);
+        await browser.logger.info(surfaceName, 'Surface Drop Down Clicked');
+
+        await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
+        await elementClick(this.selectSurface(surfaceName));
+        await browser.logger.info('Surface Selcted');
+      }
 
     async getPageTitle() {
         return browser.getTitle();

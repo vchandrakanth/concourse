@@ -1,4 +1,4 @@
-import { ExpectedConditions, utils } from 'protractor';
+import { ExpectedConditions, utils, browser } from 'protractor';
 import { ExpectHelper } from '../utils/expectHelper';
 import { CreateCloudAccount } from '../pageObjects/createAWSAccount.Po';
 import { Surface } from '../pageObjects/surfaces.Po';
@@ -25,12 +25,13 @@ describe('Managing AWS Accounts', async function () {
         awsAccountId = UtilMath.randomFixedInteger(12) ;
 
         await createCloudAccount.createNewCloudAccount(awsAccountName, awsAccountDescription, awsAccountId);
-
+        await browser.refresh();
     });
 
     it('Step 2: Assign AWS Account To Surface', async function (): Promise<any> {
 
         await surface.assignAWSAccountsToSurface(baseSurface, awsAccountName);
+        await browser.refresh();
 
     });
 

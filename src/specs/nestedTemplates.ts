@@ -8,11 +8,11 @@ import { AssetManager } from '../pageObjects/assetManager.Po';
 describe('Creaing Encalve Model With Nested Templates ', async function () {
   let originalTimeout;
   let EC = ExpectedConditions;
-  let nestedEnClaveModel = new NestedEnClaveModel();
+  let nestedEnclaveModel = new NestedEnClaveModel();
   let assetsManager = new AssetManager();
   let properties = require('../conf/properties');
   let attributeTag = new AttributeTag();
-  let assetName = properties.enclaveModelData.modelName + nestedEnClaveModel.getRandomNum(1, 1000);
+  let assetName = properties.enclaveModelData.modelName + nestedEnclaveModel.getRandomNum(1, 1000);
   let desc = properties.enclaveModelData.modelDescription;
   let attributeTagName = properties.attributeTagData.attributeName1 + attributeTag.getRandomNum(1, 1000);
   let attributeTagdescription = properties.attributeTagData.attributeDescription1;
@@ -36,30 +36,30 @@ describe('Creaing Encalve Model With Nested Templates ', async function () {
 
   it('Step 2: Create New Enclave Model', async function (): Promise<any> {
     // Creating Enclave Model
-    await nestedEnClaveModel.createNestedEnclaveModel('PUBLISHED', assetName, desc, attitibuteTag, 'roottemplate.json', nestedTemplateName, 'E2E Admin');
-    await ExpectHelper.isListElementExists(nestedEnClaveModel.list, assetName);
-    modelId = await nestedEnClaveModel.getId();
+    await nestedEnclaveModel.createNestedEnclaveModel(baseSurface, 'PUBLISHED', assetName, desc, attitibuteTag, 'roottemplate.json', nestedTemplateName, 'E2E Admin');
+    await ExpectHelper.isListElementExists(nestedEnclaveModel.list, assetName);
+    modelId = await nestedEnclaveModel.getId();
     await console.log('Enclave Model name is', assetName);
     await console.log('Enclave Model id is', modelId);
   });
 
   it('Step 3: Edit Enclave Model', async function (): Promise<any> {
     // Editing Created Enclave Model
-    await nestedEnClaveModel.editNestedEnclaveModel(assetName, desc);
-    await assetsManager.searchAssetManager(baseSurface, assetName + '  Updated');
-    await ExpectHelper.isListElementExists(assetsManager.assetList, modelId);
+    await nestedEnclaveModel.editNestedEnclaveModel(baseSurface, assetName, desc);
+    await nestedEnclaveModel.searchNestedEnclaveModel(baseSurface, assetName + ' Updated');
+    // await ExpectHelper.isListElementExists(nestedEnclaveModel.list, assetName);
   });
 
   it('Step 4: Delete Enclave Model', async function (): Promise<any> {
     // Deleting Enclave Model
-    await nestedEnClaveModel.deleteNestedEnclaveModel(assetName);
+    await nestedEnclaveModel.deleteNestedEnclaveModel(baseSurface, assetName);
     await ExpectHelper.expectDoesNotExists(assetsManager.enclaveModelElement(assetName));
 
   });
 
   it('Step 5: Verify Enclave Model Deleted Or Not', async function (): Promise<any> {
     // Verifying the Enclave Model is Deleted Or Not
-    await nestedEnClaveModel.verifyNestedEnclaveModel(assetName);
+    await nestedEnclaveModel.verifyNestedEnclaveModel(assetName);
     await ExpectHelper.expectDoesNotExists(assetsManager.enclaveModelElement(assetName));
   });
 

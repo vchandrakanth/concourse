@@ -306,6 +306,7 @@ export class AssetManager {
 
   async selectSurfaceFromDropDown(surfaceName: string = null) {
     await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
+    await browser.actions().mouseMove(this.surfaceDropDown).perform();
     await elementClick(this.surfaceDropDown);
     await browser.logger.info(surfaceName, 'Surface Drop Down Clicked');
 

@@ -226,7 +226,6 @@ export class Group {
         await browser.actions().mouseMove(this.selectUser(user)).perform();
         await elementClick(this.selectUser(user));
         await browser.logger.info('User Selected');
-
         // Click On Add
         await elementClick(this.addButton);
         await browser.logger.info(user, 'User Added To The Group');

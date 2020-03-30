@@ -1,4 +1,4 @@
-import { ExpectedConditions } from 'protractor';
+import { ExpectedConditions, browser } from 'protractor';
 import { ExpectHelper } from '../utils/expectHelper';
 import { Group } from '../pageObjects/groups.Po';
 import { Surface } from '../pageObjects/surfaces.Po';
@@ -12,7 +12,7 @@ describe('Creating Groups Concourse ', async function () {
     let properties = require('../conf/properties');
     let groupName = properties.groupData.groupName + group.getRandomNum(1, 1000);
     let groupDescription = properties.groupData.groupDescription;
-    let user = properties.groupData.user;
+    // let user = properties.groupData.user;
     let role = ['Business Operator'];
     let responsibilities = ['Manage Deployments'];
     let organization = ['Default Surface - Root Surface Layer'];
@@ -37,7 +37,7 @@ describe('Creating Groups Concourse ', async function () {
 
     it('Step 2: Asign User For New Group', async function (): Promise<any> {
         // Assigning User For Newly Created Group
-        await group.assignUserForGroup(surfaceName, groupName, user, 0);
+        await group.assignUserForGroup(surfaceName, groupName, browser.params.user, 0);
         await ExpectHelper.isListElementExists(group.groupList, groupName);
     });
 
@@ -79,7 +79,7 @@ describe('Creating Groups Concourse ', async function () {
 
     it('Step 9: Remove User From Group', async function (): Promise<any> {
         // Removing User From Group
-        await group.removeUserForGroup(surfaceName, groupName, user);
+        await group.removeUserForGroup(surfaceName, groupName, browser.params.user);
         await ExpectHelper.expectDoesNotExists(group.selectUserToDelete(groupName));
     });
 

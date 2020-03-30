@@ -44,8 +44,8 @@ export let config: Config = {
         },
         specs: [
             // '../specs/attributeTags.js',
-            '../specs/assetManager.js',
-            // '../specs/logicalDeployment.js',
+            // '../specs/assetManager.js',
+            '../specs/logicalDeployment.js',
             // '../specs/logicalDeploymentViolation.js',
             // '../specs/policyGroupTemplate.js',
             // '../specs/policyGroup.js',
@@ -124,6 +124,7 @@ export let config: Config = {
         let username;
         let password;
         let environment;
+        // let user;
         browser.logger.info('Logging into concourse website');
         let currentUrl = browserurltest;
 
@@ -132,12 +133,14 @@ export let config: Config = {
             password = configProperties.loginData.adhocPassWord;
             environment = 'adhoc';
             // log4js.configure(environment);
+            browser.params.user = configProperties.groupData.adhocUser;
         }
 
         if (currentUrl.includes('beta')) {
             username = configProperties.loginData.betaUserName;
             password = configProperties.loginData.betaPassWord;
             environment = 'beta';
+            browser.params.user = configProperties.groupData.betaUser;
             // log4js.configure(environment);
         }
 
@@ -145,6 +148,7 @@ export let config: Config = {
             username = configProperties.loginData.prodUserName;
             password = configProperties.loginData.prodPassWord;
             environment = 'prod';
+            browser.params.user = configProperties.groupData.prodUser;
             // log4js.configure(environment);
         }
 

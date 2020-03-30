@@ -194,7 +194,7 @@ export class PolicyGroup {
 
     await WaitHelper.waitForElementToBeClickable(this.selectGroup(group), 5000, ' Select Approval Group ');
     await browser.actions().mouseMove(this.selectGroup(group)).perform();
-    await elementClick(this.selectGroup(group));
+    elementClick(this.selectGroup(group));
     await browser.logger.info('Approval Groups Selected');
   }
 

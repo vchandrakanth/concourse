@@ -217,7 +217,7 @@ export class AssetManager {
   async deleteEnclaveModel(surfaceName: string = null, assetName: string = null, deleteOnly: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Assets Manager Menu Button
-    await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 10000, 'Menu');
+    await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
     await browser.actions().mouseMove(this.assetsManagerMenu).perform();
     elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
@@ -255,7 +255,7 @@ export class AssetManager {
     elementClick(this.assetsManagerMenu);
     await browser.logger.info('Clicked on Asset Manager Menu');
     // Search the enclaveModel
-    await browser.sleep(3000);
+    await browser.sleep(5000);
     await this.searchAssetManager(surfaceName, assetName);
     await elementClick(this.searchEnclaveModel(assetName));
     await browser.logger.info(assetName, 'Selected');

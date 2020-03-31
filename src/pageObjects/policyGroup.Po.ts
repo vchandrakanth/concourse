@@ -41,7 +41,7 @@ export class PolicyGroup {
   selectEvent(events: any) { return element(by.xpath(`//span[.='${events}']`)); }
   get eventsBlankClick() { return element(by.css('app-policy-template-form>div:nth-of-type(1)>div:nth-of-type(1)')); }
   get approvalGroupsDropDown() { return element(by.css('[placeholder="Select Approval Groups"]')); }
-  selectGroup(group: any) { return element(by.xpath(`//span[.='${group}']`)); }
+  selectGroup(group: any) { return element(by.xpath(`//div[.='${group}']`)); }
   get regionDropDown() { return element(by.css('ng-multiselect-dropdown[name="AwsRegions"] .dropdown-down')); }
   selectRegion(region: any) { return element(by.xpath(`//div[.='${region}']`)); }
   get attributeTagDropDown() { return element(by.css('ng-select[formcontrolname="attributeTagIds"] > div > span')); }
@@ -68,6 +68,7 @@ export class PolicyGroup {
   get editAttributeTagDropDown() { return element(by.xpath('//div[@class="ng-value-container"]')); }
   updateAttributeTag(attributeTagId: string) { return element(by.css(`span[data-e2e='${attributeTagId}']`)); }
   get saveButton() { return element(by.css('.Save')); }
+  get enterGroup() { return element(by.css('ng-select[formcontrolname="30008"]')); }
   templateType;
   policyStatusName;
   policyGroupStatusName;
@@ -230,7 +231,7 @@ export class PolicyGroup {
 
   async selectSurfaceFromDropDown(surfaceName: string = null) {
     await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
-    await elementClick(this.surfaceDropDown);
+    elementClick(this.surfaceDropDown);
     await browser.logger.info('Surface Drop Down Clicked');
 
     await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
@@ -640,6 +641,7 @@ export class PolicyGroup {
   /*************************************** Add Attribute Tag For Policy Group ******************/
   async addAttributeTagForPG(surfaceName: string = null, policyGroupName: string = null, attributeTagName: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMenu, 5000, 'Menu');
     elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -664,7 +666,7 @@ export class PolicyGroup {
     // Select Attribute Tag
     await WaitHelper.waitForElementToBeClickable(this.selectAttributeTag(attributeTagName), 5000, 'Attribute');
     await browser.actions().mouseMove(this.selectAttributeTag(attributeTagName)).perform();
-    await browser.sleep(2000);
+    // await browser.sleep(2000);
     await elementClick(this.selectAttributeTag(attributeTagName));
     await browser.logger.info('Attribute Selected');
 
@@ -675,15 +677,18 @@ export class PolicyGroup {
     await browser.logger.info('Confirm Changes ');
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
-
+    await browser.refresh();
+    await WaitHelper.waitForElementToBeClickable(this.policyGroupMenu, 5000, 'Menu');
     elementClick(this.policyGroupMenu);
 
     await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, policyGroupName);
-
+    await browser.sleep(2000);
     await this.search.sendKeys(policyGroupName);
     await elementClick(this.searchPolicyGroupName(policyGroupName));
+    // let draftPolicyGroup = element(by.css('.list')).all(by.className('list-group-item ng-star-inserted'));
+    // await draftPolicyGroup.first().click();
     await browser.sleep(2000);
 
     await WaitHelper.waitForElementToBeClickable(this.publishButton, 5000, 'Publish Button ');
@@ -741,7 +746,8 @@ export class PolicyGroup {
     await WaitHelper.waitForElementToBeClickable(this.confirmButton, 5000, 'Confirm Button ');
     await elementClick(this.confirmButton);
     await browser.logger.info('Confirm Changes ');
-    await browser.sleep(2000);
+    await WaitHelper.waitForElementToBeHidden(this.toast);
+    await browser.refresh();
 
     elementClick(this.policyGroupMenu);
 

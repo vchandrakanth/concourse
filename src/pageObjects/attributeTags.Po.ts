@@ -127,7 +127,7 @@ export class AttributeTag {
     // wait till the toast element flash is hidden.
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await browser.actions().mouseMove(this.attributeTagsLink).perform();
-    await elementClick(this.attributeTagsLink);
+    elementClick(this.attributeTagsLink);
     await browser.logger.info('AttributeTags Menu Clicked');
 
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
@@ -139,10 +139,10 @@ export class AttributeTag {
     if (!deleteOnly)
       name = name + ' Updated';
     await this.search.sendKeys(name);
-    await elementClick(this.searchAttributeName(name));
+    elementClick(this.searchAttributeName(name));
     await browser.logger.info(name, 'Selected');
 
-    await WaitHelper.waitForElementToBeClickable(this.deleteButton, 2000, 'Delete');
+    await WaitHelper.waitForElementToBeClickable(this.deleteButton, 5000, 'Delete');
     await browser.actions().mouseMove(this.deleteButton).perform();
     await elementClick(this.deleteButton);
     await browser.logger.info('Clicked Delete Button');
@@ -163,7 +163,7 @@ export class AttributeTag {
 
   async selectSurfaceFromDropDown(surfaceName: string = null) {
     await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
-    await elementClick(this.surfaceDropDown);
+    elementClick(this.surfaceDropDown);
     await browser.logger.info(surfaceName, 'Surface Drop Down Clicked');
 
     await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');

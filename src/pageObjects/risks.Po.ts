@@ -29,13 +29,13 @@ export class Risk {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // await browser.get(configProperties.qaUrl + '/workflows/risks');
     await WaitHelper.waitForElementToBeDisplayed(this.riskMenu, 2000, 'Menu');
-    await elementClick(this.riskMenu);
+    elementClick(this.riskMenu);
     await WaitHelper.waitForElementToBeDisplayed(this.risklist, 3000, 'list displayed');
     await browser.logger.info('Risk Page Displayed');
 
     await WaitHelper.waitForElementToBeDisplayed(this.surfaceDropDown, 2000, 'Surface Drop Down');
     await browser.actions().mouseDown(this.surfaceDropDown).perform();
-    await elementClick(this.surfaceDropDown);
+    elementClick(this.surfaceDropDown);
     await browser.logger.info('Surface Drop Down Selected');
 
     await WaitHelper.waitForElementToBeClickable(this.selectSurface(configProperties.SurfaceData.surfaceName), 2000, 'E2E Topology ');
@@ -48,7 +48,7 @@ export class Risk {
     await this.search.sendKeys(ID);
     await browser.sleep(2000);
     let riskItem = element(by.css('.list')).all(by.className('list-group-item ng-star-inserted'));
-    riskItem.first().click();
+    await riskItem.first().click();
     // let riskItem = $$('.list');
     // await riskItem.first().click();
     await browser.sleep(2000);
@@ -76,7 +76,7 @@ export class Risk {
     await elementClear(this.search, ID);
 
     await this.search.sendKeys(ID);
-    await browser.sleep(2000);
+    await browser.sleep(3000);
     await browser.logger.info('Risk Removed For', ID);
   }
 

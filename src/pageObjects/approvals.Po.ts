@@ -48,11 +48,12 @@ export class Approvals {
     await this.selectSurfaceFromDropDown(surfaceName);
 
     await elementClear(this.search, entityId);
+    await browser.sleep(2000);
 
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'Policy Group List Displayed');
     await this.search.sendKeys(entityId);
     let approvalRequest = element(by.css('.list-group')).all(by.className('mb-3 ng-star-inserted'));
-    approvalRequest.first().click();
+    await approvalRequest.first().click();
     await browser.logger.info(entityId, 'Selected');
 
     await WaitHelper.waitForElementToBeClickable(this.approveButton, 2000, 'Approve Button ');
@@ -74,7 +75,8 @@ export class Approvals {
 
     await WaitHelper.waitForElementToBeDisplayed(this.approvalList, 5000, 'Approval List Displayed');
     await this.search.sendKeys(Id);
-    await browser.logger.info(Id, 'Displayed');
+    await browser.sleep(2000);
+    await browser.logger.info(Id);
   }
 
   async DeleteApprovalRequest(surfaceName: string = null, policyGroupName: any = null) {
@@ -107,7 +109,7 @@ export class Approvals {
   async VerifyDeleteApprovalRequest(surfaceName: string = null, Id: any = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Approvals Menu Button
-    await elementClick(this.approvalsMenu);
+    elementClick(this.approvalsMenu);
     await browser.logger.info('Clicked on Approvals Menu');
 
     await this.selectSurfaceFromDropDown(surfaceName);
@@ -117,6 +119,7 @@ export class Approvals {
     // Select Approval Request
     await WaitHelper.waitForElementToBeDisplayed(this.approvalList, 5000, 'Approval List Displayed');
     await this.search.sendKeys(Id);
+    await browser.sleep(2000);
     await browser.logger.info(Id, 'Displayed');
   }
 

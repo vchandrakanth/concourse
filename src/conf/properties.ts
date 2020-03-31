@@ -100,7 +100,7 @@ module.exports = {
     groupDescription: 'Description Of E2E Test Group',
     adhocUser: 'e2e Test <ramakrishna+e2etest@concourselabs.com>',
     betaUser: 'e2e Test <ramakrishna+e2e@concourselabs.com>',
-    prodUser: 'Prod E2E Test <ramakrishna+e2e@concourselabs.com>'
+    prodUser: 'E2E test <jian+e2e@concourselabs.com>'
   },
   // Control Topology Data
   ControlTopologyData:

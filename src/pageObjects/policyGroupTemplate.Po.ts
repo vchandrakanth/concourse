@@ -108,7 +108,7 @@ export class PolicyGroupTemplatePage {
     // Select Policy Template
     await WaitHelper.waitForElementToBeClickable(this.policyTemplate(policyTemplateName), 2000, 'Template ');
     await browser.actions().mouseDown(this.policyTemplate(policyTemplateName)).perform();
-    await elementClick(this.policyTemplate(policyTemplateName));
+    elementClick(this.policyTemplate(policyTemplateName));
     await browser.logger.info('Allowed AWS Products Selected');
 
     // click on next to Review Policy Group Template Page
@@ -195,7 +195,7 @@ export class PolicyGroupTemplatePage {
     // await browser.get(configProperties.qaUrl + '/policy-group-templates');
     await WaitHelper.waitForElementToBeDisplayed(this.policyGroupTemplateLink, 5000, 'Menu');
     await browser.actions().mouseDown(this.policyGroupTemplateLink).perform();
-    await elementClick(this.policyGroupTemplateLink);
+    elementClick(this.policyGroupTemplateLink);
 
     await browser.logger.info('Policy Group Template Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list);
@@ -236,7 +236,7 @@ export class PolicyGroupTemplatePage {
 
   async selectSurfaceFromDropDown(surfaceName: string = null) {
     await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
-    await elementClick(this.surfaceDropDown);
+    elementClick(this.surfaceDropDown);
     await browser.logger.info('Surface Drop Down Clicked');
 
     await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');

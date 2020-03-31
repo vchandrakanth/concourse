@@ -166,7 +166,7 @@ export class Surface {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
         await WaitHelper.waitForElementToBeDisplayed(this.surfaceMenu, 3000, 'Menu');
-        await elementClick(this.surfaceMenu);
+        elementClick(this.surfaceMenu);
         await browser.logger.info('Surface Page Displayed');
 
         // Click On Surface Drop Down
@@ -379,7 +379,7 @@ export class Surface {
 
     async selectSurfaceFromDropDown(name: string = null) {
         await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
-        await elementClick(this.surfaceDropDown);
+        elementClick(this.surfaceDropDown);
         await browser.logger.info(name, 'Surface Drop Down Clicked');
 
         await WaitHelper.waitForElementToBePresent(this.selectsurface(name), 5000, 'Surface');

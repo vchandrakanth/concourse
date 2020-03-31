@@ -295,7 +295,7 @@ export class CloudRoles {
       await elementClick(this.searchInEditWindow);
       await this.searchInEditWindow.sendKeys(azureActionName);
       await browser.logger.info('Selected Action Name');
-      await browser.sleep(2000);
+      await browser.sleep(3000);
 
       await WaitHelper.waitForElementToBeClickable(this.addButton, 2000, 'Add Azure Action');
       await browser.actions().mouseMove(this.addButton).perform();
@@ -326,7 +326,7 @@ export class CloudRoles {
       await elementClick(this.searchInEditWindow);
       await this.searchInEditWindow.sendKeys(azureNonActionName);
       await browser.logger.info('Selected Action Name');
-      await browser.sleep(2000);
+      await browser.sleep(3000);
 
       await WaitHelper.waitForElementToBeClickable(this.addButton, 2000, 'Add Azure Non Action');
       await browser.actions().mouseMove(this.addButton).perform();

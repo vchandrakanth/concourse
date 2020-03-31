@@ -45,7 +45,7 @@ export let config: Config = {
         specs: [
             // '../specs/attributeTags.js',
             // '../specs/assetManager.js',
-            '../specs/logicalDeployment.js',
+            // '../specs/logicalDeployment.js',
             // '../specs/logicalDeploymentViolation.js',
             // '../specs/policyGroupTemplate.js',
             // '../specs/policyGroup.js',
@@ -67,7 +67,8 @@ export let config: Config = {
             // '../specs/removeBusinessAuthorRoleAssignment.js',
             // '../specs/removeControlAuthorRoleAssignment.js',
             // '../specs/nestedtemplates.js',
-            // '../specs/createAWSAccount.js'
+            // '../specs/createAWSAccount.js',
+            '../specs/1426Scenario.js'
         ]
     },
 

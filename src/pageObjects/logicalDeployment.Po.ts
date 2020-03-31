@@ -147,7 +147,7 @@ export class LogicalDeployment {
 
         await this.selectSurfaceFromDropDown(surfaceName);
 
-        await elementClear(this.search, deploymentName);
+        elementClear(this.search, deploymentName);
 
         // Select Created Deployment
         await WaitHelper.waitForElementToBeDisplayed(this.logicalDeploymentList, 5000, 'Logical Deployments List Displayed');

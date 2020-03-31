@@ -73,7 +73,7 @@ describe('Surface Creation Concourse ', async function () {
     });
 
     it('Step 10: Remove User From Group', async function (): Promise<any> {
-        await group.removeUserForGroup(baseSurface, groupName, user);
+        await group.removeUserForGroup(baseSurface, groupName, browser.params.user);
     });
 
     it('Step 11: Delete Group', async function (): Promise<any> {

@@ -268,7 +268,7 @@ class CloudRoles {
                 yield utils_1.elementClick(this.searchInEditWindow);
                 yield this.searchInEditWindow.sendKeys(azureActionName);
                 yield protractor_1.browser.logger.info('Selected Action Name');
-                yield protractor_1.browser.sleep(2000);
+                yield protractor_1.browser.sleep(3000);
                 yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.addButton, 2000, 'Add Azure Action');
                 yield protractor_1.browser.actions().mouseMove(this.addButton).perform();
                 yield utils_1.elementClick(this.addButton);
@@ -295,7 +295,7 @@ class CloudRoles {
                 yield utils_1.elementClick(this.searchInEditWindow);
                 yield this.searchInEditWindow.sendKeys(azureNonActionName);
                 yield protractor_1.browser.logger.info('Selected Action Name');
-                yield protractor_1.browser.sleep(2000);
+                yield protractor_1.browser.sleep(3000);
                 yield waitHelper_1.WaitHelper.waitForElementToBeClickable(this.addButton, 2000, 'Add Azure Non Action');
                 yield protractor_1.browser.actions().mouseMove(this.addButton).perform();
                 yield utils_1.elementClick(this.addButton);

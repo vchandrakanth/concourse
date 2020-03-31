@@ -143,18 +143,20 @@ export class NestedEnClaveModel {
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Enclave Model Evaluations ');
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Review Enclave Model Page');
+        await browser.sleep(5000);
 
         // Select Review Enclave Model Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Review Enclave Model ');
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Submit Page');
+        await browser.sleep(5000);
 
         // Click on Submit button to submit the EnClave Model
         await WaitHelper.waitForElementToBeClickable(this.submitButton, 5000, 'Submit ');
         await browser.actions().mouseMove(this.submitButton).perform();
         await elementClick(this.submitButton);
         await browser.logger.info('Nested Enclave Model Submitted');
-        await browser.sleep(15000);
+        await browser.sleep(10000);
     }
 
     async getId() {
@@ -287,7 +289,7 @@ export class NestedEnClaveModel {
     async selectSurfaceFromDropDown(surfaceName: string = null) {
         await WaitHelper.waitForElementToBePresent(this.surfaceDropDown, 5000, 'Surface Drop Down ');
         await browser.actions().mouseMove(this.surfaceDropDown).perform();
-        await elementClick(this.surfaceDropDown);
+        elementClick(this.surfaceDropDown);
         await browser.logger.info(surfaceName, 'Surface Drop Down Clicked');
 
         await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');

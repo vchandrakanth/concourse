@@ -1,4 +1,4 @@
-import { ExpectedConditions } from 'protractor';
+import { ExpectedConditions, browser } from 'protractor';
 import { ExpectHelper } from '../utils/expectHelper';
 import { PolicyGroupTemplatePage } from '../pageObjects/policyGroupTemplate.Po';
 import { PolicyGroup } from '../pageObjects/policyGroup.Po';
@@ -112,6 +112,7 @@ describe('Request For Model ', async function () {
 
     it('Step 15: Approve Delete Action', async function (): Promise<any> {
         await approvals.ApprovalAction(baseSurface, policyGroupId);
+        await browser.refresh();
     });
 
     it('Step 16: CleanUp', async function (): Promise<any> {

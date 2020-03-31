@@ -17,7 +17,6 @@ describe('Removing Business Author Role Assignments with Underlying LogicalDeplo
     let attributeTag = new AttributeTag();
     let assetsManager = new AssetManager();
     let logicalDeployment = new LogicalDeployment();
-    let user = properties.groupData.user;
     let groupName = properties.groupData.groupName + group.getRandomNum(1, 1000);
     let groupDescription = properties.groupData.groupDescription;
     let assetName = properties.enclaveModelData.modelName + assetsManager.getRandomNum(1, 1000);
@@ -49,7 +48,7 @@ describe('Removing Business Author Role Assignments with Underlying LogicalDeplo
 
     it('Step 2: Asign User For New Group', async function (): Promise<any> {
         // Assigning User For Newly Created Group
-        await group.assignUserForGroup(baseSurface, groupName, user, 0);
+        await group.assignUserForGroup(baseSurface, groupName, browser.params.user, 0);
         await ExpectHelper.isListElementExists(group.groupList, groupName);
     });
 
@@ -143,7 +142,7 @@ describe('Removing Business Author Role Assignments with Underlying LogicalDeplo
 
     it('Step 15: Remove User From Group', async function (): Promise<any> {
         // Removing User From Group
-        await group.removeUserForGroup(baseSurface, groupName, user);
+        await group.removeUserForGroup(baseSurface, groupName, browser.params.user);
         await ExpectHelper.expectDoesNotExists(group.selectUserToDelete(groupName));
     });
 

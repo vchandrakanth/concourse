@@ -18,7 +18,6 @@ describe('Deleting Control Author Role Assignment with dependent Policy Group', 
     let attributeTag = new AttributeTag();
     let policyPage = new PolicyGroup();
     let policyGroupTemplatePage = new PolicyGroupTemplatePage();
-    let user = properties.groupData.user;
     let groupName = properties.groupData.groupName + group.getRandomNum(1, 1000);
     let groupDescription = properties.groupData.groupDescription;
     let policyGroupTemplateName = properties.policyGroupTemplateData.policyGroupTemplateNameWithAWSProducts + policyGroupTemplatePage.getRandomNum(1, 1000);
@@ -49,7 +48,7 @@ describe('Deleting Control Author Role Assignment with dependent Policy Group', 
 
     it('Step 2: Asign User For New Group', async function (): Promise<any> {
         // Assigning User For Newly Created Group
-        await group.assignUserForGroup(baseSurface, groupName, user, 0);
+        await group.assignUserForGroup(baseSurface, groupName, browser.params.user, 0);
         await ExpectHelper.isListElementExists(group.groupList, groupName);
         await browser.refresh();
     });
@@ -134,7 +133,7 @@ describe('Deleting Control Author Role Assignment with dependent Policy Group', 
 
     it('Step 15: Remove User From Group', async function (): Promise<any> {
         // Removing User From Group
-        await group.removeUserForGroup(baseSurface, groupName, user);
+        await group.removeUserForGroup(baseSurface, groupName, browser.params.user);
         await ExpectHelper.expectDoesNotExists(group.selectUserToDelete(groupName));
     });
 

@@ -37,30 +37,31 @@ describe('Creaing Encalve Model With Nested Templates ', async function () {
   it('Step 2: Create New Enclave Model', async function (): Promise<any> {
     // Creating Enclave Model
     await nestedEnclaveModel.createNestedEnclaveModel(baseSurface, 'PUBLISHED', assetName, desc, attitibuteTag, 'roottemplate.json', nestedTemplateName, 'E2E Admin');
-    await ExpectHelper.isListElementExists(nestedEnclaveModel.list, assetName);
     modelId = await nestedEnclaveModel.getId();
     await console.log('Enclave Model name is', assetName);
     await console.log('Enclave Model id is', modelId);
+    await nestedEnclaveModel.searchNestedEnclaveModel(baseSurface, assetName);
+    await ExpectHelper.isListElementExists(nestedEnclaveModel.assetList, assetName);
   });
 
   it('Step 3: Edit Enclave Model', async function (): Promise<any> {
     // Editing Created Enclave Model
     await nestedEnclaveModel.editNestedEnclaveModel(baseSurface, assetName, desc);
     await nestedEnclaveModel.searchNestedEnclaveModel(baseSurface, assetName + ' Updated');
-    // await ExpectHelper.isListElementExists(nestedEnclaveModel.list, assetName);
+    await ExpectHelper.isListElementExists(nestedEnclaveModel.assetList, assetName);
   });
 
   it('Step 4: Delete Enclave Model', async function (): Promise<any> {
     // Deleting Enclave Model
     await nestedEnclaveModel.deleteNestedEnclaveModel(baseSurface, assetName);
-    await ExpectHelper.expectDoesNotExists(assetsManager.enclaveModelElement(assetName));
+    await ExpectHelper.expectDoesNotExists(nestedEnclaveModel.enclaveModelElement(assetName));
 
   });
 
   it('Step 5: Verify Enclave Model Deleted Or Not', async function (): Promise<any> {
     // Verifying the Enclave Model is Deleted Or Not
     await nestedEnclaveModel.verifyNestedEnclaveModel(assetName);
-    await ExpectHelper.expectDoesNotExists(assetsManager.enclaveModelElement(assetName));
+    await ExpectHelper.expectDoesNotExists(nestedEnclaveModel.enclaveModelElement(assetName));
   });
 
   it('Step 6: Clean Up', async function (): Promise<any> {

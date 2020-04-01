@@ -60,7 +60,7 @@ export class NestedEnClaveModel {
         await browser.logger.info('Assets Manager Menu Clicked');
         await browser.sleep(2000);
 
-    await this.selectSurfaceFromDropDown(surfaceName);
+        await this.selectSurfaceFromDropDown(surfaceName);
 
 
         // Click on '+' Button to Create new policy
@@ -189,7 +189,7 @@ export class NestedEnClaveModel {
         return parseInt(Math.random() * (max - min) + min);
     };
 
-    async searchNestedEnclaveModel(surfaceName: string = null, assetName: string = null, searchOnly: string = null) {
+    async searchNestedEnclaveModel(surfaceName: string = null, assetName: string = null, desc: any = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
         await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
@@ -198,43 +198,45 @@ export class NestedEnClaveModel {
 
         await this.selectSurfaceFromDropDown(surfaceName);
 
-        await elementClear(this.search, assetName);
+        elementClear(this.search, assetName);
 
         // Select Created Enclave Model
         await WaitHelper.waitForElementToBeDisplayed(this.assetList, 5000, 'Enclave Model List Displayed');
         await this.search.sendKeys(assetName);
+        await browser.sleep(2000);
     }
 
     async editNestedEnclaveModel(surfaceName: string = null, assetName: string = null, desc: any) {
         // Search the enclaveModel
-    await this.searchNestedEnclaveModel(surfaceName, assetName, desc);
-    await elementClick(this.searchEnclaveModel(assetName));
-    await browser.logger.info(assetName, 'Selected');
+        await this.searchNestedEnclaveModel(surfaceName, assetName, desc);
+        await elementClick(this.searchEnclaveModel(assetName));
+        await browser.logger.info(assetName, 'Selected');
+        await browser.sleep(5000);
+        // Click Edit Icon
+        await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button ');
+        await browser.actions().mouseMove(this.editButton).perform();
+        await elementClick(this.editButton);
+        await browser.logger.info('Edit Button Clicked');
+        await browser.sleep(5000);
 
-    // Click Edit Icon
-    await WaitHelper.waitForElementToBePresent(this.editButton, 5000, 'Edit Button ');
-    await browser.actions().mouseMove(this.editButton).perform();
-    await elementClick(this.editButton);
-    await browser.logger.info('Edit Button Clicked');
-
-    // Edit Enclave Model Name
-    await WaitHelper.waitForElementToBePresent(this.enterAssetName, 5000, 'Enclave Model Name ');
-    await elementSendkeys(this.enterAssetName, ' Updated');
-    await browser.logger.info('Asset Name Entered: ', assetName + ' Updated');
+        // Edit Enclave Model Name
+        await WaitHelper.waitForElementToBePresent(this.enterAssetName, 5000, 'Enclave Model Name ');
+        await elementSendkeys(this.enterAssetName, ' Updated');
+        await browser.logger.info('Asset Name Entered: ', assetName + ' Updated');
 
         // click on next to Template Mapping Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Template Mapping ');
         await browser.actions().mouseMove(this.nextButton).perform();
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Template Mapping Page');
-         // click on next to Enclave Model Evaluations Page
+        // click on next to Enclave Model Evaluations Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Enclave Model Evaluations ');
         await browser.actions().mouseMove(this.nextButton).perform();
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Review Enclave Model Page');
         await browser.sleep(2000);
-        // Select Review Enclave Model Page
-        await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Review Enclave Model ');
+        // Review Enclave Model Page
+        await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Review Enclave Model ');
         await browser.actions().mouseMove(this.nextButton).perform();
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Submit Page');
@@ -295,7 +297,7 @@ export class NestedEnClaveModel {
         await WaitHelper.waitForElementToBePresent(this.selectSurface(surfaceName), 5000, 'Surface');
         await elementClick(this.selectSurface(surfaceName));
         await browser.logger.info('Surface Selcted');
-      }
+    }
 
     async getPageTitle() {
         return browser.getTitle();

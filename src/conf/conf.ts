@@ -55,7 +55,7 @@ export let config: Config = {
             // '../specs/policyViolations.js',
             // '../specs/UpdatePolicyViolation.js',
             // '../specs/inviteUser.js',
-            '../specs/addAttributeTagForPG.js',
+            // '../specs/addAttributeTagForPG.js',
             // '../specs/removeAttributeTagForPG.js',
             // '../specs/manageInstitutionData.js',
             // '../specs/requestForModel.js',
@@ -66,7 +66,7 @@ export let config: Config = {
             // '../specs/group.js',
             // '../specs/removeBusinessAuthorRoleAssignment.js',
             // '../specs/removeControlAuthorRoleAssignment.js',
-            // '../specs/nestedtemplates.js',
+            '../specs/nestedtemplates.js',
             // '../specs/createAWSAccount.js',
             // '../specs/1426Scenario.js'
         ]

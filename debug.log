@@ -3789,3 +3789,38 @@
 [0402/212818.908:ERROR:exception_snapshot_win.cc(98)] thread ID 6320 not found in process
 [0402/212818.910:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [0402/212818.910:ERROR:exception_snapshot_win.cc(98)] thread ID 9736 not found in process
+[0403/155740.463:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.520:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.520:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.520:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.520:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.520:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.520:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.520:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0403/155740.670:ERROR:exception_snapshot_win.cc(98)] thread ID 11772 not found in process
+[0403/155740.794:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.794:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.794:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.794:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0403/155740.794:ERROR:exception_snapshot_win.cc(98)] thread ID 11700 not found in process
+[0403/155740.853:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.853:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.853:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.853:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.853:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.853:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.853:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.853:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.853:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.853:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0403/155740.853:ERROR:exception_snapshot_win.cc(98)] thread ID 3512 not found in process
+[0403/155740.902:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.902:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.903:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155740.903:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0403/155740.903:ERROR:exception_snapshot_win.cc(98)] thread ID 7268 not found in process
+[0403/155742.737:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0403/155742.737:ERROR:exception_snapshot_win.cc(98)] thread ID 96 not found in process
+[0403/155743.952:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0403/155743.952:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[0403/155743.952:ERROR:exception_snapshot_win.cc(98)] thread ID 10796 not found in process

@@ -39,6 +39,7 @@ export class AttributeTag {
     await browser.logger.info('Selected E2E Surface');
 
     // Click on '+' Button to Create new Tag
+    await WaitHelper.waitForElementToBeClickable(this.createNewAttributeTag, 2000, 'New Attribute Tag');
     await elementClick(this.createNewAttributeTag);
     await browser.logger.info('Clicked New Attribute Tag Button');
 

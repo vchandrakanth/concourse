@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const store_1 = require("@ngrx/store");
+const enums_1 = require("@concourse/shared/enums");
+const fromFeatureFlag = require("./feature-flag.reducer");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.FeatureFlag);
+exports.getFeatures = store_1.createSelector(exports.getState, fromFeatureFlag.features);
+exports.getInstitutionFeatures = store_1.createSelector(exports.getState, fromFeatureFlag.institutionFeatures);
+exports.getCombinedFeatures = store_1.createSelector(exports.getState, fromFeatureFlag.combinedFeatures);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmVhdHVyZS1mbGFnLnNlbGVjdG9ycy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL2NvbmNvdXJzZS9qYXZhc2NyaXB0L2NvbmNvdXJzZS1hcHAvc3JjL2FwcC9jb3JlL2ZlYXR1cmUtZmxhZ3Mvc3RhdGUvZmVhdHVyZS1mbGFnLnNlbGVjdG9ycy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHVDQUFvRTtBQUVwRSxtREFBcUQ7QUFDckQsMERBQTBEO0FBRTdDLFFBQUEsUUFBUSxHQUFHLDZCQUFxQixDQUF3QixrQkFBVSxDQUFDLFdBQVcsQ0FBQyxDQUFDO0FBQ2hGLFFBQUEsV0FBVyxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxlQUFlLENBQUMsUUFBUSxDQUFDLENBQUM7QUFDakUsUUFBQSxzQkFBc0IsR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsZUFBZSxDQUFDLG1CQUFtQixDQUFDLENBQUM7QUFDdkYsUUFBQSxtQkFBbUIsR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsZUFBZSxDQUFDLGdCQUFnQixDQUFDLENBQUMifQ==

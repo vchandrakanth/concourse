@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isStateLoaded = () => (state) => !state.loading && state.loaded;
+exports.isStateLoading = () => (state) => state.loading && !state.loaded;
+exports.isStateUpdating = () => (state) => state.loading && state.loaded;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RhdGUtaGVscGVycy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL2NvbmNvdXJzZS9qYXZhc2NyaXB0L2NvbmNvdXJzZS1hcHAvc3JjL2FwcC9zaGFyZWQvaGVscGVycy9zdGF0ZS1oZWxwZXJzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQWEsUUFBQSxhQUFhLEdBQUcsR0FBRyxFQUFFLENBQUMsQ0FBQyxLQUFVLEVBQVcsRUFBRSxDQUN6RCxDQUFDLEtBQUssQ0FBQyxPQUFPLElBQUksS0FBSyxDQUFDLE1BQU0sQ0FBQztBQUVwQixRQUFBLGNBQWMsR0FBRyxHQUFHLEVBQUUsQ0FBQyxDQUFDLEtBQVUsRUFBVyxFQUFFLENBQzFELEtBQUssQ0FBQyxPQUFPLElBQUksQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDO0FBRXBCLFFBQUEsZUFBZSxHQUFHLEdBQUcsRUFBRSxDQUFDLENBQUMsS0FBVSxFQUFXLEVBQUUsQ0FDM0QsS0FBSyxDQUFDLE9BQU8sSUFBSSxLQUFLLENBQUMsTUFBTSxDQUFDIn0=

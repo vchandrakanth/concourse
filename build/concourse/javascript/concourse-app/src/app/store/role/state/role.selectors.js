@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const store_1 = require("@ngrx/store");
+const enums_1 = require("@concourse/shared/enums");
+const helpers_1 = require("@concourse/shared/helpers");
+const fromRole = require("./role.reducer");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.Role);
+exports.getAll = store_1.createSelector(exports.getState, fromRole.selectAll);
+exports.getEntities = store_1.createSelector(exports.getState, fromRole.selectEntities);
+exports.getIsLoaded = store_1.createSelector(exports.getState, fromRole.isLoaded);
+exports.getIsUpdating = store_1.createSelector(exports.getState, fromRole.isUpdating);
+exports.getSelectedId = store_1.createSelector(exports.getState, fromRole.selectedRole);
+exports.getSelected = store_1.createSelector(exports.getEntities, exports.getSelectedId, (entities, id) => id ? entities[id].responsibilities : []);
+exports.getResponsibilityById = store_1.createSelector(exports.getEntities, roles => (roleId, responsibilityId) => !helpers_1.Util.isEmptyObject(roles) && !helpers_1.Util.isUndefined(roles[roleId]) ?
+    roles[roleId].responsibilities.find(r => r.id === responsibilityId) : undefined);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicm9sZS5zZWxlY3RvcnMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi9jb25jb3Vyc2UvamF2YXNjcmlwdC9jb25jb3Vyc2UtYXBwL3NyYy9hcHAvc3RvcmUvcm9sZS9zdGF0ZS9yb2xlLnNlbGVjdG9ycy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHVDQUFvRTtBQUVwRSxtREFBcUQ7QUFDckQsdURBQWlEO0FBQ2pELDJDQUEyQztBQUU5QixRQUFBLFFBQVEsR0FBRyw2QkFBcUIsQ0FBaUIsa0JBQVUsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUNsRSxRQUFBLE1BQU0sR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsUUFBUSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0FBQ3RELFFBQUEsV0FBVyxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxRQUFRLENBQUMsY0FBYyxDQUFDLENBQUM7QUFDaEUsUUFBQSxXQUFXLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFFBQVEsQ0FBQyxRQUFRLENBQUMsQ0FBQztBQUMxRCxRQUFBLGFBQWEsR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsUUFBUSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0FBQzlELFFBQUEsYUFBYSxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxRQUFRLENBQUMsWUFBWSxDQUFDLENBQUM7QUFDaEUsUUFBQSxXQUFXLEdBQUcsc0JBQWMsQ0FBQyxtQkFBVyxFQUFFLHFCQUFhLEVBQUUsQ0FBQyxRQUFRLEVBQUUsRUFBRSxFQUFFLEVBQUUsQ0FDckYsRUFBRSxDQUFDLENBQUMsQ0FBQyxRQUFRLENBQUMsRUFBRSxDQUFDLENBQUMsZ0JBQWdCLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDO0FBRTlCLFFBQUEscUJBQXFCLEdBQUcsc0JBQWMsQ0FDakQsbUJBQVcsRUFDWCxLQUFLLENBQUMsRUFBRSxDQUFDLENBQUMsTUFBYyxFQUFFLGdCQUF3QixFQUFFLEVBQUUsQ0FDcEQsQ0FBQyxjQUFJLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxJQUFJLENBQUMsY0FBSSxDQUFDLFdBQVcsQ0FBQyxLQUFLLENBQUMsTUFBTSxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQzlELEtBQUssQ0FBQyxNQUFNLENBQUMsQ0FBQyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsRUFBRSxLQUFLLGdCQUFnQixDQUFDLENBQUMsQ0FBQyxDQUFDLFNBQVMsQ0FDcEYsQ0FBQyJ9

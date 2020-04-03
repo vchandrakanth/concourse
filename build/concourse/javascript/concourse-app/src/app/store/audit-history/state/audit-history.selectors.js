@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const store_1 = require("@ngrx/store");
+const enums_1 = require("@concourse/shared/enums");
+const fromAuditHistoryStore = require("./audit-history.reducer");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.AuditHistory);
+exports.getAuditHistory = store_1.createSelector(exports.getState, fromAuditHistoryStore.getAuditHistory);
+exports.getIsLoading = store_1.createSelector(exports.getState, fromAuditHistoryStore.getIsLoading);
+exports.getIsLoaded = store_1.createSelector(exports.getState, fromAuditHistoryStore.getIsLoaded);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXVkaXQtaGlzdG9yeS5zZWxlY3RvcnMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi9jb25jb3Vyc2UvamF2YXNjcmlwdC9jb25jb3Vyc2UtYXBwL3NyYy9hcHAvc3RvcmUvYXVkaXQtaGlzdG9yeS9zdGF0ZS9hdWRpdC1oaXN0b3J5LnNlbGVjdG9ycy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHVDQUFvRTtBQUVwRSxtREFBcUQ7QUFDckQsaUVBQWlFO0FBRXBELFFBQUEsUUFBUSxHQUFHLDZCQUFxQixDQUE4QixrQkFBVSxDQUFDLFlBQVksQ0FBQyxDQUFDO0FBQ3ZGLFFBQUEsZUFBZSxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxxQkFBcUIsQ0FBQyxlQUFlLENBQUMsQ0FBQztBQUNsRixRQUFBLFlBQVksR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUscUJBQXFCLENBQUMsWUFBWSxDQUFDLENBQUM7QUFDNUUsUUFBQSxXQUFXLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLHFCQUFxQixDQUFDLFdBQVcsQ0FBQyxDQUFDIn0=

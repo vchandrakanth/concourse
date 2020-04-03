@@ -7,7 +7,7 @@ import { Approvals } from '../pageObjects/approvals.Po';
 import { getIdFromUrl } from '../utils/utils';
 import { BaseLineAsset } from '../pageObjects/baseLineAssets.Po';
 
-describe('Request For Model ', async function () {
+describe('Request For Base Line ', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let attributeTag = new AttributeTag();

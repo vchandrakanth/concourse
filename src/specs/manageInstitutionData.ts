@@ -3,7 +3,7 @@ import { ExpectHelper } from '../utils/expectHelper';
 import { Surface } from '../pageObjects/surfaces.Po';
 import { InstitutionData } from '../pageObjects/manageInstitutionData.Po';
 
-describe('Surface Creation Concourse ', async function () {
+describe('Manage Institution Data Concourse ', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let properties = require('../conf/properties');

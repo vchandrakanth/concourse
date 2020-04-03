@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const store_1 = require("@ngrx/store");
+const enums_1 = require("@concourse/shared/enums");
+const fromReducer = require("./aws-account.reducer");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.AwsAccount);
+exports.getAll = store_1.createSelector(exports.getState, fromReducer.selectAll);
+exports.getEntities = store_1.createSelector(exports.getState, fromReducer.selectEntities);
+exports.getSelectedId = store_1.createSelector(exports.getState, fromReducer.selectedAwsAccountId);
+exports.selected = store_1.createSelector(exports.getEntities, exports.getSelectedId, (ent, id) => ent[id]);
+exports.getIsLoaded = store_1.createSelector(exports.getState, fromReducer.isLoaded);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXdzLWFjY291bnQuc2VsZWN0b3JzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vY29uY291cnNlL2phdmFzY3JpcHQvY29uY291cnNlLWFwcC9zcmMvYXBwL3N0b3JlL2F3cy1hY2NvdW50cy9zdGF0ZS9hd3MtYWNjb3VudC5zZWxlY3RvcnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSx1Q0FBb0U7QUFFcEUsbURBQXFEO0FBQ3JELHFEQUFxRDtBQUV4QyxRQUFBLFFBQVEsR0FBRyw2QkFBcUIsQ0FBb0Isa0JBQVUsQ0FBQyxVQUFVLENBQUMsQ0FBQztBQUMzRSxRQUFBLE1BQU0sR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsV0FBVyxDQUFDLFNBQVMsQ0FBQyxDQUFDO0FBQ3pELFFBQUEsV0FBVyxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxXQUFXLENBQUMsY0FBYyxDQUFDLENBQUM7QUFDbkUsUUFBQSxhQUFhLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFdBQVcsQ0FBQyxvQkFBb0IsQ0FBQyxDQUFDO0FBQzNFLFFBQUEsUUFBUSxHQUFHLHNCQUFjLENBQUMsbUJBQVcsRUFBRSxxQkFBYSxFQUFFLENBQUMsR0FBRyxFQUFFLEVBQUUsRUFBRSxFQUFFLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7QUFDNUUsUUFBQSxXQUFXLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFdBQVcsQ0FBQyxRQUFRLENBQUMsQ0FBQyJ9

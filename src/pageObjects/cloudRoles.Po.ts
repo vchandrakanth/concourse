@@ -51,7 +51,6 @@ export class CloudRoles {
 
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await elementClick(this.cloudRolesLink);
-    // await browser.get(configProperties.qaUrl + '/cloud-roles');
     await browser.logger.info('Cloud Roles Menu Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
 
@@ -374,7 +373,6 @@ export class CloudRoles {
   async verifyCloudRole(surfaceName: string = null, name: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     await elementClick(this.cloudRolesLink);
-    // await browser.get(configProperties.qaUrl + '/cloud-roles');
     await browser.logger.info('Cloud Roles Menu Clicked');
     await WaitHelper.waitForElementToBeDisplayed(this.list, 5000, 'List displayed');
 

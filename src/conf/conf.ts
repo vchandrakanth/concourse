@@ -64,9 +64,9 @@ export let config: Config = {
             // '../specs/requestForBaseline.js',
             // '../specs/cloudRoles.js',
             // '../specs/group.js',
-            // '../specs/removeBusinessAuthorRoleAssignment.js',
+            '../specs/removeBusinessAuthorRoleAssignment.js',
             // '../specs/removeControlAuthorRoleAssignment.js',
-            '../specs/nestedtemplates.js',
+            // '../specs/nestedtemplates.js',
             // '../specs/createAWSAccount.js',
             // '../specs/1426Scenario.js'
         ]
@@ -165,8 +165,8 @@ export let config: Config = {
                 projectName: 'Concourse Labs',
                 environment: environment,
                 testname: jasmine.getEnv().currentSpec,
-                // slackUrl: 'https://hooks.slack.com/services/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',
-                slackUrl: 'https://hooks.slack.com/services/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',
+                // slackUrl: 'https://hooks.slack.com/services/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',
+                // slackUrl: 'https://hooks.slack.com/services/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',
                 channel: 'qa-e2e-test',
                 // get itName() { let cs = jasmine.getEnv().currentSpec; return cs ? cs.description : ''; }                  });
             }));

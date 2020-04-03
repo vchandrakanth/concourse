@@ -8,11 +8,9 @@ describe('Creating Groups Concourse ', async function () {
     let EC = ExpectedConditions;
     let group = new Group();
     let surface = new Surface();
-    // let verifyUserPermissions = new VerifyUserPermissions();
     let properties = require('../conf/properties');
     let groupName = properties.groupData.groupName + group.getRandomNum(1, 1000);
     let groupDescription = properties.groupData.groupDescription;
-    // let user = properties.groupData.user;
     let role = ['Business Operator'];
     let responsibilities = ['Manage Deployments'];
     let organization = ['Default Surface - Root Surface Layer'];

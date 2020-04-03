@@ -113,6 +113,7 @@ export class Surface {
         await WaitHelper.waitForElementToBeClickable(this.selectSurface(name), 2000, 'E2E Surface ');
         await elementClick(this.selectSurface(name));
         await browser.logger.info('Selected E2E Surface');
+        await browser.sleep(2000);
     }
 
     async editSurface(name: string = null, description: string = null) {
@@ -249,7 +250,7 @@ export class Surface {
 
     async deleteDataAccount(name: string = null, account: string[] = null, value: any = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
-        await browser.get(configProperties.qaUrl + '/surfaces');
+        await elementClick(this.surfaceMenu);
         await WaitHelper.waitForElementToBeDisplayed(this.surfacelist, 3000, 'list displayed');
         await browser.logger.info('Surface Page Displayed');
 
@@ -354,7 +355,7 @@ export class Surface {
 
     async deleteDataAccountForSurfaceLayer(name: string = null, account: string[] = null, value: any = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
-        await browser.get(configProperties.qaUrl + '/surfaces');
+        await elementClick(this.surfaceMenu);
         await WaitHelper.waitForElementToBeDisplayed(this.surfacelist, 3000, 'list displayed');
         await browser.logger.info('Surface Page Displayed');
 

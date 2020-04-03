@@ -1,0 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const store_1 = require("@ngrx/store");
+const enums_1 = require("@concourse/shared/enums");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.Dashboard);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGFzaGJvYXJkLnNlbGVjdG9ycy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL2NvbmNvdXJzZS9qYXZhc2NyaXB0L2NvbmNvdXJzZS1hcHAvc3JjL2FwcC9zdG9yZS9kYXNoYm9hcmQvc3RhdGUvZGFzaGJvYXJkLnNlbGVjdG9ycy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHVDQUFvRTtBQUVwRSxtREFBcUQ7QUFHeEMsUUFBQSxRQUFRLEdBQUcsNkJBQXFCLENBQXNCLGtCQUFVLENBQUMsU0FBUyxDQUFDLENBQUMifQ==

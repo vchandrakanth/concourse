@@ -6,7 +6,7 @@ import { AttributeTag } from '../pageObjects/attributeTags.Po';
 import { Approvals } from '../pageObjects/approvals.Po';
 import { getIdFromUrl } from '../utils/utils';
 
-describe('Policy Group Concourse ', async function () {
+describe('Approvals Concourse ', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let attributeTag = new AttributeTag();

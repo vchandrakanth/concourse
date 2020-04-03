@@ -27,7 +27,6 @@ export class Risk {
 
   async openRisk(ID: any) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await browser.get(configProperties.qaUrl + '/workflows/risks');
     await WaitHelper.waitForElementToBeDisplayed(this.riskMenu, 2000, 'Menu');
     elementClick(this.riskMenu);
     await WaitHelper.waitForElementToBeDisplayed(this.risklist, 3000, 'list displayed');
@@ -57,7 +56,6 @@ export class Risk {
 
   async verifyRisk(ID: any) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
-    // await browser.get(configProperties.qaUrl + '/workflows/risks');
     await WaitHelper.waitForElementToBeDisplayed(this.riskMenu, 2000, 'Menu');
     await elementClick(this.riskMenu);
     await WaitHelper.waitForElementToBeDisplayed(this.risklist, 3000, 'list displayed');

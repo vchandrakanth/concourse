@@ -1,0 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const store_1 = require("@ngrx/store");
+const enums_1 = require("@concourse/shared/enums");
+const fromModalStore = require("./modal.reducer");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.Modal);
+exports.getModals = store_1.createSelector(exports.getState, fromModalStore.modals);
+exports.getActiveModal = store_1.createSelector(exports.getState, fromModalStore.activeModal);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kYWwuc2VsZWN0b3JzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vY29uY291cnNlL2phdmFzY3JpcHQvY29uY291cnNlLWFwcC9zcmMvYXBwL2NvcmUvbW9kYWwvc3RhdGUvbW9kYWwuc2VsZWN0b3JzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsdUNBQW9FO0FBRXBFLG1EQUFxRDtBQUNyRCxrREFBa0Q7QUFFckMsUUFBQSxRQUFRLEdBQUcsNkJBQXFCLENBQXVCLGtCQUFVLENBQUMsS0FBSyxDQUFDLENBQUM7QUFDekUsUUFBQSxTQUFTLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLGNBQWMsQ0FBQyxNQUFNLENBQUMsQ0FBQztBQUM1RCxRQUFBLGNBQWMsR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsY0FBYyxDQUFDLFdBQVcsQ0FBQyxDQUFDIn0=

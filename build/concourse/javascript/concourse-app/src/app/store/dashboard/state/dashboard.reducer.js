@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.initialState = {};
+function reducer(state = exports.initialState, action) {
+    return state;
+}
+exports.reducer = reducer;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGFzaGJvYXJkLnJlZHVjZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi9jb25jb3Vyc2UvamF2YXNjcmlwdC9jb25jb3Vyc2UtYXBwL3NyYy9hcHAvc3RvcmUvZGFzaGJvYXJkL3N0YXRlL2Rhc2hib2FyZC5yZWR1Y2VyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBTWEsUUFBQSxZQUFZLEdBQVUsRUFDbEMsQ0FBQztBQUVGLFNBQWdCLE9BQU8sQ0FBQyxLQUFLLEdBQUcsb0JBQVksRUFBRSxNQUF3QjtJQUNwRSxPQUFPLEtBQUssQ0FBQztBQUNmLENBQUM7QUFGRCwwQkFFQyJ9

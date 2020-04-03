@@ -1,0 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const enums_1 = require("@concourse/shared/enums");
+const store_1 = require("@ngrx/store");
+const fromReporting = require("./reporting.reducer");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.Reporting);
+exports.isLoading = store_1.createSelector(exports.getState, fromReporting.isLoading);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVwb3J0aW5nLnNlbGVjdG9ycy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uLy4uL2NvbmNvdXJzZS9qYXZhc2NyaXB0L2NvbmNvdXJzZS1hcHAvc3JjL2FwcC9zdG9yZS9yZXBvcnRpbmcvc3RhdGUvcmVwb3J0aW5nLnNlbGVjdG9ycy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLG1EQUFxRDtBQUNyRCx1Q0FBb0U7QUFFcEUscURBQXFEO0FBRXhDLFFBQUEsUUFBUSxHQUFHLDZCQUFxQixDQUFzQixrQkFBVSxDQUFDLFNBQVMsQ0FBQyxDQUFDO0FBQzVFLFFBQUEsU0FBUyxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxhQUFhLENBQUMsU0FBUyxDQUFDLENBQUMifQ==

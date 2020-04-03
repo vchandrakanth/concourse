@@ -53,7 +53,6 @@ export class BaseLineAsset {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on BaseLine Assets Menu Button
-        // await browser.get(configProperties.qaUrl + '/baseline-assets');
         await elementClick(this.baseLineAssetsMenu);
         await browser.logger.info('baseLine Assets Menu Clicked');
         await browser.sleep(2000);

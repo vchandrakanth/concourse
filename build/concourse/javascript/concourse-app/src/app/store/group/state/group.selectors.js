@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const store_1 = require("@ngrx/store");
+const enums_1 = require("@concourse/shared/enums");
+const fromGroup = require("./group.reducer");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.Group);
+exports.getAll = store_1.createSelector(exports.getState, fromGroup.selectAll);
+exports.getEntities = store_1.createSelector(exports.getState, fromGroup.selectEntities);
+exports.getIsLoaded = store_1.createSelector(exports.getState, fromGroup.isLoaded);
+exports.getIsUpdating = store_1.createSelector(exports.getState, fromGroup.isUpdating);
+exports.getSelectedId = store_1.createSelector(exports.getState, fromGroup.selectedId);
+exports.getSelected = store_1.createSelector(exports.getEntities, exports.getSelectedId, (entities, id) => entities[id]);
+exports.getRoleAssignments = store_1.createSelector(exports.getAll, groups => groups.reduce((acc, group) => [...acc, ...group.assignedRoles], []));
+exports.getRoleAssignmentEntities = store_1.createSelector(exports.getRoleAssignments, roleAssignments => roleAssignments.reduce((acc, ra) => (Object.assign(Object.assign({}, acc), { [ra.id]: ra })), {}));
+exports.hasNextLink = store_1.createSelector(exports.getState, fromGroup.hasNextLink);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ3JvdXAuc2VsZWN0b3JzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vY29uY291cnNlL2phdmFzY3JpcHQvY29uY291cnNlLWFwcC9zcmMvYXBwL3N0b3JlL2dyb3VwL3N0YXRlL2dyb3VwLnNlbGVjdG9ycy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHVDQUFvRTtBQUdwRSxtREFBcUQ7QUFDckQsNkNBQTZDO0FBRWhDLFFBQUEsUUFBUSxHQUFHLDZCQUFxQixDQUFrQixrQkFBVSxDQUFDLEtBQUssQ0FBQyxDQUFDO0FBQ3BFLFFBQUEsTUFBTSxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxTQUFTLENBQUMsU0FBUyxDQUFDLENBQUM7QUFDdkQsUUFBQSxXQUFXLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFNBQVMsQ0FBQyxjQUFjLENBQUMsQ0FBQztBQUNqRSxRQUFBLFdBQVcsR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsU0FBUyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBQzNELFFBQUEsYUFBYSxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxTQUFTLENBQUMsVUFBVSxDQUFDLENBQUM7QUFDL0QsUUFBQSxhQUFhLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFNBQVMsQ0FBQyxVQUFVLENBQUMsQ0FBQztBQUMvRCxRQUFBLFdBQVcsR0FBRyxzQkFBYyxDQUFDLG1CQUFXLEVBQUUscUJBQWEsRUFBRSxDQUFDLFFBQVEsRUFBRSxFQUFFLEVBQUUsRUFBRSxDQUFDLFFBQVEsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDO0FBQ3pGLFFBQUEsa0JBQWtCLEdBQUcsc0JBQWMsQ0FBQyxjQUFNLEVBQ3JELE1BQU0sQ0FBQyxFQUFFLENBQUMsTUFBTSxDQUFDLE1BQU0sQ0FBQyxDQUFDLEdBQUcsRUFBRSxLQUFLLEVBQUUsRUFBRSxDQUFDLENBQUMsR0FBRyxHQUFHLEVBQUUsR0FBRyxLQUFLLENBQUMsYUFBYSxDQUFDLEVBQUUsRUFBc0IsQ0FBQyxDQUNsRyxDQUFDO0FBQ1csUUFBQSx5QkFBeUIsR0FBRyxzQkFBYyxDQUFDLDBCQUFrQixFQUN4RSxlQUFlLENBQUMsRUFBRSxDQUFDLGVBQWUsQ0FBQyxNQUFNLENBQUMsQ0FBQyxHQUFHLEVBQUUsRUFBRSxFQUFFLEVBQUUsQ0FBQyxpQ0FBTSxHQUFHLEtBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsRUFBRSxJQUFHLEVBQUUsRUFBdUMsQ0FBQyxDQUMzSCxDQUFDO0FBQ1csUUFBQSxXQUFXLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFNBQVMsQ0FBQyxXQUFXLENBQUMsQ0FBQyJ9

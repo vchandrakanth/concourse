@@ -55,7 +55,6 @@ export class NestedEnClaveModel {
 
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
-        // await browser.get(configProperties.qaUrl + '/assets');
         elementClick(this.assetsManagerMenu);
         await browser.logger.info('Assets Manager Menu Clicked');
         await browser.sleep(2000);
@@ -63,7 +62,7 @@ export class NestedEnClaveModel {
         await this.selectSurfaceFromDropDown(surfaceName);
 
 
-        // Click on '+' Button to Create new policy
+        // Click on '+' Button to Create new Enclave Model
         await WaitHelper.waitForElementToBeDisplayed(this.assetList, 5000, 'screen displayed');
         await elementClick(this.createNewAssets);
         await browser.logger.info('Clicked on NEW ASSET');
@@ -91,7 +90,7 @@ export class NestedEnClaveModel {
             console.log('value', attributeTag);
             await WaitHelper.waitForElementToBeClickable(this.attributeTagDropdown, 2000, 'Attribute Tag Drop Down  ');
             await elementClick(this.attributeTagDropdown);
-            // Select Role
+            // Select Attribute Tag
             await WaitHelper.waitForElementToBeClickable(this.attributeTag(attributeTag), 2000, 'Attribute Tag');
             await elementClick(this.attributeTag(attributeTag));
             await browser.logger.info('Attribute Tag Selected');
@@ -145,7 +144,7 @@ export class NestedEnClaveModel {
         await browser.logger.info('Moved to Review Enclave Model Page');
         await browser.sleep(5000);
 
-        // Select Review Enclave Model Page
+        //  Review Enclave Model Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Review Enclave Model ');
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Submit Page');
@@ -193,7 +192,7 @@ export class NestedEnClaveModel {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on Assets Manager Menu Button
         await WaitHelper.waitForElementToBeDisplayed(this.assetsManagerMenu, 5000, 'Menu');
-        elementClick(this.assetsManagerMenu);
+        await elementClick(this.assetsManagerMenu);
         await browser.logger.info('Clicked on Asset Manager Menu');
 
         await this.selectSurfaceFromDropDown(surfaceName);
@@ -230,11 +229,11 @@ export class NestedEnClaveModel {
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Template Mapping Page');
         // click on next to Enclave Model Evaluations Page
-        await WaitHelper.waitForElementToBePresent(this.nextButton, 10000, 'Enclave Model Evaluations ');
+        await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Enclave Model Evaluations ');
         await browser.actions().mouseMove(this.nextButton).perform();
         await elementClick(this.nextButton);
         await browser.logger.info('Moved to Review Enclave Model Page');
-        await browser.sleep(2000);
+        await browser.sleep(5000);
         // Review Enclave Model Page
         await WaitHelper.waitForElementToBePresent(this.nextButton, 5000, 'Review Enclave Model ');
         await browser.actions().mouseMove(this.nextButton).perform();

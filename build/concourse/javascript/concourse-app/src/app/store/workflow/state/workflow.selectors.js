@@ -1,0 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const store_1 = require("@ngrx/store");
+const enums_1 = require("@concourse/shared/enums");
+const fromWorkflow = require("./workflow.reducer");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.Workflow);
+exports.getAll = store_1.createSelector(exports.getState, fromWorkflow.all);
+exports.getSelectedType = store_1.createSelector(exports.getState, fromWorkflow.selectedType);
+exports.getSelected = store_1.createSelector(exports.getState, exports.getSelectedType, (state, selectedType) => state[selectedType]);
+exports.getOwned = store_1.createSelector(exports.getState, fromWorkflow.owned);
+exports.getIsLoaded = store_1.createSelector(exports.getState, fromWorkflow.isLoaded);
+exports.getIsUpdating = store_1.createSelector(exports.getState, fromWorkflow.isUpdating);
+exports.getSummary = store_1.createSelector(exports.getState, state => ({
+    myWorkflows: state.owned.length || 0,
+    myWorkflowsUpdated: state.myWorkflowsUpdated,
+    assignedWorkflows: state.assigned.length || 0,
+    assignedWorkflowsUpdated: state.assignedWorkflowsUpdated
+}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoid29ya2Zsb3cuc2VsZWN0b3JzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vY29uY291cnNlL2phdmFzY3JpcHQvY29uY291cnNlLWFwcC9zcmMvYXBwL3N0b3JlL3dvcmtmbG93L3N0YXRlL3dvcmtmbG93LnNlbGVjdG9ycy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHVDQUFvRTtBQUVwRSxtREFBcUQ7QUFDckQsbURBQW1EO0FBRXRDLFFBQUEsUUFBUSxHQUFHLDZCQUFxQixDQUFxQixrQkFBVSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBQzFFLFFBQUEsTUFBTSxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxZQUFZLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDcEQsUUFBQSxlQUFlLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFlBQVksQ0FBQyxZQUFZLENBQUMsQ0FBQztBQUN0RSxRQUFBLFdBQVcsR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsdUJBQWUsRUFBRSxDQUFDLEtBQUssRUFBRSxZQUFZLEVBQUUsRUFBRSxDQUFDLEtBQUssQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDO0FBQ3RHLFFBQUEsUUFBUSxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxZQUFZLENBQUMsS0FBSyxDQUFDLENBQUM7QUFDeEQsUUFBQSxXQUFXLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFlBQVksQ0FBQyxRQUFRLENBQUMsQ0FBQztBQUM5RCxRQUFBLGFBQWEsR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsWUFBWSxDQUFDLFVBQVUsQ0FBQyxDQUFDO0FBQ2xFLFFBQUEsVUFBVSxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxLQUFLLENBQUMsRUFBRSxDQUFDLENBQUM7SUFDM0QsV0FBVyxFQUFFLEtBQUssQ0FBQyxLQUFLLENBQUMsTUFBTSxJQUFJLENBQUM7SUFDcEMsa0JBQWtCLEVBQUUsS0FBSyxDQUFDLGtCQUFrQjtJQUM1QyxpQkFBaUIsRUFBRSxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sSUFBSSxDQUFDO0lBQzdDLHdCQUF3QixFQUFFLEtBQUssQ0FBQyx3QkFBd0I7Q0FDekQsQ0FBQyxDQUFDLENBQUMifQ==

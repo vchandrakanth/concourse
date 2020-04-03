@@ -192,7 +192,6 @@ export class PolicyGroupTemplatePage {
   async deletePolicyGroupTemplate(surfaceName: string = null, name: string = null, deleteOnly: string = null) {
     await WaitHelper.waitForElementToBeHidden(this.toast);
     // Click on Policy Group Template Menu Button
-    // await browser.get(configProperties.qaUrl + '/policy-group-templates');
     await WaitHelper.waitForElementToBeDisplayed(this.policyGroupTemplateLink, 5000, 'Menu');
     await browser.actions().mouseDown(this.policyGroupTemplateLink).perform();
     elementClick(this.policyGroupTemplateLink);

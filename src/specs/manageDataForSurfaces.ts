@@ -3,7 +3,7 @@ import { ExpectHelper } from '../utils/expectHelper';
 import { Surface } from '../pageObjects/surfaces.Po';
 import { Group } from '../pageObjects/groups.Po';
 
-describe('Surface Creation Concourse ', async function () {
+describe('Surface Data Creation Concourse ', async function () {
     let originalTimeout;
     let EC = ExpectedConditions;
     let properties = require('../conf/properties');

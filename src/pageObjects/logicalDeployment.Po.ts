@@ -141,7 +141,6 @@ export class LogicalDeployment {
     async searchLogicalDeployment(surfaceName: string = null, deploymentName: string = null) {
         await WaitHelper.waitForElementToBeHidden(this.toast);
         // Click on LogicalDeployment Menu Button
-        // await browser.get(configProperties.qaUrl + '/workflows/logical-deployments');
         elementClick(this.logicalDeployementMenu);
         await browser.logger.info('Clicked on Logical Deployment Menu');
 

@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const store_1 = require("@ngrx/store");
+const enums_1 = require("@concourse/shared/enums");
+const fromSurface = require("./surface.reducer");
+exports.getState = store_1.createFeatureSelector(enums_1.StoreNames.Surface);
+exports.getAll = store_1.createSelector(exports.getState, fromSurface.selectAll);
+exports.getEntities = store_1.createSelector(exports.getState, fromSurface.selectEntities);
+exports.getIsLoaded = store_1.createSelector(exports.getState, fromSurface.isLoaded);
+exports.getIsUpdating = store_1.createSelector(exports.getState, fromSurface.isUpdating);
+exports.getSelectedId = store_1.createSelector(exports.getState, fromSurface.selectedSurfaceId);
+exports.getSelected = store_1.createSelector(exports.getEntities, exports.getSelectedId, (entities, id) => entities[id]);
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3VyZmFjZS5zZWxlY3RvcnMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi8uLi9jb25jb3Vyc2UvamF2YXNjcmlwdC9jb25jb3Vyc2UtYXBwL3NyYy9hcHAvc3RvcmUvc3VyZmFjZS9zdGF0ZS9zdXJmYWNlLnNlbGVjdG9ycy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBLHVDQUFvRTtBQUVwRSxtREFBcUQ7QUFDckQsaURBQWlEO0FBRXBDLFFBQUEsUUFBUSxHQUFHLDZCQUFxQixDQUFvQixrQkFBVSxDQUFDLE9BQU8sQ0FBQyxDQUFDO0FBQ3hFLFFBQUEsTUFBTSxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxXQUFXLENBQUMsU0FBUyxDQUFDLENBQUM7QUFDekQsUUFBQSxXQUFXLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFdBQVcsQ0FBQyxjQUFjLENBQUMsQ0FBQztBQUNuRSxRQUFBLFdBQVcsR0FBRyxzQkFBYyxDQUFDLGdCQUFRLEVBQUUsV0FBVyxDQUFDLFFBQVEsQ0FBQyxDQUFDO0FBQzdELFFBQUEsYUFBYSxHQUFHLHNCQUFjLENBQUMsZ0JBQVEsRUFBRSxXQUFXLENBQUMsVUFBVSxDQUFDLENBQUM7QUFDakUsUUFBQSxhQUFhLEdBQUcsc0JBQWMsQ0FBQyxnQkFBUSxFQUFFLFdBQVcsQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDO0FBQ3hFLFFBQUEsV0FBVyxHQUFHLHNCQUFjLENBQUMsbUJBQVcsRUFBRSxxQkFBYSxFQUFFLENBQUMsUUFBUSxFQUFFLEVBQUUsRUFBRSxFQUFFLENBQUMsUUFBUSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMifQ==
